@@ -1,7 +1,7 @@
 # Tabela de níveis — Geometria plana (preparação EPCAR e Colégio Naval)
 # O motor lê por enquanto só a chave folha (marca e campos do cabeçalho).
 curso: geometria-plana-epcar
-folha: {marca: geometria, campos: caderno, arquivo: "{nivel}_pacote{pacote:02d}_folhas{de}-{ate}.pdf"}   # campos: caderno = "No caderno, anote: …"
+folha: {marca: "geometria  ·  CASD", campos: caderno, arquivo: "{nivel}_pacote{pacote:02d}_folhas{de}-{ate}.pdf"}   # campos: caderno = "No caderno, anote: …"
 idioma: pt-BR
 entrega: PDF no celular; resolução no caderno; respostas finais curtas no formulário
 bloco_diario: {folhas: 3, minutos_aprox: 10}
@@ -14,14 +14,14 @@ niveis:
     meta: nomear, classificar e calcular ângulos até as questões de prova
     unidades:
       - {folhas: [1, 10],   nome: Reconhecer ângulos,        conteudo: "vértice, lados, notação; agudo, reto, obtuso, raso"}
-      - {folhas: [11, 20],  nome: "Graus, minutos e segundos", conteudo: "converter, somar, subtrair, multiplicar e dividir por inteiro", revisar: true}
+      - {folhas: [11, 20],  nome: "Graus, minutos e segundos", conteudo: "converter, somar, subtrair, multiplicar e dividir por inteiro"}
       - {folhas: [21, 30],  nome: Complemento e suplemento,  conteudo: "cálculo direto; complemento do suplemento"}
       - {folhas: [31, 40],  nome: Equações com ângulos,      conteudo: "o suplemento de x é o triplo do complemento de x"}
       - {folhas: [41, 50],  nome: Posições,                  conteudo: "adjacentes, consecutivos, bissetriz, opostos pelo vértice"}
-      - {folhas: [51, 60],  nome: Revisão 1,                 conteudo: "1 a 50 misturado; primeiras questões de prova", revisar: true}
+      - {folhas: [51, 60],  nome: Revisão 1,                 conteudo: "1 a 50 misturado (questões de prova só a partir da folha 91)"}
       - {folhas: [61, 70],  nome: "Paralelas: identificar",  conteudo: "correspondentes, alternos, colaterais"}
       - {folhas: [71, 80],  nome: "Paralelas: calcular",     conteudo: "expressões do tipo 2x + 10"}
-      - {folhas: [81, 90],  nome: O bizu dos bicos,          conteudo: "zigue-zague entre paralelas: soma dos que abrem para um lado = soma dos que abrem para o outro", revisar: true}
+      - {folhas: [81, 90],  nome: O bizu dos bicos,          conteudo: "zigue-zague entre paralelas: soma dos que abrem para um lado = soma dos que abrem para o outro"}
       - {folhas: [91, 100], nome: Questões de prova,         conteudo: "EPCAR e Colégio Naval; revisão final"}
   - {codigo: G2, nome: Triângulos, conteudo: "soma dos ângulos internos; ângulo externo; classificação; desigualdade triangular"}
   - {codigo: G3, nome: Congruência e pontos notáveis}
@@ -30,4 +30,3 @@ niveis:
   - {codigo: G6, nome: Triângulo retângulo, conteudo: "Pitágoras; relações métricas"}
   - {codigo: G7, nome: Circunferência, conteudo: "ângulos inscritos; cordas; tangentes; potência de ponto"}
   - {codigo: G8, nome: Áreas}
-# revisar: true = pendência de revisão do professor (ver CLAUDE.md)

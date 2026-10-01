@@ -51,7 +51,7 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 
 | Peça | Onde | Observação |
 |---|---|---|
-| Caderno de progresso | Página privada no Notion | Estado atual, vocabulário, estruturas, erros recorrentes, registro de pacotes |
+| Caderno de progresso | Página privada no Notion | **Aposentado em 01/10/2026**: o estado está em `estado/frances.local.json` (conteúdo conferido, nada se perdeu) |
 | Leitor publicado | Artefato no claude.ai | Mesma página do `leitor/` |
 | Lembretes | Google Agenda: pedir a folha às 06:30; prazo de entrega até 23:59 (avisos às 21:00 e 23:30) | Fuso America/Sao_Paulo |
 | Memória do Claude (claude.ai) | Arquivo de memória com ponteiros e regras | O Claude Code não enxerga essa memória |
@@ -142,7 +142,7 @@ ler criticamente. **Não** incluir esse PDF nem o nome da marca no repositório.
 
 ### 4.4 Cabeçalho da instância geometria (`FolhaGeo.page`)
 
-- Linha minúscula: `FolhaGeo.MARCA` (padrão "DEGRAU · geometria"; o nome do cursinho só entra com autorização).
+- Linha minúscula: `FolhaGeo.MARCA` (no currículo: "DEGRAU · geometria · CASD"; uso do nome autorizado pela coordenação).
 - Código + unidade.
 - No lugar dos campos: "No caderno, anote: G1 81a · início · fim" (o aluno lê no celular e escreve no caderno).
 - Sem linhas de resposta: tudo no caderno; respostas finais curtas (número, ângulo, letra, alternativa).
@@ -278,7 +278,7 @@ Feuille cinq b. Je suis dans un avion. …
 
 **Piloto:** 6–8 voluntários (fortes e com dificuldade), 4 semanas, só G1. Critérios definidos antes: ≥70% ainda entregando na semana 4; nota média nas folhas subindo; desempenho no simulado melhor que o de não participantes com nível parecido. Semana 0: revisar tabela, montar planilha/formulário/script, testar com envios falsos, falar com a coordenação, convidar voluntários.
 
-**Privacidade:** alunos são menores de idade. Formulário e planilha na conta institucional do CASD; autorização da coordenação para coletar fotos de cadernos; envio de arquivo no Forms exige conta Google (alternativa: fotos por WhatsApp). **Nunca** versionar dados de alunos (`.gitignore` já bloqueia).
+**Privacidade:** alunos são menores de idade. Formulário e planilha na conta institucional do CASD; coleta de fotos de cadernos autorizada pela coordenação (01/10/2026); envio de arquivo no Forms exige conta Google (alternativa: fotos por WhatsApp). **Nunca** versionar dados de alunos (`.gitignore` já bloqueia).
 
 ---
 
@@ -305,7 +305,7 @@ e decidir domínio. Cada instância é só **dados + configuração + adaptadore
 
 | Função | Francês hoje | CASD | Opções futuras |
 |---|---|---|---|
-| Estado do aluno | Notion | Planilha (aba Alunos/Painel) | JSON local, banco |
+| Estado do aluno | JSON local (`estado/`) | Planilha (aba Alunos/Painel) | Banco |
 | Entrega do pacote | Chat no claude.ai | WhatsApp individual | E-mail, Telegram, página |
 | Recebimento | Fotos/texto no chat | Google Forms | Aplicativo |
 | Correção | Claude | Apps Script + gabarito | Correção local em Python a partir das respostas exportadas |
@@ -422,8 +422,8 @@ Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostr
 
 ## 10. Decisões pendentes do Ângelo
 
-1. Revisão da tabela G1: (a) "Graus, minutos e segundos" merece uma unidade inteira na EPCAR? (b) as questões de prova entram cedo demais na Revisão 1? (c) "O bizu dos bicos" é o nome usado em sala? (marcados com `revisar: true` no YAML)
-2. Coordenação do CASD: autorização para fotos de cadernos e dados de desempenho; uso do nome "CASD" no repositório público.
+1. ~~Revisão da tabela G1~~ — decidido em 01/10/2026: (a) graus, minutos e segundos fica como unidade inteira; (b) as questões de prova saíram da Revisão 1 (só a partir da folha 91); (c) "O bizu dos bicos" é o nome usado em sala.
+2. ~~Coordenação do CASD~~ — autorizado em 01/10/2026: fotos de cadernos, dados de desempenho e uso do nome "CASD" (inclusive na marca da folha e no repositório público). Dados de alunos continuam fora do git.
 3. ~~Onde fica o estado do francês~~ — decidido em 01/10/2026: JSON local (`estado/frances.local.json`).
 4. ~~Modelo de gabarito do formulário~~ — decidido em 01/10/2026: mais campos, uma seção por página com 12 campos numerados como na folha (`correcao/README.md`).
 5. Envio automático (fase 5): adiado em 01/10/2026; falta escolher o canal (e-mail, Telegram…).
