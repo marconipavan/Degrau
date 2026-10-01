@@ -1,0 +1,32 @@
+folha: G1 2
+unidade: Reconhecer ângulos 2
+a:
+  instrucao: "Classifique cada ângulo: A, R ou O."
+  icone: escrever
+  pontos_cada: 15
+  blocos:
+    - grade:
+        itens:
+          - {angulo: {direcoes: [0, 35]}, resposta: A}
+          - {angulo: {direcoes: [0, 90], marca: reto}, resposta: R}
+          - {angulo: {direcoes: [0, 130]}, resposta: O}
+          - {angulo: {direcoes: [10, 100], marca: reto}, resposta: R}
+          - {angulo: {direcoes: [-20, 40]}, resposta: A}
+          - {angulo: {direcoes: [0, 160]}, resposta: O}
+b:
+  instrucao: "Escreva todos os ângulos com vértice O."
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+    - exemplo:
+        figura: {semirretas: {direcoes: [0, 40, 85], nomes: [A, B, C], vertice: O, comprimento: 18}}
+        texto:
+          - destaque: "AÔB,  BÔC  e  AÔC"
+          - nota: "3 semirretas formam 3 ângulos."
+    - grade:
+        itens:
+          - semirretas: {direcoes: [0, 30, 70, 120], nomes: [P, Q, R, S], vertice: O}
+            resposta: "PÔQ, QÔR, RÔS, PÔR, QÔS, PÔS"
+          - semirretas: {direcoes: [10, 60, 100, 140, 175], nomes: [A, B, C, D, E], vertice: O, comprimento: 18}
+            texto: "Só diga quantos são. [40]"
+            resposta: 10

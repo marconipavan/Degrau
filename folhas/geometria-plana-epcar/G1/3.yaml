@@ -1,0 +1,36 @@
+folha: G1 3
+unidade: Reconhecer ângulos 3
+a:
+  instrucao: "Qual é o tipo do ângulo? Responda A, R, O ou Ra."
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+    - grade:
+        colunas: 1
+        tamanho: 14
+        itens:
+          - {texto: "a metade de 180°", resposta: R}
+          - {texto: "o dobro de 45°", resposta: R}
+          - {texto: "o dobro de 60°", resposta: O}
+          - {texto: "a metade de 90°", resposta: A}
+          - {texto: "90° + 1°", resposta: O}
+          - {texto: "180° − 1°", resposta: O}
+          - {texto: "3 × 60°", resposta: Ra}
+          - {texto: "o triplo de 25°", resposta: A}
+          - {texto: "90° − 90°/2", resposta: A}
+          - {texto: "2 × 90°", resposta: Ra}
+b:
+  instrucao: "Revisão: responda no caderno."
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+    - grade:
+        colunas: 1
+        itens:
+          - {texto: "Qual é o vértice do ângulo XŶZ?", resposta: Y}
+          - angulo: {direcoes: [0, 120], nomes: [K, L, J]}
+            texto: "Nome e tipo deste ângulo?"
+            resposta: "LKJ ou JKL (obtuso)"
+          - {texto: "Um ângulo de 90° é chamado de ______ .", resposta: reto}
+          - {texto: "Quantos ângulos 5 semirretas de mesma origem formam, ao todo?  (use a folha 2b)", resposta: 10}
+          - {texto: "O dobro de um ângulo agudo pode ser obtuso? (S/N)", resposta: S}

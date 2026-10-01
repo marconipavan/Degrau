@@ -1,0 +1,42 @@
+folha: G1 1
+unidade: Reconhecer ângulos 1
+a:
+  instrucao: "Veja o exemplo. Escreva o nome de cada ângulo."
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+    - exemplo:
+        figura: {angulo: {direcoes: [0, 50], nomes: [O, A, B]}}
+        texto:
+          - destaque: "ângulo AÔB"
+          - "vértice: O"
+          - "lados: OA e OB"
+          - nota: "O vértice fica sempre no meio do nome."
+    - grade:
+        itens:   # nomes: [vértice, ponta da 1ª direção, ponta da 2ª]
+          - {angulo: {direcoes: [0, 70], nomes: [Q, P, R]}, resposta: [PQR, RQP]}
+          - {angulo: {direcoes: [20, 110], nomes: [M, N, T]}, resposta: [NMT, TMN]}
+          - {angulo: {direcoes: [0, 140], nomes: [C, D, E]}, resposta: [DCE, ECD]}
+          - {angulo: {direcoes: [-30, 45], nomes: [F, G, H]}, resposta: [GFH, HFG]}
+b:
+  instrucao: "Classifique: agudo (A), reto (R), obtuso (O) ou raso (Ra)."
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+    - exemplo:
+        texto:
+          - "35°  →  A   (menor que 90°)        90°  →  R"
+          - "120°  →  O   (entre 90° e 180°)     180°  →  Ra"
+    - grade:
+        tamanho: 16
+        itens:
+          - {texto: "40°", resposta: A}
+          - {texto: "90°", resposta: R}
+          - {texto: "150°", resposta: O}
+          - {texto: "180°", resposta: Ra}
+          - {texto: "89°", resposta: A}
+          - {texto: "91°", resposta: O}
+          - {texto: "10°", resposta: A}
+          - {texto: "179°", resposta: O}
+          - {texto: "60°", resposta: A}
+          - {texto: "100°", resposta: O}

@@ -7,3 +7,11 @@
   titulo: Amostra — AII 64 e DI 112
   curso: frances-delf-b1
   folhas: [AII 64, DI 112]
+- arquivo: G1_pacote01_folhas1-3.pdf
+  titulo: G1 — folhas 1 a 3
+  curso: geometria-plana-epcar
+  folhas: [G1 1, G1 2, G1 3]
+- arquivo: G1_amostra_folhas81-89.pdf
+  titulo: G1 — amostra 81 a 89
+  curso: geometria-plana-epcar
+  folhas: [G1 81, G1 85, G1 89]

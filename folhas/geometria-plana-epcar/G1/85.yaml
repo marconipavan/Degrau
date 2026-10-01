@@ -1,0 +1,33 @@
+folha: G1 85
+unidade: O bizu dos bicos 5
+a:
+  instrucao: "Dois bicos. Veja o exemplo e calcule x."
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+    - exemplo:
+        figura: {bico: {altura: 42, segmentos: [[-20, 18], [-150, 18], [-40, 0]], marcas: [[0, dir, ~], [1, ~, ~], [2, ~, ~], [3, esq, ~]]}}
+        texto:
+          - "abrem para a esquerda:"
+          - destaque: "50° + 40° = 90°"
+          - "abrem para a direita:"
+          - destaque: "20° + 70° = 90°"
+          - "as duas somas são iguais"
+          - nota: "Olhe para onde cada ângulo abre."
+    - grade:
+        itens:
+          - bico: {altura: 38, tamanho: 8.8, segmentos: [[-25, 15], [-145, 15], [-40, 0]], marcas: [[0, dir, ~], [1, ~, ~], [2, ~, x], [3, esq, ~]]}
+          - bico: {altura: 38, tamanho: 8.8, segmentos: [[-30, 15], [-150, 15], [-50, 0]], marcas: [[0, dir, ~], [1, ~, x], [2, ~, ~], [3, esq, ~]]}
+          - bico: {altura: 38, tamanho: 8.8, segmentos: [[-20, 15], [-140, 15], [-45, 0]], marcas: [[0, dir, ~], [1, ~, ~], [2, ~, ~], [3, esq, x]]}
+          - bico: {altura: 38, tamanho: 8.8, segmentos: [[-35, 15], [-150, 15], [-40, 0]], marcas: [[0, dir, x], [1, ~, ~], [2, ~, ~], [3, esq, ~]]}
+b:
+  instrucao: "Calcule x. Some os ângulos de cada lado."
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+    - grade:
+        itens:
+          - bico: {altura: 42, tamanho: 8.8, segmentos: [[-30, 15], [-150, 15], [-40, 0]], marcas: [[0, dir, ~], [1, ~, x], [2, ~, ~], [3, esq, ~]]}
+          - bico: {altura: 42, tamanho: 8.8, segmentos: [[-20, 15], [-150, 15], [-35, 0]], marcas: [[0, dir, ~], [1, ~, ~], [2, ~, x], [3, esq, ~]]}
+          - bico: {altura: 42, tamanho: 8.8, segmentos: [[-40, 15], [-140, 15], [-35, 0]], marcas: [[0, dir, x], [1, ~, ~], [2, ~, ~], [3, esq, ~]]}
+          - bico: {altura: 42, tamanho: 8.8, segmentos: [[-25, 15], [-150, 15], [-50, 0]], marcas: [[0, dir, ~], [1, ~, ~], [2, ~, ~], [3, esq, x]]}

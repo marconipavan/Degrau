@@ -1,0 +1,31 @@
+folha: G1 89
+unidade: O bizu dos bicos 9
+a:
+  instrucao: "Monte a equação e calcule x."
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+    - grade:
+        colunas: 1
+        itens:
+          # ângulos reais 20, 50, 70, 40: x + 5 = 20 dá x = 15
+          - bico: {altura: 46, segmentos: [[-20, 20], [-150, 20], [-40, 0]],
+                   marcas: [[0, dir, "x + 5°"], [1, ~, "3x + 5°"], [2, ~, "5x − 5°"], [3, esq, "2x + 10°"]]}
+            resposta: 15
+          # ângulos reais 35, 80, 45: 3x + 5 = 35 dá x = 10
+          - bico: {altura: 36, segmentos: [[-35, 22], [-135, 0]],
+                   marcas: [[0, dir, "3x + 5°"], [1, ~, "8x"], [2, dir, "4x + 5°"]]}
+            resposta: 10
+b:
+  instrucao: "Questão de prova. Marque a alternativa."
+  icone: escrever
+  pontos: 100
+  blocos:
+    - texto:
+        tamanho: 11
+        paragrafos: ["Na figura, as retas r e s são paralelas.", "O valor de x é:"]
+    # ângulos reais 25, 55, 80, 50: x = 25
+    - figura:
+        bico: {altura: 52, segmentos: [[-25, 20], [-150, 22], [-50, 0]],
+               marcas: [[0, dir, x], [1, ~, "2x + 5°"], [2, ~, "80°"], [3, esq, "2x"]]}
+    - alternativas: {itens: ["15°", "20°", "25°", "30°"], resposta: C}

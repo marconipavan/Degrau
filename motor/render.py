@@ -6,6 +6,8 @@ from reportlab.lib.units import mm
 from .especificacao import (ErroEspecificacao, carregar_curso, carregar_folha,
                             carregar_pacotes, _chaves, RAIZ)
 from .folha import Folha, LIMITE, ESPACO
+from .geo import FolhaGeo
+from .bicos import Bico
 
 MARCA = 'DEGRAU  ·  '
 ICONES = {'ouvir': 'ecoute', 'escrever': 'ecris', 'ligar': 'relie', 'circular': 'entoure', 'ler': 'lis'}
@@ -90,7 +92,13 @@ def _texto(f, d, ctx):
     f.texte(d['paragrafos'], size=d.get('tamanho', 12), box=d.get('quadro', False))
 
 def _exemplo(f, d, ctx):
-    f.exemple(ctx['textos']['exemplo'], d['frase'], d['decomposicao'], size=d.get('tamanho', 11))
+    if 'frase' in d:      # frase complexa e sua decomposição (idiomas)
+        _chaves(d, ctx['onde'], ('frase', 'decomposicao'), ('tamanho',))
+        f.exemple(ctx['textos']['exemplo'], d['frase'], d['decomposicao'], size=d.get('tamanho', 11))
+    else:                 # figura e texto (geometria)
+        _chaves(d, ctx['onde'], ('texto',), ('figura',))
+        if 'figura' in d: _validar_figura(d['figura'], ctx['onde'] + ', figura')
+        f.exemplo_geo(ctx['textos']['exemplo'], d['texto'], d.get('figura'))
 
 def _perguntas(f, d, ctx):
     its = _itens(d, ctx['onde'], ('pergunta',), ('linhas', 'pontos', 'resposta'))
@@ -112,6 +120,50 @@ def _subinstrucao(f, d, ctx):
     f.sousinstr(_icone(d['icone'], ctx['onde']), d['instrucao'], _pontos(d, ctx))
 
 
+# ---------- geometria ----------
+FIGURAS = {'angulo':     (('direcoes',), ('nomes', 'marca', 'comprimento')),
+           'semirretas': (('direcoes', 'nomes', 'vertice'), ('comprimento',)),
+           'bico':       (('altura', 'segmentos', 'marcas'), ('tamanho',))}
+
+def _validar_figura(fig, onde):
+    figs = [k for k in fig if k in FIGURAS]
+    if len(figs) != 1:
+        raise ErroEspecificacao(f'{onde}: precisa de exatamente uma figura ({", ".join(FIGURAS)})')
+    _chaves(fig[figs[0]], f'{onde} ({figs[0]})', *FIGURAS[figs[0]])
+    return figs[0]
+
+def _resposta_calculada(item, vals):
+    """no bico, a resposta é o ângulo do vértice marcado com x"""
+    if 'bico' not in item or vals is None: return None
+    alvos = [m[0] for m in item['bico']['marcas'] if m[2] == 'x']
+    return vals[alvos[0]] if len(alvos) == 1 else None
+
+def _grade(f, d, ctx):
+    its = d['itens']
+    for i, it in enumerate(its):
+        onde = f'{ctx["onde"]}, item {i + 1}'
+        _chaves(it, onde, (), ('angulo', 'semirretas', 'bico', 'texto', 'resposta'))
+        if any(k in FIGURAS for k in it): _validar_figura(it, onde)
+        elif 'texto' not in it: raise ErroEspecificacao(f'{onde}: item sem figura e sem texto')
+    vals = f.grade(its, colunas=d.get('colunas', 2), tamanho=d.get('tamanho', 12), altura=ctx.get('altura'))
+    for i, (it, v) in enumerate(zip(its, vals)):
+        resp = it['resposta'] if 'resposta' in it else _resposta_calculada(it, v)
+        if resp is None:
+            raise ErroEspecificacao(f'{ctx["onde"]}, item {i + 1}: sem resposta (escreva resposta ou marque o x no bico)')
+        f.gabarito[(ctx['codigo'], i + 1)] = resp
+
+def _figura(f, d, ctx):
+    _validar_figura(d, ctx['onde'])
+    f.figura(d)
+
+def _alternativas(f, d, ctx):
+    letras = [chr(65 + k) for k in range(len(d['itens']))]
+    if d['resposta'] not in letras:
+        raise ErroEspecificacao(f'{ctx["onde"]}: resposta deve ser uma de {", ".join(letras)}')
+    f.alternativas(d['itens'], tamanho=d.get('tamanho', 12))
+    f.gabarito[(ctx['codigo'], 1)] = d['resposta']
+
+
 # nome: (função, chaves obrigatórias, chaves opcionais)
 TIPOS = {
     'palavras':         (_palavras, ('itens',), ('colunas', 'tamanho')),
@@ -125,16 +177,19 @@ TIPOS = {
     'verdadeiro-falso': (_verdadeiro_falso, ('itens',), ('tamanho',)),
     'ditado':           (_ditado, ('itens',), ('instrucao', 'traducao', 'pontos', 'pontos_cada')),
     'texto':            (_texto, ('paragrafos',), ('tamanho', 'quadro')),
-    'exemplo':          (_exemplo, ('frase', 'decomposicao'), ('tamanho',)),
+    'exemplo':          (_exemplo, (), ('frase', 'decomposicao', 'tamanho', 'texto', 'figura')),
     'perguntas':        (_perguntas, ('itens',), ('tamanho',)),
     'ordenar':          (_ordenar, ('itens',), ('tamanho',)),
     'decompor':         (_decompor, ('itens',), ('tamanho',)),
     'subinstrucao':     (_subinstrucao, ('instrucao', 'icone'), ('pontos', 'pontos_cada')),
+    'grade':            (_grade, ('itens',), ('colunas', 'tamanho')),
+    'figura':           (_figura, (), ('angulo', 'semirretas', 'bico')),
+    'alternativas':     (_alternativas, ('itens', 'resposta'), ('tamanho',)),
 }
 
 
 # blocos de itens espaçados: dividem entre si a altura que sobra na página
-ELASTICOS = {'palavras', 'ligar', 'circular', 'copiar', 'frases', 'lacunas', 'verdadeiro-falso'}
+ELASTICOS = {'palavras', 'ligar', 'circular', 'copiar', 'frases', 'lacunas', 'verdadeiro-falso', 'grade'}
 
 
 def _tipo(bloco, onde):
@@ -173,9 +228,14 @@ def desenhar_folha(f, folha, curso):
         L = folha[lado]
         codigo = f'{folha["folha"]}{lado}'
         onde = f'{folha["_caminho"]}, lado {lado}'
-        f.page(codigo, folha['unidade'], L['instrucao'], L.get('traducao'),
-               _icone(L['icone'], onde), _pontos(L, {'textos': textos}))
-        ctxs = [{'folha': folha, 'textos': textos, 'onde': f'{onde}, bloco {i + 1}'} for i in range(len(L['blocos']))]
+        icone, pontos = _icone(L['icone'], onde), _pontos(L, {'textos': textos})
+        if isinstance(f, FolhaGeo):
+            if 'traducao' in L: raise ErroEspecificacao(f'{onde}: folha de caderno não tem traducao')
+            f.page(codigo, folha['unidade'], L['instrucao'], icone, pontos)
+        else:
+            f.page(codigo, folha['unidade'], L['instrucao'], L.get('traducao'), icone, pontos)
+        ctxs = [{'folha': folha, 'textos': textos, 'codigo': codigo, 'onde': f'{onde}, bloco {i + 1}'}
+                for i in range(len(L['blocos']))]
         elasticos = [_tipo(b, cx['onde']) in ELASTICOS for b, cx in zip(L['blocos'], ctxs)]
         fixos = sum(_medir(f, b, cx) for b, cx, e in zip(L['blocos'], ctxs, elasticos) if not e)
         if any(elasticos):
@@ -192,18 +252,20 @@ def desenhar_folha(f, folha, curso):
 
 
 def gerar_pacote(pacote, saida):
+    """gera o PDF; devolve (caminho, gabarito {(página, item): resposta})"""
     curso = carregar_curso(pacote['curso'])
     folhas = [carregar_folha(pacote['curso'], cod) for cod in pacote['folhas']]  # valida tudo antes de desenhar
     os.makedirs(saida, exist_ok=True)
     caminho = os.path.join(saida, pacote['arquivo'])
-    f = Folha(caminho, pacote['titulo'])
+    f = (Bico if curso['folha']['campos'] == 'caderno' else Folha)(caminho, pacote['titulo'])
     f.MARCA = MARCA + curso['folha']['marca']
+    f.gabarito = {}   # (código da página, item) -> resposta; exportação na fase 2
     for folha in folhas:
         desenhar_folha(f, folha, curso)
     f.save()
-    return caminho
+    return caminho, f.gabarito
 
 
 def gerar(caminho_pacotes, saida=None):
     saida = saida or os.path.join(os.path.dirname(os.path.abspath(caminho_pacotes)), 'pdf')
-    return [gerar_pacote(p, saida) for p in carregar_pacotes(caminho_pacotes)]
+    return [gerar_pacote(p, saida)[0] for p in carregar_pacotes(caminho_pacotes)]

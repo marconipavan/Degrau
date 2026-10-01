@@ -1,0 +1,33 @@
+# bico: altura = distância entre as paralelas r e s (mm); segmentos = [direção em graus, comprimento em mm],
+# o último é estendido até a reta s; marcas = [vértice, lado nas pontas (dir/esq), rótulo].
+# Rótulo ~ escreve o ângulo calculado; x marca a pergunta (a resposta sai do cálculo).
+folha: G1 81
+unidade: O bizu dos bicos 1
+a:
+  instrucao: "Veja o exemplo. Calcule x.  (r // s)"
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+    - exemplo:
+        figura: {bico: {altura: 30, segmentos: [[-30, 22], [-140, 0]], marcas: [[0, dir, ~], [1, ~, x], [2, dir, ~]]}}
+        texto:
+          - "bico para a direita:"
+          - destaque: "x = 30° + 40° = 70°"
+          - nota: "O ângulo do bico é a soma dos ângulos nas paralelas."
+    - grade:
+        itens:
+          - bico: {altura: 30, segmentos: [[-35, 18], [-140, 0]], marcas: [[0, dir, ~], [1, ~, x], [2, dir, ~]]}
+          - bico: {altura: 30, segmentos: [[-50, 18], [-145, 0]], marcas: [[0, dir, ~], [1, ~, x], [2, dir, ~]]}
+          - bico: {altura: 30, segmentos: [[-30, 18], [-130, 0]], marcas: [[0, dir, ~], [1, ~, x], [2, dir, ~]]}
+          - bico: {altura: 30, segmentos: [[-45, 18], [-135, 0]], marcas: [[0, dir, ~], [1, ~, x], [2, dir, ~]]}
+b:
+  instrucao: "Agora o x está na paralela. Calcule x."
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+    - grade:
+        itens:
+          - bico: {altura: 32, segmentos: [[-40, 18], [-145, 0]], marcas: [[0, dir, x], [1, ~, ~], [2, dir, ~]]}
+          - bico: {altura: 32, segmentos: [[-55, 18], [-150, 0]], marcas: [[0, dir, ~], [1, ~, ~], [2, dir, x]]}
+          - bico: {altura: 32, segmentos: [[-30, 18], [-135, 0]], marcas: [[0, dir, x], [1, ~, ~], [2, dir, ~]]}
+          - bico: {altura: 32, segmentos: [[-40, 18], [-130, 0]], marcas: [[0, dir, ~], [1, ~, ~], [2, dir, x]]}

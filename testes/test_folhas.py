@@ -1,6 +1,6 @@
-# Testes básicos: tudo gera sem erro; nenhum texto sai da página nem fica
+# Testes básicos: tudo gera sem erro; o gabarito calculado bate; nenhum texto sai da página nem fica
 # sobre outro texto ou sobre uma linha. Rodar com: .venv/bin/pytest
-import glob, os, runpy
+import os
 import pytest
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfgen import canvas as rl_canvas
@@ -8,8 +8,8 @@ from reportlab.lib.units import mm
 
 from motor import folha as motor_folha
 from motor.folha import M, W, H
-from motor.render import gerar
-from motor.especificacao import RAIZ
+from motor.render import gerar, gerar_pacote
+from motor.especificacao import RAIZ, carregar_pacotes
 
 FOLGA = 0.3  # pt: tolerância de arredondamento
 
@@ -100,7 +100,7 @@ def paginas_yaml(tmp_path_factory):
 
 
 def test_yaml_gera_paginas(paginas_yaml):
-    assert len(paginas_yaml) == 14
+    assert len(paginas_yaml) == 26
 
 
 @pytest.mark.parametrize('verificar', VERIFICACOES, ids=lambda v: v.__name__)
@@ -109,16 +109,17 @@ def test_yaml(paginas_yaml, verificar):
     assert not erros, '\n'.join(erros)
 
 
-# Geometria ainda em scripts. Defeitos conhecidos (já nos PDFs originais), a corrigir
-# na etapa 4: rótulos "20°" encostando no segmento (85a, 85b); "x + 5°", "2x + 10°" e
-# "3x + 5°" sobre os segmentos (89a); rótulo "E" fora da margem (1a).
-@pytest.mark.xfail(strict=True, reason='defeitos conhecidos da geometria antiga (etapa 4)')
-def test_geometria_antiga(tmp_path):
-    def rodar():
-        for script in sorted(glob.glob(os.path.join(RAIZ, 'exemplos', 'geometria_*.py'))):
-            runpy.run_path(script, run_name='__main__')
-    with pytest.MonkeyPatch.context() as mp:
-        paginas = _gravar(mp, rodar, destino=str(tmp_path))
-    assert len(paginas) == 12
-    erros = [e for v in VERIFICACOES for e in v(paginas)]
-    assert not erros, '\n'.join(erros)
+# Gabarito calculado das figuras (bicos) = seção 6.3 do plano
+GABARITO_81_89 = {
+    'G1 81a': [75, 85, 80, 90], 'G1 81b': [40, 30, 30, 50],
+    'G1 85a': [75, 60, 45, 35], 'G1 85b': [60, 65, 40, 50],
+    'G1 89a': [15, 10], 'G1 89b': ['C'],
+}
+
+def test_gabarito_81_89(tmp_path):
+    pacote = next(p for p in carregar_pacotes(os.path.join(RAIZ, 'exemplos', 'pacotes.yaml'))
+                  if p['folhas'] == ['G1 81', 'G1 85', 'G1 89'])
+    _, gab = gerar_pacote(pacote, str(tmp_path))
+    obtido = {}
+    for (pag, item), resp in sorted(gab.items()): obtido.setdefault(pag, []).append(resp)
+    assert obtido == GABARITO_81_89
