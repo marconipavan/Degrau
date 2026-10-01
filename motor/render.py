@@ -1,8 +1,11 @@
 # Degrau — renderizador: lê as especificações em YAML e desenha com o motor
-import os
+import io, os
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A5
+from reportlab.lib.units import mm
 from .especificacao import (ErroEspecificacao, carregar_curso, carregar_folha,
                             carregar_pacotes, _chaves, RAIZ)
-from .folha import Folha
+from .folha import Folha, LIMITE, ESPACO
 
 MARCA = 'DEGRAU  ·  '
 ICONES = {'ouvir': 'ecoute', 'escrever': 'ecris', 'ligar': 'relie', 'circular': 'entoure', 'ler': 'lis'}
@@ -31,7 +34,7 @@ def _itens(d, onde, obrig, opc=()):
 # ---------- tipos de bloco: função(folha_pdf, dados, contexto) ----------
 
 def _palavras(f, d, ctx):
-    f.mots([tuple(p) for p in d['itens']], cols=d.get('colunas', 2), size=d.get('tamanho', 19))
+    f.mots([tuple(p) for p in d['itens']], cols=d.get('colunas', 2), size=d.get('tamanho', 19), altura=ctx.get('altura'))
 
 def _ligar(f, d, ctx):
     if 'itens_de' in d:   # reaproveita os pares do primeiro bloco do outro lado
@@ -39,31 +42,31 @@ def _ligar(f, d, ctx):
         pares = next(iter(outro.values()))['itens']
     elif 'itens' in d: pares = d['itens']
     else: raise ErroEspecificacao(f'{ctx["onde"]}: ligar precisa de itens ou itens_de')
-    f.relie([tuple(p) for p in pares], seed=d.get('semente', 1))
+    f.relie([tuple(p) for p in pares], seed=d.get('semente', 1), altura=ctx.get('altura'))
 
 def _circular(f, d, ctx):
     its = _itens(d, ctx['onde'], ('opcoes', 'resposta'))
     for i, it in enumerate(its):
         if it['resposta'] not in it['opcoes']:
             raise ErroEspecificacao(f'{ctx["onde"]}, item {i + 1}: resposta {it["resposta"]!r} não está nas opções')
-    f.entoure([it['opcoes'] for it in its])
+    f.entoure([it['opcoes'] for it in its], altura=ctx.get('altura'))
 
 def _copiar(f, d, ctx):
-    f.recopie(d['itens'], size=d.get('tamanho', 20))
+    f.recopie(d['itens'], size=d.get('tamanho', 20), altura=ctx.get('altura'))
 
 def _frases(f, d, ctx):
     its = d['itens']
     if all(isinstance(i, list) for i in its):
-        f.phrases([i[0] for i in its], size=d.get('tamanho', 15), gloss=[i[1] for i in its])
+        f.phrases([i[0] for i in its], size=d.get('tamanho', 15), gloss=[i[1] for i in its], altura=ctx.get('altura'))
     else:
-        f.phrases(its, size=d.get('tamanho', 15))
+        f.phrases(its, size=d.get('tamanho', 15), altura=ctx.get('altura'))
 
 def _banco(f, d, ctx):
     f.banque(d['itens'])
 
 def _lacunas(f, d, ctx):
     its = _itens(d, ctx['onde'], ('texto', 'resposta'))
-    f.trous([it['texto'] for it in its], size=d.get('tamanho', 14))
+    f.trous([it['texto'] for it in its], size=d.get('tamanho', 14), altura=ctx.get('altura'))
 
 def _leitura(f, d, ctx):
     f.lecture(d['linhas'], fois=d.get('vezes', 3), size=d.get('tamanho', 14))
@@ -73,7 +76,7 @@ def _verdadeiro_falso(f, d, ctx):
     for i, it in enumerate(its):
         if it['resposta'] not in ('V', 'F'):
             raise ErroEspecificacao(f'{ctx["onde"]}, item {i + 1}: resposta deve ser V ou F')
-    f.vraifaux([it['texto'] for it in its], size=d.get('tamanho', 13.5))
+    f.vraifaux([it['texto'] for it in its], size=d.get('tamanho', 13.5), altura=ctx.get('altura'))
 
 def _ditado(f, d, ctx):
     its = _itens(d, ctx['onde'], ('resposta',))
@@ -130,16 +133,38 @@ TIPOS = {
 }
 
 
-def desenhar_bloco(f, bloco, ctx):
+# blocos de itens espaçados: dividem entre si a altura que sobra na página
+ELASTICOS = {'palavras', 'ligar', 'circular', 'copiar', 'frases', 'lacunas', 'verdadeiro-falso'}
+
+
+def _tipo(bloco, onde):
     if not isinstance(bloco, dict) or len(bloco) != 1:
-        raise ErroEspecificacao(f'{ctx["onde"]}: cada bloco é um mapa com uma única chave (o tipo)')
-    tipo, dados = next(iter(bloco.items()))
+        raise ErroEspecificacao(f'{onde}: cada bloco é um mapa com uma única chave (o tipo)')
+    return next(iter(bloco))
+
+
+def _medir(f, bloco, ctx):
+    """altura de um bloco fixo: desenha num canvas descartável e vê quanto o cursor desceu"""
+    c, y = f.c, f.y
+    f.c = canvas.Canvas(io.BytesIO(), pagesize=A5)
+    try:
+        desenhar_bloco(f, bloco, ctx)
+        return y - f.y
+    finally:
+        f.c, f.y = c, y
+
+
+def desenhar_bloco(f, bloco, ctx):
+    tipo = _tipo(bloco, ctx['onde']); dados = bloco[tipo]
     if tipo not in TIPOS:
         raise ErroEspecificacao(f'{ctx["onde"]}: tipo de bloco desconhecido {tipo!r}')
     if isinstance(dados, list): dados = {'itens': dados}   # atalho: "banco: [a, b, c]"
     func, obrig, opc = TIPOS[tipo]
     _chaves(dados, ctx['onde'] + f' ({tipo})', obrig, opc)
-    func(f, dados, dict(ctx, onde=ctx['onde'] + f' ({tipo})'))
+    try:
+        func(f, dados, dict(ctx, onde=ctx['onde'] + f' ({tipo})'))
+    except ValueError as e:
+        raise ErroEspecificacao(f'{ctx["onde"]} ({tipo}): {e}') from None
 
 
 def desenhar_folha(f, folha, curso):
@@ -150,8 +175,19 @@ def desenhar_folha(f, folha, curso):
         onde = f'{folha["_caminho"]}, lado {lado}'
         f.page(codigo, folha['unidade'], L['instrucao'], L.get('traducao'),
                _icone(L['icone'], onde), _pontos(L, {'textos': textos}))
-        for i, bloco in enumerate(L['blocos']):
-            desenhar_bloco(f, bloco, {'folha': folha, 'textos': textos, 'onde': f'{onde}, bloco {i + 1}'})
+        ctxs = [{'folha': folha, 'textos': textos, 'onde': f'{onde}, bloco {i + 1}'} for i in range(len(L['blocos']))]
+        elasticos = [_tipo(b, cx['onde']) in ELASTICOS for b, cx in zip(L['blocos'], ctxs)]
+        fixos = sum(_medir(f, b, cx) for b, cx, e in zip(L['blocos'], ctxs, elasticos) if not e)
+        if any(elasticos):
+            parte = (f.y - LIMITE - fixos) / sum(elasticos) - ESPACO
+            if parte <= 0:
+                raise ErroEspecificacao(f'{onde}: os blocos não cabem na página')
+            for cx, e in zip(ctxs, elasticos):
+                if e: cx['altura'] = parte
+        for bloco, cx in zip(L['blocos'], ctxs):
+            desenhar_bloco(f, bloco, cx)
+        if f.y < LIMITE - ESPACO - 0.5:
+            raise ErroEspecificacao(f'{onde}: o conteúdo passa {(LIMITE - f.y) / mm:.1f} mm do limite da página')
         f.fim(codigo)
 
 

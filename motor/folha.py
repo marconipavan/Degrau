@@ -16,6 +16,8 @@ W,H=A5
 M=10*mm
 INK=colors.HexColor('#1d1d1f'); GREY=colors.HexColor('#8a8f98'); LIGHT=colors.HexColor('#c9ccd2')
 TRACE=colors.HexColor('#cfd3da'); ACC=colors.HexColor('#1f4e9c'); RULE=colors.HexColor('#b8bcc4')
+LIMITE=M+8*mm   # nenhum bloco desce abaixo disto (o rodapé fica em M-3mm)
+ESPACO=4*mm     # espaço depois de um bloco elástico
 
 def icon(c,kind,x,y,r=4.2*mm):
     c.saveState(); c.setStrokeColor(INK); c.setFillColor(INK); c.setLineWidth(1)
@@ -75,33 +77,45 @@ class Folha:
         c=self.c; c.setFont('And',7); c.setFillColor(GREY); c.drawRightString(W-M,M-3*mm,code); c.showPage()
 
     # ---------- tipos de exercício ----------
-    def mots(self,itens,cols=2,size=19):
-        c=self.c; colw=(W-2*M)/cols; rowh=24*mm
+    # Blocos elásticos (itens espaçados) recebem a altura disponível e usam
+    # passo = min(máximo, altura/n); sem altura, ocupam até o LIMITE.
+    # Abaixo do mínimo os itens se sobrepõem: erro em vez de desenhar.
+    def _passo(self,n,maximo,altura,minimo):
+        altura=self.y-LIMITE if altura is None else altura
+        step=altura/n if maximo is None else min(maximo,altura/n)
+        if step<minimo: raise ValueError(f'não cabe: {n} itens pedem pelo menos {n*minimo/mm:.0f} mm, há {altura/mm:.0f} mm')
+        return step
+    def _avanca(self,n,step): self.y-=n*step+ESPACO
+    def mots(self,itens,cols=2,size=19,altura=None):
+        c=self.c; colw=(W-2*M)/cols; nl=-(-len(itens)//cols); rowh=self._passo(nl,24*mm,altura,14*mm)
         for i,(fr,pt) in enumerate(itens):
             col=i%cols; row=i//cols
             x=M+col*colw+2*mm; y=self.y-row*rowh
             c.setFont('And',7.5); c.setFillColor(GREY); c.drawString(x,y,f'{i+1}')
             c.setFont('And',size); c.setFillColor(INK); c.drawString(x+5*mm,y-3*mm,fr)
             c.setFont('And',8); c.setFillColor(GREY); c.drawString(x+5*mm,y-8.5*mm,pt)
-    def relie(self,pares,seed=1):
+        self._avanca(nl,rowh)
+    def relie(self,pares,seed=1,altura=None):
         c=self.c; rnd=random.Random(seed); dir_=[p[1] for p in pares]; rnd.shuffle(dir_)
-        step=(self.y-M-12*mm)/len(pares)
+        step=self._passo(len(pares),None,altura,9*mm)
         for i,(fr,_) in enumerate(pares):
             y=self.y-i*step
             c.setFont('And',15); c.setFillColor(INK); c.drawString(M+2*mm,y,fr)
             c.circle(M+52*mm,y+1.6*mm,1.1*mm,fill=1,stroke=0)
             c.circle(W-M-48*mm,y+1.6*mm,1.1*mm,fill=1,stroke=0)
             c.setFont('And',12); c.drawString(W-M-44*mm,y,dir_[i])
-    def entoure(self,linhas):
-        c=self.c; step=min(17*mm,(self.y-M-10*mm)/len(linhas))
+        self._avanca(len(pares),step)
+    def entoure(self,linhas,altura=None):
+        c=self.c; step=self._passo(len(linhas),17*mm,altura,9*mm)
         for i,opts in enumerate(linhas):
             y=self.y-i*step
             c.setFont('And',8); c.setFillColor(GREY); c.drawString(M+1*mm,y,f'{i+1}')
             colw=(W-2*M-10*mm)/len(opts)
             for j,o in enumerate(opts):
                 c.setFont('And',15); c.setFillColor(INK); c.drawString(M+10*mm+j*colw,y,o)
-    def recopie(self,mots,size=20):
-        c=self.c; step=min(19*mm,(self.y-M-8*mm)/len(mots))
+        self._avanca(len(linhas),step)
+    def recopie(self,mots,size=20,altura=None):
+        c=self.c; step=self._passo(len(mots),19*mm,altura,10*mm)
         for i,m in enumerate(mots):
             y=self.y-i*step
             c.setFont('And',8); c.setFillColor(GREY); c.drawString(M+1*mm,y,f'{i+1}')
@@ -109,14 +123,16 @@ class Folha:
             w=c.stringWidth(m,'And',size)
             c.setStrokeColor(RULE); c.setLineWidth(.6); c.line(M+7*mm,y-2*mm,M+7*mm+w,y-2*mm)
             c.line(M+w+14*mm,y-2*mm,W-M,y-2*mm)
-    def phrases(self,frases,size=15,gloss=None):
-        c=self.c; step=min(19*mm,(self.y-M-8*mm)/len(frases))
+        self._avanca(len(mots),step)
+    def phrases(self,frases,size=15,gloss=None,altura=None):
+        c=self.c; step=self._passo(len(frases),19*mm,altura,11*mm if gloss else 8*mm)
         for i,f in enumerate(frases):
             y=self.y-i*step
             c.setFont('And',8); c.setFillColor(GREY); c.drawString(M+1*mm,y,f'{i+1}')
             c.setFont('And',size); c.setFillColor(INK); c.drawString(M+7*mm,y,f)
             if gloss:
                 c.setFont('And',8); c.setFillColor(GREY); c.drawString(M+7*mm,y-5*mm,gloss[i])
+        self._avanca(len(frases),step)
     def banque(self,mots):
         c=self.c; bw=W-2*M; bh=11*mm
         c.setStrokeColor(INK); c.setLineWidth(.7); c.roundRect(M,self.y-bh+4*mm,bw,bh,2*mm)
@@ -124,8 +140,8 @@ class Folha:
         gap=bw/len(mots)
         for i,m in enumerate(mots): c.drawCentredString(M+gap*(i+.5),self.y-3.5*mm,m)
         self.y-=bh+6*mm
-    def trous(self,frases,size=14):
-        c=self.c; step=min(18*mm,(self.y-M-8*mm)/len(frases))
+    def trous(self,frases,size=14,altura=None):
+        c=self.c; step=self._passo(len(frases),18*mm,altura,10*mm)
         for i,f in enumerate(frases):
             y=self.y-i*step; x=M+7*mm
             c.setFont('And',8); c.setFillColor(GREY); c.drawString(M+1*mm,y,f'{i+1}')
@@ -134,6 +150,7 @@ class Folha:
                 c.setFont('And',size); c.setFillColor(INK); c.drawString(x,y,p); x+=c.stringWidth(p,'And',size)
                 if k<len(partes)-1:
                     c.setStrokeColor(INK); c.setLineWidth(.7); c.rect(x+1*mm,y-2.2*mm,28*mm,8*mm); x+=30*mm
+        self._avanca(len(frases),step)
     def lecture(self,linhas,fois=3,size=14):
         c=self.c; y=self.y
         c.setFont('And',9); c.setFillColor(INK); c.drawString(M,y,'Lu à voix haute :')
@@ -143,14 +160,14 @@ class Folha:
         for l in linhas:
             c.setFont('And',size); c.setFillColor(INK); c.drawString(M+2*mm,y,l); y-=8.5*mm
         self.y=y
-    def vraifaux(self,frases,size=13.5):
-        c=self.c; step=min(15*mm,(self.y-M-40*mm)/len(frases))
+    def vraifaux(self,frases,size=13.5,altura=None):
+        c=self.c; step=self._passo(len(frases),15*mm,altura,8*mm)
         for i,f in enumerate(frases):
             y=self.y-i*step
             c.setFont('And',8); c.setFillColor(GREY); c.drawString(M+1*mm,y,f'{i+1}')
             c.setFont('And',size); c.setFillColor(INK); c.drawString(M+7*mm,y,f)
             c.setFont('AndB',13); c.drawString(W-M-18*mm,y,'V'); c.drawString(W-M-8*mm,y,'F')
-        self.y-=len(frases)*step+4*mm
+        self._avanca(len(frases),step)
     def dictee(self,n,num0=1,titre=None,gloss=None):
         c=self.c
         if titre:
@@ -162,6 +179,7 @@ class Folha:
             y=self.y-i*14*mm
             c.setFont('And',8); c.setFillColor(GREY); c.drawString(M+1*mm,y,f'{num0+i}')
             c.setStrokeColor(RULE); c.setLineWidth(.6); c.line(M+7*mm,y-2*mm,W-M,y-2*mm)
+        self.y-=n*14*mm
     def save(self): self.c.save()
 
 from reportlab.lib.utils import simpleSplit
