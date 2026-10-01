@@ -45,7 +45,11 @@ def caminho_folha(curso, codigo, versao=1):
 
 def carregar_folha(curso, codigo, versao=1):
     caminho = caminho_folha(curso, codigo, versao)
-    d = _ler(caminho)
+    return validar_folha(_ler(caminho), caminho, codigo)
+
+
+def validar_folha(d, caminho, codigo):
+    """estrutura da folha (chaves de folha e lados); os blocos são validados ao desenhar"""
     _chaves(d, caminho, ('folha', 'unidade', 'a', 'b'))
     if str(d['folha']) != str(codigo):
         raise ErroEspecificacao(f'{caminho}: folha diz {d["folha"]!r}, esperado {codigo!r}')

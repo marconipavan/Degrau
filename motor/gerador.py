@@ -49,15 +49,18 @@ def _codigo(folhas):
     return f'{n1} {a}-{b}' if n1 == n2 else f'{folhas[0]}-{folhas[-1]}'
 
 
-def proximo(estado, dias=1, hoje=None, saida='pacotes'):
-    """Gera o próximo pacote (dias = unidades diárias no pacote) e o registra como pendente.
-    Devolve (arquivos gerados, páginas em que é preciso esconder o texto)."""
+def pendentes(estado):
+    return [u for u in estado['unidades'] if u['status'] == 'pendente']
+
+
+def planejar(estado, dias=1):
+    """Folhas do próximo pacote: {'curso', 'unidades': [[folha, ...], ...], 'todas', 'versoes',
+    'faltam': [(folha, versão, caminho)]}. Não grava nada."""
     curso = carregar_curso(estado['curso'])
-    pend = [u for u in estado['unidades'] if u['status'] == 'pendente']
+    pend = pendentes(estado)
     if pend:
         raise ErroEspecificacao('pacote pendente: ' + ', '.join(f'{u["codigo"]} ({u["arquivo"]})' for u in pend)
                                 + '. O pendente vem primeiro: registre a correção com "degrau registrar".')
-    hoje = hoje or date.today().isoformat()
     feitas, k = dominadas(estado), folhas_por_unidade(curso)
     livres = (f for f in sequencia(curso, estado['inicio']) if f not in feitas)
     unidades = []
@@ -66,19 +69,27 @@ def proximo(estado, dias=1, hoje=None, saida='pacotes'):
         if not fs: break
         unidades.append(fs)
     if not unidades: raise ErroEspecificacao('currículo concluído: não há folhas sem domínio')
-
     # versão = quantas vezes a folha já saiu + 1 (repetição usa exercícios novos)
     saidas = {}
     for u in estado['unidades']:
         for f in u['folhas']: saidas[f] = saidas.get(f, 0) + 1
     todas = [f for fs in unidades for f in fs]
     versoes = [saidas.get(f, 0) + 1 for f in todas]
-    faltam = [os.path.relpath(caminho_folha(curso['curso'], f, v)) for f, v in zip(todas, versoes)
+    faltam = [(f, v, caminho_folha(curso['curso'], f, v)) for f, v in zip(todas, versoes)
               if not os.path.exists(caminho_folha(curso['curso'], f, v))]
-    if faltam:
-        raise ErroEspecificacao('faltam folhas na biblioteca (escreva antes de gerar; versão 2 em diante = '
-                                'exercícios novos para a repetição):\n  ' + '\n  '.join(faltam))
+    return {'curso': curso, 'unidades': unidades, 'todas': todas, 'versoes': versoes, 'faltam': faltam}
 
+
+def proximo(estado, dias=1, hoje=None, saida='pacotes'):
+    """Gera o próximo pacote (dias = unidades diárias no pacote) e o registra como pendente.
+    Devolve (arquivos gerados, páginas em que é preciso esconder o texto)."""
+    p = planejar(estado, dias)
+    curso, unidades, todas, versoes = p['curso'], p['unidades'], p['todas'], p['versoes']
+    if p['faltam']:
+        raise ErroEspecificacao('faltam folhas na biblioteca (escreva antes de gerar; versão 2 em diante = '
+                                'exercícios novos para a repetição):\n  '
+                                + '\n  '.join(os.path.relpath(c) for _, _, c in p['faltam']))
+    hoje = hoje or date.today().isoformat()
     n = max((u['pacote'] for u in estado['unidades']), default=0) + 1
     nivel, de = todas[0].split(); ate = todas[-1].split()[1]
     arquivo = curso['folha'].get('arquivo', 'Pacote_{pacote:03d}_{nivel}_{de}-{ate}.pdf').format(

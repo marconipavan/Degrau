@@ -17,3 +17,5 @@ _origem/
 saida/
 # Pacotes gerados para alunos (pessoais)
 pacotes/
+# Chave da API e outros segredos locais
+.env.local
