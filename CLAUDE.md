@@ -59,6 +59,8 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 ### Progresso do francês
 
 - Nível 6A. Pacote 1 (folhas 6A 1–5) enviado em 30/09/2026, **aguardando entrega e correção**.
+- 6A 4 e 6A 5 foram uma prévia (Expressions e Petite histoire). Decidido em 01/10/2026: daqui em diante vale o currículo
+  (6A 6–30 continuam Mots familiers; nome da unidade = unidade + posição na faixa, ex.: "Mots familiers 6").
 - Vocabulário introduzido: bonjour, merci, un avion, une ville, la France, un étudiant, content, fatigué, brésilien, dans, mais, arriver, je m'appelle, je suis, bienvenue, une hôtesse, en France.
 - Estrutura vista em frases (sem explicação): je suis / il est.
 
@@ -82,6 +84,7 @@ pip install -r requirements.txt           # reportlab, pyyaml, pytest
 ./degrau registrar estado/frances.local.json "6A 1-5" --nota 95 --tempo 9   # domínio ou repetir
 ./degrau automatico estado/frances.local.json --pedido   # grava em saida/pedido.txt o que iria para a API
 ./degrau automatico estado/frances.local.json            # API escreve as folhas que faltam + gera o pacote
+./degrau enviar estado/frances.local.json  # manda o último pacote por e-mail (Gmail; --pacote N, --pasta DIR)
 ferramentas/agendar.sh                     # agenda o automatico às 06:30 (crontab); --remover desfaz
 pytest                                     # nesta máquina: env -u PYTHONPATH pytest (o ROS injeta plugins)
 ferramentas/comparar.sh [etiqueta]         # compara com a referência (padrão: referencia-fase0)
@@ -326,7 +329,7 @@ Implementada na fase 4 (`./degrau`, seção 2). A correção automática do fran
 
 ### 7.6 Automação (fase 5)
 
-Feita em 01/10/2026 a **geração**; o **envio** (e-mail, Telegram) ficou para depois (decisão do Ângelo).
+Feitos em 01/10/2026 a **geração** e o **envio por e-mail** (Gmail, escolha do Ângelo).
 
 - `./degrau automatico <estado>`: se houver pacote pendente, não faz nada. Senão planeja o próximo pacote,
   pede ao Claude (`claude-opus-5-5`, esforço `high`, saída em JSON com esquema) o YAML das folhas que faltam,
@@ -339,6 +342,10 @@ Feita em 01/10/2026 a **geração**; o **envio** (e-mail, Telegram) ficou para d
 - Custo estimado: ~7 mil tokens de entrada fixos + ~2 mil do dia; saída ~10–15 mil (folhas + raciocínio).
   Com os preços do Opus 5.5 (US$ 4 / 20 por milhão), ~US$ 0,30–0,40 por pacote, ~US$ 10–12 por mês.
   O cache dura 5 minutos: só barateia as novas tentativas do mesmo dia. O custo real sai no registro.
+- Envio (`motor/envio.py`): Gmail por SMTP com **senha de app**. Em `.env.local`: `DEGRAU_EMAIL_DE`,
+  `DEGRAU_EMAIL_SENHA`, `DEGRAU_EMAIL_PARA` (opcional). Vai o PDF e o bloco de áudio (no corpo, pronto para copiar,
+  e em anexo) com o aviso de onde esconder o texto; **o gabarito nunca vai**. O `automatico` envia no fim se o
+  e-mail estiver configurado; `./degrau enviar` manda um pacote à mão.
 - Agendamento: `ferramentas/agendar.sh` põe no crontab `30 6 * * *` (fuso da máquina: America/Sao_Paulo);
   registro em `saida/automatico.log`.
 - As folhas escritas pela API ficam em `folhas/` sem commit: revisar e versionar como as outras.
@@ -398,7 +405,7 @@ Perguntas a responder antes de construir:
 | **2. Gabarito e áudio a partir da mesma especificação** (feita) | Exportar gabarito (CSV para a planilha) e bloco de áudio direto do YAML; figuras com gabarito calculado e verificação das expressões | Gabarito de G1 1–3 e 81–89 batem com o `docs/plano-completo.md` |
 | **3. Correção do CASD testada** (lógica testada; falta o teste no Google) | Conjuntos em qualquer ordem (G1 2b); testar o Apps Script com envios falsos; documentar a montagem passo a passo | Envio falso → linha correta no Painel |
 | **4. Gerador de pacotes** (feita) | Linha de comando `degrau`; estado do aluno via adaptador; regra de domínio e repetição com exercícios novos | Gerar 5 dias seguidos de francês e 2 pacotes de geometria sem editar código |
-| **5. Automação** (geração feita; envio adiado) | Agendador + geração do conteúdo pela API; envio depois | Pacote pronto sozinho às 06:30 em `pacotes/` (envio: a decidir) |
+| **5. Automação** (feita; falta ligar com as chaves) | Agendador + geração do conteúdo pela API + envio por e-mail | Pacote chega sozinho às 06:30 |
 | **6. Multi-aluno CASD** | Pacote individual por aluno a partir do painel | Piloto de 6–8 alunos rodando |
 | **7. Expansão para outras áreas** (a planejar) | Alemão, mandarim, química (nomenclatura, balanceamento, estequiometria), física (circuitos simples) etc. (seção 7.7) | Por área: currículo validado, um pacote de exemplo com gabarito calculado e testes |
 | **8. Métricas de desempenho** (a planejar) | Acertos, constância, posição em relação ao objetivo, marcos por idade, tendência mensal, progresso de nível, projeção, teste de fim de nível (seção 7.8) | Definir com o Ângelo depois do piloto |
@@ -426,7 +433,7 @@ Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostr
 2. ~~Coordenação do CASD~~ — autorizado em 01/10/2026: fotos de cadernos, dados de desempenho e uso do nome "CASD" (inclusive na marca da folha e no repositório público). Dados de alunos continuam fora do git.
 3. ~~Onde fica o estado do francês~~ — decidido em 01/10/2026: JSON local (`estado/frances.local.json`).
 4. ~~Modelo de gabarito do formulário~~ — decidido em 01/10/2026: mais campos, uma seção por página com 12 campos numerados como na folha (`correcao/README.md`).
-5. Envio automático (fase 5): adiado em 01/10/2026; falta escolher o canal (e-mail, Telegram…).
+5. ~~Envio automático~~ — decidido em 01/10/2026: e-mail pelo Gmail (senha de app).
 6. Expansão para outras áreas (fase 7): as três perguntas da seção 7.7.
 7. Métricas de desempenho (fase 8): as cinco perguntas da seção 7.8.
 

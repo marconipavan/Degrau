@@ -24,6 +24,9 @@ niveis:
     folhas: 100
     tempo_padrao_min: [1, 2]
     palavras_novas: 250
+    # 6A 4 ("Expressions 1") e 6A 5 ("Petite histoire 1") do pacote 1 foram uma prévia (decisão de 01/10/2026):
+    # daqui em diante vale o currículo. 6A 6-30 continuam Mots familiers; nome na folha = unidade + número da
+    # folha dentro da faixa (6A 6 = "Mots familiers 6").
     unidades:
       - {folhas: [1, 30], nome: Mots familiers}
       - {folhas: [31, 60], nome: Expressions}

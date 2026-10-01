@@ -4,10 +4,12 @@
 #   registrar <estado.json> <código> --nota N [--tempo MIN]   registra a correção: domínio ou repetir
 #   estado    <estado.json>                     resumo: próxima folha, pendentes, últimas notas
 #   automatico <estado.json> [--pedido]         o Claude escreve as folhas que faltam (API) e gera o pacote;
-#                                               --pedido só grava o pedido em saida/pedido.txt, sem chamar a API
+#                                               --pedido só grava o pedido em saida/pedido.txt, sem chamar a API;
+#                                               com o e-mail configurado (.env.local), envia o pacote no fim
+#   enviar    <estado.json> [--pacote N] [--pasta DIR]   envia por e-mail o pacote (padrão: o último)
 import argparse, os, sys
 from .especificacao import ErroEspecificacao, RAIZ, carregar_curso
-from . import estado as E, gerador, render, autor
+from . import estado as E, gerador, render, autor, envio
 
 
 def _mostrar(arquivos, esconder):
@@ -26,6 +28,8 @@ def main():
     p = sub.add_parser('estado'); p.add_argument('estado')
     p = sub.add_parser('automatico'); p.add_argument('estado'); p.add_argument('--dias', type=int, default=1)
     p.add_argument('--saida', default=os.path.join(RAIZ, 'pacotes')); p.add_argument('--pedido', action='store_true')
+    p = sub.add_parser('enviar'); p.add_argument('estado'); p.add_argument('--pacote', type=int)
+    p.add_argument('--pasta', default=os.path.join(RAIZ, 'pacotes'))
     a = ap.parse_args()
 
     if a.comando == 'exemplos':
@@ -50,6 +54,17 @@ def main():
         _mostrar(*gerador.proximo(est, a.dias, saida=a.saida))
         E.salvar(a.estado, est)
         print(f'  custo estimado da API: US$ {custo:.2f}')
+        if envio.configurado():
+            n = est['unidades'][-1]['pacote']
+            envio.enviar(envio.montar(est, n, a.saida))
+            print(f'  pacote {n} enviado por e-mail')
+        else:
+            print('  e-mail não configurado: pacote só em', a.saida)
+    elif a.comando == 'enviar':
+        n = a.pacote or max(u['pacote'] for u in est['unidades'])
+        msg = envio.montar(est, n, a.pasta)
+        envio.enviar(msg)
+        print(f'pacote {n} enviado para {msg["To"]}')
     elif a.comando == 'proximo':
         _mostrar(*gerador.proximo(est, a.dias, a.data, a.saida))
         E.salvar(a.estado, est)

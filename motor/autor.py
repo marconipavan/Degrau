@@ -99,7 +99,8 @@ def _unidade_do_curriculo(curso, codigo):
     n = next((n for n in curso['niveis'] if n['codigo'] == nivel), {})
     for u in n.get('unidades', []):
         a, b = u['folhas']
-        if a <= num <= b: return f'{u["nome"]} (folhas {a}-{b} do nível {nivel})'
+        if a <= num <= b:   # nome na folha = unidade + posição da folha na faixa
+            return f'{u["nome"]} (folhas {a}-{b} do nível {nivel}); campo unidade da folha: "{u["nome"]} {num - a + 1}"'
     return f'nível {nivel}: {n.get("nome", "")} — {n.get("conteudo", "")}'
 
 
