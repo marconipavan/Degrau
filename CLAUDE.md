@@ -316,6 +316,29 @@ automática: agendador (cron local ou GitHub Actions às 09:30 UTC = 06:30 em Br
 pacote a partir do estado + currículo e envia (e-mail ou Telegram). Se a geração do conteúdo novo usar a API da
 Anthropic, a chave vai em segredo do repositório, nunca no código. Avaliar custo antes.
 
+### 7.7 Métricas de desempenho (fase 7, a planejar)
+
+Pedido do Ângelo em 01/10/2026. Ainda não desenhado em detalhe: depende dos dados de correção (fases 3 e 4).
+
+| Métrica | Ideia inicial |
+|---|---|
+| Acertos | Nota de cada folha e de cada pacote (já sai da correção) |
+| Constância | Dias entregues ÷ dias previstos; sequência atual e recorde; entregas fora do prazo |
+| Posição em relação ao objetivo | O usuário escolhe um objetivo **só entre os cadastrados** num registro de objetivos (ex.: DELF A1/A2/B1, TOEFL, série escolar, prova da EPCAR). Cada objetivo aponta para um ponto do currículo (ex.: DELF B1 = fim do FI); posição = folhas dominadas ÷ folhas até esse ponto |
+| Marcos por idade | Onde se espera que um aluno de certa idade esteja (ex.: série escolar ↔ nível), a partir de uma tabela de referência por curso |
+| Tendência mensal | Por mês: nota média, tempo médio, folhas dominadas, repetições |
+| Progresso de nível | Fração do nível atual concluída; níveis concluídos por mês |
+| Projeção | Data estimada para chegar ao objetivo = folhas restantes ÷ ritmo recente (ex.: últimos 30 dias), com faixa otimista e pessimista; comparada com a data da prova |
+| Teste de fim de nível | Uma prova ao fim de cada nível, sem exemplo resolvido. Aprovado avança; reprovado recomeça o nível (ou parte dele) |
+
+Perguntas a responder antes de construir:
+
+1. Onde as métricas aparecem: painel na planilha, página no navegador ou um resumo junto do pacote?
+2. Marcos por idade: de onde vem a tabela de referência de cada curso?
+3. Teste de fim de nível: número de questões, nota de corte, e se a reprovação recomeça o nível inteiro ou só as unidades com erro.
+4. Quais objetivos entram primeiro no registro.
+5. Dados de menores: idade e métricas do CASD só na conta institucional; no repositório, só a lógica e dados fictícios.
+
 ---
 
 ## 8. Roteiro de fases (com critérios de aceite)
@@ -329,6 +352,7 @@ Anthropic, a chave vai em segredo do repositório, nunca no código. Avaliar cus
 | **4. Gerador de pacotes** | Linha de comando `degrau`; estado do aluno via adaptador; regra de domínio e repetição com exercícios novos | Gerar 5 dias seguidos de francês e 2 pacotes de geometria sem editar código |
 | **5. Automação** | Agendador + envio | Pacote chega sozinho às 06:30 |
 | **6. Multi-aluno CASD** | Pacote individual por aluno a partir do painel | Piloto de 6–8 alunos rodando |
+| **7. Métricas de desempenho** (a planejar) | Acertos, constância, posição em relação ao objetivo, marcos por idade, tendência mensal, progresso de nível, projeção, teste de fim de nível (seção 7.7) | Definir com o Ângelo depois do piloto |
 
 Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostrar retenção (≥70% entregando na semana 4).
 
@@ -354,6 +378,7 @@ Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostr
 3. Onde fica o estado do francês (Notion × JSON local × outro).
 4. Modelo de gabarito do formulário (limite de 15 campos).
 5. Se haverá automação de envio (fase 5) e por qual canal.
+6. Métricas de desempenho (fase 7): as cinco perguntas da seção 7.7.
 
 ---
 
