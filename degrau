@@ -1,0 +1,3 @@
+#!/bin/sh
+# Degrau: linha de comando (ver motor/__main__.py)
+exec "$(dirname "$0")/.venv/bin/python" -m motor "$@"

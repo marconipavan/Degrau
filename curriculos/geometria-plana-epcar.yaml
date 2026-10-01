@@ -1,7 +1,7 @@
 # Tabela de níveis — Geometria plana (preparação EPCAR e Colégio Naval)
 # O motor lê por enquanto só a chave folha (marca e campos do cabeçalho).
 curso: geometria-plana-epcar
-folha: {marca: geometria, campos: caderno}   # campos: caderno = "No caderno, anote: …"
+folha: {marca: geometria, campos: caderno, arquivo: "{nivel}_pacote{pacote:02d}_folhas{de}-{ate}.pdf"}   # campos: caderno = "No caderno, anote: …"
 idioma: pt-BR
 entrega: PDF no celular; resolução no caderno; respostas finais curtas no formulário
 bloco_diario: {folhas: 3, minutos_aprox: 10}

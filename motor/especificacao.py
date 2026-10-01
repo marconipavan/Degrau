@@ -30,17 +30,21 @@ def carregar_curso(curso):
     d = _ler(caminho)
     if 'folha' not in d:
         raise ErroEspecificacao(f'{caminho}: falta a chave folha (marca, campos)')
-    _chaves(d['folha'], f'{caminho}, folha', ('marca', 'campos'))
+    _chaves(d['folha'], f'{caminho}, folha', ('marca', 'campos'), ('arquivo',))
     if d['folha']['campos'] not in ('papel', 'caderno'):
         raise ErroEspecificacao(f'{caminho}, folha.campos: use papel ou caderno')
     d['idioma_folha'] = d.get('idioma_alvo') or d.get('idioma')
     return d
 
 
-def carregar_folha(curso, codigo):
-    """codigo 'G1 81' -> folhas/<curso>/G1/81.yaml"""
+def caminho_folha(curso, codigo, versao=1):
+    """'G1 81' -> folhas/<curso>/G1/81.yaml; versão 2 -> 81.v2.yaml (repetição com exercícios novos)"""
     nivel, num = str(codigo).split()
-    caminho = os.path.join(RAIZ, 'folhas', curso, nivel, f'{num}.yaml')
+    return os.path.join(RAIZ, 'folhas', curso, nivel, f'{num}.yaml' if versao == 1 else f'{num}.v{versao}.yaml')
+
+
+def carregar_folha(curso, codigo, versao=1):
+    caminho = caminho_folha(curso, codigo, versao)
     d = _ler(caminho)
     _chaves(d, caminho, ('folha', 'unidade', 'a', 'b'))
     if str(d['folha']) != str(codigo):

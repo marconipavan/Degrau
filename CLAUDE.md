@@ -38,6 +38,8 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 | Testes | `testes/test_folhas.py` | Gera tudo; nada fora da página; texto sobre texto ou sobre linha; gabarito de 81–89 |
 | Gabarito | `motor/gabarito.py` | Lido do YAML; bicos conferidos (todos os rótulos dão o mesmo x, que bate com resposta e alternativa) |
 | Áudio | `motor/audio.py` | Bloco de faixas para o leitor, gerado dos blocos com som |
+| Estado do aluno | `motor/estado.py`, `estado/` | Adaptador JSON; o do francês é `estado/frances.local.json` (fora do git) |
+| Gerador de pacotes | `motor/gerador.py`, `./degrau` | Próximas folhas pelo estado; domínio, repetição com a versão seguinte (`N.v2.yaml`), pendente bloqueia |
 | Comparação | `ferramentas/comparar.sh` | Pixels e palavras, página a página, contra uma etiqueta ou commit |
 | Leitor de áudio | `leitor/leitor-frances.html` | Funciona em qualquer navegador; HTML único |
 | Correção automática | `correcao/aoEnviar.gs`, `correcao/montar.gs` | Testada com envios simulados (`correcao/teste/simular.js`); **falta montar e testar no Google** (passo a passo em `correcao/README.md`) |
@@ -58,12 +60,11 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 - Vocabulário introduzido: bonjour, merci, un avion, une ville, la France, un étudiant, content, fatigué, brésilien, dans, mais, arriver, je m'appelle, je suis, bienvenue, une hôtesse, en France.
 - Estrutura vista em frases (sem explicação): je suis / il est.
 
-### Decisão em aberto: onde fica o estado
+### Onde fica o estado (decidido em 01/10/2026)
 
-Hoje o estado do francês vive no Notion; o do CASD viverá numa planilha. Para o núcleo genérico, propor
-um **adaptador de estado** (seção 7.3) e, para o francês, avaliar mover o estado para um JSON no repositório
-(`estado/frances.json`, fora do controle de versão se tiver algo pessoal) ou configurar o Notion como servidor
-de ferramentas no Claude Code. **Perguntar ao Ângelo antes de decidir.**
+O estado do francês fica em `estado/frances.local.json`, fora do git (`.gitignore`: `estado/*.local.json`).
+Formato documentado em `motor/estado.py`; exemplo fictício em `estado/exemplo.json`. O caderno no Notion
+deixa de ser a fonte do estado. O CASD continua na planilha (outro adaptador, na fase 6).
 
 ---
 
@@ -72,8 +73,11 @@ de ferramentas no Claude Code. **Perguntar ao Ângelo antes de decidir.**
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt           # reportlab, pyyaml, pytest
-python -m motor exemplos/pacotes.yaml      # saída em exemplos/pdf/: PDF + .gabarito.csv
+./degrau exemplos exemplos/pacotes.yaml    # saída em exemplos/pdf/: PDF + .gabarito.csv
                                            # + .planilha.csv (CASD) + .audio.txt (se houver som)
+./degrau estado estado/frances.local.json  # próxima folha, pendentes, últimas notas
+./degrau proximo estado/frances.local.json # gera o próximo pacote em pacotes/ (fora do git)
+./degrau registrar estado/frances.local.json "6A 1-5" --nota 95 --tempo 9   # domínio ou repetir
 pytest                                     # nesta máquina: env -u PYTHONPATH pytest (o ROS injeta plugins)
 ferramentas/comparar.sh [etiqueta]         # compara com a referência (padrão: referencia-fase0)
 ```
@@ -210,14 +214,18 @@ com passo máximo e mínimo por tipo. Se não couber, erro em vez de sobreposiç
 
 **Meta:** DELF B1 numa sessão do 2º semestre de 2027 (com margem para uma 2ª tentativa antes de abril de 2028). A prova tem 4 competências de 25 pontos; aprovação com 50/100 e mínimo 5 em cada. O maior risco é a produção oral.
 
-**Fluxo diário atual (no claude.ai):**
+**Fluxo diário (a partir da fase 4, no Claude Code):**
 
-1. 06:30 — lembrete. Ângelo manda "folha".
-2. Claude lê o caderno de progresso, confere pendências, monta o pacote seguinte conforme a tabela e o domínio anterior.
-3. Entrega: PDF `Pacote_NNN_nível_folhas.pdf` + **um bloco único de texto** com as faixas de áudio do dia.
-4. Ângelo cola o bloco no leitor, faz as folhas anotando início e fim.
-5. Entrega até 23:59: fotos das páginas (preferível) ou respostas digitadas por folha ("3a: 1 merci, …").
-6. Claude corrige, dá nota por folha e do pacote, compara tempo, decide domínio/repetição e atualiza o caderno.
+1. 06:30 — lembrete. Ângelo pede a folha.
+2. Claude roda `./degrau estado estado/frances.local.json`: se houver pacote pendente, ele vem primeiro.
+3. Claude escreve em YAML as folhas que faltam (o `proximo` lista os arquivos; numa repetição, a versão nova
+   `N.v2.yaml` com exercícios novos), usando vocabulário, estruturas e erros recorrentes do estado.
+4. `./degrau proximo …` gera PDF `Pacote_NNN_nível_folhas.pdf`, gabarito e **um bloco único de texto** com as
+   faixas de áudio, e marca o pacote como pendente.
+5. Ângelo cola o bloco no leitor, faz as folhas anotando início e fim.
+6. Entrega até 23:59: fotos das páginas (preferível) ou respostas digitadas por folha ("3a: 1 merci, …").
+7. Claude corrige com o `.gabarito.csv`, dá nota por folha e do pacote, roda `./degrau registrar …` (domínio
+   ou repetir) e atualiza vocabulário, estruturas e erros recorrentes no estado.
 
 **Pacote:** 5 folhas por dia (10 páginas A5).
 
@@ -304,14 +312,10 @@ Implementada na fase 1 (seção 5; exemplos em `folhas/`). O áudio não precisa
 
 Para itens com expressões (ex.: `3x + 5°`), o motor verifica (fase 2, `resolver_x` em `bicos.py`) que **todas** as expressões dão o valor calculado com o mesmo x e falha alto se não derem (foi assim que se pegou um rótulo errado na conversa: "100°" num ângulo de 80°).
 
-### 7.5 Linha de comando (proposta)
+### 7.5 Linha de comando
 
-```bash
-degrau gerar --curso frances-delf-b1 --pacote 2          # PDF + bloco de áudio + gabarito
-degrau gerar --curso geometria-plana-epcar --aluno joao --bloco "G1 10-12"
-degrau gabarito --curso geometria-plana-epcar --nivel G1 --csv correcao/modelos/gabarito.csv
-degrau corrigir --curso frances-delf-b1 --pacote 1 --respostas respostas.txt
-```
+Implementada na fase 4 (`./degrau`, seção 2). A correção automática do francês a partir de respostas digitadas
+(`degrau corrigir --respostas`) ainda não existe: hoje a nota vem da correção feita pelo Claude.
 
 ### 7.6 Automação de verdade (opcional, fase 5)
 
@@ -374,7 +378,7 @@ Perguntas a responder antes de construir:
 | **1. Conteúdo separado do desenho** (feita) | Esquema YAML de folha; renderizador que lê YAML; reescrever os 4 exemplos como YAML; layout por caixas em vez de milímetros fixos; testes básicos | Os PDFs gerados a partir do YAML ficam visualmente equivalentes aos atuais (comparar imagens) |
 | **2. Gabarito e áudio a partir da mesma especificação** (feita) | Exportar gabarito (CSV para a planilha) e bloco de áudio direto do YAML; figuras com gabarito calculado e verificação das expressões | Gabarito de G1 1–3 e 81–89 batem com o `docs/plano-completo.md` |
 | **3. Correção do CASD testada** (lógica testada; falta o teste no Google) | Conjuntos em qualquer ordem (G1 2b); testar o Apps Script com envios falsos; documentar a montagem passo a passo | Envio falso → linha correta no Painel |
-| **4. Gerador de pacotes** | Linha de comando `degrau`; estado do aluno via adaptador; regra de domínio e repetição com exercícios novos | Gerar 5 dias seguidos de francês e 2 pacotes de geometria sem editar código |
+| **4. Gerador de pacotes** (feita) | Linha de comando `degrau`; estado do aluno via adaptador; regra de domínio e repetição com exercícios novos | Gerar 5 dias seguidos de francês e 2 pacotes de geometria sem editar código |
 | **5. Automação** | Agendador + envio | Pacote chega sozinho às 06:30 |
 | **6. Multi-aluno CASD** | Pacote individual por aluno a partir do painel | Piloto de 6–8 alunos rodando |
 | **7. Expansão para outras áreas** (a planejar) | Alemão, mandarim, química (nomenclatura, balanceamento, estequiometria), física (circuitos simples) etc. (seção 7.7) | Por área: currículo validado, um pacote de exemplo com gabarito calculado e testes |
@@ -401,7 +405,7 @@ Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostr
 
 1. Revisão da tabela G1: (a) "Graus, minutos e segundos" merece uma unidade inteira na EPCAR? (b) as questões de prova entram cedo demais na Revisão 1? (c) "O bizu dos bicos" é o nome usado em sala? (marcados com `revisar: true` no YAML)
 2. Coordenação do CASD: autorização para fotos de cadernos e dados de desempenho; uso do nome "CASD" no repositório público.
-3. Onde fica o estado do francês (Notion × JSON local × outro).
+3. ~~Onde fica o estado do francês~~ — decidido em 01/10/2026: JSON local (`estado/frances.local.json`).
 4. ~~Modelo de gabarito do formulário~~ — decidido em 01/10/2026: mais campos, uma seção por página com 12 campos numerados como na folha (`correcao/README.md`).
 5. Se haverá automação de envio (fase 5) e por qual canal.
 6. Expansão para outras áreas (fase 7): as três perguntas da seção 7.7.

@@ -7,7 +7,7 @@ set -e
 cd "$(dirname "$0")/.."
 REF=${1:-referencia-fase0}; OUT=saida/comparacao
 rm -rf saida/ref saida/novo $OUT; mkdir -p saida/ref $OUT
-.venv/bin/python -m motor exemplos/pacotes.yaml saida/novo > /dev/null
+.venv/bin/python -m motor exemplos exemplos/pacotes.yaml saida/novo > /dev/null
 for novo in saida/novo/*.pdf; do
   n=$(basename "$novo" .pdf)
   git show "$REF:exemplos/pdf/$n.pdf" > "saida/ref/$n.pdf"

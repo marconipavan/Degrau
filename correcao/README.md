@@ -18,7 +18,7 @@ o script compara com o gabarito e escreve nota, tempo e status (Domínio ou Repe
 
 Abas: `Alunos`, `Gabarito`, `Painel` (+ a aba de respostas criada pelo Forms); cabeçalhos em `modelos/`.
 
-O gabarito não é escrito à mão: `python -m motor <pacotes.yaml>` gera, ao lado de cada PDF de geometria,
+O gabarito não é escrito à mão: `./degrau proximo <estado>` (ou `./degrau exemplos <pacotes.yaml>`) gera, ao lado de cada PDF de geometria,
 o arquivo `.planilha.csv` com as linhas da aba Gabarito (colunas: Bloco, Campo, Respostas aceitas, Pontos,
 Tempo-padrão do bloco). O bloco diário tem as folhas indicadas em `bloco_diario` no currículo (3).
 Se uma página passar de 12 itens, a geração falha. `modelos/gabarito.csv` é o bloco G1 1-3 gerado assim.
@@ -58,7 +58,7 @@ e confere que o `montar.gs` cria um campo para cada linha do gabarito, com o mes
 5. **Foto.** Abra o formulário e acrescente, no fim, a pergunta "Foto da resolução", tipo Envio de arquivo,
    até 5 imagens. (O Apps Script não cria esse tipo de pergunta.) Em Configurações, deixe a coleta de
    e-mail desligada; o envio de arquivo já exige login com conta Google.
-6. **Gabarito.** Para cada pacote: gere com `python -m motor <pacotes.yaml>` e, na aba `Gabarito`,
+6. **Gabarito.** Para cada pacote: gere com `./degrau proximo <estado do aluno>` e, na aba `Gabarito`,
    Arquivo > Importar > Upload > o `.planilha.csv` > "Anexar à página atual".
 7. **Teste com envios falsos.** Abra o formulário (ícone de olho), envie como "Aluno Teste": uma vez com
    tudo certo, uma com dois erros, uma com bloco inexistente. Confira as três linhas no Painel: nota 100

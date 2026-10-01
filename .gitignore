@@ -15,3 +15,5 @@ __pycache__/
 _origem/
 # Saídas temporárias (comparação de PDFs)
 saida/
+# Pacotes gerados para alunos (pessoais)
+pacotes/

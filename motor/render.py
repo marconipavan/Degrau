@@ -245,7 +245,8 @@ def gerar_pacote(pacote, saida):
     (.planilha.csv, só folhas de caderno) e o bloco de áudio (.audio.txt, se houver).
     Devolve (arquivos gerados, páginas em que é preciso esconder o texto ao ouvir)."""
     curso = carregar_curso(pacote['curso'])
-    folhas = [carregar_folha(pacote['curso'], cod) for cod in pacote['folhas']]  # valida tudo antes de desenhar
+    versoes = pacote.get('versoes') or [1] * len(pacote['folhas'])
+    folhas = [carregar_folha(pacote['curso'], cod, v) for cod, v in zip(pacote['folhas'], versoes)]  # valida tudo antes de desenhar
     os.makedirs(saida, exist_ok=True)
     caminho = os.path.join(saida, pacote['arquivo'])
     f = (Bico if curso['folha']['campos'] == 'caderno' else Folha)(caminho, pacote['titulo'])

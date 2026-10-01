@@ -21,7 +21,7 @@ independente e não tem relação com nenhuma marca.
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python -m motor exemplos/pacotes.yaml
+./degrau exemplos exemplos/pacotes.yaml
 pytest
 ```
 
@@ -36,6 +36,8 @@ motor/        leitura do YAML e desenho das folhas (Python + reportlab) e fonte 
 exemplos/     pacotes de exemplo (pacotes.yaml) e os PDFs gerados
 testes/       testes (pytest): geração, nada fora da página, nada sobreposto, gabarito
 ferramentas/  comparação dos PDFs com a referência
+estado/       estado dos alunos (JSON; os reais ficam fora do git)
+degrau        linha de comando: exemplos, proximo, registrar, estado
 curriculos/   tabelas de níveis (YAML)
 leitor/       leitor de áudio em HTML (texto para fala com vozes por personagem)
 correcao/     correção automática com Google Forms + Planilha + Apps Script
