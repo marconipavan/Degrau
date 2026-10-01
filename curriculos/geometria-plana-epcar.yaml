@@ -1,0 +1,32 @@
+# Tabela de níveis — Geometria plana (preparação EPCAR e Colégio Naval)
+# Formato provisório: o motor ainda NÃO lê este arquivo (ver CLAUDE.md, fase 1).
+curso: geometria-plana-epcar
+idioma: pt-BR
+entrega: PDF no celular; resolução no caderno; respostas finais curtas no formulário
+bloco_diario: {folhas: 3, minutos_aprox: 10}
+dominio: {nota_minima: 90, tempo: soma dos tempos-padrão do bloco}
+niveis:
+  - codigo: G1
+    nome: Ângulos
+    folhas: 100
+    tempo_padrao_min: [2, 4]
+    meta: nomear, classificar e calcular ângulos até as questões de prova
+    unidades:
+      - {folhas: [1, 10],   nome: Reconhecer ângulos,        conteudo: "vértice, lados, notação; agudo, reto, obtuso, raso"}
+      - {folhas: [11, 20],  nome: "Graus, minutos e segundos", conteudo: "converter, somar, subtrair, multiplicar e dividir por inteiro", revisar: true}
+      - {folhas: [21, 30],  nome: Complemento e suplemento,  conteudo: "cálculo direto; complemento do suplemento"}
+      - {folhas: [31, 40],  nome: Equações com ângulos,      conteudo: "o suplemento de x é o triplo do complemento de x"}
+      - {folhas: [41, 50],  nome: Posições,                  conteudo: "adjacentes, consecutivos, bissetriz, opostos pelo vértice"}
+      - {folhas: [51, 60],  nome: Revisão 1,                 conteudo: "1 a 50 misturado; primeiras questões de prova", revisar: true}
+      - {folhas: [61, 70],  nome: "Paralelas: identificar",  conteudo: "correspondentes, alternos, colaterais"}
+      - {folhas: [71, 80],  nome: "Paralelas: calcular",     conteudo: "expressões do tipo 2x + 10"}
+      - {folhas: [81, 90],  nome: O bizu dos bicos,          conteudo: "zigue-zague entre paralelas: soma dos que abrem para um lado = soma dos que abrem para o outro", revisar: true}
+      - {folhas: [91, 100], nome: Questões de prova,         conteudo: "EPCAR e Colégio Naval; revisão final"}
+  - {codigo: G2, nome: Triângulos, conteudo: "soma dos ângulos internos; ângulo externo; classificação; desigualdade triangular"}
+  - {codigo: G3, nome: Congruência e pontos notáveis}
+  - {codigo: G4, nome: Quadriláteros e polígonos, conteudo: "soma dos ângulos; diagonais; polígonos regulares"}
+  - {codigo: G5, nome: Semelhança e Tales}
+  - {codigo: G6, nome: Triângulo retângulo, conteudo: "Pitágoras; relações métricas"}
+  - {codigo: G7, nome: Circunferência, conteudo: "ângulos inscritos; cordas; tangentes; potência de ponto"}
+  - {codigo: G8, nome: Áreas}
+# revisar: true = pendência de revisão do professor (ver CLAUDE.md)

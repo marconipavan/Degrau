@@ -1,0 +1,15 @@
+# Nunca versionar dados de alunos ou respostas
+dados/
+respostas/
+fotos/
+*.xlsx
+*.csv.local
+estado/*.local.json
+# Python
+__pycache__/
+*.pyc
+.venv/
+# Sistema
+.DS_Store
+# Material de origem (zips, original do plano, PDF de referência da marca): nunca versionar
+_origem/

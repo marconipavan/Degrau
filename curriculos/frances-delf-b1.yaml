@@ -1,0 +1,59 @@
+# Tabela de níveis — Francês até o DELF B1
+# Formato provisório: o motor ainda NÃO lê este arquivo (ver CLAUDE.md, fase 1).
+curso: frances-delf-b1
+idioma_alvo: fr
+idioma_apoio: pt-BR
+meta: Aprovação no DELF B1 numa sessão do 2º semestre de 2027
+pacote:
+  folhas_por_dia: 5
+  formato: A5, frente (a) e verso (b)
+dominio:
+  nota_minima: 90
+  tempo: soma dos tempos-padrão das folhas do pacote
+historia:
+  titulo: Un Brésilien à Toulouse
+  protagonista: Rafael, estudante brasileiro de engenharia aeronáutica em Toulouse
+  personagens: [Rafael, Camille (estudante de Lyon), "l'hôtesse", le professeur]
+traducao_nas_instrucoes_ate: 3A
+niveis:
+  - codigo: 6A
+    nome: Répéter
+    fase: Repetir e recitar
+    europeu: A1
+    folhas: 100
+    tempo_padrao_min: [1, 2]
+    palavras_novas: 250
+    unidades:
+      - {folhas: [1, 30], nome: Mots familiers}
+      - {folhas: [31, 60], nome: Expressions}
+      - {folhas: [61, 70], nome: Révision}
+      - {folhas: [71, 90], nome: Structures familières}
+      - {folhas: [91, 100], nome: Histoire 1}
+  - codigo: 5A
+    nome: Sons et graphies
+    europeu: A1
+    folhas: 100
+    tempo_padrao_min: [1, 2]
+    conteudo: vogais e sons simples; vogais nasais; e mudo e acentos; ligações; ditado de palavras; história
+  - codigo: 4A
+    nome: Lire à voix haute
+    europeu: A1
+    folhas: 100
+    tempo_padrao_min: [1, 2]
+    palavras_novas: 200
+    conteudo: grupos de letras (ou, oi, eau, ch, gn…); rimas; recopiar frases; história
+  - codigo: 3A
+    nome: Fonction des mots
+    europeu: A1
+    folhas: 100
+    tempo_padrao_min: [1, 2.5]
+    conteudo: nome, gênero e artigo; verbo no presente; adjetivo e concordância; leitura oral de 50 palavras em 1 minuto
+  - {codigo: AI,  nome: Phrases simples,          europeu: A2,  folhas: 150, tempo_padrao_min: [1, 2], conteudo: "sujeito e verbo; expressões básicas; negação; perguntas; história"}
+  - {codigo: AII, nome: Écrire de mémoire,        europeu: A2,  folhas: 150, tempo_padrao_min: [2, 3], conteudo: "escrever de memória; sequência de acontecimentos; passé composé; histórias"}
+  - {codigo: BI,  nome: "Sujet, prédicat, passé", europeu: A2,  folhas: 150, tempo_padrao_min: [2, 3], conteudo: "passé composé × imparfait; modificadores; fazer afirmações"}
+  - {codigo: BII, nome: Définir des mots,         europeu: A2,  folhas: 150, tempo_padrao_min: [2, 3], conteudo: "sentido pelo contexto; identificar ideias; comparar e contrastar"}
+  - {codigo: CI,  nome: Construire des phrases,   europeu: A2+, folhas: 150, tempo_padrao_min: [2, 4], conteudo: "pronomes; futuro; condicional; voz passiva; reformular"}
+  - {codigo: CII, nome: "Organiser l'information", europeu: B1-, folhas: 150, tempo_padrao_min: [2, 4], conteudo: "quem, o quê, onde, quando, por quê, como; respostas completas"}
+  - {codigo: DI,  nome: Analyse de phrases complexes, europeu: B1, folhas: 150, tempo_padrao_min: [3, 5], conteudo: "relativas (qui, que, dont, où); discurso direto e indireto; subjuntivo frequente"}
+  - {codigo: EI,  nome: Liens dans le texte,      europeu: B1,  folhas: 150, tempo_padrao_min: [3, 5], conteudo: "conectores; causa e consequência; texto argumentativo"}
+  - {codigo: FI,  nome: Interpréter et répondre,  europeu: B1,  folhas: 150, tempo_padrao_min: [3, 5], conteudo: "responder ao que a pergunta pede; formato das 4 provas do DELF B1; simulados cronometrados"}

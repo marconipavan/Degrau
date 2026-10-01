@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leitor de francês</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2740; --ink-soft:#56607a; --paper:#f4f6fa; --sheet:#ffffff;
+  --blue:#2b56b3; --line:#d9dee8; --mark:#ffe7a3; --mark-ink:#1c2740;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e6eaf3; --ink-soft:#9aa3b8; --paper:#121826; --sheet:#1a2233;
+    --blue:#7ea2ef; --line:#2c364c; --mark:#5c4a12; --mark-ink:#fff4d6;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#e6eaf3; --ink-soft:#9aa3b8; --paper:#121826; --sheet:#1a2233;
+  --blue:#7ea2ef; --line:#2c364c; --mark:#5c4a12; --mark-ink:#fff4d6;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5}
+main{max-width:44rem;margin:0 auto;padding:1.5rem 1rem 3rem}
+h1{font-family:"Literata",Georgia,serif;font-weight:600;font-size:1.75rem;margin:0 0 .25rem}
+.sub{color:var(--ink-soft);margin:0 0 1.5rem}
+textarea{width:100%;min-height:8rem;padding:.75rem;border:1px solid var(--line);border-radius:6px;
+  background:var(--sheet);color:var(--ink);font-family:"Literata",Georgia,serif;font-size:1rem;line-height:1.6;resize:vertical}
+.row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin:.75rem 0}
+label{font-size:.9rem;color:var(--ink-soft)}
+select,input[type=range]{accent-color:var(--blue)}
+select{padding:.4rem;border:1px solid var(--line);border-radius:6px;background:var(--sheet);color:var(--ink);max-width:100%}
+button{font:inherit;font-weight:600;padding:.55rem 1rem;border-radius:6px;border:1px solid var(--blue);
+  background:var(--blue);color:#fff;cursor:pointer}
+button.ghost{background:transparent;color:var(--blue)}
+button:disabled{opacity:.45;cursor:default}
+button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible,.s:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.text{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:1.25rem 1.25rem 1rem;margin-top:1rem}
+.s{display:block;font-family:"Literata",Georgia,serif;font-size:1.15rem;line-height:1.75;padding:.15rem .4rem;margin:0 -.4rem .35rem;
+  border-radius:4px;cursor:pointer}
+.s:hover{background:color-mix(in srgb,var(--mark) 45%,transparent)}
+.s.on{background:var(--mark);color:var(--mark-ink)}
+.hidden .s{color:transparent;text-shadow:0 0 0 transparent;background:repeating-linear-gradient(90deg,var(--line) 0 .6em,transparent .6em .8em);background-size:100% 2px;background-repeat:no-repeat;background-position:0 70%}
+.hidden .s.on{background-color:var(--mark)}
+.num{font-family:"Figtree",sans-serif;font-size:.75rem;color:var(--ink-soft);margin-right:.5rem;user-select:none}
+.hidden .num{color:var(--ink-soft)}
+.who{font-family:"Figtree",sans-serif;font-size:.8rem;font-weight:600;color:var(--blue);margin-right:.4rem;user-select:none}
+.hidden .who{color:var(--blue)}
+.cast{margin:.5rem 0 0;padding:0;list-style:none}
+.cast li{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:.35rem 0}
+.cast b{min-width:6rem}
+.note{color:var(--ink-soft);font-size:.9rem;margin-top:1rem}
+.warn{color:#b3261e}
+@media (prefers-reduced-motion:no-preference){.s{transition:background-color .15s}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Leitor de francês</h1>
+  <p class="sub">Cole o episódio do dia, ouça com o texto escondido e depois leia em voz alta junto.</p>
+
+  <textarea id="src" placeholder="Colle ici l'épisode du jour…&#10;[Rafael] Bonjour !&#10;[Camille] Salut, Rafael !"></textarea>
+  <div class="row">
+    <button id="prep">Preparar texto</button>
+    <button id="clear" class="ghost">Limpar</button>
+  </div>
+
+  <div class="row">
+    <label for="voice">Narrador</label>
+    <select id="voice"></select>
+  </div>
+  <div id="castWrap" hidden>
+    <label>Vozes da conversa</label>
+    <ul id="cast" class="cast"></ul>
+  </div>
+  <div class="row">
+    <label for="rate">Velocidade <span id="rateVal">0.85</span>×</label>
+    <input id="rate" type="range" min="0.5" max="1.2" step="0.05" value="0.85">
+  </div>
+  <p id="voiceWarn" class="note warn" hidden>Nenhuma voz em francês encontrada neste aparelho. Instale uma voz francesa nas configurações de texto para fala do sistema.</p>
+
+  <div class="row">
+    <button id="play" disabled>Ouvir tudo</button>
+    <button id="pause" class="ghost" disabled>Pausar</button>
+    <button id="stop" class="ghost" disabled>Parar</button>
+    <button id="hide" class="ghost" disabled aria-pressed="false">Esconder texto</button>
+  </div>
+
+  <div id="out" class="text" hidden></div>
+  <p class="note">Falas entre personagens vêm marcadas com o nome entre colchetes no início da linha, por exemplo <code>[Rafael] Merci !</code>. Cada personagem ganha uma voz própria; o que não tem marca é lido pelo narrador.</p>
+  <p class="note">Toque numa frase para ouvir só ela (útil no ditado). A voz é a do seu aparelho: boa para acompanhar o texto, mas a pronúncia de referência continua sendo a de nativos.</p>
+</main>
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var $ = function(id){return document.getElementById(id)};
+  var src=$('src'), out=$('out'), sel=$('voice'), rate=$('rate'), rateVal=$('rateVal');
+  var btnPlay=$('play'), btnPause=$('pause'), btnStop=$('stop'), btnHide=$('hide');
+  var sentences=[], idx=-1, playingAll=false, paused=false, voices=[];
+
+  function store(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  function load(k){try{return localStorage.getItem(k)}catch(e){return null}}
+
+  if(!synth){ $('voiceWarn').textContent='Este navegador não tem leitura em voz alta. Tente o Chrome ou o Safari.'; $('voiceWarn').hidden=false; }
+
+  function fillVoices(){
+    if(!synth) return;
+    voices = synth.getVoices().filter(function(v){return /^fr/i.test(v.lang)});
+    sel.innerHTML='';
+    voices.forEach(function(v,i){
+      var o=document.createElement('option'); o.value=i;
+      o.textContent=v.name+' ('+v.lang+')'; sel.appendChild(o);
+    });
+    $('voiceWarn').hidden = voices.length>0;
+    var saved=load('fr-voice');
+    if(saved){ var k=voices.findIndex(function(v){return v.name===saved}); if(k>=0) sel.value=k; }
+    else { var fr=voices.findIndex(function(v){return v.lang==='fr-FR'}); if(fr>=0) sel.value=fr; }
+    if(typeof renderCast==='function' && sentences.length) renderCast();
+  }
+  if(synth){ fillVoices(); synth.onvoiceschanged=fillVoices; }
+
+  var savedRate=load('fr-rate'); if(savedRate){rate.value=savedRate}
+  rateVal.textContent=Number(rate.value).toFixed(2);
+  rate.addEventListener('input',function(){rateVal.textContent=Number(rate.value).toFixed(2);store('fr-rate',rate.value)});
+  sel.addEventListener('change',function(){var v=voices[sel.value]; if(v) store('fr-voice',v.name); if(sentences.length) renderCast()});
+
+  var savedText=load('fr-text'); if(savedText){src.value=savedText}
+
+  var PITCH=[1.2,0.8,1.35,0.7,1.1,0.9];
+  function splitSent(t){
+    var parts=t.replace(/\s+/g,' ').trim().match(/[^.!?…]+[.!?…»"]*\s*/g)||[];
+    return parts.map(function(x){return x.trim()}).filter(Boolean);
+  }
+  function split(t){
+    var out=[];
+    t.split(/\n+/).forEach(function(line){
+      line=line.trim(); if(!line) return;
+      var m=line.match(/^\[([^\]]{1,30})\]\s*(.*)$/);
+      var who=m?m[1].trim():null, body=m?m[2]:line;
+      splitSent(body).forEach(function(x){out.push({who:who,text:x})});
+    });
+    return out;
+  }
+  var speakers=[];
+  function speakerVoice(name){
+    var k=speakers.indexOf(name);
+    var saved=load('fr-spk-'+name);
+    var vi;
+    if(saved!==null && voices[saved]) vi=Number(saved);
+    else vi=voices.length?((Number(sel.value)||0)+k+1)%voices.length:null;
+    return {voice:vi===null?null:voices[vi], idx:vi, pitch:PITCH[k%PITCH.length]};
+  }
+  function renderCast(){
+    var ul=$('cast'); ul.innerHTML='';
+    speakers=[];
+    sentences.forEach(function(x){ if(x.who && speakers.indexOf(x.who)<0) speakers.push(x.who) });
+    $('castWrap').hidden=speakers.length===0;
+    speakers.forEach(function(name){
+      var li=document.createElement('li');
+      var b=document.createElement('b'); b.textContent=name;
+      var sv=document.createElement('select'); sv.setAttribute('aria-label','Voz de '+name);
+      voices.forEach(function(v,i){var o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';sv.appendChild(o)});
+      var cur=speakerVoice(name); if(cur.idx!==null) sv.value=cur.idx;
+      sv.addEventListener('change',function(){store('fr-spk-'+name,sv.value)});
+      var t=document.createElement('button'); t.className='ghost'; t.textContent='Testar';
+      t.addEventListener('click',function(){
+        if(!synth) return; stopAll();
+        var u=new SpeechSynthesisUtterance('Bonjour, je suis '+name+'.');
+        var c=speakerVoice(name); if(c.voice){u.voice=c.voice;u.lang=c.voice.lang}else{u.lang='fr-FR'}
+        u.pitch=c.pitch; u.rate=Number(rate.value); synth.speak(u);
+      });
+      li.appendChild(b); li.appendChild(sv); li.appendChild(t); ul.appendChild(li);
+    });
+  }
+
+  function render(){
+    out.innerHTML='';
+    sentences.forEach(function(s,i){
+      var el=document.createElement('span'); el.className='s'; el.tabIndex=0; el.dataset.i=i;
+      var n=document.createElement('span'); n.className='num'; n.textContent=(i+1);
+      el.appendChild(n);
+      if(s.who){var w=document.createElement('span');w.className='who';w.textContent=s.who;el.appendChild(w)}
+      el.appendChild(document.createTextNode(s.text));
+      el.addEventListener('click',function(){speakOne(i)});
+      el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();speakOne(i)}});
+      out.appendChild(el);
+    });
+    renderCast();
+    out.hidden = sentences.length===0;
+    [btnPlay,btnStop,btnHide].forEach(function(b){b.disabled=sentences.length===0});
+  }
+
+  function mark(i){
+    Array.prototype.forEach.call(out.children,function(c){c.classList.toggle('on',Number(c.dataset.i)===i)});
+    var c=out.children[i]; if(c && c.scrollIntoView) c.scrollIntoView({block:'nearest'});
+  }
+
+  function utter(i,onend){
+    var x=sentences[i];
+    var u=new SpeechSynthesisUtterance(x.text);
+    var v, pitch=1;
+    if(x.who){var c=speakerVoice(x.who); v=c.voice; pitch=c.pitch}
+    else v=voices[sel.value];
+    if(v){u.voice=v; u.lang=v.lang}else{u.lang='fr-FR'}
+    u.pitch=pitch;
+    u.rate=Number(rate.value);
+    u.onstart=function(){mark(i)};
+    u.onend=onend; u.onerror=onend;
+    return u;
+  }
+
+  function stopAll(){
+    playingAll=false; paused=false;
+    if(synth) synth.cancel();
+    mark(-1); btnPause.disabled=true; btnPause.textContent='Pausar';
+  }
+
+  function speakOne(i){
+    if(!synth) return;
+    stopAll();
+    synth.speak(utter(i,function(){mark(-1)}));
+  }
+
+  function next(){
+    if(!playingAll) return;
+    idx++;
+    if(idx>=sentences.length){stopAll();return}
+    synth.speak(utter(idx,function(){ if(playingAll && !paused) setTimeout(next,250) }));
+  }
+
+  $('prep').addEventListener('click',function(){
+    stopAll(); sentences=split(src.value); store('fr-text',src.value); render();
+  });
+  $('clear').addEventListener('click',function(){
+    stopAll(); src.value=''; sentences=[]; store('fr-text',''); render(); src.focus();
+  });
+  btnPlay.addEventListener('click',function(){
+    if(!synth||!sentences.length) return;
+    stopAll(); playingAll=true; idx=-1; btnPause.disabled=false; next();
+  });
+  btnPause.addEventListener('click',function(){
+    if(!playingAll) return;
+    if(!paused){ paused=true; synth.cancel(); btnPause.textContent='Continuar'; }
+    else { paused=false; btnPause.textContent='Pausar'; idx--; next(); }
+  });
+  btnStop.addEventListener('click',stopAll);
+  btnHide.addEventListener('click',function(){
+    var h=out.classList.toggle('hidden');
+    btnHide.textContent=h?'Mostrar texto':'Esconder texto';
+    btnHide.setAttribute('aria-pressed',h?'true':'false');
+  });
+
+  if(src.value.trim()){ sentences=split(src.value); render(); }
+})();
+</script>
+</body>
+</html>
