@@ -320,7 +320,28 @@ automática: agendador (cron local ou GitHub Actions às 09:30 UTC = 06:30 em Br
 pacote a partir do estado + currículo e envia (e-mail ou Telegram). Se a geração do conteúdo novo usar a API da
 Anthropic, a chave vai em segredo do repositório, nunca no código. Avaliar custo antes.
 
-### 7.7 Métricas de desempenho (fase 7, a planejar)
+### 7.7 Expansão para outras áreas (fase 7, a planejar)
+
+Pedido do Ângelo em 01/10/2026. Cada área nova é uma instância: currículo + tipos de bloco ou figura que faltarem
++ testes. A regra de ouro continua: tudo que é calculado (balanceamento, massas, correntes) sai do mesmo cálculo
+que gera a folha, e o motor falha alto se não fechar.
+
+| Área | Folhas típicas | O que falta no núcleo |
+|---|---|---|
+| Alemão | Igual ao francês (palavras, frases, leitura, ditado) | Currículo até o B1 (Goethe), textos fixos em alemão ("je", "Beispiel"), números por extenso no áudio, voz alemã no leitor. A Andika já tem ä, ö, ü, ß |
+| Mandarim | Caracteres, pinyin com tons, ordem dos traços, tons no áudio | Fonte com caracteres chineses (a Andika não tem; ex.: Noto Sans SC, licença OFL), quadriculado para escrever, voz chinesa no leitor, currículo por HSK |
+| Química: nomenclatura orgânica e inorgânica | Nome ↔ fórmula; nomear a cadeia | Fórmulas com índices (H₂SO₄); cadeia carbônica desenhada a partir da especificação, como os bicos |
+| Química: balanceamento | Achar os coeficientes | Gabarito calculado (sistema linear) e conferência da contagem de átomos |
+| Química: estequiometria | Massas, mols, rendimento | Gabarito calculado com tabela de massas atômicas e arredondamento padronizado |
+| Física: circuitos simples | Resistência equivalente, corrente, tensão | Figura do circuito gerada da especificação (série e paralelo); gabarito pela lei de Ohm |
+
+Perguntas a responder antes de construir:
+
+1. Qual área entra primeiro (piloto da expansão)?
+2. Quem valida o currículo de cada área (o ativo é a tabela de níveis, não o gerador)?
+3. Para quem: uso pessoal, turma do CASD ou outros professores?
+
+### 7.8 Métricas de desempenho (fase 8, a planejar)
 
 Pedido do Ângelo em 01/10/2026. Ainda não desenhado em detalhe: depende dos dados de correção (fases 3 e 4).
 
@@ -356,7 +377,8 @@ Perguntas a responder antes de construir:
 | **4. Gerador de pacotes** | Linha de comando `degrau`; estado do aluno via adaptador; regra de domínio e repetição com exercícios novos | Gerar 5 dias seguidos de francês e 2 pacotes de geometria sem editar código |
 | **5. Automação** | Agendador + envio | Pacote chega sozinho às 06:30 |
 | **6. Multi-aluno CASD** | Pacote individual por aluno a partir do painel | Piloto de 6–8 alunos rodando |
-| **7. Métricas de desempenho** (a planejar) | Acertos, constância, posição em relação ao objetivo, marcos por idade, tendência mensal, progresso de nível, projeção, teste de fim de nível (seção 7.7) | Definir com o Ângelo depois do piloto |
+| **7. Expansão para outras áreas** (a planejar) | Alemão, mandarim, química (nomenclatura, balanceamento, estequiometria), física (circuitos simples) etc. (seção 7.7) | Por área: currículo validado, um pacote de exemplo com gabarito calculado e testes |
+| **8. Métricas de desempenho** (a planejar) | Acertos, constância, posição em relação ao objetivo, marcos por idade, tendência mensal, progresso de nível, projeção, teste de fim de nível (seção 7.8) | Definir com o Ângelo depois do piloto |
 
 Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostrar retenção (≥70% entregando na semana 4).
 
@@ -382,7 +404,8 @@ Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostr
 3. Onde fica o estado do francês (Notion × JSON local × outro).
 4. ~~Modelo de gabarito do formulário~~ — decidido em 01/10/2026: mais campos, uma seção por página com 12 campos numerados como na folha (`correcao/README.md`).
 5. Se haverá automação de envio (fase 5) e por qual canal.
-6. Métricas de desempenho (fase 7): as cinco perguntas da seção 7.7.
+6. Expansão para outras áreas (fase 7): as três perguntas da seção 7.7.
+7. Métricas de desempenho (fase 8): as cinco perguntas da seção 7.8.
 
 ---
 
