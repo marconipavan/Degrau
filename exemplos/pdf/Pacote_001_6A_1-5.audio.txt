@@ -1,0 +1,30 @@
+Feuille un a.
+Bonjour. Merci. Un avion. Une ville. La France. Un étudiant.
+Feuille deux a.
+Content. Fatigué. Brésilien. Dans. Mais. Arriver.
+Feuille trois a.
+Un. Merci.
+Deux. Un avion.
+Trois. Un étudiant.
+Quatre. Fatigué.
+Cinq. Une ville.
+Six. Content.
+Feuille quatre a.
+Je m'appelle Rafael.
+Je suis brésilien.
+Je suis étudiant.
+Je suis fatigué.
+Bienvenue à Toulouse !
+Merci !
+Feuille cinq a.
+Bonjour ! Je m'appelle Rafael.
+Je suis brésilien et je suis étudiant.
+Je suis dans un avion.
+L'avion arrive à Toulouse.
+Toulouse est une ville en France.
+Je suis content, mais je suis fatigué.
+[L'hôtesse] Bienvenue à Toulouse !
+[Rafael] Merci !
+Feuille cinq b.
+Un. Je suis dans un avion.
+Deux. Toulouse est une ville en France.

@@ -36,6 +36,8 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 | Figuras de paralelas com "bicos" | `motor/bicos.py` | `Bico`: poligonal centralizada, ângulos **calculados**, rótulos afastados das linhas |
 | Exemplos | `exemplos/pacotes.yaml` | 4 PDFs: 6A 1–5, AII 64 + DI 112, G1 1–3, G1 81/85/89 |
 | Testes | `testes/test_folhas.py` | Gera tudo; nada fora da página; texto sobre texto ou sobre linha; gabarito de 81–89 |
+| Gabarito | `motor/gabarito.py` | Lido do YAML; bicos conferidos (todos os rótulos dão o mesmo x, que bate com resposta e alternativa) |
+| Áudio | `motor/audio.py` | Bloco de faixas para o leitor, gerado dos blocos com som |
 | Comparação | `ferramentas/comparar.sh` | Pixels e palavras, página a página, contra uma etiqueta ou commit |
 | Leitor de áudio | `leitor/leitor-frances.html` | Funciona em qualquer navegador; HTML único |
 | Correção automática | `correcao/aoEnviar.gs` | **Esboço não testado** |
@@ -70,7 +72,8 @@ de ferramentas no Claude Code. **Perguntar ao Ângelo antes de decidir.**
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt           # reportlab, pyyaml, pytest
-python -m motor exemplos/pacotes.yaml      # saída em exemplos/pdf/
+python -m motor exemplos/pacotes.yaml      # saída em exemplos/pdf/: PDF + .gabarito.csv
+                                           # + .planilha.csv (CASD) + .audio.txt (se houver som)
 pytest                                     # nesta máquina: env -u PYTHONPATH pytest (o ROS injeta plugins)
 ferramentas/comparar.sh [etiqueta]         # compara com a referência (padrão: referencia-fase0)
 ```
@@ -196,8 +199,8 @@ com passo máximo e mínimo por tipo. Se não couber, erro em vez de sobreposiç
 
 - Parâmetros internos ainda em francês (`size`, `gloss`, `titre`…); os nomes de métodos e ícones já estão em português.
 - Tamanhos de letra escritos por folha (`tamanho`); deveriam vir de um estilo por faixa de níveis (seção 4.5).
-- O texto do exemplo de geometria ("x = 30° + 40° = 70°") é escrito à mão; a fase 2 deve conferi-lo com a figura.
-- Gabarito recolhido, mas ainda não exportado (fase 2).
+- O texto do exemplo de geometria ("x = 30° + 40° = 70°") é escrito à mão e não é conferido com a figura.
+- O tempo-padrão do bloco usa o máximo da faixa do nível (`tempo_padrao_min`).
 
 ---
 
@@ -256,7 +259,7 @@ Feuille cinq b. Je suis dans un avion. …
 
 **Correção:** `correcao/` — formulário único, planilha (Alunos, Gabarito, Painel), Apps Script `aoEnviar` disparado ao enviar o formulário. Status "Domínio" se nota ≥ 90 e tempo ≤ limite; senão "Repetir". Constante `TEMPO_CONTA = false` nas duas primeiras semanas do piloto.
 
-**Problema conhecido do modelo de gabarito:** um bloco de 3 folhas tem mais itens que os 15 campos do formulário. Decidir antes do piloto: gabarito só dos itens objetivos principais, mais campos, ou um envio por folha. Ver `correcao/README.md`.
+**Formulário:** uma seção por página do bloco, 12 campos cada, numerados como os itens da folha. O gabarito da planilha sai do YAML (`.planilha.csv`). Ver `correcao/README.md`.
 
 **Piloto:** 6–8 voluntários (fortes e com dificuldade), 4 semanas, só G1. Critérios definidos antes: ≥70% ainda entregando na semana 4; nota média nas folhas subindo; desempenho no simulado melhor que o de não participantes com nível parecido. Semana 0: revisar tabela, montar planilha/formulário/script, testar com envios falsos, falar com a coordenação, convidar voluntários.
 
@@ -296,9 +299,10 @@ e decidir domínio. Cada instância é só **dados + configuração + adaptadore
 
 ### 7.4 Especificação de folha em YAML
 
-Implementada na fase 1 (seção 5; exemplos em `folhas/`). Falta a faixa de áudio (`faixa`), prevista para a fase 2.
+Implementada na fase 1 (seção 5; exemplos em `folhas/`). O áudio não precisa de campo próprio: sai dos blocos
+`palavras`, `frases`, `circular` (lê a resposta), `leitura` ("Nome : « fala »" vira `[Nome] fala`) e `ditado`.
 
-Para itens com expressões (ex.: `3x + 5°`), o motor deve verificar que **todas** as expressões dão o valor calculado com o mesmo x e falhar alto se não derem (foi assim que se pegou um rótulo errado na conversa: "100°" num ângulo de 80°).
+Para itens com expressões (ex.: `3x + 5°`), o motor verifica (fase 2, `resolver_x` em `bicos.py`) que **todas** as expressões dão o valor calculado com o mesmo x e falha alto se não derem (foi assim que se pegou um rótulo errado na conversa: "100°" num ângulo de 80°).
 
 ### 7.5 Linha de comando (proposta)
 
@@ -347,8 +351,8 @@ Perguntas a responder antes de construir:
 |---|---|---|
 | **0. Repositório de pé** (feita) | Revisar o que veio no zip; rodar os 4 exemplos; primeiro commit | 4 PDFs gerados sem erro; nada de dados pessoais versionados |
 | **1. Conteúdo separado do desenho** (feita) | Esquema YAML de folha; renderizador que lê YAML; reescrever os 4 exemplos como YAML; layout por caixas em vez de milímetros fixos; testes básicos | Os PDFs gerados a partir do YAML ficam visualmente equivalentes aos atuais (comparar imagens) |
-| **2. Gabarito e áudio a partir da mesma especificação** | Exportar gabarito (CSV para a planilha) e bloco de áudio direto do YAML; figuras com gabarito calculado e verificação das expressões | Gabarito de G1 1–3 e 81–89 batem com o `docs/plano-completo.md` |
-| **3. Correção do CASD testada** | Resolver o limite de 15 campos; testar o Apps Script com envios falsos; documentar a montagem passo a passo | Envio falso → linha correta no Painel |
+| **2. Gabarito e áudio a partir da mesma especificação** (feita) | Exportar gabarito (CSV para a planilha) e bloco de áudio direto do YAML; figuras com gabarito calculado e verificação das expressões | Gabarito de G1 1–3 e 81–89 batem com o `docs/plano-completo.md` |
+| **3. Correção do CASD testada** | Conjuntos em qualquer ordem (G1 2b); testar o Apps Script com envios falsos; documentar a montagem passo a passo | Envio falso → linha correta no Painel |
 | **4. Gerador de pacotes** | Linha de comando `degrau`; estado do aluno via adaptador; regra de domínio e repetição com exercícios novos | Gerar 5 dias seguidos de francês e 2 pacotes de geometria sem editar código |
 | **5. Automação** | Agendador + envio | Pacote chega sozinho às 06:30 |
 | **6. Multi-aluno CASD** | Pacote individual por aluno a partir do painel | Piloto de 6–8 alunos rodando |
@@ -376,7 +380,7 @@ Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostr
 1. Revisão da tabela G1: (a) "Graus, minutos e segundos" merece uma unidade inteira na EPCAR? (b) as questões de prova entram cedo demais na Revisão 1? (c) "O bizu dos bicos" é o nome usado em sala? (marcados com `revisar: true` no YAML)
 2. Coordenação do CASD: autorização para fotos de cadernos e dados de desempenho; uso do nome "CASD" no repositório público.
 3. Onde fica o estado do francês (Notion × JSON local × outro).
-4. Modelo de gabarito do formulário (limite de 15 campos).
+4. ~~Modelo de gabarito do formulário~~ — decidido em 01/10/2026: mais campos, uma seção por página com 12 campos numerados como na folha (`correcao/README.md`).
 5. Se haverá automação de envio (fase 5) e por qual canal.
 6. Métricas de desempenho (fase 7): as cinco perguntas da seção 7.7.
 

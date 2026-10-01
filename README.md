@@ -25,7 +25,8 @@ python -m motor exemplos/pacotes.yaml
 pytest
 ```
 
-Os PDFs saem em `exemplos/pdf/`. Cada folha é descrita em YAML em `folhas/`; o motor só lê e desenha.
+Os PDFs saem em `exemplos/pdf/`, cada um com o gabarito (`.gabarito.csv`), o gabarito da planilha do
+formulário (`.planilha.csv`, folhas de caderno) e o bloco de áudio (`.audio.txt`, quando há som). Cada folha é descrita em YAML em `folhas/`; o motor só lê e desenha.
 
 ## Estrutura
 

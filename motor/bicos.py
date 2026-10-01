@@ -1,4 +1,4 @@
-import math
+import math, re
 from .geo import FolhaGeo, M, W, H, INK, GREY
 from reportlab.lib.units import mm
 
@@ -32,6 +32,44 @@ def arc_between(a,b):
     a%=360; b%=360; d=(b-a)%360
     return (a,d) if d<=180 else (b,360-d)
 
+def arco_marca(dirs, vi, lado):
+    """(início, abertura) do arco do vértice vi; dirs = direções dos segmentos"""
+    if vi == 0:
+        a = 0 if lado == 'dir' else 180; b = dirs[0]
+    elif vi == len(dirs):
+        a = 0 if lado == 'dir' else 180; b = dirs[-1] + 180
+    else:
+        a = dirs[vi - 1] + 180; b = dirs[vi]
+    return arc_between(a, b)
+
+def angulos(dirs, marks):
+    """{vértice: ângulo em graus}; só depende das direções, não das posições"""
+    return {vi: round(arco_marca(dirs, vi, lado)[1]) for vi, lado, _ in marks}
+
+_EXPR = re.compile(r'^(?:(\d*)x([+-]\d+)?|(\d+))$')
+
+def resolver_x(marks, vals):
+    """Lê os rótulos (x, 3x + 5°, 80°...) e confere que todos batem com os ângulos
+    calculados para um único x. Devolve x, ou None se nenhum rótulo tem x."""
+    xs = []
+    for vi, _, rot in marks:
+        if rot is None: continue
+        s = str(rot).replace('°', '').replace('−', '-').replace(' ', '')
+        m = _EXPR.match(s)
+        if not m: raise ValueError(f'rótulo {rot!r} no vértice {vi}: use a forma ax + b ou um número')
+        if m.group(3) is not None:
+            if int(m.group(3)) != vals[vi]:
+                raise ValueError(f'rótulo {rot!r} no vértice {vi}, mas o ângulo desenhado é {vals[vi]}°')
+            continue
+        a = int(m.group(1)) if m.group(1) else 1; b = int(m.group(2) or 0)
+        x = (vals[vi] - b) / a
+        if x != int(x): raise ValueError(f'rótulo {rot!r} no vértice {vi} ({vals[vi]}°) dá x = {x:g}, não inteiro')
+        xs.append((int(x), rot, vi))
+    if not xs: return None
+    if len({x for x, _, _ in xs}) > 1:
+        raise ValueError('os rótulos dão valores diferentes de x: ' + ', '.join(f'{r!r} → x = {x}' for x, r, _ in xs))
+    return xs[0][0]
+
 class Bico(FolhaGeo):
     def paralelas(self, yr, ys, x0=None, x1=None):
         c=self.c; x0=x0 or M+2*mm; x1=x1 or W-M-6*mm
@@ -52,13 +90,7 @@ class Bico(FolhaGeo):
         rotulos=[]; vals={}
         for vi,which,lab in marks:
             x,y=pts[vi]
-            if vi==0:
-                a=0 if which=='dir' else 180; b=dirs[0]
-            elif vi==len(pts)-1:
-                a=0 if which=='dir' else 180; b=dirs[-1]+180
-            else:
-                a=dirs[vi-1]+180; b=dirs[vi]
-            s,e=arc_between(a,b); vals[vi]=round(e)
+            s,e=arco_marca(dirs,vi,which); vals[vi]=round(e)
             c.setLineWidth(.7); c.arc(x-r,y-r,x+r,y+r,s,e)
             m=math.radians(s+e/2); txt=lab if lab is not None else f'{round(e)}°'
             tw=c.stringWidth(txt,'And',size)

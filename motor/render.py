@@ -8,6 +8,7 @@ from .especificacao import (ErroEspecificacao, carregar_curso, carregar_folha,
 from .folha import Folha, LIMITE, ESPACO
 from .geo import FolhaGeo
 from .bicos import Bico
+from . import gabarito, audio
 
 MARCA = 'DEGRAU  ·  '
 ICONES = ('ouvir', 'escrever', 'ligar', 'circular', 'ler')
@@ -132,12 +133,6 @@ def _validar_figura(fig, onde):
     _chaves(fig[figs[0]], f'{onde} ({figs[0]})', *FIGURAS[figs[0]])
     return figs[0]
 
-def _resposta_calculada(item, vals):
-    """no bico, a resposta é o ângulo do vértice marcado com x"""
-    if 'bico' not in item or vals is None: return None
-    alvos = [m[0] for m in item['bico']['marcas'] if m[2] == 'x']
-    return vals[alvos[0]] if len(alvos) == 1 else None
-
 def _grade(f, d, ctx):
     its = d['itens']
     for i, it in enumerate(its):
@@ -145,12 +140,7 @@ def _grade(f, d, ctx):
         _chaves(it, onde, (), ('angulo', 'semirretas', 'bico', 'texto', 'resposta'))
         if any(k in FIGURAS for k in it): _validar_figura(it, onde)
         elif 'texto' not in it: raise ErroEspecificacao(f'{onde}: item sem figura e sem texto')
-    vals = f.grade(its, colunas=d.get('colunas', 2), tamanho=d.get('tamanho', 12), altura=ctx.get('altura'))
-    for i, (it, v) in enumerate(zip(its, vals)):
-        resp = it['resposta'] if 'resposta' in it else _resposta_calculada(it, v)
-        if resp is None:
-            raise ErroEspecificacao(f'{ctx["onde"]}, item {i + 1}: sem resposta (escreva resposta ou marque o x no bico)')
-        f.gabarito[(ctx['codigo'], i + 1)] = resp
+    f.grade(its, colunas=d.get('colunas', 2), tamanho=d.get('tamanho', 12), altura=ctx.get('altura'))
 
 def _figura(f, d, ctx):
     _validar_figura(d, ctx['onde'])
@@ -161,7 +151,6 @@ def _alternativas(f, d, ctx):
     if d['resposta'] not in letras:
         raise ErroEspecificacao(f'{ctx["onde"]}: resposta deve ser uma de {", ".join(letras)}')
     f.alternativas(d['itens'], tamanho=d.get('tamanho', 12))
-    f.gabarito[(ctx['codigo'], 1)] = d['resposta']
 
 
 # nome: (função, chaves obrigatórias, chaves opcionais)
@@ -234,7 +223,7 @@ def desenhar_folha(f, folha, curso):
             f.pagina(codigo, folha['unidade'], L['instrucao'], icone, pontos)
         else:
             f.pagina(codigo, folha['unidade'], L['instrucao'], L.get('traducao'), icone, pontos)
-        ctxs = [{'folha': folha, 'textos': textos, 'codigo': codigo, 'onde': f'{onde}, bloco {i + 1}'}
+        ctxs = [{'folha': folha, 'textos': textos, 'onde': f'{onde}, bloco {i + 1}'}
                 for i in range(len(L['blocos']))]
         elasticos = [_tipo(b, cx['onde']) in ELASTICOS for b, cx in zip(L['blocos'], ctxs)]
         fixos = sum(_medir(f, b, cx) for b, cx, e in zip(L['blocos'], ctxs, elasticos) if not e)
@@ -252,20 +241,30 @@ def desenhar_folha(f, folha, curso):
 
 
 def gerar_pacote(pacote, saida):
-    """gera o PDF; devolve (caminho, gabarito {(página, item): resposta})"""
+    """Gera o PDF e, ao lado, o gabarito (.gabarito.csv), a aba Gabarito da planilha
+    (.planilha.csv, só folhas de caderno) e o bloco de áudio (.audio.txt, se houver).
+    Devolve (arquivos gerados, páginas em que é preciso esconder o texto ao ouvir)."""
     curso = carregar_curso(pacote['curso'])
     folhas = [carregar_folha(pacote['curso'], cod) for cod in pacote['folhas']]  # valida tudo antes de desenhar
     os.makedirs(saida, exist_ok=True)
     caminho = os.path.join(saida, pacote['arquivo'])
     f = (Bico if curso['folha']['campos'] == 'caderno' else Folha)(caminho, pacote['titulo'])
     f.MARCA = MARCA + curso['folha']['marca']
-    f.gabarito = {}   # (código da página, item) -> resposta; exportação na fase 2
     for folha in folhas:
         desenhar_folha(f, folha, curso)
     f.save()
-    return caminho, f.gabarito
+    base = caminho[:-4]
+    linhas = [l for folha in folhas for l in gabarito.respostas_folha(folha)]
+    gabarito.escrever_csv(linhas, base + '.gabarito.csv')
+    arquivos = [caminho, base + '.gabarito.csv']
+    if curso['folha']['campos'] == 'caderno':
+        gabarito.escrever_planilha(folhas, curso, base + '.planilha.csv')
+        arquivos.append(base + '.planilha.csv')
+    esconder = audio.escrever(folhas, base + '.audio.txt')
+    if esconder is not None: arquivos.append(base + '.audio.txt')
+    return arquivos, esconder or []
 
 
 def gerar(caminho_pacotes, saida=None):
     saida = saida or os.path.join(os.path.dirname(os.path.abspath(caminho_pacotes)), 'pdf')
-    return [gerar_pacote(p, saida)[0] for p in carregar_pacotes(caminho_pacotes)]
+    return [gerar_pacote(p, saida) for p in carregar_pacotes(caminho_pacotes)]

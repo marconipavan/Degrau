@@ -30,7 +30,7 @@ b:
           - {texto: "Qual é o vértice do ângulo XŶZ?", resposta: Y}
           - angulo: {direcoes: [0, 120], nomes: [K, L, J]}
             texto: "Nome e tipo deste ângulo?"
-            resposta: "LKJ ou JKL (obtuso)"
+            resposta: ["JKL obtuso", "LKJ obtuso", "JKL O", "LKJ O"]   # nome e tipo, numa linha
           - {texto: "Um ângulo de 90° é chamado de ______ .", resposta: reto}
           - {texto: "Quantos ângulos 5 semirretas de mesma origem formam, ao todo?  (use a folha 2b)", resposta: 10}
           - {texto: "O dobro de um ângulo agudo pode ser obtuso? (S/N)", resposta: S}

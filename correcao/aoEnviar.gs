@@ -13,7 +13,6 @@
 const SS = SpreadsheetApp.getActive();
 const CORTE_NOTA = 90;            // % mínimo para domínio
 const TEMPO_CONTA = true;         // false nas duas primeiras semanas do piloto (só registra)
-const N_RESPOSTAS = 15;
 
 function normalizar(s) {
   return String(s || '')
@@ -49,12 +48,13 @@ function aoEnviar(e) {
 
   let feitos = 0, total = 0;
   const errados = [];
-  gab.forEach(([, item, aceitas, pontos]) => {
+  // cada linha do gabarito: [bloco, campo, respostas aceitas, pontos, tempo]; campo = título da pergunta
+  gab.forEach(([, campo, aceitas, pontos]) => {
     pontos = Number(pontos) || 0;
     total += pontos;
-    const resp = normalizar((r['Resposta ' + item] || [''])[0]);
+    const resp = normalizar((r[campo] || [''])[0]);
     const ok = String(aceitas).split('|').map(normalizar).includes(resp);
-    if (ok) feitos += pontos; else errados.push(item);
+    if (ok) feitos += pontos; else errados.push(campo);
   });
 
   const nota = total ? Math.round(100 * feitos / total) : 0;
