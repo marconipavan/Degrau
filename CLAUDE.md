@@ -40,7 +40,7 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 | Áudio | `motor/audio.py` | Bloco de faixas para o leitor, gerado dos blocos com som |
 | Comparação | `ferramentas/comparar.sh` | Pixels e palavras, página a página, contra uma etiqueta ou commit |
 | Leitor de áudio | `leitor/leitor-frances.html` | Funciona em qualquer navegador; HTML único |
-| Correção automática | `correcao/aoEnviar.gs` | **Esboço não testado** |
+| Correção automática | `correcao/aoEnviar.gs`, `correcao/montar.gs` | Testada com envios simulados (`correcao/teste/simular.js`); **falta montar e testar no Google** (passo a passo em `correcao/README.md`) |
 | Currículos | `curriculos/*.yaml` | O motor lê só a chave `folha` (marca e tipo de campos); o resto ainda não |
 
 ### Fora do repositório (instância francês)
@@ -352,7 +352,7 @@ Perguntas a responder antes de construir:
 | **0. Repositório de pé** (feita) | Revisar o que veio no zip; rodar os 4 exemplos; primeiro commit | 4 PDFs gerados sem erro; nada de dados pessoais versionados |
 | **1. Conteúdo separado do desenho** (feita) | Esquema YAML de folha; renderizador que lê YAML; reescrever os 4 exemplos como YAML; layout por caixas em vez de milímetros fixos; testes básicos | Os PDFs gerados a partir do YAML ficam visualmente equivalentes aos atuais (comparar imagens) |
 | **2. Gabarito e áudio a partir da mesma especificação** (feita) | Exportar gabarito (CSV para a planilha) e bloco de áudio direto do YAML; figuras com gabarito calculado e verificação das expressões | Gabarito de G1 1–3 e 81–89 batem com o `docs/plano-completo.md` |
-| **3. Correção do CASD testada** | Conjuntos em qualquer ordem (G1 2b); testar o Apps Script com envios falsos; documentar a montagem passo a passo | Envio falso → linha correta no Painel |
+| **3. Correção do CASD testada** (lógica testada; falta o teste no Google) | Conjuntos em qualquer ordem (G1 2b); testar o Apps Script com envios falsos; documentar a montagem passo a passo | Envio falso → linha correta no Painel |
 | **4. Gerador de pacotes** | Linha de comando `degrau`; estado do aluno via adaptador; regra de domínio e repetição com exercícios novos | Gerar 5 dias seguidos de francês e 2 pacotes de geometria sem editar código |
 | **5. Automação** | Agendador + envio | Pacote chega sozinho às 06:30 |
 | **6. Multi-aluno CASD** | Pacote individual por aluno a partir do painel | Piloto de 6–8 alunos rodando |

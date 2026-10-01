@@ -1,6 +1,6 @@
 # Testes básicos: tudo gera sem erro; o gabarito bate com o plano; expressões conferidas; nenhum texto sai da página nem fica
 # sobre outro texto ou sobre uma linha. Rodar com: .venv/bin/pytest
-import os
+import os, shutil, subprocess
 import pytest
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfgen import canvas as rl_canvas
@@ -116,7 +116,7 @@ PLANO_6_3 = {
     'G1 1a': ['PQR', 'NMT', 'DCE', 'GFH'],
     'G1 1b': ['A', 'R', 'O', 'Ra', 'A', 'O', 'A', 'O', 'A', 'O'],
     'G1 2a': ['A', 'R', 'O', 'R', 'A', 'O'],
-    'G1 2b': ['PÔQ, QÔR, RÔS, PÔR, QÔS, PÔS', '10'],
+    'G1 2b': ['conjunto:PÔQ,QÔR,RÔS,PÔR,QÔS,PÔS', '10'],
     'G1 3a': ['R', 'R', 'O', 'A', 'O', 'O', 'Ra', 'A', 'A', 'Ra'],
     'G1 3b': ['Y', 'JKL obtuso', 'reto', '10', 'S'],
     'G1 81a': ['75', '85', '80', '90'], 'G1 81b': ['40', '30', '30', '50'],
@@ -161,3 +161,20 @@ def test_audio():
     assert '[L\'hôtesse] Bienvenue à Toulouse !' in fx['6A 5a'][0]
     assert fx['6A 5b'] == ('Feuille cinq b.\nUn. Je suis dans un avion.\nDeux. Toulouse est une ville en France.', True)
     assert not fx['6A 5a'][1]
+
+
+# ---------- correção do CASD (fase 3) ----------
+def test_modelo_de_gabarito_atualizado(tmp_path):
+    """correcao/modelos/gabarito.csv é o bloco G1 1-3 gerado do YAML (o simulador usa este arquivo)"""
+    from motor.gabarito import escrever_planilha
+    from motor.especificacao import carregar_curso
+    novo = tmp_path / 'g.csv'
+    escrever_planilha([carregar_folha('geometria-plana-epcar', f'G1 {n}') for n in (1, 2, 3)],
+                      carregar_curso('geometria-plana-epcar'), str(novo))
+    assert novo.read_text(encoding='utf-8') == open(os.path.join(RAIZ, 'correcao', 'modelos', 'gabarito.csv'), encoding='utf-8').read()
+
+
+@pytest.mark.skipif(not shutil.which('node'), reason='node não instalado')
+def test_correcao_simulada():
+    r = subprocess.run(['node', os.path.join(RAIZ, 'correcao', 'teste', 'simular.js')], capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout + r.stderr

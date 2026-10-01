@@ -1,14 +1,10 @@
 /**
  * Degrau — correção automática dos blocos diários (Google Apps Script)
  *
- * ESTADO: esboço, ainda NÃO testado com um formulário real.
+ * ESTADO: testado com planilha e formulário simulados (correcao/teste/simular.js);
+ * falta o teste com envios falsos no Google (passo 7 da montagem).
  *
- * Instalação:
- *  1. Crie o formulário (campos em correcao/README.md) e vincule a uma planilha.
- *  2. Na planilha, crie as abas Alunos, Gabarito e Painel (modelos em correcao/modelos/).
- *  3. Extensões > Apps Script > cole este arquivo.
- *  4. Acionadores > Adicionar acionador > função aoEnviar > "Da planilha" > "Ao enviar o formulário".
- *  5. Teste com envios falsos antes de usar com alunos.
+ * Montagem: correcao/README.md (o montar.gs cria formulário, abas e gatilho).
  */
 const SS = SpreadsheetApp.getActive();
 const CORTE_NOTA = 90;            // % mínimo para domínio
@@ -23,11 +19,32 @@ function normalizar(s) {
     .replace(/,/g, '.');
 }
 
+// "19:02", "19:02:00" ou "7:02:00 PM" -> minutos desde a meia-noite
+function emMinutos(t) {
+  const m = String(t).match(/(\d{1,2}):(\d{2})(?::\d{2})?\s*([AP]M)?/i);
+  if (!m) return NaN;
+  let h = Number(m[1]);
+  if (m[3]) h = h % 12 + (m[3].toUpperCase() === 'PM' ? 12 : 0);
+  return h * 60 + Number(m[2]);
+}
+
 function minutos(ini, fim) {
-  const p = t => String(t).split(':').map(Number);
-  const [h1, m1] = p(ini), [h2, m2] = p(fim);
-  let d = (h2 * 60 + m2) - (h1 * 60 + m1);
+  const d = emMinutos(fim) - emMinutos(ini);
   return d < 0 ? d + 24 * 60 : d;
+}
+
+// Resposta do tipo conjunto ("conjunto:PÔQ,QÔR,..."): itens em qualquer ordem, separados por
+// vírgula, ponto e vírgula ou espaço; nome de ângulo de 3 letras vale nos dois sentidos (QÔP = PÔQ).
+function itensConjunto(s) {
+  return String(s || '').split(/[,;\s]+/).map(normalizar).filter(x => x)
+    .map(x => /^[A-Z]{3}$/.test(x) ? [x, x.split('').reverse().join('')].sort()[0] : x)
+    .sort().join(',');
+}
+
+function confere(resposta, aceitas) {
+  return String(aceitas).split('|').some(a => a.startsWith('conjunto:')
+    ? itensConjunto(resposta) === itensConjunto(a.slice('conjunto:'.length))
+    : normalizar(resposta) === normalizar(a));
 }
 
 function aoEnviar(e) {
@@ -52,8 +69,7 @@ function aoEnviar(e) {
   gab.forEach(([, campo, aceitas, pontos]) => {
     pontos = Number(pontos) || 0;
     total += pontos;
-    const resp = normalizar((r[campo] || [''])[0]);
-    const ok = String(aceitas).split('|').map(normalizar).includes(resp);
+    const ok = confere((r[campo] || [''])[0], aceitas);
     if (ok) feitos += pontos; else errados.push(campo);
   });
 

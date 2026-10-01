@@ -26,7 +26,7 @@ b:
     - grade:
         itens:
           - semirretas: {direcoes: [0, 30, 70, 120], nomes: [P, Q, R, S], vertice: O}
-            resposta: "PÔQ, QÔR, RÔS, PÔR, QÔS, PÔS"
+            resposta: {conjunto: [PÔQ, QÔR, RÔS, PÔR, QÔS, PÔS]}   # em qualquer ordem
           - semirretas: {direcoes: [10, 60, 100, 140, 175], nomes: [A, B, C, D, E], vertice: O, comprimento: 18}
             texto: "Só diga quantos são. [40]"
             resposta: 10

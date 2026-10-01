@@ -7,6 +7,9 @@ MAX_ITENS_PAGINA = 12   # campos por página no formulário do CASD
 
 
 def _lista(r):
+    """respostas aceitas; {conjunto: [...]} = itens em qualquer ordem (o script de correção entende)"""
+    if isinstance(r, dict) and list(r) == ['conjunto']:
+        return ['conjunto:' + ','.join(str(x) for x in r['conjunto'])]
     return [str(x) for x in r] if isinstance(r, list) else [str(r)]
 
 
