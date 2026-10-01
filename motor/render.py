@@ -10,7 +10,7 @@ from .geo import FolhaGeo
 from .bicos import Bico
 
 MARCA = 'DEGRAU  ·  '
-ICONES = {'ouvir': 'ecoute', 'escrever': 'ecris', 'ligar': 'relie', 'circular': 'entoure', 'ler': 'lis'}
+ICONES = ('ouvir', 'escrever', 'ligar', 'circular', 'ler')
 TEXTOS = {'fr': {'cada': 'chacun', 'exemplo': 'Exemple'},
           'pt-BR': {'cada': 'cada', 'exemplo': 'Exemplo'}}
 
@@ -18,7 +18,7 @@ TEXTOS = {'fr': {'cada': 'chacun', 'exemplo': 'Exemple'},
 def _icone(nome, onde):
     if nome not in ICONES:
         raise ErroEspecificacao(f'{onde}: ícone desconhecido {nome!r} (use {", ".join(ICONES)})')
-    return ICONES[nome]
+    return nome
 
 
 def _pontos(d, ctx):
@@ -36,7 +36,7 @@ def _itens(d, onde, obrig, opc=()):
 # ---------- tipos de bloco: função(folha_pdf, dados, contexto) ----------
 
 def _palavras(f, d, ctx):
-    f.mots([tuple(p) for p in d['itens']], cols=d.get('colunas', 2), size=d.get('tamanho', 19), altura=ctx.get('altura'))
+    f.palavras([tuple(p) for p in d['itens']], cols=d.get('colunas', 2), size=d.get('tamanho', 19), altura=ctx.get('altura'))
 
 def _ligar(f, d, ctx):
     if 'itens_de' in d:   # reaproveita os pares do primeiro bloco do outro lado
@@ -44,41 +44,41 @@ def _ligar(f, d, ctx):
         pares = next(iter(outro.values()))['itens']
     elif 'itens' in d: pares = d['itens']
     else: raise ErroEspecificacao(f'{ctx["onde"]}: ligar precisa de itens ou itens_de')
-    f.relie([tuple(p) for p in pares], seed=d.get('semente', 1), altura=ctx.get('altura'))
+    f.ligar([tuple(p) for p in pares], seed=d.get('semente', 1), altura=ctx.get('altura'))
 
 def _circular(f, d, ctx):
     its = _itens(d, ctx['onde'], ('opcoes', 'resposta'))
     for i, it in enumerate(its):
         if it['resposta'] not in it['opcoes']:
             raise ErroEspecificacao(f'{ctx["onde"]}, item {i + 1}: resposta {it["resposta"]!r} não está nas opções')
-    f.entoure([it['opcoes'] for it in its], altura=ctx.get('altura'))
+    f.circular([it['opcoes'] for it in its], altura=ctx.get('altura'))
 
 def _copiar(f, d, ctx):
-    f.recopie(d['itens'], size=d.get('tamanho', 20), altura=ctx.get('altura'))
+    f.copiar(d['itens'], size=d.get('tamanho', 20), altura=ctx.get('altura'))
 
 def _frases(f, d, ctx):
     its = d['itens']
     if all(isinstance(i, list) for i in its):
-        f.phrases([i[0] for i in its], size=d.get('tamanho', 15), gloss=[i[1] for i in its], altura=ctx.get('altura'))
+        f.frases([i[0] for i in its], size=d.get('tamanho', 15), gloss=[i[1] for i in its], altura=ctx.get('altura'))
     else:
-        f.phrases(its, size=d.get('tamanho', 15), altura=ctx.get('altura'))
+        f.frases(its, size=d.get('tamanho', 15), altura=ctx.get('altura'))
 
 def _banco(f, d, ctx):
-    f.banque(d['itens'])
+    f.banco(d['itens'])
 
 def _lacunas(f, d, ctx):
     its = _itens(d, ctx['onde'], ('texto', 'resposta'))
-    f.trous([it['texto'] for it in its], size=d.get('tamanho', 14), altura=ctx.get('altura'))
+    f.lacunas([it['texto'] for it in its], size=d.get('tamanho', 14), altura=ctx.get('altura'))
 
 def _leitura(f, d, ctx):
-    f.lecture(d['linhas'], fois=d.get('vezes', 3), size=d.get('tamanho', 14))
+    f.leitura(d['linhas'], fois=d.get('vezes', 3), size=d.get('tamanho', 14))
 
 def _verdadeiro_falso(f, d, ctx):
     its = _itens(d, ctx['onde'], ('texto', 'resposta'))
     for i, it in enumerate(its):
         if it['resposta'] not in ('V', 'F'):
             raise ErroEspecificacao(f'{ctx["onde"]}, item {i + 1}: resposta deve ser V ou F')
-    f.vraifaux([it['texto'] for it in its], size=d.get('tamanho', 13.5), altura=ctx.get('altura'))
+    f.verdadeiro_falso([it['texto'] for it in its], size=d.get('tamanho', 13.5), altura=ctx.get('altura'))
 
 def _ditado(f, d, ctx):
     its = _itens(d, ctx['onde'], ('resposta',))
@@ -86,38 +86,38 @@ def _ditado(f, d, ctx):
     if 'instrucao' in d:
         p = _pontos(d, ctx)
         titulo = d['instrucao'] + (f'   [{p}]' if p else '')
-    f.dictee(len(its), titre=titulo, gloss=d.get('traducao'))
+    f.ditado(len(its), titre=titulo, gloss=d.get('traducao'))
 
 def _texto(f, d, ctx):
-    f.texte(d['paragrafos'], size=d.get('tamanho', 12), box=d.get('quadro', False))
+    f.texto(d['paragrafos'], size=d.get('tamanho', 12), box=d.get('quadro', False))
 
 def _exemplo(f, d, ctx):
     if 'frase' in d:      # frase complexa e sua decomposição (idiomas)
         _chaves(d, ctx['onde'], ('frase', 'decomposicao'), ('tamanho',))
-        f.exemple(ctx['textos']['exemplo'], d['frase'], d['decomposicao'], size=d.get('tamanho', 11))
+        f.exemplo_frase(ctx['textos']['exemplo'], d['frase'], d['decomposicao'], size=d.get('tamanho', 11))
     else:                 # figura e texto (geometria)
         _chaves(d, ctx['onde'], ('texto',), ('figura',))
         if 'figura' in d: _validar_figura(d['figura'], ctx['onde'] + ', figura')
-        f.exemplo_geo(ctx['textos']['exemplo'], d['texto'], d.get('figura'))
+        f.exemplo_figura(ctx['textos']['exemplo'], d['texto'], d.get('figura'))
 
 def _perguntas(f, d, ctx):
     its = _itens(d, ctx['onde'], ('pergunta',), ('linhas', 'pontos', 'resposta'))
     qs = [(it['pergunta'] + (f' [{it["pontos"]}]' if 'pontos' in it else ''), it.get('linhas')) for it in its]
-    f.questions(qs, size=d.get('tamanho', 11))
+    f.perguntas(qs, size=d.get('tamanho', 11))
 
 def _ordenar(f, d, ctx):
     its = _itens(d, ctx['onde'], ('texto', 'resposta'))
     if sorted(it['resposta'] for it in its) != list(range(1, len(its) + 1)):
         raise ErroEspecificacao(f'{ctx["onde"]}: as respostas devem ser 1 a {len(its)}, sem repetir')
-    f.ordre([it['texto'] for it in its], size=d.get('tamanho', 11))
+    f.ordenar([it['texto'] for it in its], size=d.get('tamanho', 11))
 
 def _decompor(f, d, ctx):
     its = _itens(d, ctx['onde'], ('frase', 'partes'), ('resposta',))
     for i, it in enumerate(its):
-        f.decompose(i + 1, it['frase'], it['partes'], size=d.get('tamanho', 11))
+        f.decompor(i + 1, it['frase'], it['partes'], size=d.get('tamanho', 11))
 
 def _subinstrucao(f, d, ctx):
-    f.sousinstr(_icone(d['icone'], ctx['onde']), d['instrucao'], _pontos(d, ctx))
+    f.subinstrucao(_icone(d['icone'], ctx['onde']), d['instrucao'], _pontos(d, ctx))
 
 
 # ---------- geometria ----------
@@ -231,9 +231,9 @@ def desenhar_folha(f, folha, curso):
         icone, pontos = _icone(L['icone'], onde), _pontos(L, {'textos': textos})
         if isinstance(f, FolhaGeo):
             if 'traducao' in L: raise ErroEspecificacao(f'{onde}: folha de caderno não tem traducao')
-            f.page(codigo, folha['unidade'], L['instrucao'], icone, pontos)
+            f.pagina(codigo, folha['unidade'], L['instrucao'], icone, pontos)
         else:
-            f.page(codigo, folha['unidade'], L['instrucao'], L.get('traducao'), icone, pontos)
+            f.pagina(codigo, folha['unidade'], L['instrucao'], L.get('traducao'), icone, pontos)
         ctxs = [{'folha': folha, 'textos': textos, 'codigo': codigo, 'onde': f'{onde}, bloco {i + 1}'}
                 for i in range(len(L['blocos']))]
         elasticos = [_tipo(b, cx['onde']) in ELASTICOS for b, cx in zip(L['blocos'], ctxs)]

@@ -28,16 +28,18 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 
 | Peça | Onde | Estado |
 |---|---|---|
-| Motor de folhas (texto) | `motor/folha.py` | Funciona. Classe `Folha` (alias `Feuille`) com cabeçalho, ícones e 14 tipos de exercício |
-| Motor de geometria | `motor/geo.py` | Funciona. `FolhaGeo`: cabeçalho para celular, ângulos, semirretas, quadro de exemplo |
-| Figuras de paralelas com "bicos" | `motor/bicos.py` | Funciona. `Bico`: poligonal entre paralelas, centralizada, com ângulos **calculados** |
-| Pacote 1 de francês | `exemplos/frances_pacote001.py` | Gera `Pacote_001_6A_1-5.pdf` (10 páginas) |
-| Amostra de francês avançado | `exemplos/frances_amostra_AII_DI.py` | Gera AII 64 e DI 112 |
-| Pacote 1 de geometria | `exemplos/geometria_G1_pacote01.py` | Gera G1 1–3 |
-| Amostra de geometria avançada | `exemplos/geometria_G1_amostra_81-89.py` | Gera G1 81, 85, 89 e imprime o gabarito calculado |
+| Especificações em YAML | `folhas/<curso>/<nível>/<número>.yaml` | Uma folha (frente a + verso b) por arquivo; respostas em cada item, nunca desenhadas |
+| Leitura e validação | `motor/especificacao.py` | Falha alto com arquivo, lado, bloco e item do erro |
+| Renderizador | `motor/render.py` | Tabela de tipos de bloco; layout por caixas; recolhe o gabarito |
+| Motor de folhas (texto) | `motor/folha.py` | Classe `Folha`: cabeçalho, ícones e os tipos de exercício de idioma |
+| Motor de geometria | `motor/geo.py` | `FolhaGeo`: cabeçalho para celular, figuras medidas, quadro de exemplo, grade |
+| Figuras de paralelas com "bicos" | `motor/bicos.py` | `Bico`: poligonal centralizada, ângulos **calculados**, rótulos afastados das linhas |
+| Exemplos | `exemplos/pacotes.yaml` | 4 PDFs: 6A 1–5, AII 64 + DI 112, G1 1–3, G1 81/85/89 |
+| Testes | `testes/test_folhas.py` | Gera tudo; nada fora da página; texto sobre texto ou sobre linha; gabarito de 81–89 |
+| Comparação | `ferramentas/comparar.sh` | Pixels e palavras, página a página, contra uma etiqueta ou commit |
 | Leitor de áudio | `leitor/leitor-frances.html` | Funciona em qualquer navegador; HTML único |
 | Correção automática | `correcao/aoEnviar.gs` | **Esboço não testado** |
-| Currículos | `curriculos/*.yaml` | Dados prontos, **ainda não lidos pelo motor** |
+| Currículos | `curriculos/*.yaml` | O motor lê só a chave `folha` (marca e tipo de campos); o resto ainda não |
 
 ### Fora do repositório (instância francês)
 
@@ -67,10 +69,13 @@ de ferramentas no Claude Code. **Perguntar ao Ângelo antes de decidir.**
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt           # só reportlab
-python exemplos/frances_pacote001.py       # saída em exemplos/pdf/
-python exemplos/geometria_G1_amostra_81-89.py   # imprime também o gabarito calculado
+pip install -r requirements.txt           # reportlab, pyyaml, pytest
+python -m motor exemplos/pacotes.yaml      # saída em exemplos/pdf/
+pytest                                     # nesta máquina: env -u PYTHONPATH pytest (o ROS injeta plugins)
+ferramentas/comparar.sh [etiqueta]         # compara com a referência (padrão: referencia-fase0)
 ```
+
+A etiqueta `referencia-fase0` guarda os PDFs gerados pelos scripts originais (fase 0).
 
 Para conferir visualmente: `pdftoppm -png -r 80 arquivo.pdf previa` (poppler) e abrir as imagens.
 **Sempre** renderizar e olhar as páginas depois de mudar layout: vários bugs da conversa só apareceram na imagem
@@ -110,11 +115,11 @@ ler criticamente. **Não** incluir esse PDF nem o nome da marca no repositório.
 
 | Chave | Desenho | Uso |
 |---|---|---|
-| `ecoute` | alto-falante | ouvir |
-| `ecris` | lápis inclinado | escrever, completar, responder |
-| `relie` | dois pontos ligados | ligar |
-| `entoure` | oval | circular, verdadeiro ou falso |
-| `lis` | livro aberto | ler |
+| `ouvir` | alto-falante | ouvir |
+| `escrever` | lápis inclinado | escrever, completar, responder |
+| `ligar` | dois pontos ligados | ligar |
+| `circular` | oval | circular, verdadeiro ou falso |
+| `ler` | livro aberto | ler |
 
 ### 4.3 Cabeçalho da instância francês (`Folha.page`)
 
@@ -141,49 +146,58 @@ ler criticamente. **Não** incluir esse PDF nem o nome da marca no repositório.
 
 ---
 
-## 5. Tipos de exercício implementados (API atual)
+## 5. Especificação das folhas (YAML) e motor
 
-`Folha` (em `folha.py`). Todos desenham a partir de `self.y` (cursor vertical) e o atualizam.
+Cada folha: `folha`, `unidade`, `a`, `b`. Cada lado: `instrucao`, `icone`, `blocos` e, opcionais, `traducao`
+(só folhas de papel), `pontos` ("[100]") ou `pontos_cada` ("[10 chacun]"/"[10 cada]"). Cada bloco é um mapa
+com uma chave, o tipo. Exemplos completos em `folhas/`. O campo `resposta` alimenta o gabarito e nunca é desenhado.
 
-| Método | Parâmetros | O que desenha |
+| Bloco | Conteúdo | Método do motor |
 |---|---|---|
-| `page(code, unite, instr, gloss, icone, points=None)` | — | Cabeçalho + instrução; define `self.y` |
-| `fim(code)` | — | Rodapé + `showPage()` |
-| `mots(itens, cols=2, size=19)` | `[(fr, pt), …]` | Palavras grandes com tradução cinza |
-| `relie(pares, seed=1)` | `[(fr, pt), …]` | Duas colunas para ligar; direita embaralhada com semente fixa |
-| `entoure(linhas)` | `[[op1, op2, op3], …]` | Linhas de opções para circular (o áudio diz qual) |
-| `recopie(mots, size=20)` | `[str]` | Palavra em contorno claro + linha para copiar |
-| `phrases(frases, size=15, gloss=None)` | `[str]`, `[str]` | Frases numeradas, tradução opcional |
-| `banque(mots)` | `[str]` | Quadro de palavras |
-| `trous(frases, size=14)` | `"Je ___ Rafael."` | Frases com caixa no lugar de `___` |
-| `lecture(linhas, fois=3, size=14)` | `[str]` | Texto + quadradinhos para cada leitura em voz alta |
-| `vraifaux(frases)` | `[str]` | Afirmações + "V F" |
-| `dictee(n, num0=1, titre=None, gloss=None)` | — | Linhas de ditado (com subinstrução opcional) |
-| `texte(paras, size=12, box=False)` | `[str]` | Parágrafos com quebra automática, quadro opcional |
-| `exemple(titre, phrase, decomp)` | — | Quadro com frase e decomposição (a), (b)… |
-| `questions(qs, size=11, lignes=2, num0=1)` | `[(pergunta, n_linhas)]` | Perguntas + linhas |
-| `sousinstr(icone, txt, points=None)` | — | Segunda instrução na mesma página |
-| `ordre(frases)` | `[str]` | Caixas para numerar a ordem |
-| `decompose(num, phrase, parts)` | — | Frase + partes "(a) …" com linha até a margem |
+| `palavras` | `itens: [[fr, pt], …]`, `colunas` | `palavras` |
+| `ligar` | `itens` ou `itens_de: a`, `semente` | `ligar` |
+| `circular` | `itens: [{opcoes, resposta}]` | `circular` |
+| `copiar` | `[str]` | `copiar` |
+| `frases` | `itens: [str]` ou `[[fr, pt]]` | `frases` |
+| `banco` | `[str]` | `banco` |
+| `lacunas` | `itens: [{texto: "Je ___ Rafael.", resposta}]` | `lacunas` |
+| `leitura` | `linhas`, `vezes` | `leitura` |
+| `verdadeiro-falso` | `itens: [{texto, resposta: V/F}]` | `verdadeiro_falso` |
+| `ditado` | `itens: [{resposta}]`, subinstrução opcional | `ditado` |
+| `texto` | `paragrafos`, `quadro` | `texto` |
+| `exemplo` | `frase` + `decomposicao` (idiomas) ou `texto` + `figura` (geometria) | `exemplo_frase` / `exemplo_figura` |
+| `perguntas` | `itens: [{pergunta, linhas, pontos, resposta}]` | `perguntas` |
+| `ordenar` | `itens: [{texto, resposta: posição}]` | `ordenar` |
+| `decompor` | `itens: [{frase, partes, resposta}]` | `decompor` |
+| `subinstrucao` | `instrucao`, `icone`, pontos | `subinstrucao` |
+| `grade` | `itens` numerados (figura e/ou `texto`, `resposta`), `colunas` | `grade` |
+| `figura` | uma figura sem número | `figura` |
+| `alternativas` | `itens`, `resposta: A/B/C/D` | `alternativas` |
 
-`FolhaGeo` (em `geo.py`): `angulo(x, y, d1, d2, L, nomes=(V,P,Q), marca='arco'|'reto', rot)`, `raios(x, y, dirs, nomes, vert)`,
-`num`, `texto`, `exemplo(h)`.
+`tamanho` (pt) é opcional em quase todos. Figuras (medidas em mm):
+`angulo: {direcoes: [d1, d2], nomes: [V, P, Q], marca: arco|reto}`,
+`semirretas: {direcoes, nomes, vertice}`,
+`bico: {altura, segmentos: [[direção, comprimento], …], marcas: [[vértice, dir|esq|~, rótulo|~|x], …]}`.
 
-`Bico` (em `bicos.py`): `paralelas(yr, ys, x0, x1)` e `zig(xa, xb, yr, ys, segs, marks, r, size)`.
+**Layout por caixas:** a página empilha os blocos. Os fixos são medidos num canvas descartável; os elásticos
+(palavras, ligar, circular, copiar, frases, lacunas, verdadeiro-falso, grade) dividem a sobra até `LIMITE`,
+com passo máximo e mínimo por tipo. Se não couber, erro em vez de sobreposição.
 
-- `segs`: lista de `(direção em graus, comprimento)`; o **último** segmento é estendido até encostar na reta `s`.
-- `marks`: lista de `(índice do vértice, lado, rótulo)`. Nas pontas (índice 0 e último), `lado` é `'dir'` ou `'esq'` (de que lado da paralela o ângulo é medido). Rótulo `None` → escreve o valor calculado; string → escreve a string (ex.: `'x'`, `'3x + 5°'`).
-- **Retorna** `{índice: valor em graus}` calculado da geometria. O gabarito vem daqui.
-- A poligonal é **centralizada** entre `xa` e `xb`. Direções rasas (menos de ~30° com a horizontal) fazem a figura sair do quadro; prefira direções íngremes.
+**Bico** (`desenhar_bico` em `bicos.py`):
+
+- O **último** segmento é estendido até encostar na reta `s`.
+- Nas pontas (índice 0 e último), `lado` é `dir` ou `esq` (de que lado da paralela o ângulo é medido). Rótulo `~` → escreve o valor calculado; string → escreve a string (`x`, `3x + 5°`).
+- Devolve `{índice: valor em graus}` calculado da geometria. Item sem `resposta` usa o vértice marcado com `x`.
+- A poligonal é **centralizada**; se ficar mais larga que o espaço, erro (prefira direções íngremes).
+- Cada rótulo se afasta pela bissetriz até não encostar em linha nem em outro rótulo.
 - Regra matemática usada nas folhas: entre paralelas, a soma dos ângulos que **abrem** para a esquerda é igual à soma dos que abrem para a direita.
 
-### Débitos do motor (corrigir na fase 1)
+### Débitos do motor
 
-- Posições escritas à mão (milímetros mágicos) em cada exemplo; falta layout automático por "caixas".
-- Nomes misturados em francês e português (`mots`, `relie`, `texte` × `angulo`, `raios`). Padronizar (sugestão: português no código, conteúdo no idioma do curso).
-- `exemplo()` de `FolhaGeo` recebe altura fixa; deveria medir o conteúdo.
-- Não há testes. Mínimo: gerar todos os exemplos sem erro + checar que nenhum texto sai da página (bounding boxes).
-- Itens de verdadeiro ou falso, lacunas etc. não carregam gabarito: o gabarito está só no `docs/plano-completo.md`.
+- Parâmetros internos ainda em francês (`size`, `gloss`, `titre`…); os nomes de métodos e ícones já estão em português.
+- Tamanhos de letra escritos por folha (`tamanho`); deveriam vir de um estilo por faixa de níveis (seção 4.5).
+- O texto do exemplo de geometria ("x = 30° + 40° = 70°") é escrito à mão; a fase 2 deve conferi-lo com a figura.
+- Gabarito recolhido, mas ainda não exportado (fase 2).
 
 ---
 
@@ -280,51 +294,9 @@ e decidir domínio. Cada instância é só **dados + configuração + adaptadore
 | Lembretes | Google Agenda | (a definir) | Agendador automático |
 | Áudio | Leitor no navegador | — | Texto para fala gerado no servidor (arquivos de áudio) |
 
-### 7.4 Especificação de folha em YAML (proposta)
+### 7.4 Especificação de folha em YAML
 
-Francês:
-
-```yaml
-curso: frances-delf-b1
-folha: 6A 1
-unidade: Mots familiers 1
-a:
-  tipo: mots
-  icone: ecoute
-  instrucao: Écoute et répète.
-  traducao: Ouça e repita cada palavra em voz alta.
-  itens:
-    - [bonjour, "olá, bom dia"]
-    - [merci, obrigado]
-  faixa: "Feuille un a. Bonjour. Merci."
-b:
-  tipo: relie
-  icone: relie
-  instrucao: Relie.
-  pontos: 10
-  itens_de: a          # reaproveita os pares da frente
-  semente: 3
-```
-
-Geometria (a figura é **especificação de construção**; o gabarito é calculado):
-
-```yaml
-curso: geometria-plana-epcar
-folha: G1 81
-unidade: O bizu dos bicos 1
-a:
-  tipo: figuras-bico
-  instrucao: Veja o exemplo. Calcule x.  (r // s)
-  pontos: 25
-  exemplo:
-    segmentos: [[-30, 22], [-140, 0]]
-    marcas: [[0, dir, ~], [1, ~, x], [2, dir, ~]]
-    texto: ["bico para a direita:", "x = 30° + 40° = 70°"]
-  itens:
-    - segmentos: [[-35, 18], [-140, 0]]
-      marcas: [[0, dir, ~], [1, ~, x], [2, dir, ~]]
-      resposta: calcular      # o motor preenche com o valor do vértice marcado com x
-```
+Implementada na fase 1 (seção 5; exemplos em `folhas/`). Falta a faixa de áudio (`faixa`), prevista para a fase 2.
 
 Para itens com expressões (ex.: `3x + 5°`), o motor deve verificar que **todas** as expressões dão o valor calculado com o mesmo x e falhar alto se não derem (foi assim que se pegou um rótulo errado na conversa: "100°" num ângulo de 80°).
 
@@ -350,8 +322,8 @@ Anthropic, a chave vai em segredo do repositório, nunca no código. Avaliar cus
 
 | Fase | Entregas | Aceite |
 |---|---|---|
-| **0. Repositório de pé** | Revisar o que veio no zip; rodar os 4 exemplos; primeiro commit | 4 PDFs gerados sem erro; nada de dados pessoais versionados |
-| **1. Conteúdo separado do desenho** | Esquema YAML de folha; renderizador que lê YAML; reescrever os 4 exemplos como YAML; layout por caixas em vez de milímetros fixos; testes básicos | Os PDFs gerados a partir do YAML ficam visualmente equivalentes aos atuais (comparar imagens) |
+| **0. Repositório de pé** (feita) | Revisar o que veio no zip; rodar os 4 exemplos; primeiro commit | 4 PDFs gerados sem erro; nada de dados pessoais versionados |
+| **1. Conteúdo separado do desenho** (feita) | Esquema YAML de folha; renderizador que lê YAML; reescrever os 4 exemplos como YAML; layout por caixas em vez de milímetros fixos; testes básicos | Os PDFs gerados a partir do YAML ficam visualmente equivalentes aos atuais (comparar imagens) |
 | **2. Gabarito e áudio a partir da mesma especificação** | Exportar gabarito (CSV para a planilha) e bloco de áudio direto do YAML; figuras com gabarito calculado e verificação das expressões | Gabarito de G1 1–3 e 81–89 batem com o `docs/plano-completo.md` |
 | **3. Correção do CASD testada** | Resolver o limite de 15 campos; testar o Apps Script com envios falsos; documentar a montagem passo a passo | Envio falso → linha correta no Painel |
 | **4. Gerador de pacotes** | Linha de comando `degrau`; estado do aluno via adaptador; regra de domínio e repetição com exercícios novos | Gerar 5 dias seguidos de francês e 2 pacotes de geometria sem editar código |

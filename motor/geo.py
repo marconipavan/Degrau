@@ -19,7 +19,7 @@ def _caixa(pts):
 
 class FolhaGeo(Folha):
     MARCA='DEGRAU  ·  geometria'
-    def page(self,code,unite,instr,icone,points=None):
+    def pagina(self,code,unite,instr,icone,points=None):
         c=self.c
         c.setFont('Sans',6.3); c.setFillColor(GREY); c.drawString(M,H-M,self.MARCA)
         c.setFillColor(INK); c.setFont('AndB',15); c.drawString(M,H-M-7*mm,code)
@@ -56,7 +56,7 @@ class FolhaGeo(Folha):
             c.drawString(x-3.2*mm,y-3.5*mm,v)
             for d,n in ((d1,p),(d2,q)):
                 c.drawCentredString(x+(L+3*mm)*math.cos(math.radians(d)),y+(L+3*mm)*math.sin(math.radians(d))-1.2*mm,n)
-    def raios(self,x,y,dirs,nomes,vert,L=20*mm):
+    def semirretas(self,x,y,dirs,nomes,vert,L=20*mm):
         c=self.c; c.setFillColor(INK); c.setStrokeColor(INK); c.setLineWidth(1)
         for d,n in zip(dirs,nomes):
             c.line(x,y,x+L*math.cos(math.radians(d)),y+L*math.sin(math.radians(d)))
@@ -95,14 +95,14 @@ class FolhaGeo(Folha):
             self.paralelas(yr,ys,x0,x1)
             segs=[(a,L*mm) for a,L in d['segmentos']]
             marks=[tuple(m) for m in d['marcas']]
-            return self.zig(x0,x1,yr,ys,segs,marks,size=d.get('tamanho',9.5))
+            return self.desenhar_bico(x0,x1,yr,ys,segs,marks,size=d.get('tamanho',9.5))
         bx0,by0,bx1,by1=self._caixa_local(tipo,d)
         vx=x+(largura-(bx1-bx0))/2-bx0; vy=y_topo-by1
         if tipo=='angulo':
             a,b=d['direcoes']
             self.angulo(vx,vy,a,b,L=d.get('comprimento',18)*mm,nomes=d.get('nomes'),marca=d.get('marca','arco'))
         else:
-            self.raios(vx,vy,d['direcoes'],d['nomes'],d['vertice'],L=d.get('comprimento',20)*mm)
+            self.semirretas(vx,vy,d['direcoes'],d['nomes'],d['vertice'],L=d.get('comprimento',20)*mm)
         return None
 
     # ---------- texto com estilos ----------
@@ -124,7 +124,7 @@ class FolhaGeo(Folha):
         return y
 
     # ---------- blocos ----------
-    def exemplo_geo(self,titulo,textos,figura=None):
+    def exemplo_figura(self,titulo,textos,figura=None):
         """quadro de exemplo: figura à esquerda, texto à direita; altura medida pelo conteúdo"""
         c=self.c; topo=self.y-5*mm; x=M+3*mm; larg=W-2*M-6*mm
         fw,fh=(0,0)

@@ -39,7 +39,7 @@ class Bico(FolhaGeo):
         c.line(x0,yr,x1,yr); c.line(x0,ys,x1,ys)
         self._retas=[(x0,yr,x1,yr),(x0,ys,x1,ys)]
         c.setFont('AndB',10); c.setFillColor(INK); c.drawString(x1+1.5*mm,yr-1.2*mm,'r'); c.drawString(x1+1.5*mm,ys-1.2*mm,'s')
-    def zig(self, xa, xb, yr, ys, segs, marks, r=4.5*mm, size=9.5):
+    def desenhar_bico(self, xa, xb, yr, ys, segs, marks, r=4.5*mm, size=9.5):
         """centraliza a poligonal entre xa e xb; marks: (índice do vértice, lado 'dir'/'esq' nas pontas, rótulo)"""
         c=self.c; pts,dirs=build_path((0,yr),segs,ys)
         xs=[p[0] for p in pts]; sh=(xa+xb)/2-(min(xs)+max(xs))/2

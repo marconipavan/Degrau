@@ -21,17 +21,20 @@ independente e não tem relação com nenhuma marca.
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python exemplos/frances_pacote001.py
-python exemplos/geometria_G1_amostra_81-89.py
+python -m motor exemplos/pacotes.yaml
+pytest
 ```
 
-Os PDFs saem em `exemplos/pdf/`.
+Os PDFs saem em `exemplos/pdf/`. Cada folha é descrita em YAML em `folhas/`; o motor só lê e desenha.
 
 ## Estrutura
 
 ```
-motor/        motor de desenho das folhas (Python + reportlab) e fonte Andika
-exemplos/     scripts que geram pacotes de exemplo
+folhas/       folhas descritas em YAML, uma por arquivo (frente e verso)
+motor/        leitura do YAML e desenho das folhas (Python + reportlab) e fonte Andika
+exemplos/     pacotes de exemplo (pacotes.yaml) e os PDFs gerados
+testes/       testes (pytest): geração, nada fora da página, nada sobreposto, gabarito
+ferramentas/  comparação dos PDFs com a referência
 curriculos/   tabelas de níveis (YAML)
 leitor/       leitor de áudio em HTML (texto para fala com vozes por personagem)
 correcao/     correção automática com Google Forms + Planilha + Apps Script
