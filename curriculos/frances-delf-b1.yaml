@@ -1,6 +1,7 @@
 # Tabela de níveis — Francês até o DELF B1
-# Formato provisório: o motor ainda NÃO lê este arquivo (ver CLAUDE.md, fase 1).
+# O motor lê por enquanto só a chave folha (marca e campos do cabeçalho).
 curso: frances-delf-b1
+folha: {marca: français, campos: papel}      # campos: papel = Nom/Date/Début/Fin
 idioma_alvo: fr
 idioma_apoio: pt-BR
 meta: Aprovação no DELF B1 numa sessão do 2º semestre de 2027

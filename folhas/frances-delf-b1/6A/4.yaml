@@ -1,0 +1,30 @@
+folha: 6A 4
+unidade: Expressions 1
+a:
+  instrucao: "Écoute et répète."
+  traducao: "Ouça e repita cada frase em voz alta."
+  icone: ouvir
+  blocos:
+    - frases:
+        tamanho: 16
+        itens:
+          - ["Je m'appelle Rafael.", "Eu me chamo Rafael."]
+          - ["Je suis brésilien.", "Sou brasileiro."]
+          - ["Je suis étudiant.", "Sou estudante."]
+          - ["Je suis fatigué.", "Estou cansado."]
+          - ["Bienvenue à Toulouse !", "Bem-vindo a Toulouse!"]
+          - ["Merci !", "Obrigado!"]
+b:
+  instrucao: "Complète avec les mots de la boîte."
+  traducao: "Complete com as palavras do quadro."
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+    - banco: ["suis", "m'appelle", "Bienvenue", "avion", "ville"]
+    - lacunas:
+        itens:
+          - {texto: "Je ___ Rafael.", resposta: "m'appelle"}
+          - {texto: "Je ___ étudiant.", resposta: "suis"}
+          - {texto: "Je suis dans un ___ .", resposta: "avion"}
+          - {texto: "Toulouse est une ___ .", resposta: "ville"}
+          - {texto: "« ___ à Toulouse ! »", resposta: "Bienvenue"}

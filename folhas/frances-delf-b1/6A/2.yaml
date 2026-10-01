@@ -1,0 +1,22 @@
+folha: 6A 2
+unidade: Mots familiers 2
+a:
+  instrucao: "Écoute et répète."
+  traducao: "Ouça e repita cada palavra em voz alta."
+  icone: ouvir
+  blocos:
+    - palavras:
+        itens:
+          - ["content", "contente"]
+          - ["fatigué", "cansado"]
+          - ["brésilien", "brasileiro"]
+          - ["dans", "dentro de, em"]
+          - ["mais", "mas"]
+          - ["arriver", "chegar"]
+b:
+  instrucao: "Relie."
+  traducao: "Ligue cada palavra ao seu sentido."
+  icone: ligar
+  pontos_cada: 10
+  blocos:
+    - ligar: {itens_de: a, semente: 7}

@@ -1,0 +1,23 @@
+folha: 6A 3
+unidade: Mots familiers 3
+a:
+  instrucao: "Écoute et entoure."
+  traducao: "Ouça e circule a palavra que você ouvir."
+  icone: circular
+  pontos_cada: 10
+  blocos:
+    - circular:
+        itens:
+          - {opcoes: ["merci", "mais", "une ville"], resposta: "merci"}
+          - {opcoes: ["arriver", "un avion", "dans"], resposta: "un avion"}
+          - {opcoes: ["content", "un étudiant", "la France"], resposta: "un étudiant"}
+          - {opcoes: ["bonjour", "brésilien", "fatigué"], resposta: "fatigué"}
+          - {opcoes: ["une ville", "mais", "merci"], resposta: "une ville"}
+          - {opcoes: ["dans", "la France", "content"], resposta: "content"}
+b:
+  instrucao: "Recopie."
+  traducao: "Passe o lápis sobre a palavra e depois copie na linha."
+  icone: escrever
+  pontos_cada: 5
+  blocos:
+    - copiar: ["bonjour", "merci", "un avion", "une ville", "fatigué", "brésilien"]

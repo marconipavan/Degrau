@@ -13,3 +13,5 @@ __pycache__/
 .DS_Store
 # Material de origem (zips, original do plano, PDF de referência da marca): nunca versionar
 _origem/
+# Saídas temporárias (comparação de PDFs)
+saida/

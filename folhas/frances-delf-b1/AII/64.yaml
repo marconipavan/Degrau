@@ -1,0 +1,35 @@
+folha: AII 64
+unidade: Écrire de mémoire 7
+a:
+  instrucao: "Lis le texte deux fois, puis cache-le."
+  icone: ler
+  blocos:
+    - texto:
+        tamanho: 13
+        quadro: true
+        paragrafos:
+          - "Le premier jour, Rafael est arrivé à l'école à huit heures. Il a cherché la salle B12 pendant vingt minutes. Enfin, une étudiante l'a aidé. Elle s'appelle Camille et elle vient de Lyon."
+          - "Ensemble, ils sont entrés dans la salle. Le professeur a regardé sa montre et il a souri : « Vous êtes en retard, mais bienvenue ! »"
+    - subinstrucao:
+        instrucao: "Numérote les phrases dans l'ordre de l'histoire."
+        icone: escrever
+        pontos_cada: 10
+    - ordenar:
+        tamanho: 12
+        itens:
+          - {texto: "Camille a aidé Rafael.", resposta: 2}
+          - {texto: "Le professeur a souri.", resposta: 4}
+          - {texto: "Rafael a cherché la salle B12.", resposta: 1}
+          - {texto: "Ils sont entrés dans la salle.", resposta: 3}
+b:
+  instrucao: "Sans regarder le texte, réponds."
+  icone: escrever
+  pontos_cada: 15
+  blocos:
+    - perguntas:
+        tamanho: 12
+        itens:
+          - {pergunta: "À quelle heure Rafael est-il arrivé à l'école ?", linhas: 1, resposta: "Il est arrivé à huit heures."}
+          - {pergunta: "Pendant combien de temps a-t-il cherché la salle ?", linhas: 1, resposta: "Pendant vingt minutes."}
+          - {pergunta: "Qui l'a aidé ? D'où vient-elle ?", linhas: 2, resposta: "Camille l'a aidé. Elle vient de Lyon."}
+          - {pergunta: "Qu'est-ce que le professeur a fait ?", linhas: 2, resposta: "Il a regardé sa montre et il a souri."}

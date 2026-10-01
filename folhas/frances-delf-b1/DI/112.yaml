@@ -1,0 +1,51 @@
+folha: DI 112
+unidade: Analyse de phrases complexes 12
+a:
+  instrucao: "Lis l'exemple, puis décompose chaque phrase."
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+    - exemplo:
+        frase: "L'avion que Rafael a pris hier, qui venait de Paris, est arrivé en retard à cause du brouillard."
+        decomposicao:
+          - "(a) Rafael a pris un avion hier."
+          - "(b) L'avion venait de Paris."
+          - "(c) L'avion est arrivé en retard."
+          - "(d) Il y avait du brouillard."
+    - decompor:
+        itens:
+          - frase: "Camille, dont le frère travaille chez Airbus, pense que Rafael devrait postuler à un stage."
+            partes: ["(a) Le frère de Camille", "(b) Camille pense que"]
+            resposta:
+              - "(a) Le frère de Camille travaille chez Airbus."
+              - "(b) Camille pense que Rafael devrait postuler à un stage."
+          - frase: "Bien qu'il soit fatigué, Rafael relit le rapport que son professeur lui a demandé."
+            partes: ["(a) Rafael est", "(b) Son professeur lui a demandé", "(c) Rafael"]
+            resposta:
+              - "(a) Rafael est fatigué."
+              - "(b) Son professeur lui a demandé un rapport."
+              - "(c) Rafael relit le rapport."
+b:
+  instrucao: "Lis le paragraphe, puis réponds aux questions."
+  icone: ler
+  blocos:
+    - texto:
+        tamanho: 10.5
+        quadro: true
+        paragrafos:
+          - "Toulouse est souvent appelée la capitale européenne de l'aéronautique. C'est ici qu'Airbus assemble une grande partie de ses avions, et plusieurs écoles d'ingénieurs y forment chaque année des milliers d'étudiants. Pourtant, la ville ne vit pas seulement de l'industrie : le centre historique, construit en briques roses, attire de nombreux touristes, ce qui lui a donné le surnom de « Ville rose ». Pour Rafael, qui est arrivé il y a six mois, c'est ce mélange qui rend Toulouse unique. Il pense que, s'il obtient son diplôme ici, il pourra travailler dans une entreprise dont les avions volent partout dans le monde."
+    - perguntas:
+        tamanho: 10.5
+        itens:
+          - pergunta: "Donne deux raisons pour lesquelles Toulouse est la « capitale de l'aéronautique »."
+            pontos: 20
+            linhas: 2
+            resposta: "Airbus y assemble une grande partie de ses avions, et plusieurs écoles d'ingénieurs y forment des milliers d'étudiants."
+          - pergunta: "D'où vient le surnom « Ville rose » ?"
+            pontos: 20
+            linhas: 1
+            resposta: "Du centre historique, construit en briques roses."
+          - pergunta: "Réécris la dernière phrase en deux phrases simples."
+            pontos: 30
+            linhas: 2
+            resposta: "Rafael obtient peut-être son diplôme ici. Alors, il pourra travailler dans une entreprise dont les avions volent partout dans le monde."

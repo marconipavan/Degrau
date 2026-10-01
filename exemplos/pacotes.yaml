@@ -1,0 +1,9 @@
+# Pacotes de exemplo. Gerar com: python -m motor exemplos/pacotes.yaml  (saída em exemplos/pdf/)
+- arquivo: Pacote_001_6A_1-5.pdf
+  titulo: Pacote 1 — 6A 1 a 5
+  curso: frances-delf-b1
+  folhas: [6A 1, 6A 2, 6A 3, 6A 4, 6A 5]
+- arquivo: Amostra_niveis_AII_e_DI.pdf
+  titulo: Amostra — AII 64 e DI 112
+  curso: frances-delf-b1
+  folhas: [AII 64, DI 112]

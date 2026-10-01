@@ -40,6 +40,7 @@ def icon(c,kind,x,y,r=4.2*mm):
     c.restoreState()
 
 class Folha:
+    MARCA='DEGRAU  ·  français'
     def __init__(self,path,titre_doc):
         self.c=canvas.Canvas(path,pagesize=A5); self.c.setTitle(titre_doc); self.c.setAuthor('Degrau')
     def page(self,code,unite,instr,gloss,icone,points=None):
@@ -50,7 +51,7 @@ class Folha:
         fx0=W-M-52*mm; us=9.5
         while us>6.5 and c.stringWidth(unite,'And',us)>fx0-(M+cw+4*mm)-5*mm: us-=0.25
         c.setFont('And',us); c.setFillColor(INK); c.drawString(M+cw+4*mm,H-M-7*mm,unite)
-        c.setFont('Sans',6.3); c.setFillColor(GREY); c.drawString(M,H-M,'DEGRAU  ·  français')
+        c.setFont('Sans',6.3); c.setFillColor(GREY); c.drawString(M,H-M,self.MARCA)
         # campos
         fx=W-M-52*mm; fy=H-M-1.5*mm
         c.setFont('And',7.5); c.setFillColor(INK)

@@ -1,0 +1,37 @@
+folha: 6A 5
+unidade: Petite histoire 1
+a:
+  instrucao: "Écoute, puis lis à voix haute."
+  traducao: "Ouça e depois leia em voz alta três vezes. Marque um quadrinho a cada leitura."
+  icone: ler
+  blocos:
+    - leitura:
+        tamanho: 13.5
+        linhas:
+          - "Bonjour ! Je m'appelle Rafael."
+          - "Je suis brésilien et je suis étudiant."
+          - "Je suis dans un avion."
+          - "L'avion arrive à Toulouse."
+          - "Toulouse est une ville en France."
+          - "Je suis content, mais je suis fatigué."
+          - "L'hôtesse : « Bienvenue à Toulouse ! »"
+          - "Rafael : « Merci ! »"
+b:
+  instrucao: "Vrai ou faux ? Entoure V ou F."
+  traducao: "Verdadeiro ou falso? Circule V ou F."
+  icone: circular
+  pontos_cada: 10
+  blocos:
+    - verdadeiro-falso:
+        itens:
+          - {texto: "Rafael est français.", resposta: F}
+          - {texto: "L'avion arrive à Toulouse.", resposta: V}
+          - {texto: "Toulouse est en France.", resposta: V}
+          - {texto: "Rafael est fatigué.", resposta: V}
+    - ditado:
+        instrucao: "Écoute et écris."
+        traducao: "Ouça cada frase e escreva o que ouviu."
+        pontos_cada: 30
+        itens:
+          - {resposta: "Je suis dans un avion."}
+          - {resposta: "Toulouse est une ville en France."}
