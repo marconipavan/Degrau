@@ -12,7 +12,7 @@ o script compara com o gabarito e escreve nota, tempo e status (Domínio ou Repe
 | Início | Hora | início da primeira folha do bloco |
 | Fim | Hora | fim da última folha |
 | `1ª folha (a) · 1` … `3ª folha (b) · 12` | Resposta curta | uma seção por página (6 seções × 12 campos); o número do campo é o número do item na folha; em branco se a página tiver menos itens |
-| Foto da resolução | Envio de arquivo (até 5 imagens) | exige login com conta Google |
+| Foto da resolução | Envio de arquivo (até 5 imagens) | **opcional, fica para depois** (decisão de 02/10/2026); exige login com conta Google |
 
 ## Planilha
 
@@ -96,9 +96,9 @@ A `clasp` é a ferramenta oficial do Google para editar Apps Script no computado
    (aparece uma aba de respostas) e cria o gatilho que chama `aoEnviar` a cada envio.
    **Rode só esta vez:** cada execução cria outro formulário e outro gatilho. Confira em Acionadores (ícone de
    relógio, à esquerda no editor) que existe um só, `aoEnviar`, "Ao enviar o formulário".
-4. Abra o formulário (no Drive, ou pela aba de respostas: Formulário > Editar formulário) e acrescente **no fim**
-   a pergunta "Foto da resolução", tipo **Envio de arquivo**, até 5 arquivos, só imagens. O Apps Script não
-   consegue criar esse tipo de pergunta. As fotos vão para uma pasta no Drive da conta institucional.
+4. (Opcional, fica para depois.) Para receber fotos da resolução: abra o formulário e acrescente **no fim** a
+   pergunta "Foto da resolução", tipo **Envio de arquivo**, até 5 arquivos, só imagens. O Apps Script não consegue
+   criar esse tipo de pergunta. Sem ela, a correção funciona igual (a coluna Fotos do Painel fica vazia).
 5. Ainda no formulário, em Configurações > Respostas: deixe "Coletar endereços de e-mail" desligado e
    "Limitar a uma resposta" desligado (o aluno envia todo dia).
 

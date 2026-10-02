@@ -312,6 +312,9 @@ Feuille cinq b. Je suis dans un avion. …
   (o código "G1 NIV" não passa no formulário: definir como entra no sistema).
 - **Entrega por e-mail automático.** O sistema é entregue ao CASD; os e-mails dos alunos ficam com a
   administração do curso (na planilha da conta institucional), nunca no repositório.
+- **Foto da resolução fica para depois** (02/10/2026): o formulário funciona sem ela.
+- **Projeto de teste:** planilha, script e formulário de teste foram criados com `clasp` na conta **pessoal** do
+  Ângelo, com alunos fictícios. Dados reais só no projeto que o CASD criar na conta institucional (fase 9).
 
 **Piloto:** 6–8 voluntários (fortes e com dificuldade), 4 semanas, só G1. Critérios definidos antes: ≥70% ainda entregando na semana 4; nota média nas folhas subindo; desempenho no simulado melhor que o de não participantes com nível parecido. Semana 0: revisar tabela, montar planilha/formulário/script, testar com envios falsos, falar com a coordenação, convidar voluntários.
 
@@ -430,6 +433,28 @@ Perguntas a responder antes de construir:
 
 ---
 
+### 7.9 Configuração e entrega ao CASD (fase 9, etapa final)
+
+Pedido do Ângelo em 02/10/2026. O Ângelo monta a estrutura; **a implantação é feita pela administração do CASD,
+no computador deles e com a conta institucional**. O projeto tem que chegar fechado e organizado como um produto
+(código aberto), simples de instalar e de configurar por quem não é programador.
+
+- **Instalação em um passo:** script que cria o ambiente, instala as dependências (Python, `clasp`) e confere tudo.
+- **Configuração num lugar só:** um arquivo (ou um assistente `degrau configurar`) com o que muda por instituição:
+  conta e remetente do e-mail, planilha/formulário (criados pelo assistente via `clasp`), curso, nota de corte,
+  se o tempo conta, data de início.
+- **Dados reais só na conta institucional:** o projeto de teste do Ângelo (conta pessoal) é descartado; o CASD
+  cria o seu com `clasp login` na conta dele.
+- **Documentação por papel:** administração (instalar, configurar, rotina semanal), professor (escrever e revisar
+  folhas, `validar`, `ver`), aluno (uma página: como ler a folha e enviar o formulário). Termos por extenso.
+- **Repositório pronto para ser público:** README de produto, licenças, versão marcada; separar o que é pessoal
+  (instância de francês, `docs/plano-completo.md`, estado) do que é do produto.
+- **Aceite:** alguém da administração, sem ajuda, instala, configura e gera e envia um pacote de teste seguindo só
+  a documentação.
+
+Perguntas a responder: sistema do computador do CASD (Windows, Linux, macOS); quem opera no dia a dia (técnico ou
+professor); o que fica fora do repositório público.
+
 ## 8. Roteiro de fases (com critérios de aceite)
 
 | Fase | Entregas | Aceite |
@@ -443,6 +468,7 @@ Perguntas a responder antes de construir:
 | **6. Multi-aluno CASD** | Gabarito por folha e versão; código do bloco na folha; `degrau validar` e `degrau ver`; um estado por aluno; importar o Painel; gerar e enviar por e-mail o pacote de cada aluno; nivelamento | Piloto de 6–8 alunos rodando |
 | **7. Expansão para outras áreas** (a planejar) | Alemão, mandarim, química (nomenclatura, balanceamento, estequiometria), física (circuitos simples) etc. (seção 7.7) | Por área: currículo validado, um pacote de exemplo com gabarito calculado e testes |
 | **8. Métricas de desempenho** (a planejar) | Acertos, constância, posição em relação ao objetivo, marcos por idade, tendência mensal, progresso de nível, projeção, teste de fim de nível (seção 7.8) | Definir com o Ângelo depois do piloto |
+| **9. Configuração e entrega ao CASD** (etapa final) | Instalação em um passo, configuração num lugar só, documentação por papel, repositório pronto para ser público (seção 7.9) | A administração instala, configura e envia um pacote de teste sozinha, só com a documentação |
 
 Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostrar retenção (≥70% entregando na semana 4).
 
@@ -470,6 +496,8 @@ Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostr
 5. ~~Envio automático~~ — decidido em 01/10/2026: e-mail pelo Gmail (senha de app).
 6. Expansão para outras áreas (fase 7): as três perguntas da seção 7.7.
 7. Métricas de desempenho (fase 8): as cinco perguntas da seção 7.8.
+8. Configuração e entrega (fase 9): as três perguntas da seção 7.9.
+9. Nivelamento como folha `G1 0` corrigida pelo formulário (proposto em 02/10/2026, sem resposta).
 
 ---
 
