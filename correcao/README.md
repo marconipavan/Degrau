@@ -74,8 +74,8 @@ A `clasp` é a ferramenta oficial do Google para editar Apps Script no computado
    clasp push
    ```
    O primeiro comando cria a planilha e o projeto de script ligado a ela; o segundo envia `aoEnviar.gs`,
-   `montar.gs` e `appsscript.json` (o arquivo `.clasp.json` criado aqui fica fora do git). Em versões antigas
-   da `clasp`, os nomes são `clasp create` e `clasp open`; `clasp --help` mostra os da sua versão.
+   `montar.gs` e `appsscript.json` (o arquivo `.clasp.json` criado aqui fica fora do git). Comandos conferidos
+   na `clasp` 3.4.1; `clasp status` mostra o que seria enviado (só esses três arquivos).
 5. `clasp open-script` abre o editor do script no navegador. A planilha aparece no seu Drive com o nome
    "Degrau — CASD".
 
