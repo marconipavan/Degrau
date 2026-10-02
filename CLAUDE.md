@@ -47,6 +47,9 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 | Rotina da turma (CASD) | `motor/turma.py`, `./degrau semana planilha.xlsx` | Planilha baixada em Excel → resultados do Painel no estado de cada aluno → próximos pacotes → resumo → e-mails (pergunta antes); estado gravado só depois do envio |
 | Gerador de pacotes | `motor/gerador.py`, `./degrau` | Próximas folhas pelo estado; domínio, repetição com a versão seguinte (`N.v2.yaml`), pendente bloqueia |
 | Ferramentas de autoria | `motor/ferramentas.py` | `degrau validar` (biblioteca inteira + o que falta), `degrau ver` (PDF e gabarito de uma folha), `degrau gabarito` (aba Gabarito da planilha) |
+| Instalação e configuração | `instalar.py`, `degrau configurar`, `degrau` (menu), `degrau.cmd`, `Degrau.command` | Instalação em um passo nos três sistemas; assistente (turma, e-mail, Google via clasp); menu para quem não usa terminal |
+| Guias por papel | `docs/ADMINISTRACAO.md`, `docs/PROFESSOR.md`, `docs/ALUNO.md`, `docs/DESENVOLVIMENTO.md` | Para quem opera, professor, aluno e quem mexe no código |
+| Cópia pública | `ferramentas/exportar_publico.py` | Monta o repositório público sem a parte pessoal, com histórico novo; barra termos pessoais |
 | Comparação | `ferramentas/comparar.sh` | Pixels e palavras, página a página, contra uma etiqueta ou commit |
 | Leitor de áudio | `leitor/leitor-frances.html` | Funciona em qualquer navegador; HTML único |
 | Correção automática | `correcao/aoEnviar.gs`, `correcao/montar.gs`, `correcao/gabarito.gs` | Gabarito por folha e versão, dentro do Apps Script (`degrau atualizar-gabarito`); testada com envios simulados (`correcao/teste/simular.js`); **falta montar e testar no Google** (passo a passo em `correcao/README.md`, com `clasp` para editar pelo VS Code) |
@@ -92,6 +95,11 @@ pip install -r requirements.txt           # reportlab, pyyaml, pytest
 ./degrau enviar estado/frances.local.json  # manda o último pacote por e-mail (Gmail; --pacote N, --pasta DIR)
 ferramentas/agendar.sh estado/frances.local.json   # agenda o automatico às 06:30 (crontab); --remover desfaz
 ./degrau semana planilha.xlsx              # turma do CASD (config.local.yaml); --sem-enviar só gera os PDFs
+./degrau configurar                        # assistente: turma, e-mail, projeto no Google, link do formulário
+./degrau atualizar-gabarito                # gera correcao/gabarito.gs e envia ao Google (clasp push)
+./degrau                                   # menu (dois cliques: degrau.cmd no Windows, Degrau.command no macOS)
+python3 instalar.py                        # instala do zero (ambiente, bibliotecas, configuração, conferência)
+.venv/bin/python ferramentas/exportar_publico.py ../Degrau-publico   # cópia pública (não publica nada)
 ./degrau validar                           # confere todas as folhas e lista as que faltam (sai com 1 se houver erro)
 ./degrau ver G1 4-6                        # PDF dessas folhas em saida/ver/ + gabarito na numeração do formulário
 ./degrau gabarito geometria-plana-epcar    # aba Gabarito da planilha (biblioteca inteira) em saida/
@@ -460,7 +468,13 @@ no computador deles e com a conta institucional**. O projeto tem que chegar fech
   a documentação.
 
 Respondido em 02/10/2026: opera um membro do CASD (sem barreira de dificuldade); fora do repositório público
-ficam a instância de francês, `docs/plano-completo.md` e os estados. Falta: sistema do computador do CASD.
+ficam a instância de francês, `docs/plano-completo.md`, `CLAUDE.md` e os estados. Sistema do computador: ainda não
+se sabe; tudo funciona nos três (atalhos para cada um).
+
+Feito em 02/10/2026: `instalar.py`; leitura do `.env.local` pelo próprio programa; gabarito dentro do Apps Script
+(`correcao/gabarito.gs`, sem aba Gabarito nem importação); `degrau configurar` e menu; menu "Degrau" na planilha
+(atualizar a lista de alunos do formulário); guias por papel; `ferramentas/exportar_publico.py` (cópia pública
+testada do zero: instala, 23 testes passam e 10 de francês são pulados, simulador 13/13).
 
 ## 8. Roteiro de fases (com critérios de aceite)
 
@@ -475,7 +489,7 @@ ficam a instância de francês, `docs/plano-completo.md` e os estados. Falta: si
 | **6. Multi-aluno CASD** (feita; falta o teste com a planilha real) | Gabarito por folha e versão; código do bloco na folha; `degrau validar` e `degrau ver`; um estado por aluno; importar o Painel; gerar e enviar por e-mail o pacote de cada aluno; nivelamento | Piloto de 6–8 alunos rodando |
 | **7. Expansão para outras áreas** (a planejar) | Alemão, mandarim, química (nomenclatura, balanceamento, estequiometria), física (circuitos simples) etc. (seção 7.7) | Por área: currículo validado, um pacote de exemplo com gabarito calculado e testes |
 | **8. Métricas de desempenho** (a planejar) | Acertos, constância, posição em relação ao objetivo, marcos por idade, tendência mensal, progresso de nível, projeção, teste de fim de nível (seção 7.8) | Definir com o Ângelo depois do piloto |
-| **9. Configuração e entrega ao CASD** (etapa final) | Instalação em um passo, configuração num lugar só, documentação por papel, repositório pronto para ser público (seção 7.9) | A administração instala, configura e envia um pacote de teste sozinha, só com a documentação |
+| **9. Configuração e entrega ao CASD** (feita; falta o aceite pela administração do CASD) | Instalação em um passo, configuração num lugar só, documentação por papel, repositório pronto para ser público (seção 7.9) | A administração instala, configura e envia um pacote de teste sozinha, só com a documentação |
 
 Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostrar retenção (≥70% entregando na semana 4).
 
@@ -503,7 +517,7 @@ Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostr
 5. ~~Envio automático~~ — decidido em 01/10/2026: e-mail pelo Gmail (senha de app).
 6. Expansão para outras áreas (fase 7): as três perguntas da seção 7.7.
 7. Métricas de desempenho (fase 8): as cinco perguntas da seção 7.8.
-8. Configuração e entrega (fase 9): sistema do computador do CASD (seção 7.9).
+8. Publicar o repositório público (fase 9): quando e com que nome; o exportador está pronto.
 
 ---
 
