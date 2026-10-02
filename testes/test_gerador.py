@@ -6,6 +6,7 @@ from motor import especificacao, estado as E
 from motor.especificacao import ErroEspecificacao, RAIZ
 from motor.gerador import proximo, registrar, proxima_folha
 from motor.especificacao import carregar_curso
+from conftest import TEM_FRANCES, requer_frances
 
 
 def _copiar(origem, destino, codigo):
@@ -19,9 +20,9 @@ def _copiar(origem, destino, codigo):
 def biblioteca(tmp_path, monkeypatch):
     shutil.copytree(os.path.join(RAIZ, 'curriculos'), tmp_path / 'curriculos')
     fr = os.path.join(RAIZ, 'folhas', 'frances-delf-b1', '6A')
-    for n in range(1, 26):
+    for n in (range(1, 26) if TEM_FRANCES else []):
         _copiar(os.path.join(fr, f'{(n - 1) % 5 + 1}.yaml'), str(tmp_path / f'folhas/frances-delf-b1/6A/{n}.yaml'), f'6A {n}')
-    for n in range(6, 11):   # exercícios novos para repetir 6A 6-10
+    for n in (range(6, 11) if TEM_FRANCES else []):   # exercícios novos para repetir 6A 6-10
         _copiar(os.path.join(fr, f'{n % 5 + 1}.yaml'), str(tmp_path / f'folhas/frances-delf-b1/6A/{n}.v2.yaml'), f'6A {n}')
     g = os.path.join(RAIZ, 'folhas', 'geometria-plana-epcar', 'G1')
     for n in range(1, 13):
@@ -35,6 +36,7 @@ def _novo(curso, inicio, aluno='Teste'):
             'vocabulario': {}, 'estruturas': {}, 'erros_recorrentes': []}
 
 
+@requer_frances
 def test_cinco_dias_de_frances(biblioteca):
     est, saida, caminho = _novo('frances-delf-b1', '6A 1'), str(biblioteca / 'pacotes'), str(biblioteca / 'est.json')
     # (dia, nota, tempo) -> esperado: pacote gerado no dia e status depois da correção
@@ -76,6 +78,7 @@ def test_dois_pacotes_de_geometria(biblioteca):
     assert proxima_folha(est, carregar_curso('geometria-plana-epcar')) == 'G1 13'
 
 
+@requer_frances
 def test_registrar_codigo_errado(biblioteca):
     est = _novo('frances-delf-b1', '6A 1')
     proximo(est, hoje='2026-10-01', saida=str(biblioteca / 'p'))
@@ -83,6 +86,7 @@ def test_registrar_codigo_errado(biblioteca):
         registrar(est, '6A 6-10', 95)
 
 
+@requer_frances
 def test_estado_real_do_frances_bloqueia_ate_corrigir():
     caminho = os.path.join(RAIZ, 'estado', 'frances.local.json')
     if not os.path.exists(caminho): pytest.skip('estado pessoal não está nesta máquina')

@@ -2,6 +2,8 @@
 import json, os, re, shutil
 from types import SimpleNamespace
 import pytest
+from conftest import requer_frances
+pytestmark = requer_frances
 from motor import especificacao, autor
 from motor.especificacao import ErroEspecificacao, RAIZ
 from motor.gerador import planejar, proximo, registrar

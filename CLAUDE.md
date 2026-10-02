@@ -90,7 +90,7 @@ pip install -r requirements.txt           # reportlab, pyyaml, pytest
 ./degrau automatico estado/frances.local.json --pedido   # grava em saida/pedido.txt o que iria para a API
 ./degrau automatico estado/frances.local.json            # API escreve as folhas que faltam + gera o pacote
 ./degrau enviar estado/frances.local.json  # manda o último pacote por e-mail (Gmail; --pacote N, --pasta DIR)
-ferramentas/agendar.sh                     # agenda o automatico às 06:30 (crontab); --remover desfaz
+ferramentas/agendar.sh estado/frances.local.json   # agenda o automatico às 06:30 (crontab); --remover desfaz
 ./degrau semana planilha.xlsx              # turma do CASD (config.local.yaml); --sem-enviar só gera os PDFs
 ./degrau validar                           # confere todas as folhas e lista as que faltam (sai com 1 se houver erro)
 ./degrau ver G1 4-6                        # PDF dessas folhas em saida/ver/ + gabarito na numeração do formulário

@@ -8,6 +8,7 @@ from motor.render import gerar
 from motor.especificacao import RAIZ, ErroEspecificacao, carregar_folha
 from motor.gabarito import respostas_folha
 from motor.audio import faixas, numero_fr
+from conftest import TEM_FRANCES, requer_frances
 
 GRAVADORES = []
 
@@ -29,7 +30,9 @@ def paginas_yaml(tmp_path_factory):
 
 
 def test_yaml_gera_paginas(paginas_yaml):
-    assert len(paginas_yaml) == 26
+    from motor.especificacao import carregar_pacotes
+    pacotes = carregar_pacotes(os.path.join(RAIZ, 'exemplos', 'pacotes.yaml'))
+    assert len(paginas_yaml) == sum(2 * len(p['folhas']) for p in pacotes)
 
 
 @pytest.mark.parametrize('verificar', VERIFICACOES, ids=lambda v: v.__name__)
@@ -56,12 +59,14 @@ PLANO_6_3 = {
 
 def test_gabarito_bate_com_o_plano():
     obtido = {}
-    for curso, cods in [('geometria-plana-epcar', ['G1 1', 'G1 2', 'G1 3', 'G1 81', 'G1 85', 'G1 89']),
-                        ('frances-delf-b1', ['6A 3', '6A 4', '6A 5'])]:
+    cursos = [('geometria-plana-epcar', ['G1 1', 'G1 2', 'G1 3', 'G1 81', 'G1 85', 'G1 89'])]
+    if TEM_FRANCES: cursos.append(('frances-delf-b1', ['6A 3', '6A 4', '6A 5']))
+    esperado = {k: v for k, v in PLANO_6_3.items() if TEM_FRANCES or k.startswith('G1')}
+    for curso, cods in cursos:
         for cod in cods:
             for l in respostas_folha(carregar_folha(curso, cod)):
                 if l['pagina'] in PLANO_6_3: obtido.setdefault(l['pagina'], []).append(l['respostas'][0])
-    assert obtido == PLANO_6_3
+    assert obtido == esperado
 
 
 def _folha_89(mexer):
@@ -80,6 +85,7 @@ def test_expressoes_erradas_falham(mexer, msg):
         respostas_folha(_folha_89(mexer))
 
 
+@requer_frances
 def test_audio():
     assert [numero_fr(n) for n in (1, 21, 64, 71, 80, 91, 112)] == [
         'un', 'vingt et un', 'soixante-quatre', 'soixante et onze', 'quatre-vingts', 'quatre-vingt-onze', 'cent douze']
@@ -107,6 +113,7 @@ def test_correcao_simulada():
     assert r.returncode == 0, r.stdout + r.stderr
 
 
+@requer_frances
 def test_verificar_folha_aponta_frase_longa():
     """a geração automática usa verificar_folha: uma frase que vaza a margem tem que aparecer"""
     from motor.especificacao import carregar_curso

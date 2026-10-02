@@ -39,12 +39,18 @@ def _secao(texto, inicio, fim):
 
 def pedido_fixo(curso):
     """Parte do pedido que não muda de um dia para o outro (vai em cache)."""
-    claude_md = open(os.path.join(RAIZ, 'CLAUDE.md'), encoding='utf-8').read()
-    regras = '\n\n'.join([
-        _secao(claude_md, '## 3. O método', '\n---'),
-        _secao(claude_md, '### 4.5 Progressão de formato', '\n---'),
-        _secao(claude_md, '## 5. Especificação das folhas', '### Débitos do motor'),
-    ])
+    claude_md = os.path.join(RAIZ, 'CLAUDE.md')
+    if os.path.exists(claude_md):   # repositório de desenvolvimento: regras completas
+        texto = open(claude_md, encoding='utf-8').read()
+        regras = '\n\n'.join([
+            _secao(texto, '## 3. O método', '\n---'),
+            _secao(texto, '### 4.5 Progressão de formato', '\n---'),
+            _secao(texto, '## 5. Especificação das folhas', '### Débitos do motor'),
+        ])
+    else:                           # repositório público: os guias
+        prof = open(os.path.join(RAIZ, 'docs', 'PROFESSOR.md'), encoding='utf-8').read()
+        dev = open(os.path.join(RAIZ, 'docs', 'DESENVOLVIMENTO.md'), encoding='utf-8').read()
+        regras = '\n\n'.join([_secao(prof, '## O método', '\n## '), _secao(dev, '## Folhas', '\n## Testes')])
     curriculo = open(os.path.join(RAIZ, 'curriculos', f'{curso["curso"]}.yaml'), encoding='utf-8').read()
     # exemplos fixos: as folhas de referência do curso em exemplos/pacotes.yaml (não a biblioteca inteira)
     codigos = [c for p in carregar_pacotes(os.path.join(RAIZ, 'exemplos', 'pacotes.yaml'))

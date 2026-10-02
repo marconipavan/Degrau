@@ -1,6 +1,8 @@
 # Envio por e-mail com servidor SMTP simulado (nada sai da máquina).
 import os, smtplib
 import pytest
+from conftest import requer_frances
+pytestmark = requer_frances
 from motor import envio
 from motor.especificacao import RAIZ, ErroEspecificacao
 

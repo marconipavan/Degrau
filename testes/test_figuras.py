@@ -42,4 +42,5 @@ def test_conversor_le_as_frases_de_figura():
 def test_biblioteca_inteira_valida(capsys):
     """todas as folhas escritas passam por estrutura, desenho, gabarito e limite do formulário"""
     from motor.ferramentas import validar
-    assert validar(['geometria-plana-epcar', 'frances-delf-b1']) == 0, capsys.readouterr().out
+    from conftest import TEM_FRANCES
+    assert validar(['geometria-plana-epcar'] + (['frances-delf-b1'] if TEM_FRANCES else [])) == 0, capsys.readouterr().out
