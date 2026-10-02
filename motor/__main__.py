@@ -10,6 +10,7 @@
 #   validar   [curso ...]                       confere a biblioteca inteira e lista as folhas que faltam
 #   ver       G1 12 | G1 4-6 [--versao N]       gera o PDF dessas folhas em saida/ver/ e mostra o gabarito
 #   gabarito  <curso> [arquivo.csv]             aba Gabarito da planilha com a biblioteca inteira
+#   atualizar-gabarito [curso] [--sem-enviar]  gera correcao/gabarito.gs e envia ao Google (clasp)
 #   semana    <planilha.xlsx> [--sim] [--sem-enviar] [--config arquivo]
 #             rotina da turma: resultados do Painel, próximos pacotes e e-mails (pergunta antes de enviar)
 import argparse, os, sys
@@ -51,10 +52,11 @@ def main():
     p = sub.add_parser('validar'); p.add_argument('cursos', nargs='*')
     p = sub.add_parser('ver'); p.add_argument('codigo', nargs='+'); p.add_argument('--versao', type=int, default=1)
     p = sub.add_parser('gabarito'); p.add_argument('curso'); p.add_argument('arquivo', nargs='?')
+    p = sub.add_parser('atualizar-gabarito'); p.add_argument('curso', nargs='?'); p.add_argument('--sem-enviar', action='store_true')
     p = sub.add_parser('semana'); p.add_argument('planilha'); p.add_argument('--config')
     p.add_argument('--sim', action='store_true'); p.add_argument('--sem-enviar', action='store_true')
     a = ap.parse_args()
-    if a.comando in ('validar', 'ver', 'gabarito'):
+    if a.comando in ('validar', 'ver', 'gabarito', 'atualizar-gabarito'):
         return ferramentas.executar(a)
     if a.comando == 'semana':
         from . import turma

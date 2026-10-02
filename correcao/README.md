@@ -16,14 +16,14 @@ o script compara com o gabarito e escreve nota, tempo e status (Domínio ou Repe
 
 ## Planilha
 
-Abas: `Alunos`, `Gabarito`, `Painel` (+ a aba de respostas criada pelo Forms); cabeçalhos em `modelos/`.
+Abas: `Alunos`, `Painel` (+ a aba de respostas criada pelo Forms); cabeçalhos em `modelos/`.
 
 - **Alunos:** Aluno, E-mail, Nível atual, Próximo bloco, Entrada (nivelamento). Os e-mails são preenchidos pela
   administração do curso e ficam só na planilha da conta institucional.
-- **Gabarito:** uma linha por item, **por folha e versão**: Folha, Versão, Página, Item, Respostas aceitas, Pontos,
-  Tempo-padrão da folha (min). Carrega-se **uma vez** com a biblioteca inteira, gerada por
-  `./degrau gabarito geometria-plana-epcar`, e de novo quando entrarem folhas novas.
-  `modelos/gabarito.csv` é esse arquivo para as folhas escritas hoje.
+- **Gabarito:** não fica na planilha. Vai dentro do próprio Apps Script, no arquivo `gabarito.gs`, gerado das
+  folhas por `./degrau atualizar-gabarito` (uma linha por item, **por folha e versão**: folha, versão, página, item,
+  respostas aceitas, pontos, tempo-padrão da folha). O mesmo comando envia o arquivo ao Google. Rode de novo
+  sempre que entrarem ou mudarem folhas.
 - **Painel:** escrito pelo script, uma linha por envio.
 
 Como o envio é corrigido (`aoEnviar.gs`):
@@ -89,7 +89,7 @@ A `clasp` é a ferramenta oficial do Google para editar Apps Script no computado
 
 1. No editor do script, escolha a função `montar` no menu de cima e clique em **Executar**. Na primeira vez o
    Google pede autorização: avance, escolha a conta institucional e permita (planilha, formulário, gatilhos).
-   O `montar` cria as abas `Alunos`, `Gabarito` e `Painel` e para com a mensagem "Preencha a aba Alunos".
+   O `montar` cria as abas `Alunos` e `Painel` e para com a mensagem "Preencha a aba Alunos".
 2. Na aba `Alunos`, coloque um aluno por linha: **nome** na coluna A e **e-mail** na coluna B. Os e-mails podem
    ser preenchidos pela administração. Inclua uma linha "Aluno Teste" para os testes.
 3. Rode `montar` de novo. Ele cria o formulário "Degrau — entrega do bloco diário", liga o formulário à planilha
@@ -104,12 +104,9 @@ A `clasp` é a ferramenta oficial do Google para editar Apps Script no computado
 
 ### Parte 3 — Carregar o gabarito
 
-1. No computador do projeto: `./degrau gabarito geometria-plana-epcar` (gera
-   `saida/gabarito-geometria-plana-epcar.csv` com a biblioteca inteira).
-2. Na planilha, abra a aba `Gabarito` e use Arquivo > Importar > Upload > esse arquivo, com
-   **"Substituir a página atual"** e **"Converter texto em números, datas e fórmulas: Não"** (sem isso, uma
-   resposta como `1/2` vira data).
-3. Repita sempre que entrarem folhas novas na biblioteca.
+No computador do projeto: `./degrau atualizar-gabarito geometria-plana-epcar`. Ele gera `correcao/gabarito.gs` com a
+biblioteca inteira e envia ao Google pela `clasp` (no caminho B, cole o conteúdo do arquivo num terceiro arquivo
+`gabarito` do editor). Não há nada a importar na planilha. Repita sempre que entrarem ou mudarem folhas.
 
 ### Parte 4 — Testar com envios falsos
 

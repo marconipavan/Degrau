@@ -49,7 +49,7 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 | Ferramentas de autoria | `motor/ferramentas.py` | `degrau validar` (biblioteca inteira + o que falta), `degrau ver` (PDF e gabarito de uma folha), `degrau gabarito` (aba Gabarito da planilha) |
 | Comparação | `ferramentas/comparar.sh` | Pixels e palavras, página a página, contra uma etiqueta ou commit |
 | Leitor de áudio | `leitor/leitor-frances.html` | Funciona em qualquer navegador; HTML único |
-| Correção automática | `correcao/aoEnviar.gs`, `correcao/montar.gs` | Gabarito por folha e versão; testada com envios simulados (`correcao/teste/simular.js`); **falta montar e testar no Google** (passo a passo em `correcao/README.md`, com `clasp` para editar pelo VS Code) |
+| Correção automática | `correcao/aoEnviar.gs`, `correcao/montar.gs`, `correcao/gabarito.gs` | Gabarito por folha e versão, dentro do Apps Script (`degrau atualizar-gabarito`); testada com envios simulados (`correcao/teste/simular.js`); **falta montar e testar no Google** (passo a passo em `correcao/README.md`, com `clasp` para editar pelo VS Code) |
 | Currículos | `curriculos/*.yaml` | O motor lê só a chave `folha` (marca e tipo de campos); o resto ainda não |
 
 ### Fora do repositório (instância francês)

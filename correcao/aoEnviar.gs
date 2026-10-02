@@ -73,8 +73,9 @@ function aoEnviar(e) {
   const bloco = lerBloco(digitado);
   if (!bloco) return erro('código do bloco inválido');
 
-  // Gabarito por folha e versão: [folha, versão, página, item, respostas aceitas, pontos, tempo-padrão da folha]
-  const linhas = SS.getSheetByName('Gabarito').getDataRange().getValues().slice(1);
+  // Gabarito por folha e versão, no arquivo gabarito.gs (gerado por "degrau atualizar-gabarito"):
+  // [folha, versão, página, item, respostas aceitas, pontos, tempo-padrão da folha]
+  const linhas = GABARITO;
   let feitos = 0, total = 0, limite = 0;
   const errados = [], semGabarito = [];
   bloco.folhas.forEach((folha, i) => {

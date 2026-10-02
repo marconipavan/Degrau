@@ -1,7 +1,7 @@
 // Testa o aoEnviar.gs com envios falsos, sem Google: planilha e formulário simulados.
 // uso: node correcao/teste/simular.js        (sai com código 1 se algum caso falhar)
-// O Gabarito vem de correcao/modelos/gabarito.csv: a biblioteca de geometria inteira, por folha e versão,
-// gerada do YAML (./degrau gabarito geometria-plana-epcar).
+// O gabarito vem de correcao/gabarito.gs (a biblioteca de geometria inteira, por folha e versão), gerado do YAML
+// por ./degrau atualizar-gabarito.
 const fs = require('fs'), path = require('path'), vm = require('vm'), assert = require('assert');
 
 const DIR = path.join(__dirname, '..');
@@ -26,7 +26,6 @@ function lerCsv(texto) {           // CSV simples com aspas
 
 function novaPlanilha() {
   const abas = {
-    Gabarito: lerCsv(fs.readFileSync(path.join(DIR, 'modelos', 'gabarito.csv'), 'utf8')),
     Painel: [lerCsv(fs.readFileSync(path.join(DIR, 'modelos', 'painel.csv'), 'utf8'))[0]],
   };
   const aba = nome => ({
@@ -40,8 +39,9 @@ function carregar() {
   const p = novaPlanilha();
   const ctx = { SpreadsheetApp: p.SpreadsheetApp, Date, String, Number, Math };
   vm.createContext(ctx);
+  vm.runInContext(fs.readFileSync(path.join(DIR, 'gabarito.gs'), 'utf8') + '\nthis.GABARITO = GABARITO;', ctx);
   vm.runInContext(fs.readFileSync(path.join(DIR, 'aoEnviar.gs'), 'utf8') + '\nthis.aoEnviar = aoEnviar;', ctx);
-  return { aoEnviar: ctx.aoEnviar, painel: p.abas.Painel, gabarito: p.abas.Gabarito.slice(1) };
+  return { aoEnviar: ctx.aoEnviar, painel: p.abas.Painel, gabarito: ctx.GABARITO };
 }
 
 // envio do formulário: e.namedValues = {título da pergunta: [resposta]}

@@ -2,7 +2,7 @@
  * Degrau — montagem do formulário, das abas e do gatilho (rodar uma vez, na planilha do CASD).
  *
  * Extensões > Apps Script > cole este arquivo e o aoEnviar.gs > escolha montar > Executar.
- * Cria: abas Alunos, Gabarito e Painel (se faltarem); o formulário ligado a esta planilha;
+ * Cria: abas Alunos e Painel (se faltarem); o formulário ligado a esta planilha;
  * o gatilho que chama aoEnviar a cada envio. O campo de foto precisa ser criado à mão
  * (o Apps Script não cria envio de arquivo): ver correcao/README.md.
  */
@@ -13,7 +13,6 @@ function montar() {
   const ss = SpreadsheetApp.getActive();
   const cabecalhos = {
     Alunos: ['Aluno', 'E-mail', 'Nível atual', 'Próximo bloco', 'Entrada (nivelamento)'],
-    Gabarito: ['Folha', 'Versão', 'Página', 'Item', 'Respostas aceitas', 'Pontos', 'Tempo-padrão da folha (min)'],
     Painel: ['Data', 'Aluno', 'Nível', 'Bloco', 'Nota (%)', 'Tempo (min)', 'Limite (min)', 'Status', 'Itens errados', 'Fotos'],
   };
   for (const [nome, cab] of Object.entries(cabecalhos)) {

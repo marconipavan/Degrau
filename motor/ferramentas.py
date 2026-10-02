@@ -94,7 +94,28 @@ def ver(codigo, versao):
     return 0
 
 
+def atualizar_gabarito(curso_nome=None, enviar=True):
+    """Gera correcao/gabarito.gs e, se o projeto do Google estiver configurado aqui (correcao/.clasp.json), envia."""
+    import shutil, subprocess
+    if curso_nome is None:
+        from .turma import carregar_config
+        curso_nome = carregar_config()['curso']
+    pasta = os.path.join(esp.RAIZ, 'correcao')
+    from .gabarito import escrever_apps_script
+    n = escrever_apps_script(carregar_curso(curso_nome), os.path.join(pasta, 'gabarito.gs'))
+    print(f'gabarito.gs gerado: {n} itens de {curso_nome}')
+    if not enviar: return 0
+    if not os.path.exists(os.path.join(pasta, '.clasp.json')):
+        print('projeto do Google não configurado neste computador (rode: degrau configurar); nada enviado'); return 1
+    if not shutil.which('clasp'):
+        print('clasp não encontrada (npm install -g @google/clasp); nada enviado'); return 1
+    r = subprocess.run(['clasp', 'push', '--force'], cwd=pasta)
+    print('enviado ao Google' if r.returncode == 0 else 'o envio falhou (veja a mensagem acima)')
+    return r.returncode
+
+
 def executar(a):
+    if a.comando == 'atualizar-gabarito': sys.exit(atualizar_gabarito(a.curso, enviar=not a.sem_enviar))
     if a.comando == 'validar': sys.exit(validar(a.cursos))
     if a.comando == 'ver': return ver(a.codigo, a.versao)
     curso = carregar_curso(a.curso)

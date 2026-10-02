@@ -91,13 +91,14 @@ def test_audio():
 
 
 # ---------- correção do CASD (fase 3) ----------
-def test_modelo_de_gabarito_atualizado(tmp_path):
-    """correcao/modelos/gabarito.csv é a biblioteca de geometria inteira gerada do YAML (o simulador usa)"""
-    from motor.gabarito import escrever_planilha_biblioteca
+def test_gabarito_do_apps_script_atualizado(tmp_path):
+    """correcao/gabarito.gs é a biblioteca de geometria inteira gerada do YAML (o simulador e o Google usam).
+    Se falhar: ./degrau atualizar-gabarito geometria-plana-epcar --sem-enviar"""
+    from motor.gabarito import escrever_apps_script
     from motor.especificacao import carregar_curso
-    novo = tmp_path / 'g.csv'
-    escrever_planilha_biblioteca(carregar_curso('geometria-plana-epcar'), str(novo))
-    assert novo.read_text(encoding='utf-8') == open(os.path.join(RAIZ, 'correcao', 'modelos', 'gabarito.csv'), encoding='utf-8').read()
+    novo = tmp_path / 'g.gs'
+    escrever_apps_script(carregar_curso('geometria-plana-epcar'), str(novo))
+    assert novo.read_text(encoding='utf-8') == open(os.path.join(RAIZ, 'correcao', 'gabarito.gs'), encoding='utf-8').read()
 
 
 @pytest.mark.skipif(not shutil.which('node'), reason='node não instalado')

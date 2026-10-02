@@ -157,3 +157,20 @@ def escrever_planilha_biblioteca(curso, caminho):
     na planilha (e de novo quando entrarem folhas novas)."""
     from .especificacao import biblioteca
     escrever_planilha([carregar_folha(curso['curso'], c, v) for c, v in biblioteca(curso['curso'])], curso, caminho)
+
+
+def escrever_apps_script(curso, caminho):
+    """correcao/gabarito.gs: o gabarito da biblioteca inteira dentro do próprio Apps Script (sem importar nada na
+    planilha). Uma linha por item: [folha, versão, página, item, respostas aceitas, pontos, tempo-padrão da folha]."""
+    import json
+    from .especificacao import biblioteca
+    linhas = []
+    for c, v in biblioteca(curso['curso']):
+        linhas += linhas_planilha(carregar_folha(curso['curso'], c, v), curso)
+    corpo = ',\n'.join('  ' + json.dumps(l, ensure_ascii=False) for l in linhas)
+    with open(caminho, 'w', encoding='utf-8') as f:
+        f.write(f'// Gabarito de {curso["curso"]}, gerado por "degrau atualizar-gabarito". Não editar à mão:\n'
+                f'// mude as folhas (folhas/*.yaml) e gere de novo.\n'
+                f'// [folha, versão, página, item, respostas aceitas, pontos, tempo-padrão da folha]\n'
+                f'const GABARITO = [\n{corpo}\n];\n')
+    return len(linhas)
