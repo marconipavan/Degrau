@@ -1,0 +1,6 @@
+# Configuração da turma. Copie para config.local.yaml (fica fora do git) e ajuste.
+# A senha do e-mail não vai aqui: fica em .env.local (DEGRAU_EMAIL_DE e DEGRAU_EMAIL_SENHA).
+curso: geometria-plana-epcar
+blocos_por_pacote: 3        # dias de treino entre uma aula e a seguinte (cada dia = 1 bloco de 3 folhas)
+link_formulario: https://forms.gle/COLE-AQUI-O-LINK-DO-FORMULARIO
+pasta_dados: dados          # estados dos alunos, planilhas baixadas e pacotes gerados (fora do git)

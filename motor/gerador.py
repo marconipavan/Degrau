@@ -127,3 +127,12 @@ def registrar(estado, codigo, nota, tempo=None):
     ok_tempo = tempo is None or tempo <= u['limite_min']
     u['status'] = 'dominio' if nota >= curso['dominio']['nota_minima'] and ok_tempo else 'repetir'
     return u
+
+
+def registrar_resultado(estado, codigo, nota, tempo, status):
+    """Registra um resultado já decidido fora daqui (o Painel da planilha do CASD): status 'dominio' ou 'repetir'."""
+    alvo = [u for u in estado['unidades'] if u['codigo'] == codigo and u['status'] == 'pendente']
+    if not alvo: return None
+    u = alvo[0]
+    u['nota'], u['tempo_min'], u['status'] = nota, tempo, status
+    return u

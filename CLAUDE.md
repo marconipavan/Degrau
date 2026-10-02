@@ -44,6 +44,7 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 | Estado do aluno | `motor/estado.py`, `estado/` | Adaptador JSON; o do francês é `estado/frances.local.json` (fora do git) |
 | Autor automático | `motor/autor.py`, `./degrau automatico` | O Claude (API) escreve as folhas que faltam; passam pelas verificações do motor antes de gravar |
 | Verificação do desenho | `motor/verificar.py` | Texto fora da página, sobre texto ou sobre linha (testes e autor automático) |
+| Rotina da turma (CASD) | `motor/turma.py`, `./degrau semana planilha.xlsx` | Planilha baixada em Excel → resultados do Painel no estado de cada aluno → próximos pacotes → resumo → e-mails (pergunta antes); estado gravado só depois do envio |
 | Gerador de pacotes | `motor/gerador.py`, `./degrau` | Próximas folhas pelo estado; domínio, repetição com a versão seguinte (`N.v2.yaml`), pendente bloqueia |
 | Ferramentas de autoria | `motor/ferramentas.py` | `degrau validar` (biblioteca inteira + o que falta), `degrau ver` (PDF e gabarito de uma folha), `degrau gabarito` (aba Gabarito da planilha) |
 | Comparação | `ferramentas/comparar.sh` | Pixels e palavras, página a página, contra uma etiqueta ou commit |
@@ -90,6 +91,7 @@ pip install -r requirements.txt           # reportlab, pyyaml, pytest
 ./degrau automatico estado/frances.local.json            # API escreve as folhas que faltam + gera o pacote
 ./degrau enviar estado/frances.local.json  # manda o último pacote por e-mail (Gmail; --pacote N, --pasta DIR)
 ferramentas/agendar.sh                     # agenda o automatico às 06:30 (crontab); --remover desfaz
+./degrau semana planilha.xlsx              # turma do CASD (config.local.yaml); --sem-enviar só gera os PDFs
 ./degrau validar                           # confere todas as folhas e lista as que faltam (sai com 1 se houver erro)
 ./degrau ver G1 4-6                        # PDF dessas folhas em saida/ver/ + gabarito na numeração do formulário
 ./degrau gabarito geometria-plana-epcar    # aba Gabarito da planilha (biblioteca inteira) em saida/
@@ -283,6 +285,9 @@ Feuille cinq b. Je suis dans un avion. …
 
 **Rotina:**
 
+- **Depois de cada aula (quem opera):** baixar a planilha em Excel e rodar `./degrau semana planilha.xlsx`.
+  Configuração em `config.local.yaml` (modelo: `config.exemplo.yaml`): curso, blocos por pacote, link do
+  formulário, pasta dos dados (estados e pacotes, fora do git). Quem tem bloco sem envio recebe lembrete, não pacote.
 - Bloco diário = 3 folhas (3–4 min cada). Código do bloco: `G1 10-12`.
 - Pacote = blocos entre uma aula e a seguinte.
 - Na aula: professor olha o painel (quem sobe, quem repete). Depois da aula: PDF do próximo pacote por WhatsApp, individual, no nível de cada aluno. Em casa: bloco diário + envio pelo formulário. Prazo: véspera da aula.
@@ -467,7 +472,7 @@ ficam a instância de francês, `docs/plano-completo.md` e os estados. Falta: si
 | **3. Correção do CASD testada** (lógica testada; falta o teste no Google) | Conjuntos em qualquer ordem (G1 2b); testar o Apps Script com envios falsos; documentar a montagem passo a passo | Envio falso → linha correta no Painel |
 | **4. Gerador de pacotes** (feita) | Linha de comando `degrau`; estado do aluno via adaptador; regra de domínio e repetição com exercícios novos | Gerar 5 dias seguidos de francês e 2 pacotes de geometria sem editar código |
 | **5. Automação** (feita; falta ligar com as chaves) | Agendador + geração do conteúdo pela API + envio por e-mail | Pacote chega sozinho às 06:30 |
-| **6. Multi-aluno CASD** | Gabarito por folha e versão; código do bloco na folha; `degrau validar` e `degrau ver`; um estado por aluno; importar o Painel; gerar e enviar por e-mail o pacote de cada aluno; nivelamento | Piloto de 6–8 alunos rodando |
+| **6. Multi-aluno CASD** (feita; falta o teste com a planilha real) | Gabarito por folha e versão; código do bloco na folha; `degrau validar` e `degrau ver`; um estado por aluno; importar o Painel; gerar e enviar por e-mail o pacote de cada aluno; nivelamento | Piloto de 6–8 alunos rodando |
 | **7. Expansão para outras áreas** (a planejar) | Alemão, mandarim, química (nomenclatura, balanceamento, estequiometria), física (circuitos simples) etc. (seção 7.7) | Por área: currículo validado, um pacote de exemplo com gabarito calculado e testes |
 | **8. Métricas de desempenho** (a planejar) | Acertos, constância, posição em relação ao objetivo, marcos por idade, tendência mensal, progresso de nível, projeção, teste de fim de nível (seção 7.8) | Definir com o Ângelo depois do piloto |
 | **9. Configuração e entrega ao CASD** (etapa final) | Instalação em um passo, configuração num lugar só, documentação por papel, repositório pronto para ser público (seção 7.9) | A administração instala, configura e envia um pacote de teste sozinha, só com a documentação |

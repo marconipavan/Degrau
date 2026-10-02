@@ -21,3 +21,5 @@ pacotes/
 .env.local
 # Projeto do Apps Script na conta do CASD (criado pela clasp)
 correcao/.clasp.json
+# Configuração local da turma
+config.local.yaml

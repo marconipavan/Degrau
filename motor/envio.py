@@ -64,3 +64,31 @@ def enviar(msg):
         raise ErroEspecificacao('o Gmail recusou o login: confira o endereço e a senha de app (não a senha da conta)') from None
     except (smtplib.SMTPException, OSError) as e:
         raise ErroEspecificacao(f'falha ao enviar o e-mail: {e}') from None
+
+
+def montar_turma(r, config):
+    """E-mail para um aluno da turma: o pacote novo ou, se houver bloco pendente, o lembrete."""
+    msg = EmailMessage()
+    msg['From'] = os.environ.get('DEGRAU_EMAIL_DE', '')
+    msg['To'] = r['email']
+    link = config['link_formulario']
+    primeiro = r['aluno'].split()[0]
+    if r['pacote']:
+        blocos = r['pacote']['blocos']
+        msg['Subject'] = f'Degrau — suas folhas: {", ".join(blocos)}'
+        corpo = [f'Olá, {primeiro}!', '',
+                 f'Seguem as folhas até a próxima aula, em {len(blocos)} bloco(s), um por dia:',
+                 *[f'  Dia {i}: bloco {b}' for i, b in enumerate(blocos, 1)], '',
+                 'Para cada bloco: resolva no caderno, anote o início e o fim, e envie as respostas no formulário,',
+                 'copiando o código do bloco que está no topo da folha.', '', f'Formulário: {link}']
+        msg.set_content('\n'.join(corpo) + '\n')   # texto primeiro: set_content depois apagaria o anexo
+        with open(r['pacote']['pdf'], 'rb') as f:
+            msg.add_attachment(f.read(), maintype='application', subtype='pdf',
+                               filename=os.path.basename(r['pacote']['pdf']))
+        return msg
+    msg['Subject'] = f'Degrau — falta enviar: {", ".join(r["pendentes"])}'
+    msg.set_content('\n'.join([f'Olá, {primeiro}!', '',
+                                f'Ainda não recebemos no formulário: {", ".join(r["pendentes"])}.',
+                                'As folhas novas chegam assim que esses blocos forem enviados.', '',
+                                f'Formulário: {link}']) + '\n')
+    return msg

@@ -38,7 +38,7 @@ testes/       testes (pytest): geração, nada fora da página, nada sobreposto,
 ferramentas/  comparação dos PDFs com a referência
 estado/       estado dos alunos (JSON; os reais ficam fora do git)
 degrau        linha de comando: exemplos, proximo, registrar, estado, automatico (API), enviar (e-mail),
-              validar, ver, gabarito
+              validar, ver, gabarito, semana (turma do CASD)
 curriculos/   tabelas de níveis (YAML)
 leitor/       leitor de áudio em HTML (texto para fala com vozes por personagem)
 correcao/     correção automática com Google Forms + Planilha + Apps Script

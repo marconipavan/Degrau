@@ -10,6 +10,8 @@
 #   validar   [curso ...]                       confere a biblioteca inteira e lista as folhas que faltam
 #   ver       G1 12 | G1 4-6 [--versao N]       gera o PDF dessas folhas em saida/ver/ e mostra o gabarito
 #   gabarito  <curso> [arquivo.csv]             aba Gabarito da planilha com a biblioteca inteira
+#   semana    <planilha.xlsx> [--sim] [--sem-enviar] [--config arquivo]
+#             rotina da turma: resultados do Painel, próximos pacotes e e-mails (pergunta antes de enviar)
 import argparse, os, sys
 from .especificacao import ErroEspecificacao, RAIZ, carregar_curso, carregar_folha, biblioteca
 from . import estado as E, gerador, render, autor, envio, ferramentas
@@ -36,9 +38,27 @@ def main():
     p = sub.add_parser('validar'); p.add_argument('cursos', nargs='*')
     p = sub.add_parser('ver'); p.add_argument('codigo', nargs='+'); p.add_argument('--versao', type=int, default=1)
     p = sub.add_parser('gabarito'); p.add_argument('curso'); p.add_argument('arquivo', nargs='?')
+    p = sub.add_parser('semana'); p.add_argument('planilha'); p.add_argument('--config')
+    p.add_argument('--sim', action='store_true'); p.add_argument('--sem-enviar', action='store_true')
     a = ap.parse_args()
     if a.comando in ('validar', 'ver', 'gabarito'):
         return ferramentas.executar(a)
+    if a.comando == 'semana':
+        from . import turma
+        config = turma.carregar_config(a.config)
+        resumo = turma.preparar(a.planilha, config)
+        print(turma.texto_resumo(resumo))
+        enviaveis = [r for r in resumo if r['pacote'] or r['pendentes']]
+        if a.sem_enviar:
+            print('\nSem envio: os PDFs estão em', os.path.join(config['pasta_dados'], 'pacotes'))
+            turma.enviar_e_gravar(resumo, config, enviar=False); return
+        if not envio.configurado():
+            sys.exit('\nerro: e-mail não configurado (DEGRAU_EMAIL_DE e DEGRAU_EMAIL_SENHA em .env.local); '
+                     'nada foi gravado. Use --sem-enviar para só gerar os PDFs.')
+        if not a.sim and input(f'\nEnviar {len(enviaveis)} e-mail(s)? [s/N] ').strip().lower() not in ('s', 'sim'):
+            print('Nada enviado nem gravado.'); return
+        turma.enviar_e_gravar(resumo, config)
+        return
 
     if a.comando == 'exemplos':
         for arquivos, esconder in render.gerar(a.pacotes, a.saida): _mostrar(arquivos, esconder)
