@@ -36,7 +36,7 @@ def _mostrar(arquivos, esconder):
     if esconder: print('  esconder o texto ao ouvir:', ', '.join(esconder))
 
 
-def main():
+def main(argv):
     ap = argparse.ArgumentParser(prog='degrau')
     sub = ap.add_subparsers(dest='comando', required=True)
     p = sub.add_parser('exemplos'); p.add_argument('pacotes'); p.add_argument('saida', nargs='?')
@@ -53,14 +53,22 @@ def main():
     p = sub.add_parser('ver'); p.add_argument('codigo', nargs='+'); p.add_argument('--versao', type=int, default=1)
     p = sub.add_parser('gabarito'); p.add_argument('curso'); p.add_argument('arquivo', nargs='?')
     p = sub.add_parser('atualizar-gabarito'); p.add_argument('curso', nargs='?'); p.add_argument('--sem-enviar', action='store_true')
-    p = sub.add_parser('semana'); p.add_argument('planilha'); p.add_argument('--config')
+    p = sub.add_parser('configurar')
+    p = sub.add_parser('semana'); p.add_argument('planilha', nargs='?'); p.add_argument('--config')
     p.add_argument('--sim', action='store_true'); p.add_argument('--sem-enviar', action='store_true')
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
+    if a.comando == 'configurar':
+        from . import assistente
+        return assistente.configurar()
     if a.comando in ('validar', 'ver', 'gabarito', 'atualizar-gabarito'):
         return ferramentas.executar(a)
     if a.comando == 'semana':
         from . import turma
         config = turma.carregar_config(a.config)
+        if not a.planilha:   # sem caminho: janela para escolher a planilha baixada
+            from .assistente import escolher_planilha
+            a.planilha = escolher_planilha()
+            if not a.planilha: print('Nenhuma planilha escolhida.'); return
         resumo = turma.preparar(a.planilha, config)
         print(turma.texto_resumo(resumo))
         enviaveis = [r for r in resumo if r['pacote'] or r['pendentes']]
@@ -126,7 +134,19 @@ def main():
                 print(f'  {u["data"]}  {u["codigo"]:<10} nota {u["nota"]:g}  {u["status"]}')
 
 
+# sem nada: menu (dois cliques no atalho); a janela espera um Enter antes de fechar, mesmo com erro
+argv, pelo_menu = sys.argv[1:], len(sys.argv) == 1
+if pelo_menu:
+    from .assistente import menu
+    argv = menu() or []
+codigo = 0
 try:
-    main()
+    if argv: main(argv)
 except ErroEspecificacao as e:
-    sys.exit(f'erro: {e}')
+    print(f'erro: {e}', file=sys.stderr); codigo = 1
+except SystemExit as e:
+    codigo = e.code if isinstance(e.code, int) else (print(e.code, file=sys.stderr) or 1)
+except KeyboardInterrupt:
+    print('\ninterrompido'); codigo = 1
+if pelo_menu and argv: input('\nPressione Enter para fechar.')
+sys.exit(codigo)
