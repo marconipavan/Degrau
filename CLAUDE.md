@@ -308,8 +308,10 @@ Feuille cinq b. Je suis dans un avion. …
   G1 42 (definição de adjacentes × consecutivos); G1 66 (siglas CO, AI, AE… como resposta); G1 88 (ponte para a 89);
   91–100 (questões inéditas "no estilo" EPCAR/Colégio Naval; trocar algumas por questões reais adaptadas);
   distratores das alternativas; enunciados que repetem a figura ("Figura 1: quanto mede AÔC?").
-- **Nivelamento:** esqueleto em `NIVELAMENTO_G1.md` do zip (10 questões, regra de entrada); ainda não convertido
-  (o código "G1 NIV" não passa no formulário: definir como entra no sistema).
+- **Sem nivelamento** (decisão de 02/10/2026): todo aluno começa em G1 1; as folhas já partem de um nível
+  introdutório e sobem aos poucos. O esqueleto `NIVELAMENTO_G1.md` do zip fica só como referência.
+- **Operação:** roda no computador do CASD, em Python, operado por um membro do CASD (não necessariamente
+  técnico): tudo tem que ser simples o bastante para não haver barreira de uso.
 - **Entrega por e-mail automático.** O sistema é entregue ao CASD; os e-mails dos alunos ficam com a
   administração do curso (na planilha da conta institucional), nunca no repositório.
 - **Foto da resolução fica para depois** (02/10/2026): o formulário funciona sem ela.
@@ -452,8 +454,8 @@ no computador deles e com a conta institucional**. O projeto tem que chegar fech
 - **Aceite:** alguém da administração, sem ajuda, instala, configura e gera e envia um pacote de teste seguindo só
   a documentação.
 
-Perguntas a responder: sistema do computador do CASD (Windows, Linux, macOS); quem opera no dia a dia (técnico ou
-professor); o que fica fora do repositório público.
+Respondido em 02/10/2026: opera um membro do CASD (sem barreira de dificuldade); fora do repositório público
+ficam a instância de francês, `docs/plano-completo.md` e os estados. Falta: sistema do computador do CASD.
 
 ## 8. Roteiro de fases (com critérios de aceite)
 
@@ -496,8 +498,7 @@ Fazer na ordem. Não pular para aplicativo: o produto só vale se o piloto mostr
 5. ~~Envio automático~~ — decidido em 01/10/2026: e-mail pelo Gmail (senha de app).
 6. Expansão para outras áreas (fase 7): as três perguntas da seção 7.7.
 7. Métricas de desempenho (fase 8): as cinco perguntas da seção 7.8.
-8. Configuração e entrega (fase 9): as três perguntas da seção 7.9.
-9. Nivelamento como folha `G1 0` corrigida pelo formulário (proposto em 02/10/2026, sem resposta).
+8. Configuração e entrega (fase 9): sistema do computador do CASD (seção 7.9).
 
 ---
 
