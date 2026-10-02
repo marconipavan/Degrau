@@ -1,38 +1,38 @@
-Bloco,Campo,Respostas aceitas,Pontos,Tempo-padrão do bloco (min)
-G1 1-3,1ª folha (a) · 1,PQR|RQP,20,12
-G1 1-3,1ª folha (a) · 2,NMT|TMN,20,12
-G1 1-3,1ª folha (a) · 3,DCE|ECD,20,12
-G1 1-3,1ª folha (a) · 4,GFH|HFG,20,12
-G1 1-3,1ª folha (b) · 1,A,10,12
-G1 1-3,1ª folha (b) · 2,R,10,12
-G1 1-3,1ª folha (b) · 3,O,10,12
-G1 1-3,1ª folha (b) · 4,Ra,10,12
-G1 1-3,1ª folha (b) · 5,A,10,12
-G1 1-3,1ª folha (b) · 6,O,10,12
-G1 1-3,1ª folha (b) · 7,A,10,12
-G1 1-3,1ª folha (b) · 8,O,10,12
-G1 1-3,1ª folha (b) · 9,A,10,12
-G1 1-3,1ª folha (b) · 10,O,10,12
-G1 1-3,2ª folha (a) · 1,A,15,12
-G1 1-3,2ª folha (a) · 2,R,15,12
-G1 1-3,2ª folha (a) · 3,O,15,12
-G1 1-3,2ª folha (a) · 4,R,15,12
-G1 1-3,2ª folha (a) · 5,A,15,12
-G1 1-3,2ª folha (a) · 6,O,15,12
-G1 1-3,2ª folha (b) · 1,"conjunto:PÔQ,QÔR,RÔS,PÔR,QÔS,PÔS",10,12
-G1 1-3,2ª folha (b) · 2,10,10,12
-G1 1-3,3ª folha (a) · 1,R,10,12
-G1 1-3,3ª folha (a) · 2,R,10,12
-G1 1-3,3ª folha (a) · 3,O,10,12
-G1 1-3,3ª folha (a) · 4,A,10,12
-G1 1-3,3ª folha (a) · 5,O,10,12
-G1 1-3,3ª folha (a) · 6,O,10,12
-G1 1-3,3ª folha (a) · 7,Ra,10,12
-G1 1-3,3ª folha (a) · 8,A,10,12
-G1 1-3,3ª folha (a) · 9,A,10,12
-G1 1-3,3ª folha (a) · 10,Ra,10,12
-G1 1-3,3ª folha (b) · 1,Y,20,12
-G1 1-3,3ª folha (b) · 2,JKL obtuso|LKJ obtuso|JKL O|LKJ O,20,12
-G1 1-3,3ª folha (b) · 3,reto,20,12
-G1 1-3,3ª folha (b) · 4,10,20,12
-G1 1-3,3ª folha (b) · 5,S,20,12
+Folha,Versão,Página,Item,Respostas aceitas,Pontos,Tempo-padrão da folha (min)
+G1 1,1,a,1,PQR|RQP,20,4
+G1 1,1,a,2,NMT|TMN,20,4
+G1 1,1,a,3,DCE|ECD,20,4
+G1 1,1,a,4,GFH|HFG,20,4
+G1 1,1,b,1,A,10,4
+G1 1,1,b,2,R,10,4
+G1 1,1,b,3,O,10,4
+G1 1,1,b,4,Ra,10,4
+G1 1,1,b,5,A,10,4
+G1 1,1,b,6,O,10,4
+G1 1,1,b,7,A,10,4
+G1 1,1,b,8,O,10,4
+G1 1,1,b,9,A,10,4
+G1 1,1,b,10,O,10,4
+G1 2,1,a,1,A,15,4
+G1 2,1,a,2,R,15,4
+G1 2,1,a,3,O,15,4
+G1 2,1,a,4,R,15,4
+G1 2,1,a,5,A,15,4
+G1 2,1,a,6,O,15,4
+G1 2,1,b,1,"conjunto:PÔQ,QÔR,RÔS,PÔR,QÔS,PÔS",10,4
+G1 2,1,b,2,10,10,4
+G1 3,1,a,1,R,10,4
+G1 3,1,a,2,R,10,4
+G1 3,1,a,3,O,10,4
+G1 3,1,a,4,A,10,4
+G1 3,1,a,5,O,10,4
+G1 3,1,a,6,O,10,4
+G1 3,1,a,7,Ra,10,4
+G1 3,1,a,8,A,10,4
+G1 3,1,a,9,A,10,4
+G1 3,1,a,10,Ra,10,4
+G1 3,1,b,1,Y,20,4
+G1 3,1,b,2,JKL obtuso|LKJ obtuso|JKL O|LKJ O,20,4
+G1 3,1,b,3,reto,20,4
+G1 3,1,b,4,10,20,4
+G1 3,1,b,5,S,20,4

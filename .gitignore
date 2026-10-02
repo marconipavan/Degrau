@@ -19,3 +19,5 @@ saida/
 pacotes/
 # Chave da API e outros segredos locais
 .env.local
+# Projeto do Apps Script na conta do CASD (criado pela clasp)
+correcao/.clasp.json

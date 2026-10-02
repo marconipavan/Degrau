@@ -211,7 +211,7 @@ def desenhar_bloco(f, bloco, ctx):
         raise ErroEspecificacao(f'{ctx["onde"]} ({tipo}): {e}') from None
 
 
-def desenhar_folha(f, folha, curso):
+def desenhar_folha(f, folha, curso, codigo_bloco=None):
     textos = TEXTOS[curso['idioma_folha']]
     for lado in 'ab':
         L = folha[lado]
@@ -220,7 +220,7 @@ def desenhar_folha(f, folha, curso):
         icone, pontos = _icone(L['icone'], onde), _pontos(L, {'textos': textos})
         if isinstance(f, FolhaGeo):
             if 'traducao' in L: raise ErroEspecificacao(f'{onde}: folha de caderno não tem traducao')
-            f.pagina(codigo, folha['unidade'], L['instrucao'], icone, pontos)
+            f.pagina(codigo, folha['unidade'], L['instrucao'], icone, pontos, bloco=codigo_bloco)
         else:
             f.pagina(codigo, folha['unidade'], L['instrucao'], L.get('traducao'), icone, pontos)
         ctxs = [{'folha': folha, 'textos': textos, 'onde': f'{onde}, bloco {i + 1}'}
@@ -251,8 +251,9 @@ def gerar_pacote(pacote, saida):
     caminho = os.path.join(saida, pacote['arquivo'])
     f = (Bico if curso['folha']['campos'] == 'caderno' else Folha)(caminho, pacote['titulo'])
     f.MARCA = MARCA + curso['folha']['marca']
-    for folha in folhas:
-        desenhar_folha(f, folha, curso)
+    blocos = pacote.get('blocos') or [None] * len(folhas)   # código do bloco de cada folha (CASD)
+    for folha, bloco in zip(folhas, blocos):
+        desenhar_folha(f, folha, curso, bloco)
     f.save()
     base = caminho[:-4]
     linhas = [l for folha in folhas for l in gabarito.respostas_folha(folha)]

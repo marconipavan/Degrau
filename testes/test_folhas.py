@@ -92,12 +92,11 @@ def test_audio():
 
 # ---------- correção do CASD (fase 3) ----------
 def test_modelo_de_gabarito_atualizado(tmp_path):
-    """correcao/modelos/gabarito.csv é o bloco G1 1-3 gerado do YAML (o simulador usa este arquivo)"""
-    from motor.gabarito import escrever_planilha
+    """correcao/modelos/gabarito.csv é a biblioteca de geometria inteira gerada do YAML (o simulador usa)"""
+    from motor.gabarito import escrever_planilha_biblioteca
     from motor.especificacao import carregar_curso
     novo = tmp_path / 'g.csv'
-    escrever_planilha([carregar_folha('geometria-plana-epcar', f'G1 {n}') for n in (1, 2, 3)],
-                      carregar_curso('geometria-plana-epcar'), str(novo))
+    escrever_planilha_biblioteca(carregar_curso('geometria-plana-epcar'), str(novo))
     assert novo.read_text(encoding='utf-8') == open(os.path.join(RAIZ, 'correcao', 'modelos', 'gabarito.csv'), encoding='utf-8').read()
 
 

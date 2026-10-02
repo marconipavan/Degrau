@@ -12,8 +12,8 @@ const CAMPOS_POR_PAGINA = 12;   // igual a MAX_ITENS_PAGINA em motor/gabarito.py
 function montar() {
   const ss = SpreadsheetApp.getActive();
   const cabecalhos = {
-    Alunos: ['Aluno', 'Nível atual', 'Próximo bloco', 'Entrada (nivelamento)', 'Contato'],
-    Gabarito: ['Bloco', 'Campo', 'Respostas aceitas', 'Pontos', 'Tempo-padrão do bloco (min)'],
+    Alunos: ['Aluno', 'E-mail', 'Nível atual', 'Próximo bloco', 'Entrada (nivelamento)'],
+    Gabarito: ['Folha', 'Versão', 'Página', 'Item', 'Respostas aceitas', 'Pontos', 'Tempo-padrão da folha (min)'],
     Painel: ['Data', 'Aluno', 'Nível', 'Bloco', 'Nota (%)', 'Tempo (min)', 'Limite (min)', 'Status', 'Itens errados', 'Fotos'],
   };
   for (const [nome, cab] of Object.entries(cabecalhos)) {
@@ -27,9 +27,9 @@ function montar() {
   const form = FormApp.create('Degrau — entrega do bloco diário');
   form.setDescription('Uma resposta por campo, com o número do item da folha. Deixe em branco os campos que a folha não tem.');
   form.addListItem().setTitle('Aluno').setChoiceValues(alunos).setRequired(true);
-  form.addTextItem().setTitle('Código do bloco').setHelpText('Exemplo: G1 10-12').setRequired(true)
-    .setValidation(FormApp.createTextValidation().requireTextMatchesPattern('^ *[Gg]\\d+ +\\d+-\\d+ *$')
-      .setHelpText('Use o formato G1 10-12').build());
+  form.addTextItem().setTitle('Código do bloco').setHelpText('Copie da folha. Exemplo: G1 10-12 (ou G1 10-12 v2)').setRequired(true)
+    .setValidation(FormApp.createTextValidation().requireTextMatchesPattern('^ *[Gg]\\d+ +\\d+(-\\d+)?( +[Vv]\\d+)? *$')
+      .setHelpText('Use o formato da folha: G1 10-12 ou G1 10-12 v2').build());
   form.addTimeItem().setTitle('Início').setRequired(true);
   form.addTimeItem().setTitle('Fim').setRequired(true);
   for (const pagina of PAGINAS) {

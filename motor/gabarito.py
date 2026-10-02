@@ -1,6 +1,6 @@
 # Degrau — gabarito a partir das especificações (sem desenhar nada)
 import csv
-from .especificacao import ErroEspecificacao
+from .especificacao import ErroEspecificacao, carregar_folha
 from .bicos import angulos, resolver_x
 
 MAX_ITENS_PAGINA = 12   # campos por página no formulário do CASD
@@ -97,29 +97,44 @@ def escrever_csv(linhas, caminho):
                         '' if l['pontos'] is None else l['pontos']])
 
 
+CABECALHO_PLANILHA = ['Folha', 'Versão', 'Página', 'Item', 'Respostas aceitas', 'Pontos', 'Tempo-padrão da folha (min)']
+
+
+def linhas_planilha(folha, curso):
+    """Linhas da aba Gabarito para uma folha: uma por item com resposta, numeradas como no formulário
+    (o campo do formulário é '<k>ª folha (<página>) · <item>', k = posição da folha no bloco)."""
+    nivel = folha['folha'].split()[0]
+    n = next((n for n in curso['niveis'] if n['codigo'] == nivel and 'tempo_padrao_min' in n), None)
+    if n is None:
+        raise ErroEspecificacao(f'currículo {curso["curso"]}: nível {nivel} sem tempo_padrao_min')
+    tempo = max(n['tempo_padrao_min'])
+    linhas, saida = respostas_folha(folha), []
+    for lado in 'ab':
+        da_pagina = [l for l in linhas if l['pagina'].endswith(lado)]
+        if len(da_pagina) > MAX_ITENS_PAGINA:
+            raise ErroEspecificacao(f'{folha["_caminho"]}, lado {lado}: {len(da_pagina)} itens; '
+                                    f'o formulário tem {MAX_ITENS_PAGINA} campos por página')
+        for k, l in enumerate(da_pagina, 1):
+            saida.append([folha['folha'], folha.get('_versao', 1), lado, k, '|'.join(l['respostas']),
+                          '' if l['pontos'] is None else l['pontos'], tempo])
+    return saida
+
+
 def escrever_planilha(folhas, curso, caminho):
-    """Aba Gabarito da planilha do CASD: uma linha por campo do formulário.
-    Campo = '<k>ª folha (<lado>) · <n>', com k a posição da folha no bloco diário."""
-    por_bloco = curso['bloco_diario']['folhas']
-    tempos = {n['codigo']: max(n['tempo_padrao_min']) for n in curso['niveis'] if 'tempo_padrao_min' in n}
+    """Linhas da aba Gabarito (por folha e versão) para as folhas dadas, sem repetir folha."""
+    vistas = set()
     with open(caminho, 'w', newline='', encoding='utf-8') as f:
         w = csv.writer(f)
-        w.writerow(['Bloco', 'Campo', 'Respostas aceitas', 'Pontos', 'Tempo-padrão do bloco (min)'])
-        for i in range(0, len(folhas), por_bloco):
-            grupo = folhas[i:i + por_bloco]
-            nivel = grupo[0]['folha'].split()[0]
-            nums = [g['folha'].split()[1] for g in grupo]
-            codigo = f'{nivel} {nums[0]}-{nums[-1]}'
-            if nivel not in tempos:
-                raise ErroEspecificacao(f'currículo {curso["curso"]}: nível {nivel} sem tempo_padrao_min')
-            tempo = tempos[nivel] * len(grupo)   # soma dos tempos-padrão das folhas
-            for k, folha in enumerate(grupo, 1):
-                linhas = respostas_folha(folha)
-                for lado in 'ab':
-                    da_pagina = [l for l in linhas if l['pagina'].endswith(lado)]
-                    if len(da_pagina) > MAX_ITENS_PAGINA:
-                        raise ErroEspecificacao(f'{folha["_caminho"]}, lado {lado}: {len(da_pagina)} itens; '
-                                                f'o formulário tem {MAX_ITENS_PAGINA} campos por página')
-                    for n, l in enumerate(da_pagina, 1):
-                        w.writerow([codigo, f'{k}ª folha ({lado}) · {n}', '|'.join(l['respostas']),
-                                    '' if l['pontos'] is None else l['pontos'], tempo])
+        w.writerow(CABECALHO_PLANILHA)
+        for folha in folhas:
+            chave = (folha['folha'], folha.get('_versao', 1))
+            if chave in vistas: continue
+            vistas.add(chave)
+            w.writerows(linhas_planilha(folha, curso))
+
+
+def escrever_planilha_biblioteca(curso, caminho):
+    """Aba Gabarito inteira: todas as folhas escritas do curso, em todas as versões. Carrega-se uma vez
+    na planilha (e de novo quando entrarem folhas novas)."""
+    from .especificacao import biblioteca
+    escrever_planilha([carregar_folha(curso['curso'], c, v) for c, v in biblioteca(curso['curso'])], curso, caminho)

@@ -7,9 +7,12 @@
 #                                               --pedido só grava o pedido em saida/pedido.txt, sem chamar a API;
 #                                               com o e-mail configurado (.env.local), envia o pacote no fim
 #   enviar    <estado.json> [--pacote N] [--pasta DIR]   envia por e-mail o pacote (padrão: o último)
+#   validar   [curso ...]                       confere a biblioteca inteira e lista as folhas que faltam
+#   ver       G1 12 | G1 4-6 [--versao N]       gera o PDF dessas folhas em saida/ver/ e mostra o gabarito
+#   gabarito  <curso> [arquivo.csv]             aba Gabarito da planilha com a biblioteca inteira
 import argparse, os, sys
-from .especificacao import ErroEspecificacao, RAIZ, carregar_curso
-from . import estado as E, gerador, render, autor, envio
+from .especificacao import ErroEspecificacao, RAIZ, carregar_curso, carregar_folha, biblioteca
+from . import estado as E, gerador, render, autor, envio, ferramentas
 
 
 def _mostrar(arquivos, esconder):
@@ -30,7 +33,12 @@ def main():
     p.add_argument('--saida', default=os.path.join(RAIZ, 'pacotes')); p.add_argument('--pedido', action='store_true')
     p = sub.add_parser('enviar'); p.add_argument('estado'); p.add_argument('--pacote', type=int)
     p.add_argument('--pasta', default=os.path.join(RAIZ, 'pacotes'))
+    p = sub.add_parser('validar'); p.add_argument('cursos', nargs='*')
+    p = sub.add_parser('ver'); p.add_argument('codigo', nargs='+'); p.add_argument('--versao', type=int, default=1)
+    p = sub.add_parser('gabarito'); p.add_argument('curso'); p.add_argument('arquivo', nargs='?')
     a = ap.parse_args()
+    if a.comando in ('validar', 'ver', 'gabarito'):
+        return ferramentas.executar(a)
 
     if a.comando == 'exemplos':
         for arquivos, esconder in render.gerar(a.pacotes, a.saida): _mostrar(arquivos, esconder)

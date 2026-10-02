@@ -19,14 +19,15 @@ def _caixa(pts):
 
 class FolhaGeo(Folha):
     MARCA='DEGRAU  ·  geometria'
-    def pagina(self,code,unite,instr,icone,points=None):
+    def pagina(self,code,unite,instr,icone,points=None,bloco=None):
         c=self.c
         c.setFont('Sans',6.3); c.setFillColor(GREY); c.drawString(M,H-M,self.MARCA)
         c.setFillColor(INK); c.setFont('AndB',15); c.drawString(M,H-M-7*mm,code)
         cw=c.stringWidth(code,'AndB',15)
         c.setFont('And',9.5); c.drawString(M+cw+4*mm,H-M-7*mm,unite)
         c.setFont('And',7.2); c.setFillColor(GREY)
-        c.drawRightString(W-M,H-M-2*mm,'No caderno, anote:')
+        # o código do bloco vai para o formulário; folha avulsa (exemplos) não tem bloco
+        c.drawRightString(W-M,H-M-2*mm,f'Bloco {bloco}  ·  no caderno, anote:' if bloco else 'No caderno, anote:')
         c.drawRightString(W-M,H-M-6*mm,f'{code}  ·  início  ·  fim')
         c.setStrokeColor(INK); c.setLineWidth(.8); c.line(M,H-M-10*mm,W-M,H-M-10*mm)
         iy=H-M-17*mm

@@ -45,7 +45,26 @@ def caminho_folha(curso, codigo, versao=1):
 
 def carregar_folha(curso, codigo, versao=1):
     caminho = caminho_folha(curso, codigo, versao)
-    return validar_folha(_ler(caminho), caminho, codigo)
+    d = validar_folha(_ler(caminho), caminho, codigo)
+    d['_versao'] = versao
+    return d
+
+
+def biblioteca(curso):
+    """[(código, versão)] de todas as folhas escritas do curso, na ordem do currículo"""
+    import glob, re
+    c = carregar_curso(curso)
+    ordem = {n['codigo']: i for i, n in enumerate(c['niveis'])}
+    achadas = []
+    for caminho in glob.glob(os.path.join(RAIZ, 'folhas', curso, '*', '*.yaml')):
+        nivel = os.path.basename(os.path.dirname(caminho))
+        m = re.fullmatch(r'(\d+)(?:\.v(\d+))?\.yaml', os.path.basename(caminho))
+        if not m:
+            raise ErroEspecificacao(f'{caminho}: nome fora do padrão (N.yaml ou N.vK.yaml)')
+        if nivel not in ordem:
+            raise ErroEspecificacao(f'{caminho}: nível {nivel} não está no currículo {curso}')
+        achadas.append((ordem[nivel], int(m.group(1)), int(m.group(2) or 1), f'{nivel} {m.group(1)}'))
+    return [(cod, v) for _, _, v, cod in sorted(achadas)]
 
 
 def validar_folha(d, caminho, codigo):

@@ -1,6 +1,7 @@
 // Testa o aoEnviar.gs com envios falsos, sem Google: planilha e formulário simulados.
 // uso: node correcao/teste/simular.js        (sai com código 1 se algum caso falhar)
-// O Gabarito vem de correcao/modelos/gabarito.csv, gerado do YAML (bloco G1 1-3).
+// O Gabarito vem de correcao/modelos/gabarito.csv: a biblioteca de geometria inteira, por folha e versão,
+// gerada do YAML (./degrau gabarito geometria-plana-epcar).
 const fs = require('fs'), path = require('path'), vm = require('vm'), assert = require('assert');
 
 const DIR = path.join(__dirname, '..');
@@ -51,9 +52,13 @@ function envio(bloco, ini, fim, respostas) {
   return { namedValues: nv };
 }
 
-function corretas(gab) {           // primeira resposta aceita de cada campo
+// primeira resposta aceita de cada campo do bloco (folhas na ordem do bloco, versão 1)
+function corretas(gab, folhas = ['G1 1', 'G1 2', 'G1 3']) {
   const r = {};
-  for (const [, campo, aceitas] of gab) r[campo] = String(aceitas).split('|')[0].replace(/^conjunto:/, '');
+  folhas.forEach((folha, k) => {
+    for (const [f, v, pagina, item, aceitas] of gab)
+      if (f === folha && v === 1) r[`${k + 1}ª folha (${pagina}) · ${item}`] = String(aceitas).split('|')[0].replace(/^conjunto:/, '');
+  });
   return r;
 }
 
@@ -79,6 +84,14 @@ caso('variações de escrita aceitas (minúsculas, sem acento, ordem inversa, °
   assert.strictEqual(s.painel[1][4], 100, 'itens errados: ' + s.painel[1][8]);
 });
 
+caso('minutos e segundos com aspas do celular (’ ′ ” e duas aspas simples)', () => {
+  const ctx = { String }; vm.createContext(ctx);
+  vm.runInContext(fs.readFileSync(path.join(DIR, 'aoEnviar.gs'), 'utf8').replace(/^const SS = .*$/m, '') + '\nthis.confere = confere;', ctx);
+  for (const r of ['35°20’15”', "35°20′15″", "35°20'15''", ' 35° 20\' 15" '])
+    assert.ok(ctx.confere(r, '35°20\'15"'), r);
+  assert.ok(!ctx.confere("35°15'20\"", '35°20\'15"'));
+});
+
 caso('conjunto com ângulo escrito ao contrário (QÔP = PÔQ)', () => {
   const s = carregar(); const r = corretas(s.gabarito);
   r['2ª folha (b) · 1'] = 'QÔP; RÔQ; SÔR; RÔP; SÔQ; SÔP';
@@ -99,7 +112,7 @@ caso('erros: nota pelos pontos e lista dos campos errados; 90% ainda é Domínio
   r['3ª folha (a) · 7'] = 'O';        // 10 pontos
   delete r['3ª folha (b) · 5'];       // 20 pontos, em branco
   s.aoEnviar(envio('G1 1-3', '19:02', '19:10', r));
-  const total = s.gabarito.reduce((a, l) => a + l[3], 0);   // 490
+  const total = s.gabarito.filter(l => ['G1 1', 'G1 2', 'G1 3'].includes(l[0])).reduce((a, l) => a + l[5], 0);   // 490
   const l = s.painel[1];
   assert.strictEqual(l[4], Math.round(100 * (total - 50) / total));   // 90
   assert.strictEqual(l[7], 'Domínio');
@@ -131,7 +144,17 @@ caso('horário em formato de 12 horas e passando da meia-noite', () => {
 caso('bloco sem gabarito: linha de erro no Painel', () => {
   const s = carregar();
   s.aoEnviar(envio('G1 4-6', '19:02', '19:10', {}));
-  assert.strictEqual(s.painel[1][7], 'ERRO: bloco sem gabarito');
+  assert.strictEqual(s.painel[1][7], 'ERRO: sem gabarito: G1 4, G1 5, G1 6');
+  s.aoEnviar(envio('G1 1-3 v2', '19:02', '19:10', {}));            // repetição sem a versão 2 carregada
+  assert.strictEqual(s.painel[2][7], 'ERRO: sem gabarito: G1 1, G1 2, G1 3 v2');
+  s.aoEnviar(envio('G1 1-9', '19:02', '19:10', {}));               // mais folhas do que o formulário comporta
+  assert.strictEqual(s.painel[3][7], 'ERRO: código do bloco inválido');
+});
+
+caso('bloco de uma folha só e folha fora do início da biblioteca (G1 89)', () => {
+  const s = carregar();
+  s.aoEnviar(envio('G1 89', '19:02', '19:05', corretas(s.gabarito, ['G1 89'])));
+  assert.deepStrictEqual([s.painel[1][3], s.painel[1][4], s.painel[1][6], s.painel[1][7]], ['G1 89', 100, 4, 'Domínio']);
 });
 
 caso('montar.gs cria um campo para cada linha do gabarito, com o mesmo título', () => {
@@ -154,11 +177,12 @@ caso('montar.gs cria um campo para cada linha do gabarito, com o mesmo título',
   abas.Alunos.appendRow(['Aluno Teste']);
   titulos.length = 0;
   ctx.montar();
-  const campos = carregar().gabarito.map(l => l[1]);
+  const campos = [1, 2, 3].flatMap(k => carregar().gabarito.map(l => `${k}ª folha (${l[2]}) · ${l[3]}`));
   const faltam = campos.filter(c => !titulos.includes(c));
   assert.deepStrictEqual(faltam, []);
   // o regex do formulário aceita o que o script normaliza
-  assert.ok(/^ *[Gg]\d+ +\d+-\d+ *$/.test(' g1  10-12 '));
+  const re = /^ *[Gg]\d+ +\d+(-\d+)?( +[Vv]\d+)? *$/;
+  for (const c of [' g1  10-12 ', 'G1 100', 'G1 10-12 v2']) assert.ok(re.test(c), c);
 });
 
 let falhas = 0;

@@ -1,0 +1,5 @@
+# a clasp só envia ao Google os scripts e o manifesto
+**/**
+!aoEnviar.gs
+!montar.gs
+!appsscript.json

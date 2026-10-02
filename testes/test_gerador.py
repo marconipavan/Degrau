@@ -40,7 +40,7 @@ def test_cinco_dias_de_frances(biblioteca):
     # (dia, nota, tempo) -> esperado: pacote gerado no dia e status depois da correção
     dias = [('2026-10-01', 95, 9,  '6A 1-5',   [1] * 5, 'dominio'),
             ('2026-10-02', 80, 9,  '6A 6-10',  [1] * 5, 'repetir'),   # nota baixa
-            ('2026-10-03', 95, 9,  '6A 6-10',  [2] * 5, 'dominio'),   # mesmo trecho, exercícios novos
+            ('2026-10-03', 95, 9,  '6A 6-10 v2', [2] * 5, 'dominio'), # mesmo trecho, exercícios novos
             ('2026-10-04', 100, 12, '6A 11-15', [1] * 5, 'repetir'),  # passou do tempo (limite 10)
             ('2026-10-05', 92, 10, '6A 11-15', None, None)]           # falta a versão 2: erro
     for n, (dia, nota, tempo, codigo, versoes, status) in enumerate(dias, 1):
@@ -69,7 +69,8 @@ def test_dois_pacotes_de_geometria(biblioteca):
         assert [os.path.basename(a) for a in arquivos] == [
             f'G1_pacote{n:02d}_folhas{de}-{ate}.{ext}' for ext in ('pdf', 'gabarito.csv', 'planilha.csv')]
         planilha = open(arquivos[2], encoding='utf-8').read()
-        assert all(f'\n{b},' in planilha for b in blocos)          # um bloco diário por dia
+        primeira = 1 + 6 * (n - 1)
+        assert all(f'\nG1 {k},1,' in planilha for k in range(primeira, primeira + 6))   # gabarito por folha
         assert [u['codigo'] for u in est['unidades'][-2:]] == blocos
         for b in blocos: registrar(est, b, 95, 10)
     assert proxima_folha(est, carregar_curso('geometria-plana-epcar')) == 'G1 13'
@@ -87,3 +88,18 @@ def test_estado_real_do_frances_bloqueia_ate_corrigir():
     if not os.path.exists(caminho): pytest.skip('estado pessoal não está nesta máquina')
     with pytest.raises(ErroEspecificacao, match='pendente'):
         proximo(E.carregar(caminho), saida='/nao/usado')
+
+
+def test_validar_aponta_erros_e_faltas(biblioteca, capsys):
+    from motor.ferramentas import validar
+    assert validar(['geometria-plana-epcar']) == 0
+    caminho = biblioteca / 'folhas/geometria-plana-epcar/G1/3.yaml'
+    t = caminho.read_text(encoding='utf-8')
+    caminho.write_text(t.replace('- grade:', '- gradee:', 1), encoding='utf-8')
+    (biblioteca / 'folhas/geometria-plana-epcar/G1/14.yaml').write_text(t.replace('folha: G1 1', 'folha: G1 99', 1), encoding='utf-8')
+    capsys.readouterr()
+    assert validar(['geometria-plana-epcar']) == 1
+    saida = capsys.readouterr().out
+    assert 'ERRO G1 3' in saida and "tipo de bloco desconhecido 'gradee'" in saida
+    assert "ERRO G1 14" in saida and "esperado 'G1 14'" in saida
+    assert 'faltam no G1 (87): 13, 15-100' in saida

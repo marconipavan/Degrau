@@ -43,10 +43,15 @@ def _tempo(curso, folha):
     return max(n['tempo_padrao_min'])
 
 
-def _codigo(folhas):
-    """'6A 6-10'; se cruzar de nível, '6A 99-5A 3'"""
+def _codigo(folhas, versoes=None):
+    """'6A 6-10'; uma folha só: 'G1 100'; repetição: 'G1 10-12 v2'; se cruzar de nível, '6A 99-5A 3'"""
     (n1, a), (n2, b) = folhas[0].split(), folhas[-1].split()
-    return f'{n1} {a}-{b}' if n1 == n2 else f'{folhas[0]}-{folhas[-1]}'
+    cod = folhas[0] if len(folhas) == 1 else (f'{n1} {a}-{b}' if n1 == n2 else f'{folhas[0]}-{folhas[-1]}')
+    vs = set(versoes or [1])
+    if len(vs) > 1:
+        raise ErroEspecificacao(f'{cod}: versões diferentes no mesmo bloco ({sorted(vs)}); o código do bloco só leva uma')
+    v = vs.pop()
+    return cod + (f' v{v}' if v > 1 else '')
 
 
 def pendentes(estado):
@@ -94,12 +99,16 @@ def proximo(estado, dias=1, hoje=None, saida='pacotes'):
     nivel, de = todas[0].split(); ate = todas[-1].split()[1]
     arquivo = curso['folha'].get('arquivo', 'Pacote_{pacote:03d}_{nivel}_{de}-{ate}.pdf').format(
         pacote=n, nivel=nivel, de=de, ate=ate)
-    titulo = f'Pacote {n} — ' + ', '.join(_codigo(fs) for fs in unidades)
-    arquivos, esconder = gerar_pacote({'arquivo': arquivo, 'titulo': titulo, 'curso': curso['curso'],
-                                       'folhas': todas, 'versoes': versoes}, saida)
-    i = 0
+    codigos, i = [], 0
     for fs in unidades:
-        estado['unidades'].append({'pacote': n, 'codigo': _codigo(fs), 'folhas': fs, 'versoes': versoes[i:i + len(fs)],
+        codigos.append(_codigo(fs, versoes[i:i + len(fs)])); i += len(fs)
+    titulo = f'Pacote {n} — ' + ', '.join(codigos)
+    blocos = [c for c, fs in zip(codigos, unidades) for _ in fs]
+    arquivos, esconder = gerar_pacote({'arquivo': arquivo, 'titulo': titulo, 'curso': curso['curso'],
+                                       'folhas': todas, 'versoes': versoes, 'blocos': blocos}, saida)
+    i = 0
+    for fs, cod in zip(unidades, codigos):
+        estado['unidades'].append({'pacote': n, 'codigo': cod, 'folhas': fs, 'versoes': versoes[i:i + len(fs)],
                                    'data': hoje, 'limite_min': sum(_tempo(curso, f) for f in fs),
                                    'status': 'pendente', 'nota': None, 'tempo_min': None, 'arquivo': arquivo})
         i += len(fs)

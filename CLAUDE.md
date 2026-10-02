@@ -42,9 +42,10 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 | Autor automático | `motor/autor.py`, `./degrau automatico` | O Claude (API) escreve as folhas que faltam; passam pelas verificações do motor antes de gravar |
 | Verificação do desenho | `motor/verificar.py` | Texto fora da página, sobre texto ou sobre linha (testes e autor automático) |
 | Gerador de pacotes | `motor/gerador.py`, `./degrau` | Próximas folhas pelo estado; domínio, repetição com a versão seguinte (`N.v2.yaml`), pendente bloqueia |
+| Ferramentas de autoria | `motor/ferramentas.py` | `degrau validar` (biblioteca inteira + o que falta), `degrau ver` (PDF e gabarito de uma folha), `degrau gabarito` (aba Gabarito da planilha) |
 | Comparação | `ferramentas/comparar.sh` | Pixels e palavras, página a página, contra uma etiqueta ou commit |
 | Leitor de áudio | `leitor/leitor-frances.html` | Funciona em qualquer navegador; HTML único |
-| Correção automática | `correcao/aoEnviar.gs`, `correcao/montar.gs` | Testada com envios simulados (`correcao/teste/simular.js`); **falta montar e testar no Google** (passo a passo em `correcao/README.md`) |
+| Correção automática | `correcao/aoEnviar.gs`, `correcao/montar.gs` | Gabarito por folha e versão; testada com envios simulados (`correcao/teste/simular.js`); **falta montar e testar no Google** (passo a passo em `correcao/README.md`, com `clasp` para editar pelo VS Code) |
 | Currículos | `curriculos/*.yaml` | O motor lê só a chave `folha` (marca e tipo de campos); o resto ainda não |
 
 ### Fora do repositório (instância francês)
@@ -86,6 +87,10 @@ pip install -r requirements.txt           # reportlab, pyyaml, pytest
 ./degrau automatico estado/frances.local.json            # API escreve as folhas que faltam + gera o pacote
 ./degrau enviar estado/frances.local.json  # manda o último pacote por e-mail (Gmail; --pacote N, --pasta DIR)
 ferramentas/agendar.sh                     # agenda o automatico às 06:30 (crontab); --remover desfaz
+./degrau validar                           # confere todas as folhas e lista as que faltam (sai com 1 se houver erro)
+./degrau ver G1 4-6                        # PDF dessas folhas em saida/ver/ + gabarito na numeração do formulário
+./degrau gabarito geometria-plana-epcar    # aba Gabarito da planilha (biblioteca inteira) em saida/
+cd correcao && clasp push                  # envia aoEnviar.gs e montar.gs ao projeto do CASD (depois do clasp login)
 pytest                                     # nesta máquina: env -u PYTHONPATH pytest (o ROS injeta plugins)
 ferramentas/comparar.sh [etiqueta]         # compara com a referência (padrão: referencia-fase0)
 ```
@@ -286,7 +291,10 @@ Feuille cinq b. Je suis dans un avion. …
 - **Gabarito indexado por folha e versão**, carregado uma vez só na aba Gabarito para a biblioteca inteira
   (resolve entradas em qualquer folha e repetições com versões diferentes). Código do bloco com a versão quando
   for repetição (`G1 10-12 v2`).
-- **Código do bloco impresso na folha**, para o aluno copiar no formulário.
+- **Código do bloco impresso na folha**, para o aluno copiar no formulário (cabeçalho: "Bloco G1 1-3 · no caderno, anote:").
+- **Conteúdo do G1:** o Ângelo pede os esqueletos das 94 folhas que faltam a outra conversa do Claude
+  (`docs/prompts/esqueletos-g1.md`) e o Claude Code converte para YAML. Faltam no motor: ângulo com valor escrito,
+  retas que se cruzam, transversal entre paralelas com 8 ângulos, várias questões de prova numeradas por página.
 - **Entrega por e-mail automático.** O sistema é entregue ao CASD; os e-mails dos alunos ficam com a
   administração do curso (na planilha da conta institucional), nunca no repositório.
 

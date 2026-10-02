@@ -9,12 +9,14 @@
 const SS = SpreadsheetApp.getActive();
 const CORTE_NOTA = 90;            // % mínimo para domínio
 const TEMPO_CONTA = true;         // false nas duas primeiras semanas do piloto (só registra)
+const PAGINAS_DO_FORMULARIO = 6;  // 3 folhas por bloco, frente e verso (igual ao montar.gs)
 
 function normalizar(s) {
   return String(s || '')
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '')  // remove acentos e circunflexos (AÔB -> AOB)
     .toUpperCase()
     .replace(/°|º/g, '')
+    .replace(/[’‘′´`]/g, "'").replace(/[”“″]/g, '"').replace(/''/g, '"')   // minutos e segundos digitados no celular
     .replace(/\s+/g, '')
     .replace(/,/g, '.');
 }
@@ -47,37 +49,50 @@ function confere(resposta, aceitas) {
     : normalizar(resposta) === normalizar(a));
 }
 
+// "G1 10-12", "G1 100" ou "G1 10-12 v2" -> {nivel, folhas: ['G1 10', 'G1 11', 'G1 12'], versao}
+function lerBloco(codigo) {
+  const m = String(codigo || '').trim().toUpperCase().replace(/\s+/g, ' ').match(/^(\w+) (\d+)(?:-(\d+))?(?: V(\d+))?$/);
+  if (!m) return null;
+  const de = Number(m[2]), ate = Number(m[3] || m[2]);
+  if (ate < de || ate - de >= PAGINAS_DO_FORMULARIO / 2) return null;
+  const folhas = [];
+  for (let n = de; n <= ate; n++) folhas.push(m[1] + ' ' + n);
+  const versao = Number(m[4] || 1);
+  return { nivel: m[1], folhas, versao, texto: m[1] + ' ' + de + (ate > de ? '-' + ate : '') + (versao > 1 ? ' v' + versao : '') };
+}
+
 function aoEnviar(e) {
   const r = e.namedValues;
   const aluno = (r['Aluno'] || [''])[0];
-  const bloco = String((r['Código do bloco'] || [''])[0]).trim().toUpperCase().replace(/\s+/g, ' ');
+  const digitado = String((r['Código do bloco'] || [''])[0]).trim();
   const tempo = minutos(r['Início'][0], r['Fim'][0]);
   const fotos = (r['Foto da resolução'] || [''])[0];
-
-  const gab = SS.getSheetByName('Gabarito').getDataRange().getValues().slice(1)
-    .filter(l => String(l[0]).trim().toUpperCase().replace(/\s+/g, ' ') === bloco);
-
   const painel = SS.getSheetByName('Painel');
-  if (gab.length === 0) {
-    painel.appendRow([new Date(), aluno, '', bloco, '', tempo, '', 'ERRO: bloco sem gabarito', '', fotos]);
-    return;
-  }
+  const erro = msg => painel.appendRow([new Date(), aluno, '', digitado, '', tempo, '', 'ERRO: ' + msg, '', fotos]);
 
-  let feitos = 0, total = 0;
-  const errados = [];
-  // cada linha do gabarito: [bloco, campo, respostas aceitas, pontos, tempo]; campo = título da pergunta
-  gab.forEach(([, campo, aceitas, pontos]) => {
-    pontos = Number(pontos) || 0;
-    total += pontos;
-    const ok = confere((r[campo] || [''])[0], aceitas);
-    if (ok) feitos += pontos; else errados.push(campo);
+  const bloco = lerBloco(digitado);
+  if (!bloco) return erro('código do bloco inválido');
+
+  // Gabarito por folha e versão: [folha, versão, página, item, respostas aceitas, pontos, tempo-padrão da folha]
+  const linhas = SS.getSheetByName('Gabarito').getDataRange().getValues().slice(1);
+  let feitos = 0, total = 0, limite = 0;
+  const errados = [], semGabarito = [];
+  bloco.folhas.forEach((folha, i) => {
+    const daFolha = linhas.filter(l => String(l[0]).trim().toUpperCase() === folha && Number(l[1]) === bloco.versao);
+    if (daFolha.length === 0) { semGabarito.push(folha); return; }
+    limite += Number(daFolha[0][6]) || 0;
+    daFolha.forEach(([, , pagina, item, aceitas, pontos]) => {
+      const campo = `${i + 1}ª folha (${String(pagina).trim().toLowerCase()}) · ${item}`;
+      pontos = Number(pontos) || 0;
+      total += pontos;
+      if (confere((r[campo] || [''])[0], aceitas)) feitos += pontos; else errados.push(campo);
+    });
   });
+  if (semGabarito.length) return erro('sem gabarito: ' + semGabarito.join(', ') + (bloco.versao > 1 ? ' v' + bloco.versao : ''));
 
   const nota = total ? Math.round(100 * feitos / total) : 0;
-  const limite = Number(gab[0][4]) || 0;
   const dentroDoTempo = !TEMPO_CONTA || !limite || tempo <= limite;
   const status = (nota >= CORTE_NOTA && dentroDoTempo) ? 'Domínio' : 'Repetir';
-
-  painel.appendRow([new Date(), aluno, bloco.split(' ')[0], bloco, nota, tempo, limite,
+  painel.appendRow([new Date(), aluno, bloco.nivel, bloco.texto, nota, tempo, limite,
                     status, errados.join(', '), fotos]);
 }
