@@ -72,7 +72,7 @@ def _folha_89(mexer):
      'o ângulo desenhado é 80°'),
     (lambda f: f['a']['blocos'][0]['grade']['itens'][0]['bico']['marcas'].__setitem__(1, [1, None, '4x + 10°']),
      'valores diferentes de x'),
-    (lambda f: f['a']['blocos'][0]['grade']['itens'][1].__setitem__('resposta', 12), 'os rótulos dão x = 10'),
+    (lambda f: f['a']['blocos'][0]['grade']['itens'][1].__setitem__('resposta', 12), 'a figura dá x = 10'),
     (lambda f: f['b']['blocos'][2]['alternativas'].__setitem__('resposta', 'B'), 'a figura dá x = 25'),
 ])
 def test_expressoes_erradas_falham(mexer, msg):

@@ -1,0 +1,39 @@
+# convertido de G1_035.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 35
+unidade: Equações com ângulos 5
+a:
+  instrucao: Ache o ângulo x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: A soma do complemento com o suplemento de x é 150°.
+        resposta: ['60', 60°]
+      - texto: A soma do complemento com o suplemento de x é 200°.
+        resposta: ['35', 35°]
+      - texto: x mais o dobro do seu complemento dá 140°.
+        resposta: ['40', 40°]
+      - texto: x mais o seu suplemento mais o seu complemento dá 210°.
+        resposta: ['60', 60°]
+      - texto: O suplemento de x menos o dobro de x dá 30°.
+        resposta: ['50', 50°]
+b:
+  instrucao: Ache o ângulo x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: A metade do suplemento de x mais o complemento de x dá 105°.
+        resposta: ['50', 50°]
+      - texto: O dobro do complemento de x mais a metade de x dá 120°.
+        resposta: ['40', 40°]
+      - texto: A metade do complemento de x é igual à quarta parte de x.
+        resposta: ['60', 60°]
+      - texto: O triplo do complemento de x menos o suplemento de x dá 20°.
+        resposta: ['35', 35°]
+      - texto: A terça parte do suplemento de x é igual ao complemento de x mais 10°.
+        resposta: ['60', 60°]

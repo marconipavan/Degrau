@@ -1,0 +1,63 @@
+# convertido de G1_023.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 23
+unidade: Complemento e suplemento 3
+a:
+  instrucao: Qual ângulo tem esse complemento?
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [O complemento mede 25°. O ângulo mede 90° − 25° = 65°.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: O complemento mede 25°
+        resposta: ['65', 65°]
+      - texto: O complemento mede 60°
+        resposta: ['30', 30°]
+      - texto: O complemento mede 45°
+        resposta: ['45', 45°]
+      - texto: O complemento mede 10°
+        resposta: ['80', 80°]
+      - texto: O complemento mede 89°
+        resposta: ['1', 1°]
+      - texto: O complemento mede 30°
+        resposta: ['60', 60°]
+      - texto: O complemento mede 72°
+        resposta: ['18', 18°]
+      - texto: O complemento mede 5°
+        resposta: ['85', 85°]
+      - texto: O complemento mede 54°
+        resposta: ['36', 36°]
+      - texto: O complemento mede 1°
+        resposta: ['89', 89°]
+b:
+  instrucao: Qual ângulo tem esse suplemento?
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [O suplemento mede 70°. O ângulo mede 180° − 70° = 110°.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: O suplemento mede 70°
+        resposta: ['110', 110°]
+      - texto: O suplemento mede 120°
+        resposta: ['60', 60°]
+      - texto: O suplemento mede 90°
+        resposta: ['90', 90°]
+      - texto: O suplemento mede 15°
+        resposta: ['165', 165°]
+      - texto: O suplemento mede 160°
+        resposta: ['20', 20°]
+      - texto: O suplemento mede 1°
+        resposta: ['179', 179°]
+      - texto: O suplemento mede 135°
+        resposta: ['45', 45°]
+      - texto: O suplemento mede 45°
+        resposta: ['135', 135°]
+      - texto: O suplemento mede 100°
+        resposta: ['80', 80°]
+      - texto: O suplemento mede 179°
+        resposta: ['1', 1°]

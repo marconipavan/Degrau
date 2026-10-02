@@ -1,0 +1,45 @@
+# convertido de G1_039.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 39
+unidade: Equações com ângulos 9
+a:
+  instrucao: Ache o ângulo x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [Suplemento do complemento de x = 90° + x. Então 90° + x = 7x → x = 15°.]
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O suplemento do complemento de x é 7 vezes x.
+        resposta: ['15', 15°]
+      - texto: O complemento do suplemento de x é a terça parte de x.
+        resposta: ['135', 135°]
+      - texto: O suplemento do complemento de x é o triplo de x.
+        resposta: ['45', 45°]
+      - texto: O complemento do suplemento de x é a quarta parte de x.
+        resposta: ['120', 120°]
+      - texto: O suplemento do complemento de x é igual ao suplemento de x.
+        resposta: ['45', 45°]
+b:
+  instrucao: Ache o ângulo pedido.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O suplemento de x é o triplo do complemento de x. Ache x.
+        resposta: ['45', 45°]
+        incognita: x
+      - texto: 'Complementares na razão 4 : 5. O maior?'
+        resposta: ['50', 50°]
+      - texto: Suplementares x + 30° e 2x. Ache x.
+        resposta: ['50', 50°]
+        incognita: x
+      - texto: O complemento de x é igual a x/2 + 15°. Ache x.
+        resposta: ['50', 50°]
+        incognita: x
+      - texto: O suplemento do complemento de x é 5 vezes x. Ache x.
+        resposta: [22°30', 22°30'0", 22°30'00"]
+        incognita: x

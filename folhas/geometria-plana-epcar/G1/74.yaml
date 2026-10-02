@@ -1,0 +1,89 @@
+# convertido de G1_074.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 74
+unidade: 'Paralelas: calcular 4'
+a:
+  instrucao: Ache x e depois a medida pedida.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Correspondentes. Quanto mede o ângulo 3x − 10°?
+        resposta: ['80', 80°]
+        transversal:
+          direcao: 80
+          marcas:
+          - [r, acima-direita, 3x − 10°]
+          - [s, acima-direita, 2x + 20°]
+      - texto: Alternos internos. Quanto mede cada um?
+        resposta: ['70', 70°]
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, abaixo-esquerda, 2x + 10°]
+          - [s, acima-direita, 3x − 20°]
+      - texto: Correspondentes. Quanto mede o ângulo 1 (em r, acima à direita)?
+        resposta: ['120', 120°]
+        transversal:
+          direcao: 120
+          marcas:
+          - [r, acima-esquerda, x + 35°]
+          - [s, acima-esquerda, 2x + 10°]
+      - texto: Alternos internos. Quanto mede o ângulo em s, acima à direita?
+        resposta: ['60', 60°]
+        transversal:
+          direcao: 60
+          marcas:
+          - [r, abaixo-direita, x + 80°]
+          - [s, acima-esquerda, 3x]
+      - texto: Alternos internos. Quanto mede o ângulo em r, abaixo à direita?
+        resposta: ['110', 110°]
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, abaixo-esquerda, 4x − 10°]
+          - [s, acima-direita, 2x + 30°]
+b:
+  instrucao: Ache x e depois a medida pedida.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Colaterais internos. Quanto mede o ângulo 3x + 50°?
+        resposta: ['110', 110°]
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, abaixo-direita, 3x + 50°]
+          - [s, acima-direita, 2x + 30°]
+      - texto: Colaterais internos. Quanto mede o ângulo 2x + 40°?
+        resposta: ['100', 100°]
+        transversal:
+          direcao: 80
+          marcas:
+          - [r, abaixo-esquerda, x + 50°]
+          - [s, acima-esquerda, 2x + 40°]
+      - texto: Colaterais internos. Quanto mede o ângulo 4x?
+        resposta: ['120', 120°]
+        transversal:
+          direcao: 120
+          marcas:
+          - [r, abaixo-direita, x + 30°]
+          - [s, acima-direita, 4x]
+      - texto: Colaterais internos. Quanto mede o ângulo em r, acima à esquerda?
+        resposta: ['115', 115°]
+        transversal:
+          direcao: 65
+          marcas:
+          - [r, abaixo-esquerda, 2x + 11°]
+          - [s, acima-esquerda, 5x − 20°]
+      - texto: Colaterais internos. Quanto mede o ângulo em r, acima à direita?
+        resposta: [72°30', 72°30'0", 72°30'00"]
+        transversal:
+          direcao: 72.5
+          marcas:
+          - [r, abaixo-direita, 3x + 25°]
+          - [s, acima-direita, x + 45°]

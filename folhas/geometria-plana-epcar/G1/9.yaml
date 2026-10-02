@@ -1,0 +1,58 @@
+# convertido de G1_009.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 9
+unidade: Reconhecer ângulos 9
+a:
+  instrucao: 'Classifique cada ângulo da figura: A, R, O ou Ra.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - figura:
+      semirretas:
+        direcoes: [0, 30, 90, 150, 180]
+        nomes: [A, B, C, D, E]
+        vertice: O
+        marcas:
+        - [A, C, reto, null]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ângulo AÔB
+        resposta: [A, agudo]
+      - texto: Ângulo AÔC
+        resposta: [R, reto]
+      - texto: Ângulo AÔD
+        resposta: [O, obtuso]
+      - texto: Ângulo AÔE
+        resposta: [Ra, raso, RA]
+      - texto: Ângulo BÔC
+        resposta: [A, agudo]
+      - texto: Ângulo BÔD
+        resposta: [O, obtuso]
+      - texto: Ângulo BÔE
+        resposta: [O, obtuso]
+      - texto: Ângulo CÔD
+        resposta: [A, agudo]
+      - texto: Ângulo CÔE
+        resposta: [R, reto]
+      - texto: Ângulo DÔE
+        resposta: [A, agudo]
+b:
+  instrucao: Na figura, conte os ângulos de cada tipo.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - figura:
+      semirretas:
+        direcoes: [0, 30, 90, 150, 180]
+        nomes: [A, B, C, D, E]
+        vertice: O
+        marcas:
+        - [A, C, reto, null]
+  - grade:
+      colunas: 2
+      itens:
+      - {texto: 'Quantos ângulos agudos?', resposta: '4'}
+      - {texto: 'Quantos ângulos retos?', resposta: '2'}
+      - {texto: 'Quantos ângulos obtusos?', resposta: '3'}
+      - {texto: 'Quantos ângulos rasos?', resposta: '1'}
+      - {texto: 'Quantos ângulos ao todo?', resposta: '10'}

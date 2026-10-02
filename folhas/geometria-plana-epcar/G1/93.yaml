@@ -1,0 +1,46 @@
+# convertido de G1_093.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 93
+unidade: Questões de prova 3
+a:
+  instrucao: Marque a alternativa correta.
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'Na figura, OM é bissetriz de AÔB. A medida de AÔB é:'
+        alternativas: [96°, 48°, 15°, 90°]
+        resposta: A
+        semirretas:
+          direcoes: [0, 48, 96]
+          nomes: [A, M, B]
+          vertice: O
+          marcas:
+          - [A, M, null, 2x + 18°]
+          - [M, B, null, 4x − 12°]
+          comprimento: 15
+      - texto: 'Na figura, duas retas se cruzam em O. O valor de x é:'
+        alternativas: [85°, 20°, 40°, 10°]
+        resposta: B
+        incognita: x
+        cruzadas:
+          direcoes: [0, 85]
+          ponto: O
+          marcas:
+          - [0, 85, 3x + 25°]
+          - [180, 265, 5x − 15°]
+b:
+  instrucao: Marque a alternativa correta.
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'O ângulo formado pelas bissetrizes de dois ângulos adjacentes e suplementares mede:'
+        alternativas: [45°, 180°, 90°, depende dos ângulos]
+        resposta: C
+      - texto: 'Três ângulos adjacentes formam um ângulo raso e medem x, 2x + 10° e 3x − 10°. O maior mede:'
+        alternativas: [30°, 70°, 60°, 80°]
+        resposta: D

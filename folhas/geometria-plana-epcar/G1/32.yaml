@@ -1,0 +1,43 @@
+# convertido de G1_032.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 32
+unidade: Equações com ângulos 2
+a:
+  instrucao: Os dois ângulos são suplementares. Ache x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['x e 2x suplementares: x + 2x = 180° → x = 60°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: x e 2x
+        resposta: ['60', 60°]
+      - texto: x e 5x
+        resposta: ['30', 30°]
+      - texto: x e x + 40°
+        resposta: ['70', 70°]
+      - texto: 2x e 3x + 30°
+        resposta: ['30', 30°]
+      - texto: x − 10° e x + 30°
+        resposta: ['80', 80°]
+b:
+  instrucao: Ache x e responda o que se pede.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['Suplementares x e 3x: x = 45°; o maior mede 3 × 45° = 135°.']
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Suplementares x e 3x. Quanto mede o maior?
+        resposta: ['135', 135°]
+      - texto: Complementares x e 2x. Quanto mede o maior?
+        resposta: ['60', 60°]
+      - texto: Suplementares x e x + 20°. Quanto mede o maior?
+        resposta: ['100', 100°]
+      - texto: Complementares 2x e 3x. Quanto mede o menor?
+        resposta: ['36', 36°]
+      - texto: Suplementares x + 15° e 2x. Quanto mede o menor?
+        resposta: ['70', 70°]

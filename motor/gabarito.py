@@ -1,7 +1,9 @@
 # Degrau — gabarito a partir das especificações (sem desenhar nada)
 import csv
 from .especificacao import ErroEspecificacao, carregar_folha
-from .bicos import angulos, resolver_x
+from .medidas import incognitas, ler_medida, gms
+
+FIGURAS = ('angulo', 'semirretas', 'bico', 'cruzadas', 'transversal')
 
 MAX_ITENS_PAGINA = 12   # campos por página no formulário do CASD
 
@@ -13,13 +15,20 @@ def _lista(r):
     return [str(x) for x in r] if isinstance(r, list) else [str(r)]
 
 
-def _x_bico(bico, onde):
-    """x dos rótulos do bico, conferido contra os ângulos calculados"""
-    marks = [tuple(m) for m in bico['marcas']]
+def _incognitas(item, onde):
+    """{x: minutos, y: ...} da figura do item (ou {}), conferindo todos os rótulos contra os ângulos desenhados"""
+    fig = {k: v for k, v in item.items() if k in FIGURAS}
+    if not fig: return {}
     try:
-        return resolver_x(marks, angulos([d for d, _ in bico['segmentos']], marks))
-    except ValueError as e:
+        return incognitas(fig)
+    except (ValueError, KeyError) as e:
         raise ErroEspecificacao(f'{onde}: {e}') from None
+
+
+def _confere(texto, valor, var, onde):
+    m = ler_medida(texto)
+    if m is not None and m != valor:
+        raise ErroEspecificacao(f'{onde}: resposta {texto} mas a figura dá {var} = {gms(valor)}')
 
 
 def _pares_ligar(d, folha):
@@ -57,25 +66,35 @@ def respostas_folha(folha):
                 its = [(_lista(it['resposta']) if 'resposta' in it else [], it.get('pontos')) for it in d['itens']]
             elif tipo == 'decompor':
                 its = [([' / '.join(_lista(it['resposta']))] if 'resposta' in it else [], None) for it in d['itens']]
-            elif tipo == 'exemplo' and 'bico' in d.get('figura', {}):
-                _x_bico(d['figura']['bico'], onde + ', figura')
-            elif tipo == 'figura' and 'bico' in d:
-                x_pagina = _x_bico(d['bico'], onde)
+            elif tipo == 'exemplo' and d.get('figura'):
+                _incognitas(d['figura'], onde + ', figura')
+            elif tipo == 'figura':
+                x_pagina = _incognitas(d, onde) or None
             elif tipo == 'grade':
                 for i, it in enumerate(d['itens'], 1):
-                    x = _x_bico(it['bico'], f'{onde}, item {i}') if 'bico' in it else None
-                    if 'resposta' in it:
-                        if x is not None and _lista(it['resposta']) != [str(x)]:
-                            raise ErroEspecificacao(f'{onde}, item {i}: resposta {it["resposta"]} mas os rótulos dão x = {x}')
-                        its.append((_lista(it['resposta']), None))
-                    elif x is not None:
-                        its.append(([str(x)], None))
+                    o = f'{onde}, item {i}'
+                    proprias = _incognitas(it, o)
+                    var = it.get('incognita', 'x')
+                    # sem figura própria, a pergunta pode ser sobre a figura da página ("Ache y.")
+                    fonte = proprias or ((x_pagina or {}) if 'incognita' in it else {})
+                    if 'alternativas' in it:
+                        letra = it['resposta']; letras = [chr(65 + k) for k in range(len(it['alternativas']))]
+                        if letra not in letras: raise ErroEspecificacao(f'{o}: resposta deve ser uma de {", ".join(letras)}')
+                        if 'incognita' in it and var in fonte:   # "O valor de x é" (e não "a medida de AÔB")
+                            _confere(it['alternativas'][ord(letra) - 65], fonte[var], var, o + f', alternativa {letra}')
+                        its.append(([letra], it.get('pontos')))
+                    elif 'resposta' in it:
+                        # compara com x só se a pergunta é x (incógnita declarada) ou se o item é só a figura
+                        if var in fonte and ('incognita' in it or 'texto' not in it):
+                            _confere(_lista(it['resposta'])[0], fonte[var], var, o)
+                        its.append((_lista(it['resposta']), it.get('pontos')))
+                    elif var in fonte:
+                        its.append(([gms(fonte[var])], it.get('pontos')))
                     else:
-                        raise ErroEspecificacao(f'{onde}, item {i}: sem resposta (escreva resposta ou marque o x no bico)')
+                        raise ErroEspecificacao(f'{o}: sem resposta (escreva resposta ou marque o x na figura)')
             elif tipo == 'alternativas':
                 letra = d['resposta']; texto = d['itens'][ord(letra) - 65]
-                if x_pagina is not None and texto.replace('°', '').strip() != str(x_pagina):
-                    raise ErroEspecificacao(f'{onde}: alternativa {letra} ({texto}), mas a figura dá x = {x_pagina}')
+                if x_pagina and 'x' in x_pagina: _confere(texto, x_pagina['x'], 'x', f'{onde}: alternativa {letra} ({texto})')
                 its = [([letra], None)]
             for n, (resp, pts) in enumerate(its, 1):
                 da_pagina.append({'pagina': pagina, 'bloco': b, 'item': n, 'respostas': resp,

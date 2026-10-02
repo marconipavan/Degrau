@@ -1,0 +1,53 @@
+# convertido de G1_028.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 28
+unidade: Complemento e suplemento 8
+a:
+  instrucao: 'Calcule: suplemento menos complemento.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['Para 20°: suplemento 160°, complemento 70°; 160° − 70° = 90°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Para o ângulo de 20°
+        resposta: ['90', 90°]
+      - texto: Para o ângulo de 40°
+        resposta: ['90', 90°]
+      - texto: Para o ângulo de 10°
+        resposta: ['90', 90°]
+      - texto: Para o ângulo de 75°
+        resposta: ['90', 90°]
+      - texto: Para o ângulo de 89°
+        resposta: ['90', 90°]
+      - texto: Para o ângulo de 1°
+        resposta: ['90', 90°]
+      - texto: Para o ângulo de 55°
+        resposta: ['90', 90°]
+      - texto: Para o ângulo de 30°
+        resposta: ['90', 90°]
+      - texto: Para o ângulo de 62°
+        resposta: ['90', 90°]
+      - texto: Para o ângulo de 5°
+        resposta: ['90', 90°]
+b:
+  instrucao: Calcule o que se pede.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [Suplemento 130° → complemento 130° − 90° = 40°.]
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O suplemento mede 130°. Quanto mede o complemento?
+        resposta: ['40', 40°]
+      - texto: O complemento mede 25°. Quanto mede o suplemento?
+        resposta: ['115', 115°]
+      - texto: O suplemento mede 100°. Quanto mede o complemento?
+        resposta: ['10', 10°]
+      - texto: O complemento mede 33°20'. Quanto mede o suplemento?
+        resposta: [123°20', 123°20'0", 123°20'00"]
+      - texto: O suplemento mede 179°. Quanto mede o complemento?
+        resposta: ['89', 89°]

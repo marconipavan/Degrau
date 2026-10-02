@@ -1,0 +1,56 @@
+# convertido de G1_051.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 51
+unidade: Revisão 1 1
+a:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - {texto: Vértice de KL̂M, resposta: L}
+      - texto: Classifique 91°
+        resposta: [O, obtuso]
+      - texto: Classifique 2/3 de um reto
+        resposta: [A, agudo]
+      - texto: 1/5 de volta
+        resposta: ['72', 72°]
+      - texto: Menor ângulo dos ponteiros às 5 h
+        resposta: ['150', 150°]
+      - texto: Classifique o menor ângulo às 3 h
+        resposta: [R, reto]
+      - {texto: 'Quantos ângulos formam 3 semirretas de mesma origem?', resposta: '3'}
+      - {texto: 'E 6 semirretas?', resposta: '15'}
+      - texto: Menor obtuso inteiro
+        resposta: ['91', 91°]
+      - texto: Dois agudos podem somar 90°?
+        resposta: [S, Sim]
+b:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Quantos minutos em 4°30'?
+        resposta: ['270', 270']
+      - texto: 150'
+        resposta: [2°30', 2°30'0", 2°30'00"]
+      - texto: 18°47' + 21°13'
+        resposta: ['40', 40°]
+      - texto: 90° − 47°38'
+        resposta: [42°22', 42°22'0", 42°22'00"]
+      - texto: 3 × 15°25'
+        resposta: [46°15', 46°15'0", 46°15'00"]
+      - texto: 45° ÷ 4
+        resposta: [11°15', 11°15'0", 11°15'00"]
+      - texto: 12,5°
+        resposta: [12°30', 12°30'0", 12°30'00"]
+      - texto: 10°10'10" + 9°49'50"
+        resposta: ['20', 20°]
+      - texto: 180° − 99°59'59"
+        resposta: [80°0'1", 80°00'01"]
+      - texto: 100°20' ÷ 2
+        resposta: [50°10', 50°10'0", 50°10'00"]

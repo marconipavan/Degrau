@@ -143,8 +143,8 @@ caso('horário em formato de 12 horas e passando da meia-noite', () => {
 
 caso('bloco sem gabarito: linha de erro no Painel', () => {
   const s = carregar();
-  s.aoEnviar(envio('G1 4-6', '19:02', '19:10', {}));
-  assert.strictEqual(s.painel[1][7], 'ERRO: sem gabarito: G1 4, G1 5, G1 6');
+  s.aoEnviar(envio('G1 101-103', '19:02', '19:10', {}));     // folhas que não existem
+  assert.strictEqual(s.painel[1][7], 'ERRO: sem gabarito: G1 101, G1 102, G1 103');
   s.aoEnviar(envio('G1 1-3 v2', '19:02', '19:10', {}));            // repetição sem a versão 2 carregada
   assert.strictEqual(s.painel[2][7], 'ERRO: sem gabarito: G1 1, G1 2, G1 3 v2');
   s.aoEnviar(envio('G1 1-9', '19:02', '19:10', {}));               // mais folhas do que o formulário comporta

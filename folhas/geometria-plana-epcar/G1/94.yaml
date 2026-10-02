@@ -1,0 +1,49 @@
+# convertido de G1_094.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 94
+unidade: Questões de prova 4
+a:
+  instrucao: Marque a alternativa correta (r // s).
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'Na figura, as retas r e s são paralelas. O valor de x é:'
+        alternativas: [20°, 70°, 25°, 10°]
+        resposta: A
+        incognita: x
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, acima-direita, 3x + 10°]
+          - [s, acima-direita, 5x − 30°]
+      - texto: 'Na figura, r // s. O valor de x é:'
+        alternativas: [26°, 22°, 76°, 30°]
+        resposta: B
+        incognita: x
+        transversal:
+          direcao: 76
+          marcas:
+          - [r, abaixo-direita, 2x + 60°]
+          - [s, acima-direita, 3x + 10°]
+b:
+  instrucao: Marque a alternativa correta (r // s).
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'Na figura, r // s. O valor de x + y é:'
+        alternativas: [40°, 150°, 110°, 70°]
+        resposta: C
+        transversal:
+          direcao: 110
+          marcas:
+          - [r, acima-direita, 2x + 30°]
+          - [s, acima-direita, 110°]
+          - [s, acima-esquerda, y]
+      - texto: 'Dois ângulos colaterais internos medem 3x + 20° e 2x + 10°. O menor deles mede:'
+        alternativas: [30°, 110°, 90°, 70°]
+        resposta: D

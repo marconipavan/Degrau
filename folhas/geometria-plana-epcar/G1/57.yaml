@@ -1,0 +1,99 @@
+# convertido de G1_057.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 57
+unidade: Revisão 1 7
+a:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'Bissetriz: metades 3x − 10° e x + 30°. Ache x.'
+        resposta: ['20', 20°]
+        incognita: x
+      - texto: 'Opostos: 2x + 5° e 3x − 25°. Ache x.'
+        resposta: ['30', 30°]
+        incognita: x
+      - texto: 'Lado a lado: x + 15° e 2x. Ache x.'
+        resposta: ['55', 55°]
+        incognita: x
+      - texto: 'Sobre uma reta: x, x + 20°, x + 40°. Ache x.'
+        resposta: ['40', 40°]
+        incognita: x
+      - texto: 'Em volta de um ponto: x, 3x, 5x, 3x. Ache x.'
+        resposta: ['30', 30°]
+        incognita: x
+      - texto: 'Adjacentes complementares: 2x e x + 15°. Ache x.'
+        resposta: ['25', 25°]
+        incognita: x
+      - texto: 'Adjacentes suplementares: 4x e 5x. Ache x.'
+        resposta: ['20', 20°]
+        incognita: x
+      - texto: 'Opostos: x/2 + 30° e x. Ache x.'
+        resposta: ['60', 60°]
+        incognita: x
+      - texto: Bissetriz de um ângulo de 6x; cada metade mede 39°. Ache x.
+        resposta: ['13', 13°]
+        incognita: x
+      - texto: 'Lado a lado: 3x e o complemento de x. Ache x.'
+        resposta: ['45', 45°]
+        incognita: x
+b:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔM = 5x + 3° e MÔB = 3x + 21°. Ache x.
+        resposta: ['9', 9°]
+        incognita: x
+        semirretas:
+          direcoes: [0, 48, 96]
+          nomes: [A, M, B]
+          vertice: O
+          marcas:
+          - [A, M, null, 5x + 3°]
+          - [M, B, null, 3x + 21°]
+          comprimento: 15
+      - texto: x + 48° e 4x
+        resposta: ['16', 16°]
+        cruzadas:
+          direcoes: [0, 64]
+          ponto: O
+          marcas:
+          - [0, 64, x + 48°]
+          - [180, 244, 4x]
+      - texto: 3x + 15° e x + 5°
+        resposta: ['40', 40°]
+        cruzadas:
+          direcoes: [0, 135]
+          ponto: O
+          marcas:
+          - [0, 135, 3x + 15°]
+          - [135, 180, x + 5°]
+      - texto: 2x, x + 15°, x + 25°
+        resposta: ['35', 35°]
+        semirretas:
+          direcoes: [0, 70, 120, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, 2x]
+          - [B, C, null, x + 15°]
+          - [C, D, null, x + 25°]
+          comprimento: 15
+      - texto: x + 10°, 2x, 2x + 20°, 90°
+        resposta: ['48', 48°]
+        semirretas:
+          direcoes: [0, 58, 154, 270]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, x + 10°]
+          - [B, C, null, 2x]
+          - [C, D, null, 2x + 20°]
+          - [D, A, null, 90°]
+          comprimento: 15

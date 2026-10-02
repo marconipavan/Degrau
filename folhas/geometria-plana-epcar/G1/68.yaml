@@ -1,0 +1,61 @@
+# convertido de G1_068.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 68
+unidade: 'Paralelas: identificar 8'
+a:
+  instrucao: O ângulo 1 mede 70°. Calcule os pedidos.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['1 mede 70°: 5 (correspondente) mede 70°; 2 (lado a lado) mede 110°.']
+  - figura:
+      transversal:
+        direcao: 70
+        marcas:
+        - [r, acima-direita, 70°]
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-esquerda, '3']
+        - [s, acima-direita, '5']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-direita, '8']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Quanto mede o ângulo 5?
+        resposta: ['70', 70°]
+      - texto: Quanto mede o ângulo 3?
+        resposta: ['70', 70°]
+      - texto: Quanto mede o ângulo 2?
+        resposta: ['110', 110°]
+      - texto: Quanto mede o ângulo 8?
+        resposta: ['110', 110°]
+      - texto: Quanto mede o ângulo 6?
+        resposta: ['110', 110°]
+b:
+  instrucao: O ângulo 4 mede 115°. Calcule os pedidos.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - figura:
+      transversal:
+        direcao: 65
+        marcas:
+        - [r, acima-direita, '1']
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-direita, 115°]
+        - [s, acima-direita, '5']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-esquerda, '7']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Quanto mede o ângulo 6?
+        resposta: ['115', 115°]
+      - texto: Quanto mede o ângulo 2?
+        resposta: ['115', 115°]
+      - texto: Quanto mede o ângulo 1?
+        resposta: ['65', 65°]
+      - texto: Quanto mede o ângulo 7?
+        resposta: ['65', 65°]
+      - texto: Quanto mede o ângulo 5?
+        resposta: ['65', 65°]

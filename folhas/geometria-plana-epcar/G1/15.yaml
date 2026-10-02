@@ -1,0 +1,49 @@
+# convertido de G1_015.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 15
+unidade: Graus, minutos e segundos 5
+a:
+  instrucao: Some os ângulos.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['20°15'' + 30°20'' = 50°35'' (graus com graus, minutos com minutos).']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 20°15' + 30°20'
+        resposta: [50°35', 50°35'0", 50°35'00"]
+      - texto: 12°10' + 5°40'
+        resposta: [17°50', 17°50'0", 17°50'00"]
+      - texto: 45°5' + 10°50'
+        resposta: [55°55', 55°55'0", 55°55'00"]
+      - texto: 8°30' + 1°25'
+        resposta: [9°55', 9°55'0", 9°55'00"]
+      - texto: 60°12' + 20°7'
+        resposta: [80°19', 80°19'0", 80°19'00"]
+      - texto: 33°33' + 11°11'
+        resposta: [44°44', 44°44'0", 44°44'00"]
+      - texto: 90° + 0°45'
+        resposta: [90°45', 90°45'0", 90°45'00"]
+      - texto: 14°20' + 14°20'
+        resposta: [28°40', 28°40'0", 28°40'00"]
+      - texto: 5°5' + 50°50'
+        resposta: [55°55', 55°55'0", 55°55'00"]
+      - texto: 71°18' + 8°41'
+        resposta: [79°59', 79°59'0", 79°59'00"]
+b:
+  instrucao: Some os ângulos.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [10°20'15" + 5°10'30" = 15°30'45".]
+  - grade:
+      colunas: 2
+      itens:
+      - {texto: 10°20'15" + 5°10'30", resposta: 15°30'45"}
+      - {texto: 22°5'5" + 3°40'50", resposta: 25°45'55"}
+      - {texto: 40°30'20" + 10°10'10", resposta: 50°40'30"}
+      - {texto: 7°0'45" + 12°25'10", resposta: 19°25'55"}
+      - texto: 1°1'1" + 2°2'2"
+        resposta: [3°3'3", 3°03'03"]

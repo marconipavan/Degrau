@@ -1,0 +1,125 @@
+# convertido de G1_090.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 90
+unidade: O bizu dos bicos 10
+a:
+  instrucao: Calcule x.  (r // s)
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['85', 85°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-39, 15]
+          - [-134, 0]
+          marcas:
+          - [0, dir, 39°]
+          - [1, null, x]
+          - [2, dir, 46°]
+      - texto: Ache x.
+        resposta: [75°15', 75°15'0", 75°15'00"]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-149.5, 15]
+          - [-44.75, 0]
+          marcas:
+          - [0, esq, 30°30']
+          - [1, null, x]
+          - [2, esq, 44°45']
+      - texto: Ache x.
+        resposta: ['69', 69°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-27, 15]
+          - [-152, 15]
+          - [-41, 0]
+          marcas:
+          - [0, dir, 27°]
+          - [1, null, 55°]
+          - [2, null, x]
+          - [3, esq, 41°]
+      - texto: Ache x.
+        resposta: ['63', 63°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-26, 15]
+          - [-148, 15]
+          - [-34, 15]
+          - [-151, 0]
+          marcas:
+          - [0, dir, 26°]
+          - [1, null, 58°]
+          - [2, null, 66°]
+          - [3, null, x]
+          - [4, dir, 29°]
+b:
+  instrucao: Calcule x.  (r // s)
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['20', 20°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-30, 15]
+          - [-130, 0]
+          marcas:
+          - [0, dir, x + 10°]
+          - [1, null, 4x]
+          - [2, dir, 2x + 10°]
+      - texto: Ache x.
+        resposta: ['10', 10°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-25, 15]
+          - [-150, 15]
+          - [-40, 0]
+          marcas:
+          - [0, dir, 2x + 5°]
+          - [1, null, 5x + 5°]
+          - [2, null, 7x]
+          - [3, esq, 4x]
+      - texto: Ache x.
+        resposta: ['7', 7°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-150, 15]
+          - [-32, 15]
+          - [-145, 0]
+          marcas:
+          - [0, esq, 3x + 9°]
+          - [1, null, 9x − 1°]
+          - [2, null, 10x − 3°]
+          - [3, dir, 5x]
+      - texto: Ache x.
+        resposta: ['35', 35°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-35, 15]
+          - [-135, 0]
+          marcas:
+          - [0, dir, x]
+          - [1, null, 2x + 10°]
+          - [2, dir, x + 10°]

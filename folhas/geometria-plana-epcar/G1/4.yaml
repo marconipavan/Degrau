@@ -1,0 +1,48 @@
+# convertido de G1_004.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 4
+unidade: Reconhecer ângulos 4
+a:
+  instrucao: Escreva o vértice de cada ângulo.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['No ângulo AÔB, o vértice é O (a letra do meio, com o chapéu).']
+  - grade:
+      colunas: 2
+      itens:
+      - {texto: Vértice do ângulo AB̂C, resposta: B}
+      - {texto: Vértice do ângulo DÊF, resposta: E}
+      - {texto: Vértice do ângulo MN̂P, resposta: N}
+      - {texto: Vértice do ângulo RŜT, resposta: S}
+      - {texto: Vértice do ângulo XŶZ, resposta: Y}
+      - {texto: Vértice do ângulo GĤI, resposta: H}
+      - {texto: Vértice do ângulo JK̂L, resposta: K}
+      - {texto: Vértice do ângulo PQ̂R, resposta: Q}
+      - {texto: Vértice do ângulo UV̂W, resposta: V}
+      - {texto: Vértice do ângulo BÔC, resposta: O}
+b:
+  instrucao: Escreva os dois lados de cada ângulo.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['Ângulo AÔB: lados OA e OB (cada lado começa no vértice).']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Lados do ângulo DÊF
+        resposta:
+          conjunto: [ED, EF]
+      - texto: Lados do ângulo MN̂P
+        resposta:
+          conjunto: [NM, NP]
+      - texto: Lados do ângulo AĈB
+        resposta:
+          conjunto: [CA, CB]
+      - texto: Lados do ângulo RÔS
+        resposta:
+          conjunto: [OR, OS]
+      - texto: Lados do ângulo XŶZ
+        resposta:
+          conjunto: [YX, YZ]

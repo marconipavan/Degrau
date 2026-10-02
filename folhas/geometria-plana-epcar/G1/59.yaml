@@ -1,0 +1,95 @@
+# convertido de G1_059.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 59
+unidade: Revisão 1 9
+a:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - {texto: Complemento de 45°45'45", resposta: 44°14'15"}
+      - texto: O suplemento de x é o quádruplo do complemento. Ache x.
+        resposta: ['60', 60°]
+        incognita: x
+      - texto: Complemento do suplemento de 152°
+        resposta: ['62', 62°]
+      - texto: 'Opostos: 6x − 18° e 4x + 12°. Ache x.'
+        resposta: ['15', 15°]
+        incognita: x
+      - texto: 'Bissetriz de 75°30'': cada metade?'
+        resposta: [37°45', 37°45'0", 37°45'00"]
+      - texto: 'Suplementares na razão 7 : 11. O menor?'
+        resposta: ['70', 70°]
+      - texto: 'Em volta de um ponto: 2x, 3x, 4x, 6x. Ache x.'
+        resposta: ['24', 24°]
+        incognita: x
+      - texto: 3 × 27°47'
+        resposta: [83°21', 83°21'0", 83°21'00"]
+      - texto: O complemento de x é 7x. Ache x.
+        resposta: [11°15', 11°15'0", 11°15'00"]
+        incognita: x
+      - texto: 'Bissetrizes de adjacentes suplementares: MÔN?'
+        resposta: ['90', 90°]
+b:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔM = 7x − 12° e MÔB = 4x + 15°. Ache x.
+        resposta: ['9', 9°]
+        incognita: x
+        semirretas:
+          direcoes: [0, 51, 102]
+          nomes: [A, M, B]
+          vertice: O
+          marcas:
+          - [A, M, null, 7x − 12°]
+          - [M, B, null, 4x + 15°]
+          comprimento: 15
+      - texto: 3x + 17° e 5x + 3°
+        resposta: ['20', 20°]
+        cruzadas:
+          direcoes: [0, 77]
+          ponto: O
+          marcas:
+          - [0, 77, 3x + 17°]
+          - [77, 180, 5x + 3°]
+      - texto: 4x, x + 5°, 2x + 10°, 5x + 21°
+        resposta: ['27', 27°]
+        semirretas:
+          direcoes: [0, 108, 140, 204]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, 4x]
+          - [B, C, null, x + 5°]
+          - [C, D, null, 2x + 10°]
+          - [D, A, null, 5x + 21°]
+          comprimento: 15
+      - texto: x + 7°, 2x − 7°, 3x
+        resposta: ['30', 30°]
+        semirretas:
+          direcoes: [0, 37, 90, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, x + 7°]
+          - [B, C, null, 2x − 7°]
+          - [C, D, null, 3x]
+          comprimento: 15
+      - texto: AÔB = 72° e BÔC = 108°. MÔN?
+        resposta: ['90', 90°]
+        semirretas:
+          direcoes: [0, 36, 72, 126, 180]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 72°]
+          - [B, C, null, 108°]
+          tracejadas: [M, N]
+          comprimento: 15

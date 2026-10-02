@@ -1,0 +1,69 @@
+# convertido de G1_062.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 62
+unidade: 'Paralelas: identificar 2'
+a:
+  instrucao: Escreva o número do alterno interno.
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+  - exemplo:
+      texto: ['Alternos internos: entre as paralelas e em lados opostos da transversal: 3 e 5.']
+  - figura:
+      transversal:
+        direcao: 55
+        marcas:
+        - [r, acima-direita, '1']
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-esquerda, '3']
+        - [r, abaixo-direita, '4']
+        - [s, acima-direita, '5']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-esquerda, '7']
+        - [s, abaixo-direita, '8']
+  - grade:
+      colunas: 1
+      itens:
+      - {texto: O alterno interno do ângulo 3, resposta: '5'}
+      - {texto: O alterno interno do ângulo 4, resposta: '6'}
+      - {texto: O alterno interno do ângulo 5, resposta: '3'}
+      - {texto: O alterno interno do ângulo 6, resposta: '4'}
+b:
+  instrucao: São alternos internos? Responda S ou N.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - figura:
+      transversal:
+        direcao: 125
+        marcas:
+        - [r, acima-direita, '1']
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-esquerda, '3']
+        - [r, abaixo-direita, '4']
+        - [s, acima-direita, '5']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-esquerda, '7']
+        - [s, abaixo-direita, '8']
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 3 e 5 são alternos internos?
+        resposta: [S, Sim]
+      - texto: 4 e 6 são alternos internos?
+        resposta: [S, Sim]
+      - texto: 3 e 6 são alternos internos?
+        resposta: [N, Não, Nao]
+      - texto: 4 e 5 são alternos internos?
+        resposta: [N, Não, Nao]
+      - texto: 1 e 7 são alternos internos?
+        resposta: [N, Não, Nao]
+      - texto: 5 e 3 são alternos internos?
+        resposta: [S, Sim]
+      - texto: 2 e 6 são alternos internos?
+        resposta: [N, Não, Nao]
+      - texto: 6 e 4 são alternos internos?
+        resposta: [S, Sim]
+      - texto: 3 e 7 são alternos internos?
+        resposta: [N, Não, Nao]
+      - texto: 4 e 8 são alternos internos?
+        resposta: [N, Não, Nao]

@@ -1,0 +1,117 @@
+# convertido de G1_084.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 84
+unidade: O bizu dos bicos 4
+a:
+  instrucao: Calcule x.  (r // s)
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+  - exemplo:
+      texto: ['Em r 35°30'', em s 42°45'': x = 35°30'' + 42°45'' = 78°15''.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: [78°15', 78°15'0", 78°15'00"]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-35.5, 15]
+          - [-137.25, 0]
+          marcas:
+          - [0, dir, 35°30']
+          - [1, null, x]
+          - [2, dir, 42°45']
+      - texto: Ache x.
+        resposta: [80°5', 80°05', 80°5'0", 80°05'00"]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-151.75, 15]
+          - [-51.8333, 0]
+          marcas:
+          - [0, esq, 28°15']
+          - [1, null, x]
+          - [2, esq, 51°50']
+      - texto: Ache x.
+        resposta: ['74', 74°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-40.3333, 15]
+          - [-146.3333, 0]
+          marcas:
+          - [0, dir, 40°20']
+          - [1, null, x]
+          - [2, dir, 33°40']
+      - texto: Ache x.
+        resposta: [73°15', 73°15'0", 73°15'00"]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-132.25, 15]
+          - [-25.5, 0]
+          marcas:
+          - [0, esq, 47°45']
+          - [1, null, x]
+          - [2, esq, 25°30']
+b:
+  instrucao: Calcule x.  (r // s)
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: [36°40', 36°40'0", 36°40'00"]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-36.6667, 15]
+          - [-135.1667, 0]
+          marcas:
+          - [0, dir, x]
+          - [1, null, 81°30']
+          - [2, dir, 44°50']
+      - texto: Ache x.
+        resposta: [48°15', 48°15'0", 48°15'00"]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-148.5833, 15]
+          - [-48.25, 0]
+          marcas:
+          - [0, esq, 31°25']
+          - [1, null, 79°40']
+          - [2, esq, x]
+      - texto: Ache x.
+        resposta: [55°30', 55°30'0", 55°30'00"]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-25.75, 15]
+          - [-124.5, 0]
+          marcas:
+          - [0, dir, 25°45']
+          - [1, null, 81°15']
+          - [2, dir, x]
+      - texto: Ache x.
+        resposta: [52°10', 52°10'0", 52°10'00"]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-127.8333, 15]
+          - [-29.5833, 0]
+          marcas:
+          - [0, esq, x]
+          - [1, null, 81°45']
+          - [2, esq, 29°35']

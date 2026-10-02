@@ -1,0 +1,54 @@
+# convertido de G1_098.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 98
+unidade: Questões de prova 8
+a:
+  instrucao: Marque a alternativa correta (r // s).
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'Na figura, r // s. O valor de x é:'
+        alternativas: [30°, 26°, 20°, 80°]
+        resposta: A
+        incognita: x
+        transversal:
+          direcao: 80
+          marcas:
+          - [r, acima-direita, 2x + 20°]
+          - [s, acima-esquerda, 3x + 10°]
+      - texto: 'Na figura, r // s. O valor de x é:'
+        alternativas: [5°, 7°, 9°, 35°]
+        resposta: B
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-150, 15]
+          - [-32, 15]
+          - [-145, 0]
+          marcas:
+          - [0, esq, 3x + 9°]
+          - [1, null, 9x − 1°]
+          - [2, null, 10x − 3°]
+          - [3, dir, 5x]
+b:
+  instrucao: Marque a alternativa correta (r // s).
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'Na figura, r // s. O ângulo em s, abaixo à direita, mede:'
+        alternativas: [50°, 104°, 76°, 100°]
+        resposta: C
+        transversal:
+          direcao: 104
+          marcas:
+          - [r, acima-direita, 3x − 46°]
+          - [s, acima-esquerda, 2x − 24°]
+      - texto: Uma transversal corta duas paralelas. Um dos 8 ângulos mede 38°. Quantos dos 8 ângulos medem 142°?
+        alternativas: ['2', '3', '1', '4']
+        resposta: D

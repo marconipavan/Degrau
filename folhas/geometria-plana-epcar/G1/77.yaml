@@ -1,0 +1,101 @@
+# convertido de G1_077.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 77
+unidade: 'Paralelas: calcular 7'
+a:
+  instrucao: Ache x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['80', 80°]
+        incognita: x
+        transversal:
+          direcao: 60
+          marcas:
+          - [r, acima-direita, x/2 + 20°]
+          - [s, acima-direita, 60°]
+      - texto: Ache x.
+        resposta: ['80', 80°]
+        incognita: x
+        transversal:
+          direcao: 50
+          marcas:
+          - [r, abaixo-esquerda, x/2 + 10°]
+          - [s, acima-direita, x − 30°]
+      - texto: Ache x.
+        resposta: ['60', 60°]
+        incognita: x
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, abaixo-direita, x/3 + 90°]
+          - [s, acima-direita, 70°]
+      - texto: Ache x.
+        resposta: ['80', 80°]
+        incognita: x
+        transversal:
+          direcao: 80
+          marcas:
+          - [r, acima-esquerda, x/2 + 60°]
+          - [s, acima-esquerda, x + 20°]
+      - texto: Ache x.
+        resposta: ['60', 60°]
+        incognita: x
+        transversal:
+          direcao: 40
+          marcas:
+          - [r, abaixo-esquerda, x/2 + 10°]
+          - [s, acima-esquerda, x + 80°]
+b:
+  instrucao: Ache x (pode dar graus e minutos).
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['2x = 75° → x = 37,5° = 37°30''.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: [37°30', 37°30'0", 37°30'00"]
+        incognita: x
+        transversal:
+          direcao: 75
+          marcas:
+          - [r, acima-direita, 2x]
+          - [s, acima-direita, 75°]
+      - texto: Ache x.
+        resposta: ['25', 25°]
+        incognita: x
+        transversal:
+          direcao: 100
+          marcas:
+          - [r, abaixo-esquerda, 4x]
+          - [s, abaixo-esquerda, 100°]
+      - texto: Ache x.
+        resposta: [57°30', 57°30'0", 57°30'00"]
+        incognita: x
+        transversal:
+          direcao: 50
+          marcas:
+          - [r, abaixo-direita, 2x + 15°]
+          - [s, acima-direita, 50°]
+      - texto: Ache x.
+        resposta: ['15', 15°]
+        incognita: x
+        transversal:
+          direcao: 65
+          marcas:
+          - [r, abaixo-esquerda, 65°]
+          - [s, acima-direita, 4x + 5°]
+      - texto: Ache x.
+        resposta: [37°30', 37°30'0", 37°30'00"]
+        incognita: x
+        transversal:
+          direcao: 110
+          marcas:
+          - [r, acima-direita, 110°]
+          - [s, abaixo-direita, 2x − 5°]

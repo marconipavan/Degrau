@@ -1,0 +1,131 @@
+# convertido de G1_048.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 48
+unidade: Posições 8
+a:
+  instrucao: OM e ON são bissetrizes. Quanto mede MÔN?
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['AÔB = 40°, BÔC = 80°: MÔB = 20°, BÔN = 40°, MÔN = 60° (metade da soma).']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔB = 40° e BÔC = 80°. MÔN?
+        resposta: ['60', 60°]
+        semirretas:
+          direcoes: [0, 20, 40, 80, 120]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 40°]
+          - [B, C, null, 80°]
+          tracejadas: [M, N]
+          comprimento: 15
+      - texto: AÔB = 30° e BÔC = 50°. MÔN?
+        resposta: ['40', 40°]
+        semirretas:
+          direcoes: [0, 15, 30, 55, 80]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 30°]
+          - [B, C, null, 50°]
+          tracejadas: [M, N]
+          comprimento: 17
+      - texto: AÔB = 60° e BÔC = 60°. MÔN?
+        resposta: ['60', 60°]
+        semirretas:
+          direcoes: [0, 30, 60, 90, 120]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 60°]
+          - [B, C, null, 60°]
+          tracejadas: [M, N]
+          comprimento: 15
+      - texto: AÔB = 20° e BÔC = 100°. MÔN?
+        resposta: ['60', 60°]
+        semirretas:
+          direcoes: [0, 10, 20, 70, 120]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 20°]
+          - [B, C, null, 100°]
+          tracejadas: [M, N]
+          comprimento: 17
+      - texto: AÔB = 70° e BÔC = 45°. MÔN?
+        resposta: [57°30', 57°30'0", 57°30'00"]
+        semirretas:
+          direcoes: [0, 35, 70, 92.5, 115]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 70°]
+          - [B, C, null, 45°]
+          tracejadas: [M, N]
+          comprimento: 15
+b:
+  instrucao: OM e ON são bissetrizes. Quanto mede MÔN?
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔB = 50° e BÔC = 130°. MÔN?
+        resposta: ['90', 90°]
+        semirretas:
+          direcoes: [0, 25, 50, 115, 180]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 50°]
+          - [B, C, null, 130°]
+          tracejadas: [M, N]
+          comprimento: 15
+      - texto: AÔB = 100° e BÔC = 80°. MÔN?
+        resposta: ['90', 90°]
+        semirretas:
+          direcoes: [0, 50, 100, 140, 180]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 100°]
+          - [B, C, null, 80°]
+          tracejadas: [M, N]
+          comprimento: 15
+      - texto: AÔB = 30° e BÔC = 60°. MÔN?
+        resposta: ['45', 45°]
+        semirretas:
+          direcoes: [0, 15, 30, 60, 90]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 30°]
+          - [B, C, null, 60°]
+          tracejadas: [M, N]
+          comprimento: 17
+      - texto: AÔB = 15° e BÔC = 165°. MÔN?
+        resposta: ['90', 90°]
+        semirretas:
+          direcoes: [0, 7.5, 15, 97.5, 180]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 15°]
+          - [B, C, null, 165°]
+          tracejadas: [M, N]
+          comprimento: 17
+      - texto: AÔB = 45° e BÔC = 45°. MÔN?
+        resposta: ['45', 45°]
+        semirretas:
+          direcoes: [0, 22.5, 45, 67.5, 90]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 45°]
+          - [B, C, null, 45°]
+          tracejadas: [M, N]
+          comprimento: 15

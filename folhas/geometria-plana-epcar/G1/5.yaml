@@ -1,0 +1,71 @@
+# convertido de G1_005.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 5
+unidade: Reconhecer ângulos 5
+a:
+  instrucao: Escreva o nome do ângulo.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['Vértice O, lados OA e OB → ângulo AÔB (ou BÔA).']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Vértice B, lados BA e BC
+        resposta: [ABC, CBA, AB̂C, CB̂A]
+      - texto: Vértice E, lados ED e EF
+        resposta: [DEF, FED, DÊF, FÊD]
+      - texto: Vértice Q, lados QP e QR
+        resposta: [PQR, RQP, PQ̂R, RQ̂P]
+      - texto: Vértice O, lados OM e ON
+        resposta: [MON, NOM, MÔN, NÔM]
+      - texto: Vértice Y, lados YX e YZ
+        resposta: [XYZ, ZYX, XŶZ, ZŶX]
+      - texto: Vértice K, lados KJ e KL
+        resposta: [JKL, LKJ, JK̂L, LK̂J]
+      - texto: Vértice T, lados TS e TU
+        resposta: [STU, UTS, ST̂U, UT̂S]
+      - texto: Vértice O, lados OA e OD
+        resposta: [AOD, DOA, AÔD, DÔA]
+      - texto: Vértice H, lados HG e HI
+        resposta: [GHI, IHG, GĤI, IĤG]
+      - texto: Vértice C, lados CB e CD
+        resposta: [BCD, DCB, BĈD, DĈB]
+b:
+  instrucao: 'Classifique cada ângulo: A, R ou O.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ângulo 1 da figura
+        resposta: [A, agudo]
+        angulo:
+          direcoes: [0, 80]
+          nomes: [O, A, B]
+          marca: arco
+      - texto: Ângulo 2 da figura
+        resposta: [O, obtuso]
+        angulo:
+          direcoes: [0, 100]
+          nomes: [O, A, B]
+          marca: arco
+      - texto: Ângulo 3 da figura
+        resposta: [R, reto]
+        angulo:
+          direcoes: [20, 110]
+          nomes: [O, A, B]
+          marca: reto
+      - texto: Ângulo 4 da figura
+        resposta: [O, obtuso]
+        angulo:
+          direcoes: [0, 150]
+          nomes: [O, A, B]
+          marca: arco
+      - texto: Ângulo 5 da figura
+        resposta: [A, agudo]
+        angulo:
+          direcoes: [-20, 55]
+          nomes: [O, A, B]
+          marca: arco

@@ -1,0 +1,31 @@
+# convertido de G1_097.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 97
+unidade: Questões de prova 7
+a:
+  instrucao: Marque a alternativa correta.
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'O complemento do suplemento de um ângulo é igual à quarta parte desse ângulo. O ângulo mede:'
+        alternativas: [120°, 30°, 60°, 150°]
+        resposta: A
+      - texto: 'A diferença entre o suplemento de um ângulo e o triplo do seu complemento é 20°. O ângulo mede:'
+        alternativas: [35°, 55°, 45°, 65°]
+        resposta: B
+b:
+  instrucao: Marque a alternativa correta.
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'Dois ângulos são suplementares e o triplo de um é igual ao dobro do outro. O menor mede:'
+        alternativas: [108°, 36°, 72°, 60°]
+        resposta: C
+      - texto: 'O suplemento do complemento de um ângulo é 7 vezes esse ângulo. O ângulo mede:'
+        alternativas: [75°, 30°, 105°, 15°]
+        resposta: D

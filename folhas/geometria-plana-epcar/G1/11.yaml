@@ -1,0 +1,63 @@
+# convertido de G1_011.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 11
+unidade: Graus, minutos e segundos 1
+a:
+  instrucao: Quantos minutos há em cada ângulo?
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [1° = 60'. Então 3° = 3 × 60' = 180'.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 1°
+        resposta: ['60', 60']
+      - texto: 2°
+        resposta: ['120', 120']
+      - texto: 3°
+        resposta: ['180', 180']
+      - texto: 4°
+        resposta: ['240', 240']
+      - texto: 5°
+        resposta: ['300', 300']
+      - texto: 6°
+        resposta: ['360', 360']
+      - texto: 10°
+        resposta: ['600', 600']
+      - texto: 12°
+        resposta: ['720', 720']
+      - texto: 15°
+        resposta: ['900', 900']
+      - texto: 20°
+        resposta: ['1200', 1200']
+b:
+  instrucao: Quantos segundos há em cada medida?
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [1' = 60". Então 2' = 2 × 60" = 120".]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 1'
+        resposta: ['60', 60"]
+      - texto: 2'
+        resposta: ['120', 120"]
+      - texto: 3'
+        resposta: ['180', 180"]
+      - texto: 4'
+        resposta: ['240', 240"]
+      - texto: 5'
+        resposta: ['300', 300"]
+      - texto: 6'
+        resposta: ['360', 360"]
+      - texto: 10'
+        resposta: ['600', 600"]
+      - texto: 12'
+        resposta: ['720', 720"]
+      - texto: 15'
+        resposta: ['900', 900"]
+      - texto: 30'
+        resposta: ['1800', 1800"]

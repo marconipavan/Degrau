@@ -1,0 +1,136 @@
+# convertido de G1_047.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 47
+unidade: Posições 7
+a:
+  instrucao: Os ângulos formam um raso. Ache x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['x, 2x e 30° lado a lado sobre uma reta: x + 2x + 30° = 180° → x = 50°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: x, 2x, 30°
+        resposta: ['50', 50°]
+        semirretas:
+          direcoes: [0, 50, 150, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, x]
+          - [B, C, null, 2x]
+          - [C, D, null, 30°]
+          comprimento: 15
+      - texto: x, x, x
+        resposta: ['60', 60°]
+        semirretas:
+          direcoes: [0, 60, 120, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, x]
+          - [B, C, null, x]
+          - [C, D, null, x]
+          comprimento: 15
+      - texto: 2x, 3x, x + 30°
+        resposta: ['25', 25°]
+        semirretas:
+          direcoes: [0, 50, 125, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, 2x]
+          - [B, C, null, 3x]
+          - [C, D, null, x + 30°]
+          comprimento: 15
+      - texto: x + 10°, x + 20°, x + 30°
+        resposta: ['40', 40°]
+        semirretas:
+          direcoes: [0, 50, 110, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, x + 10°]
+          - [B, C, null, x + 20°]
+          - [C, D, null, x + 30°]
+          comprimento: 15
+      - texto: 4x, x, 45°
+        resposta: ['27', 27°]
+        semirretas:
+          direcoes: [0, 108, 135, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, 4x]
+          - [B, C, null, x]
+          - [C, D, null, 45°]
+          comprimento: 15
+b:
+  instrucao: Os ângulos dão a volta toda. Ache x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['x, 2x, 3x e 4x em volta de O: 10x = 360° → x = 36°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: x, 2x, 3x, 4x
+        resposta: ['36', 36°]
+        semirretas:
+          direcoes: [0, 36, 108, 216]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, x]
+          - [B, C, null, 2x]
+          - [C, D, null, 3x]
+          - [D, A, null, 4x]
+          comprimento: 15
+      - texto: x, x, x, x
+        resposta: ['90', 90°]
+        semirretas:
+          direcoes: [0, 90, 180, 270]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, x]
+          - [B, C, null, x]
+          - [C, D, null, x]
+          - [D, A, null, x]
+          comprimento: 15
+      - texto: 2x, 3x, 100°
+        resposta: ['52', 52°]
+        semirretas:
+          direcoes: [0, 104, 260]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 2x]
+          - [B, C, null, 3x]
+          - [C, A, null, 100°]
+          comprimento: 15
+      - texto: x + 20°, x + 40°, 2x
+        resposta: ['75', 75°]
+        semirretas:
+          direcoes: [0, 95, 210]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, x + 20°]
+          - [B, C, null, x + 40°]
+          - [C, A, null, 2x]
+          comprimento: 15
+      - texto: 5x, 90°, 3x, x
+        resposta: ['30', 30°]
+        semirretas:
+          direcoes: [0, 150, 240, 330]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, 5x]
+          - [B, C, null, 90°]
+          - [C, D, null, 3x]
+          - [D, A, null, x]
+          comprimento: 15

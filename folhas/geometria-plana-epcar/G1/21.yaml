@@ -1,0 +1,63 @@
+# convertido de G1_021.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 21
+unidade: Complemento e suplemento 1
+a:
+  instrucao: Calcule o complemento de cada ângulo.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['Complemento de 30°: 90° − 30° = 60°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Complemento de 20°
+        resposta: ['70', 70°]
+      - texto: Complemento de 35°
+        resposta: ['55', 55°]
+      - texto: Complemento de 45°
+        resposta: ['45', 45°]
+      - texto: Complemento de 10°
+        resposta: ['80', 80°]
+      - texto: Complemento de 72°
+        resposta: ['18', 18°]
+      - texto: Complemento de 89°
+        resposta: ['1', 1°]
+      - texto: Complemento de 1°
+        resposta: ['89', 89°]
+      - texto: Complemento de 64°
+        resposta: ['26', 26°]
+      - texto: Complemento de 50°
+        resposta: ['40', 40°]
+      - texto: Complemento de 18°
+        resposta: ['72', 72°]
+b:
+  instrucao: Calcule o suplemento de cada ângulo.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['Suplemento de 50°: 180° − 50° = 130°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Suplemento de 50°
+        resposta: ['130', 130°]
+      - texto: Suplemento de 120°
+        resposta: ['60', 60°]
+      - texto: Suplemento de 90°
+        resposta: ['90', 90°]
+      - texto: Suplemento de 10°
+        resposta: ['170', 170°]
+      - texto: Suplemento de 135°
+        resposta: ['45', 45°]
+      - texto: Suplemento de 179°
+        resposta: ['1', 1°]
+      - texto: Suplemento de 1°
+        resposta: ['179', 179°]
+      - texto: Suplemento de 77°
+        resposta: ['103', 103°]
+      - texto: Suplemento de 100°
+        resposta: ['80', 80°]
+      - texto: Suplemento de 45°
+        resposta: ['135', 135°]

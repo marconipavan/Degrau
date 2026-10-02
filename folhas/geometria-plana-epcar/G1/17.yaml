@@ -1,0 +1,63 @@
+# convertido de G1_017.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 17
+unidade: Graus, minutos e segundos 7
+a:
+  instrucao: Subtraia os ângulos.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [50°40' − 20°15' = 30°25'.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 50°40' − 20°15'
+        resposta: [30°25', 30°25'0", 30°25'00"]
+      - texto: 80°55' − 30°25'
+        resposta: [50°30', 50°30'0", 50°30'00"]
+      - texto: 45°30' − 15°30'
+        resposta: ['30', 30°]
+      - texto: 90°50' − 0°25'
+        resposta: [90°25', 90°25'0", 90°25'00"]
+      - texto: 33°47' − 11°12'
+        resposta: [22°35', 22°35'0", 22°35'00"]
+      - texto: 60°20' − 60°5'
+        resposta: [0°15', 0°15'0", 0°15'00", 15']
+      - texto: 100°45' − 50°40'
+        resposta: [50°5', 50°05', 50°5'0", 50°05'00"]
+      - texto: 27°59' − 7°9'
+        resposta: [20°50', 20°50'0", 20°50'00"]
+      - texto: 12°30' − 2°30'
+        resposta: ['10', 10°]
+      - texto: 75°35' − 25°15'
+        resposta: [50°20', 50°20'0", 50°20'00"]
+b:
+  instrucao: Subtraia os ângulos.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [90° − 35°20' = 89°60' − 35°20' = 54°40'.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 50°10' − 20°45'
+        resposta: [29°25', 29°25'0", 29°25'00"]
+      - texto: 90° − 35°20'
+        resposta: [54°40', 54°40'0", 54°40'00"]
+      - texto: 180° − 100°30'
+        resposta: [79°30', 79°30'0", 79°30'00"]
+      - texto: 40°5' − 10°50'
+        resposta: [29°15', 29°15'0", 29°15'00"]
+      - texto: 90° − 0°1'
+        resposta: [89°59', 89°59'0", 89°59'00"]
+      - texto: 61°15' − 30°40'
+        resposta: [30°35', 30°35'0", 30°35'00"]
+      - texto: 180° − 45°45'
+        resposta: [134°15', 134°15'0", 134°15'00"]
+      - texto: 90° − 89°59'
+        resposta: [0°1', 0°01', 0°1'0", 0°01'00", 1']
+      - texto: 25° − 12°30'
+        resposta: [12°30', 12°30'0", 12°30'00"]
+      - texto: 100°20' − 40°35'
+        resposta: [59°45', 59°45'0", 59°45'00"]

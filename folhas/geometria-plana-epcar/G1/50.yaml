@@ -1,0 +1,92 @@
+# convertido de G1_050.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 50
+unidade: Posições 10
+a:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: AÔB = 28° e BÔC = 47°, adjacentes. AÔC?
+        resposta: ['75', 75°]
+      - texto: AÔC = 130° e AÔB = 55°, adjacentes. BÔC?
+        resposta: ['75', 75°]
+      - texto: OM bissetriz de AÔB = 86°. AÔM?
+        resposta: ['43', 43°]
+      - texto: OM bissetriz de AÔB = 47°. AÔM?
+        resposta: [23°30', 23°30'0", 23°30'00"]
+      - texto: Retas se cruzam; um ângulo mede 72°. O oposto?
+        resposta: ['72', 72°]
+      - texto: Retas se cruzam; um ângulo mede 72°. O vizinho?
+        resposta: ['108', 108°]
+      - texto: 'Opostos pelo vértice: 4x − 20° e 2x + 30°. Ache x.'
+        resposta: ['25', 25°]
+        incognita: x
+      - texto: 'Sobre uma reta: x, 2x, 3x. Ache x.'
+        resposta: ['30', 30°]
+        incognita: x
+      - texto: 'Em volta de um ponto: x, 2x, 3x, 6x. Ache x.'
+        resposta: ['30', 30°]
+        incognita: x
+      - texto: 'Bissetrizes de adjacentes de 50° e 70°: MÔN?'
+        resposta: ['60', 60°]
+b:
+  instrucao: 'Revisão: ache x.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔM = x + 15° e MÔB = 2x − 5°. Ache x.
+        resposta: ['20', 20°]
+        incognita: x
+        semirretas:
+          direcoes: [0, 35, 70]
+          nomes: [A, M, B]
+          vertice: O
+          marcas:
+          - [A, M, null, x + 15°]
+          - [M, B, null, 2x − 5°]
+          comprimento: 15
+      - texto: 4x − 20° e 2x + 30°
+        resposta: ['25', 25°]
+        cruzadas:
+          direcoes: [0, 80]
+          ponto: O
+          marcas:
+          - [0, 80, 4x − 20°]
+          - [180, 260, 2x + 30°]
+      - texto: x + 10° e 2x + 20°
+        resposta: ['50', 50°]
+        cruzadas:
+          direcoes: [0, 60]
+          ponto: O
+          marcas:
+          - [0, 60, x + 10°]
+          - [60, 180, 2x + 20°]
+      - texto: x, x + 20°, 2x
+        resposta: ['40', 40°]
+        semirretas:
+          direcoes: [0, 40, 100, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, x]
+          - [B, C, null, x + 20°]
+          - [C, D, null, 2x]
+          comprimento: 15
+      - texto: 3x, 2x, 4x, x + 10°
+        resposta: ['35', 35°]
+        semirretas:
+          direcoes: [0, 105, 175, 315]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, 3x]
+          - [B, C, null, 2x]
+          - [C, D, null, 4x]
+          - [D, A, null, x + 10°]
+          comprimento: 15

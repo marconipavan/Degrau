@@ -1,0 +1,43 @@
+# convertido de G1_034.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 34
+unidade: Equações com ângulos 4
+a:
+  instrucao: Ache o ângulo x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [180° − x = 3(90° − x) → 180° − x = 270° − 3x → 2x = 90° → x = 45°.]
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O suplemento de x é o triplo do complemento de x.
+        resposta: ['45', 45°]
+      - texto: O suplemento de x é o quádruplo do complemento de x.
+        resposta: ['60', 60°]
+      - texto: O suplemento de x é o quíntuplo do complemento de x.
+        resposta: [67°30', 67°30'0", 67°30'00"]
+      - texto: O suplemento de x é 6 vezes o complemento de x.
+        resposta: ['72', 72°]
+      - texto: O suplemento de x é 10 vezes o complemento de x.
+        resposta: ['80', 80°]
+b:
+  instrucao: Ache o ângulo x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [90° − x = (180° − x)/3 → 270° − 3x = 180° − x → x = 45°.]
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O complemento de x é a terça parte do suplemento de x.
+        resposta: ['45', 45°]
+      - texto: O complemento de x é a quarta parte do suplemento de x.
+        resposta: ['60', 60°]
+      - texto: O complemento de x é a quinta parte do suplemento de x.
+        resposta: [67°30', 67°30'0", 67°30'00"]
+      - texto: O complemento de x é 2/7 do suplemento de x.
+        resposta: ['54', 54°]
+      - texto: O complemento de x é 3/8 do suplemento de x.
+        resposta: ['36', 36°]

@@ -29,6 +29,9 @@ O plano original, com mais narrativa e todos os gabaritos, está em `docs/plano-
 | Peça | Onde | Estado |
 |---|---|---|
 | Especificações em YAML | `folhas/<curso>/<nível>/<número>.yaml` | Uma folha (frente a + verso b) por arquivo; respostas em cada item, nunca desenhadas |
+| **G1 completo** | `folhas/geometria-plana-epcar/G1/1..100.yaml` | 4–100 (exceto 81, 85, 89) convertidos dos esqueletos de `docs/prompts/esqueletos-G1.zip`; 100/100 passam no `validar`; **falta a revisão do Ângelo** (seção 6.2) |
+| Conversor de esqueletos | `ferramentas/esqueletos.py` | Formato do prompt `docs/prompts/esqueletos-g1.md` → YAML; para em frase de figura desconhecida |
+| Medidas das figuras | `motor/medidas.py`, `motor/figuras.py` | Ângulos em minutos (aceita 35°30'), incógnitas x e y; retas que se cruzam, transversal entre paralelas, rótulos que desviam de linhas e rótulos da página inteira |
 | Leitura e validação | `motor/especificacao.py` | Falha alto com arquivo, lado, bloco e item do erro |
 | Renderizador | `motor/render.py` | Tabela de tipos de bloco; layout por caixas; recolhe o gabarito |
 | Motor de folhas (texto) | `motor/folha.py` | Classe `Folha`: cabeçalho, ícones e os tipos de exercício de idioma |
@@ -194,10 +197,18 @@ com uma chave, o tipo. Exemplos completos em `folhas/`. O campo `resposta` alime
 | `figura` | uma figura sem número | `figura` |
 | `alternativas` | `itens`, `resposta: A/B/C/D` | `alternativas` |
 
-`tamanho` (pt) é opcional em quase todos. Figuras (medidas em mm):
-`angulo: {direcoes: [d1, d2], nomes: [V, P, Q], marca: arco|reto}`,
-`semirretas: {direcoes, nomes, vertice}`,
+`tamanho` (pt) é opcional em quase todos. Figuras (medidas em mm; direções em graus, podem ter fração):
+`angulo: {direcoes: [d1, d2], nomes: [V, P, Q], marca: arco|reto, rotulo}`,
+`semirretas: {direcoes, nomes, vertice, marcas: [[P, Q, arco|reto|~, rótulo], …], tracejadas: [M, …]}`,
+`cruzadas: {direcoes: [d1, d2], ponto: O, marcas: [[de, até, rótulo], …]}` (retas que se cruzam),
+`transversal: {direcao, marcas: [[r|s, acima-direita|acima-esquerda|abaixo-esquerda|abaixo-direita, rótulo], …]}`,
 `bico: {altura, segmentos: [[direção, comprimento], …], marcas: [[vértice, dir|esq|~, rótulo|~|x], …]}`.
+
+Rótulos: com `°` ou `'` é medida (conferida com o desenho); com `x`/`y` é expressão (todas as do mesmo x têm
+que fechar); sem nada disso (`3`, `a`) é só nome. Item da grade pode ter `alternativas` (questão de prova,
+resposta = letra), `incognita: y` (quando a pergunta é y) e `pontos`. Sem `incognita`, a resposta só é conferida
+com x quando o item é só a figura. Figuras são medidas desenhando num canvas que não desenha (`Medidor`), então
+o espaço reservado inclui os rótulos.
 
 **Layout por caixas:** a página empilha os blocos. Os fixos são medidos num canvas descartável; os elásticos
 (palavras, ligar, circular, copiar, frases, lacunas, verdadeiro-falso, grade) dividem a sobra até `LIMITE`,
@@ -292,9 +303,13 @@ Feuille cinq b. Je suis dans un avion. …
   (resolve entradas em qualquer folha e repetições com versões diferentes). Código do bloco com a versão quando
   for repetição (`G1 10-12 v2`).
 - **Código do bloco impresso na folha**, para o aluno copiar no formulário (cabeçalho: "Bloco G1 1-3 · no caderno, anote:").
-- **Conteúdo do G1:** o Ângelo pede os esqueletos das 94 folhas que faltam a outra conversa do Claude
-  (`docs/prompts/esqueletos-g1.md`) e o Claude Code converte para YAML. Faltam no motor: ângulo com valor escrito,
-  retas que se cruzam, transversal entre paralelas com 8 ângulos, várias questões de prova numeradas por página.
+- **Conteúdo do G1:** esqueletos das 94 folhas feitos noutra conversa do Claude (`docs/prompts/esqueletos-g1.md`,
+  resultado em `docs/prompts/esqueletos-G1.zip`) e convertidos em 02/10/2026. Revisão de professor pendente:
+  G1 42 (definição de adjacentes × consecutivos); G1 66 (siglas CO, AI, AE… como resposta); G1 88 (ponte para a 89);
+  91–100 (questões inéditas "no estilo" EPCAR/Colégio Naval; trocar algumas por questões reais adaptadas);
+  distratores das alternativas; enunciados que repetem a figura ("Figura 1: quanto mede AÔC?").
+- **Nivelamento:** esqueleto em `NIVELAMENTO_G1.md` do zip (10 questões, regra de entrada); ainda não convertido
+  (o código "G1 NIV" não passa no formulário: definir como entra no sistema).
 - **Entrega por e-mail automático.** O sistema é entregue ao CASD; os e-mails dos alunos ficam com a
   administração do curso (na planilha da conta institucional), nunca no repositório.
 

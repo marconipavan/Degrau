@@ -1,0 +1,103 @@
+# convertido de G1_046.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 46
+unidade: Posições 6
+a:
+  instrucao: Ache x (opostos pelo vértice).
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [3x + 10° = 5x − 30° → 40° = 2x → x = 20°.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 3x + 10° e 5x − 30°
+        resposta: ['20', 20°]
+        cruzadas:
+          direcoes: [0, 70]
+          ponto: O
+          marcas:
+          - [0, 70, 3x + 10°]
+          - [180, 250, 5x − 30°]
+      - texto: 2x + 15° e x + 40°
+        resposta: ['25', 25°]
+        cruzadas:
+          direcoes: [0, 65]
+          ponto: O
+          marcas:
+          - [0, 65, 2x + 15°]
+          - [180, 245, x + 40°]
+      - texto: 4x e 2x + 50°
+        resposta: ['25', 25°]
+        cruzadas:
+          direcoes: [0, 100]
+          ponto: O
+          marcas:
+          - [0, 100, 4x]
+          - [180, 280, 2x + 50°]
+      - texto: 6x − 20° e 3x + 25°
+        resposta: ['15', 15°]
+        cruzadas:
+          direcoes: [0, 70]
+          ponto: O
+          marcas:
+          - [0, 70, 6x − 20°]
+          - [180, 250, 3x + 25°]
+      - texto: x + 70° e 3x + 10°
+        resposta: ['30', 30°]
+        cruzadas:
+          direcoes: [0, 100]
+          ponto: O
+          marcas:
+          - [0, 100, x + 70°]
+          - [180, 280, 3x + 10°]
+b:
+  instrucao: Ache x (lado a lado somam 180°).
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [2x + 30° + 4x = 180° → 6x = 150° → x = 25°.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 2x + 30° e 4x
+        resposta: ['25', 25°]
+        cruzadas:
+          direcoes: [0, 80]
+          ponto: O
+          marcas:
+          - [0, 80, 2x + 30°]
+          - [80, 180, 4x]
+      - texto: x + 20° e 3x
+        resposta: ['40', 40°]
+        cruzadas:
+          direcoes: [0, 60]
+          ponto: O
+          marcas:
+          - [0, 60, x + 20°]
+          - [60, 180, 3x]
+      - texto: 5x e 4x + 18°
+        resposta: ['18', 18°]
+        cruzadas:
+          direcoes: [0, 90]
+          ponto: O
+          marcas:
+          - [0, 90, 5x]
+          - [90, 180, 4x + 18°]
+      - texto: 3x − 10° e 2x + 40°
+        resposta: ['30', 30°]
+        cruzadas:
+          direcoes: [0, 80]
+          ponto: O
+          marcas:
+          - [0, 80, 3x − 10°]
+          - [80, 180, 2x + 40°]
+      - texto: x e x + 60°
+        resposta: ['60', 60°]
+        cruzadas:
+          direcoes: [0, 60]
+          ponto: O
+          marcas:
+          - [0, 60, x]
+          - [60, 180, x + 60°]

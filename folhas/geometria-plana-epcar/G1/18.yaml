@@ -1,0 +1,34 @@
+# convertido de G1_018.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 18
+unidade: Graus, minutos e segundos 8
+a:
+  instrucao: Subtraia os ângulos.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [30°20'10" − 10°30'40" = 29°79'70" − 10°30'40" = 19°49'30".]
+  - grade:
+      colunas: 2
+      itens:
+      - {texto: 30°20'10" − 10°30'40", resposta: 19°49'30"}
+      - {texto: 45° − 20°10'30", resposta: 24°49'30"}
+      - {texto: 12°5'5" − 6°10'10", resposta: 5°54'55"}
+      - {texto: 60°30'15" − 30°30'30", resposta: 29°59'45"}
+      - {texto: 50°0'20" − 25°30'40", resposta: 24°29'40"}
+b:
+  instrucao: Subtraia os ângulos.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [90° − 25°35'40" = 89°59'60" − 25°35'40" = 64°24'20".]
+  - grade:
+      colunas: 2
+      itens:
+      - {texto: 90° − 25°35'40", resposta: 64°24'20"}
+      - {texto: 180° − 100°20'30", resposta: 79°39'30"}
+      - {texto: 90° − 45°0'1", resposta: 44°59'59"}
+      - texto: 180° − 179°59'59"
+        resposta: [0°0'1", 0°00'01", 0'1"]
+      - {texto: 90° − 12°12'12", resposta: 77°47'48"}

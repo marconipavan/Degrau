@@ -1,0 +1,48 @@
+# convertido de G1_030.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 30
+unidade: Complemento e suplemento 10
+a:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Complemento de 37°
+        resposta: ['53', 53°]
+      - texto: Suplemento de 112°
+        resposta: ['68', 68°]
+      - texto: Complemento de 51°45'
+        resposta: [38°15', 38°15'0", 38°15'00"]
+      - texto: O suplemento mede 64°. Qual é o ângulo?
+        resposta: ['116', 116°]
+      - texto: Complemento do suplemento de 165°
+        resposta: ['75', 75°]
+      - texto: O dobro do complemento de 65°
+        resposta: ['50', 50°]
+      - texto: 100° tem complemento?
+        resposta: [N, Não, Nao]
+      - texto: '35° e 145° são: C, S ou N?'
+        resposta: [S, suplementares]
+      - texto: O suplemento mede 150°. Quanto mede o complemento?
+        resposta: ['60', 60°]
+      - texto: O complemento da metade de 70°
+        resposta: ['55', 55°]
+b:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - {texto: Suplemento de 120°20'30", resposta: 59°39'30"}
+      - texto: Suplemento do complemento de 12°40'
+        resposta: [102°40', 102°40'0", 102°40'00"]
+      - texto: A metade do suplemento de 85°
+        resposta: [47°30', 47°30'0", 47°30'00"]
+      - texto: O complemento mede 44°59'. Qual é o ângulo?
+        resposta: [45°1', 45°01', 45°1'0", 45°01'00"]
+      - texto: Suplemento menos complemento de 17°17'
+        resposta: ['90', 90°]

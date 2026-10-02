@@ -1,0 +1,87 @@
+# convertido de G1_066.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 66
+unidade: 'Paralelas: identificar 6'
+a:
+  instrucao: 'Escreva o tipo: CO, AI, AE, CI ou CE.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [CO = correspondentes; AI/AE = alternos internos/externos; CI/CE = colaterais internos/externos.]
+  - figura:
+      transversal:
+        direcao: 60
+        marcas:
+        - [r, acima-direita, '1']
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-esquerda, '3']
+        - [r, abaixo-direita, '4']
+        - [s, acima-direita, '5']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-esquerda, '7']
+        - [s, abaixo-direita, '8']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 1 e 5
+        resposta: [CO, correspondentes]
+      - texto: 3 e 5
+        resposta: [AI, alternos internos]
+      - texto: 1 e 7
+        resposta: [AE, alternos externos]
+      - texto: 3 e 6
+        resposta: [CI, colaterais internos]
+      - texto: 2 e 7
+        resposta: [CE, colaterais externos]
+      - texto: 4 e 8
+        resposta: [CO, correspondentes]
+      - texto: 4 e 6
+        resposta: [AI, alternos internos]
+      - texto: 2 e 8
+        resposta: [AE, alternos externos]
+      - texto: 4 e 5
+        resposta: [CI, colaterais internos]
+      - texto: 1 e 8
+        resposta: [CE, colaterais externos]
+b:
+  instrucao: 'Tipo: CO, AI, AE, CI, CE, OV ou LL.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [OV = opostos pelo vértice (1 e 3); LL = lado a lado no mesmo cruzamento (1 e 2).]
+  - figura:
+      transversal:
+        direcao: 125
+        marcas:
+        - [r, acima-direita, '1']
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-esquerda, '3']
+        - [r, abaixo-direita, '4']
+        - [s, acima-direita, '5']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-esquerda, '7']
+        - [s, abaixo-direita, '8']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 1 e 3
+        resposta: [OV, opostos pelo vértice]
+      - texto: 2 e 6
+        resposta: [CO, correspondentes]
+      - texto: 5 e 6
+        resposta: [LL, lado a lado]
+      - texto: 3 e 5
+        resposta: [AI, alternos internos]
+      - texto: 6 e 8
+        resposta: [OV, opostos pelo vértice]
+      - texto: 1 e 8
+        resposta: [CE, colaterais externos]
+      - texto: 7 e 8
+        resposta: [LL, lado a lado]
+      - texto: 4 e 5
+        resposta: [CI, colaterais internos]
+      - texto: 2 e 4
+        resposta: [OV, opostos pelo vértice]
+      - texto: 1 e 7
+        resposta: [AE, alternos externos]

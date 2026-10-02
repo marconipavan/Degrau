@@ -1,0 +1,31 @@
+# convertido de G1_092.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 92
+unidade: Questões de prova 2
+a:
+  instrucao: Marque a alternativa correta.
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'O valor de 90° − 2 × 23°45'' é:'
+        alternativas: [42°30', 66°15', 43°30', 47°30']
+        resposta: A
+      - texto: 'A metade do complemento de 31° mede:'
+        alternativas: [29°5', 29°30', 30°, 74°30']
+        resposta: B
+b:
+  instrucao: Marque a alternativa correta.
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'Se α = 42°38''15" e β = 17°21''45", então α + β vale:'
+        alternativas: [59°, 60°30', 60°, 61°]
+        resposta: C
+      - texto: '1/8 de volta somado a 22°30'' resulta em:'
+        alternativas: [67°, 57°30', 112°30', 67°30']
+        resposta: D

@@ -1,0 +1,103 @@
+# convertido de G1_075.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 75
+unidade: 'Paralelas: calcular 5'
+a:
+  instrucao: Alternos externos. Ache x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['Alternos externos são iguais: 2x + 15° = 3x → x = 15°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['15', 15°]
+        incognita: x
+        transversal:
+          direcao: 45
+          marcas:
+          - [r, acima-direita, 2x + 15°]
+          - [s, abaixo-esquerda, 3x]
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 110
+          marcas:
+          - [r, acima-esquerda, x + 40°]
+          - [s, abaixo-direita, 2x + 10°]
+      - texto: Ache x.
+        resposta: ['15', 15°]
+        incognita: x
+        transversal:
+          direcao: 55
+          marcas:
+          - [r, acima-direita, x + 40°]
+          - [s, abaixo-esquerda, 4x − 5°]
+      - texto: Ache x.
+        resposta: ['20', 20°]
+        incognita: x
+        transversal:
+          direcao: 140
+          marcas:
+          - [r, acima-esquerda, x + 20°]
+          - [s, abaixo-direita, 2x]
+      - texto: Ache x.
+        resposta: ['26', 26°]
+        incognita: x
+        transversal:
+          direcao: 66
+          marcas:
+          - [r, acima-direita, 3x − 12°]
+          - [s, abaixo-esquerda, 2x + 14°]
+b:
+  instrucao: Colaterais externos. Ache x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['Colaterais externos somam 180°: x + 40° + 3x + 20° = 180° → x = 30°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, acima-direita, x + 40°]
+          - [s, abaixo-direita, 3x + 20°]
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 120
+          marcas:
+          - [r, acima-esquerda, 2x]
+          - [s, abaixo-esquerda, x + 90°]
+      - texto: Ache x.
+        resposta: ['15', 15°]
+        incognita: x
+        transversal:
+          direcao: 75
+          marcas:
+          - [r, acima-esquerda, 6x + 15°]
+          - [s, abaixo-esquerda, 5x]
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 100
+          marcas:
+          - [r, acima-direita, 4x − 20°]
+          - [s, abaixo-direita, x + 50°]
+      - texto: Ache x.
+        resposta: ['45', 45°]
+        incognita: x
+        transversal:
+          direcao: 60
+          marcas:
+          - [r, acima-direita, x + 15°]
+          - [s, abaixo-direita, 2x + 30°]

@@ -1,0 +1,51 @@
+# convertido de G1_020.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 20
+unidade: Graus, minutos e segundos 10
+a:
+  instrucao: Divida.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [25° ÷ 2 = 24°60' ÷ 2 = 12°30'.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 40°20' ÷ 2
+        resposta: [20°10', 20°10'0", 20°10'00"]
+      - texto: 25° ÷ 2
+        resposta: [12°30', 12°30'0", 12°30'00"]
+      - texto: 50°10' ÷ 2
+        resposta: [25°5', 25°05', 25°5'0", 25°05'00"]
+      - texto: 31° ÷ 2
+        resposta: [15°30', 15°30'0", 15°30'00"]
+      - texto: 90° ÷ 2
+        resposta: ['45', 45°]
+      - texto: 60°30' ÷ 3
+        resposta: [20°10', 20°10'0", 20°10'00"]
+      - texto: 100° ÷ 4
+        resposta: ['25', 25°]
+      - texto: 45° ÷ 2
+        resposta: [22°30', 22°30'0", 22°30'00"]
+      - texto: 15° ÷ 4
+        resposta: [3°45', 3°45'0", 3°45'00"]
+      - texto: 1° ÷ 2
+        resposta: [0°30', 0°30'0", 0°30'00", 30']
+b:
+  instrucao: Divida.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [25°15' ÷ 2 = 24°75' ÷ 2 = 12°37'30".]
+  - grade:
+      colunas: 2
+      itens:
+      - {texto: 25°15' ÷ 2, resposta: 12°37'30"}
+      - texto: 100° ÷ 3
+        resposta: [33°20', 33°20'0", 33°20'00"]
+      - {texto: 45°15' ÷ 2, resposta: 22°37'30"}
+      - texto: 10° ÷ 3
+        resposta: [3°20', 3°20'0", 3°20'00"]
+      - texto: 1° ÷ 4
+        resposta: [0°15', 0°15'0", 0°15'00", 15']

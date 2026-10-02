@@ -1,0 +1,104 @@
+# convertido de G1_045.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 45
+unidade: Posições 5
+a:
+  instrucao: Ache x (ângulos opostos pelo vértice).
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['Duas retas se cruzam: os ângulos opostos (de frente um para o outro) são iguais. 40° e x opostos
+          → x = 40°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Figura 1
+        resposta: ['40', 40°]
+        cruzadas:
+          direcoes: [0, 40]
+          ponto: O
+          marcas:
+          - [0, 40, 40°]
+          - [180, 220, x]
+      - texto: Figura 2
+        resposta: ['65', 65°]
+        cruzadas:
+          direcoes: [0, 65]
+          ponto: O
+          marcas:
+          - [0, 65, 65°]
+          - [180, 245, x]
+      - texto: Figura 3
+        resposta: ['110', 110°]
+        cruzadas:
+          direcoes: [0, 110]
+          ponto: O
+          marcas:
+          - [0, 110, 110°]
+          - [180, 290, x]
+      - texto: Figura 4
+        resposta: ['25', 25°]
+        cruzadas:
+          direcoes: [0, 25]
+          ponto: O
+          marcas:
+          - [0, 25, 25°]
+          - [180, 205, x]
+      - texto: Figura 5
+        resposta: ['135', 135°]
+        cruzadas:
+          direcoes: [0, 135]
+          ponto: O
+          marcas:
+          - [0, 135, 135°]
+          - [180, 315, x]
+b:
+  instrucao: Ache x (lado a lado somam 180°).
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['Lado a lado sobre a mesma reta: 50° + x = 180° → x = 130°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Figura 1
+        resposta: ['130', 130°]
+        cruzadas:
+          direcoes: [0, 50]
+          ponto: O
+          marcas:
+          - [0, 50, 50°]
+          - [50, 180, x]
+      - texto: Figura 2
+        resposta: ['110', 110°]
+        cruzadas:
+          direcoes: [0, 70]
+          ponto: O
+          marcas:
+          - [0, 70, 70°]
+          - [70, 180, x]
+      - texto: Figura 3
+        resposta: ['60', 60°]
+        cruzadas:
+          direcoes: [0, 120]
+          ponto: O
+          marcas:
+          - [0, 120, 120°]
+          - [120, 180, x]
+      - texto: Figura 4
+        resposta: ['150', 150°]
+        cruzadas:
+          direcoes: [0, 30]
+          ponto: O
+          marcas:
+          - [0, 30, 30°]
+          - [30, 180, x]
+      - texto: Figura 5
+        resposta: ['35', 35°]
+        cruzadas:
+          direcoes: [0, 145]
+          ponto: O
+          marcas:
+          - [0, 145, 145°]
+          - [145, 180, x]

@@ -119,7 +119,7 @@ a mesma numeração dos campos (ex.: `G1 1b · 4: Ra` é o campo "1ª folha (b) 
 1. Abra o formulário em modo de visualização (ícone de olho) e envie como "Aluno Teste", código `G1 1-3`, início
    19:00, fim 19:10, todas as respostas certas. No Painel deve aparecer: nota 100, tempo 10, limite 12, Domínio.
 2. Envie de novo com duas respostas erradas. Deve aparecer a nota menor e, em "Itens errados", os dois campos.
-3. Envie com o código `G1 4-6`. Deve aparecer `ERRO: sem gabarito: G1 4, G1 5, G1 6`.
+3. Envie com o código `G1 101-103` (folhas que não existem). Deve aparecer `ERRO: sem gabarito: G1 101, G1 102, G1 103`.
 4. Se algo não aparecer: no editor do script, menu Execuções, cada envio mostra o erro, se houver.
 5. Apague as linhas de teste do Painel e da aba de respostas.
 

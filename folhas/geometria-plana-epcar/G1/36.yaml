@@ -1,0 +1,41 @@
+# convertido de G1_036.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 36
+unidade: Equações com ângulos 6
+a:
+  instrucao: Ache x e responda o que se pede.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O suplemento de x é o triplo de x. Quanto mede o complemento de x?
+        resposta: ['45', 45°]
+      - texto: O complemento de x é o dobro de x. Quanto mede o suplemento de x?
+        resposta: ['150', 150°]
+      - texto: O suplemento de x é o quádruplo do complemento. Quanto mede o suplemento?
+        resposta: ['120', 120°]
+      - texto: O complemento de x é a quarta parte do suplemento. Quanto mede o complemento?
+        resposta: ['30', 30°]
+      - texto: O suplemento de x é igual a 5x. Quanto mede o dobro de x?
+        resposta: ['60', 60°]
+b:
+  instrucao: Ache o ângulo x (pode dar minutos).
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['Complemento de x é o triplo de x: 90° − x = 3x → x = 22,5° = 22°30''.']
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O complemento de x é o quíntuplo de x.
+        resposta: ['15', 15°]
+      - texto: O suplemento de x é o quíntuplo do complemento de x.
+        resposta: [67°30', 67°30'0", 67°30'00"]
+      - texto: O suplemento de x é igual a 7x.
+        resposta: [22°30', 22°30'0", 22°30'00"]
+      - texto: O complemento de x é 7 vezes x.
+        resposta: [11°15', 11°15'0", 11°15'00"]
+      - texto: O complemento de x é 1/5 do suplemento de x.
+        resposta: [67°30', 67°30'0", 67°30'00"]

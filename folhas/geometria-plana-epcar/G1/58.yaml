@@ -1,0 +1,92 @@
+# convertido de G1_058.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 58
+unidade: Revisão 1 8
+a:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Classifique 3/4 de um raso
+        resposta: [O, obtuso]
+      - texto: 71°48' + 18°12'
+        resposta: ['90', 90°]
+      - texto: Complemento de 66°
+        resposta: ['24', 24°]
+      - texto: Complementares x e 2x + 15°. Ache x.
+        resposta: ['25', 25°]
+        incognita: x
+      - texto: 'Bissetriz de 130°: cada metade?'
+        resposta: ['65', 65°]
+      - texto: 'Retas se cruzam: um ângulo mede 35°. O oposto?'
+        resposta: ['35', 35°]
+      - texto: Suplemento de 140°25'
+        resposta: [39°35', 39°35'0", 39°35'00"]
+      - texto: Menor ângulo dos ponteiros às 10 h
+        resposta: ['60', 60°]
+      - texto: O suplemento de x é 2x. Ache x.
+        resposta: ['60', 60°]
+        incognita: x
+      - texto: 40°30' ÷ 3
+        resposta: [13°30', 13°30'0", 13°30'00"]
+b:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔM = x + 12° e MÔB = 3x − 8°. Ache x.
+        resposta: ['10', 10°]
+        incognita: x
+        semirretas:
+          direcoes: [0, 22, 44]
+          nomes: [A, M, B]
+          vertice: O
+          marcas:
+          - [A, M, null, x + 12°]
+          - [M, B, null, 3x − 8°]
+          comprimento: 15
+      - texto: 5x e 3x + 30°
+        resposta: ['15', 15°]
+        cruzadas:
+          direcoes: [0, 75]
+          ponto: O
+          marcas:
+          - [0, 75, 5x]
+          - [180, 255, 3x + 30°]
+      - texto: x, 2x, 3x
+        resposta: ['30', 30°]
+        semirretas:
+          direcoes: [0, 30, 90, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, x]
+          - [B, C, null, 2x]
+          - [C, D, null, 3x]
+          comprimento: 15
+      - texto: AÔB = 50° e BÔC = 40°. MÔN?
+        resposta: ['45', 45°]
+        semirretas:
+          direcoes: [0, 25, 50, 70, 90]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 50°]
+          - [B, C, null, 40°]
+          tracejadas: [M, N]
+          comprimento: 15
+      - texto: AÔC = 95°, AÔB = 38°. BÔC?
+        resposta: ['57', 57°]
+        semirretas:
+          direcoes: [0, 38, 95]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 38°]
+          - [A, C, arco, 95°]
+          comprimento: 15

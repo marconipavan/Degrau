@@ -1,0 +1,53 @@
+# convertido de G1_025.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 25
+unidade: Complemento e suplemento 5
+a:
+  instrucao: Calcule.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['O dobro do complemento de 30°: complemento = 60°; dobro = 120°.']
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O dobro do complemento de 30°
+        resposta: ['120', 120°]
+      - texto: A metade do suplemento de 40°
+        resposta: ['70', 70°]
+      - texto: O triplo do complemento de 70°
+        resposta: ['60', 60°]
+      - texto: A metade do complemento de 50°
+        resposta: ['20', 20°]
+      - texto: O dobro do suplemento de 150°
+        resposta: ['60', 60°]
+      - texto: A terça parte do suplemento de 30°
+        resposta: ['50', 50°]
+      - texto: O dobro do complemento de 45°
+        resposta: ['90', 90°]
+      - texto: A metade do suplemento de 75°
+        resposta: [52°30', 52°30'0", 52°30'00"]
+      - texto: O quádruplo do complemento de 80°
+        resposta: ['40', 40°]
+      - texto: A metade do complemento de 25°
+        resposta: [32°30', 32°30'0", 32°30'00"]
+b:
+  instrucao: Calcule.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['O complemento da metade de 100°: metade = 50°; complemento = 40°.']
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O complemento da metade de 100°
+        resposta: ['40', 40°]
+      - texto: O suplemento do dobro de 35°
+        resposta: ['110', 110°]
+      - texto: O complemento do dobro de 20°
+        resposta: ['50', 50°]
+      - texto: O suplemento da metade de 150°
+        resposta: ['105', 105°]
+      - texto: O complemento do triplo de 25°
+        resposta: ['15', 15°]

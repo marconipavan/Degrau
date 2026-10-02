@@ -1,0 +1,55 @@
+# convertido de G1_100.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 100
+unidade: Questões de prova 10
+a:
+  instrucao: Marque a alternativa correta.
+  icone: escrever
+  pontos: 100
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'O suplemento do triplo do complemento de 70° mede:'
+        alternativas: [120°, 60°, 150°, 20°]
+        resposta: A
+      - texto: 'O valor de (180° − 47°36'') ÷ 2 é:'
+        alternativas: [66°48', 66°12', 67°12', 132°24']
+        resposta: B
+      - texto: 'Na figura, r // s. O valor de x é:'
+        alternativas: [5°, 15°, 10°, 25°]
+        resposta: C
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-25, 15]
+          - [-150, 15]
+          - [-40, 0]
+          marcas:
+          - [0, dir, 2x + 5°]
+          - [1, null, 5x + 5°]
+          - [2, null, 7x]
+          - [3, esq, 4x]
+b:
+  instrucao: Marque a alternativa correta.
+  icone: escrever
+  pontos: 100
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'O complemento de um ângulo é igual a x/2 + 15°, e o ângulo mede x. Então x vale:'
+        alternativas: [40°, 60°, 25°, 50°]
+        resposta: D
+      - texto: 'Na figura, r // s. O valor de x é:'
+        alternativas: [28°, 32°, 26°, 102°]
+        resposta: A
+        incognita: x
+        transversal:
+          direcao: 78
+          marcas:
+          - [r, abaixo-direita, x + 74°]
+          - [s, acima-direita, 2x + 22°]
+      - texto: 'Em volta de um ponto há quatro ângulos: x, 2x, 3x e 4x. O maior mede:'
+        alternativas: [36°, 144°, 108°, 160°]
+        resposta: B

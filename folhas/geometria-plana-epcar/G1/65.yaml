@@ -1,0 +1,69 @@
+# convertido de G1_065.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 65
+unidade: 'Paralelas: identificar 5'
+a:
+  instrucao: Escreva o número do colateral externo.
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+  - exemplo:
+      texto: ['Colaterais externos: fora das paralelas e do mesmo lado da transversal: 1 e 8.']
+  - figura:
+      transversal:
+        direcao: 70
+        marcas:
+        - [r, acima-direita, '1']
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-esquerda, '3']
+        - [r, abaixo-direita, '4']
+        - [s, acima-direita, '5']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-esquerda, '7']
+        - [s, abaixo-direita, '8']
+  - grade:
+      colunas: 1
+      itens:
+      - {texto: O colateral externo do ângulo 1, resposta: '8'}
+      - {texto: O colateral externo do ângulo 2, resposta: '7'}
+      - {texto: O colateral externo do ângulo 7, resposta: '2'}
+      - {texto: O colateral externo do ângulo 8, resposta: '1'}
+b:
+  instrucao: São colaterais externos? Responda S ou N.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - figura:
+      transversal:
+        direcao: 115
+        marcas:
+        - [r, acima-direita, '1']
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-esquerda, '3']
+        - [r, abaixo-direita, '4']
+        - [s, acima-direita, '5']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-esquerda, '7']
+        - [s, abaixo-direita, '8']
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 1 e 8 são colaterais externos?
+        resposta: [S, Sim]
+      - texto: 2 e 7 são colaterais externos?
+        resposta: [S, Sim]
+      - texto: 1 e 7 são colaterais externos?
+        resposta: [N, Não, Nao]
+      - texto: 2 e 8 são colaterais externos?
+        resposta: [N, Não, Nao]
+      - texto: 8 e 1 são colaterais externos?
+        resposta: [S, Sim]
+      - texto: 4 e 5 são colaterais externos?
+        resposta: [N, Não, Nao]
+      - texto: 7 e 2 são colaterais externos?
+        resposta: [S, Sim]
+      - texto: 3 e 6 são colaterais externos?
+        resposta: [N, Não, Nao]
+      - texto: 1 e 5 são colaterais externos?
+        resposta: [N, Não, Nao]
+      - texto: 2 e 6 são colaterais externos?
+        resposta: [N, Não, Nao]

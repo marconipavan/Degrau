@@ -1,0 +1,47 @@
+# convertido de G1_055.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 55
+unidade: Revisão 1 5
+a:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - figura:
+      semirretas:
+        direcoes: [0, 25, 90, 155, 180]
+        nomes: [A, B, C, D, E]
+        vertice: O
+        marcas:
+        - [A, B, null, 25°]
+        - [C, D, null, 65°]
+        - [A, C, reto, null]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Tipo de AÔD
+        resposta: [O, obtuso]
+      - texto: Quanto mede BÔC?
+        resposta: ['65', 65°]
+      - texto: Quanto mede DÔE?
+        resposta: ['25', 25°]
+      - texto: Complemento de AÔB
+        resposta: ['65', 65°]
+      - texto: Suplemento de AÔD
+        resposta: ['25', 25°]
+b:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Complemento de 1/8 de volta
+        resposta: ['45', 45°]
+      - texto: Suplemento do ângulo dos ponteiros às 2 h
+        resposta: ['120', 120°]
+      - {texto: (90° − 33°33') ÷ 2, resposta: 28°13'30"}
+      - texto: 2 × (180° − 120°20')
+        resposta: [119°20', 119°20'0", 119°20'00"]
+      - texto: Complemento de 0,25 de 100°
+        resposta: ['65', 65°]

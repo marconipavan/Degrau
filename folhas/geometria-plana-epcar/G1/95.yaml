@@ -1,0 +1,77 @@
+# convertido de G1_095.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 95
+unidade: Questões de prova 5
+a:
+  instrucao: Marque a alternativa correta (r // s).
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'Na figura, r // s. O valor de x é:'
+        alternativas: [85°, 95°, 47°, 76°]
+        resposta: A
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-38, 15]
+          - [-133, 0]
+          marcas:
+          - [0, dir, 38°]
+          - [1, null, x]
+          - [2, dir, 47°]
+      - texto: 'Na figura, r // s. O valor de x é:'
+        alternativas: [95°, 70°, 55°, 40°]
+        resposta: B
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-25, 15]
+          - [-150, 15]
+          - [-40, 0]
+          marcas:
+          - [0, dir, 25°]
+          - [1, null, 55°]
+          - [2, null, x]
+          - [3, esq, 40°]
+b:
+  instrucao: Marque a alternativa correta (r // s).
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'Na figura, r // s. O valor de x é:'
+        alternativas: [80°, 30°, 20°, 25°]
+        resposta: C
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-30, 15]
+          - [-130, 0]
+          marcas:
+          - [0, dir, x + 10°]
+          - [1, null, 4x]
+          - [2, dir, 2x + 10°]
+      - texto: 'Na figura, r // s. O valor de x é:'
+        alternativas: [55°, 70°, 115°, 65°]
+        resposta: D
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-25, 15]
+          - [-150, 15]
+          - [-35, 15]
+          - [-145, 0]
+          marcas:
+          - [0, dir, 25°]
+          - [1, null, 55°]
+          - [2, null, x]
+          - [3, null, 70°]
+          - [4, dir, 35°]

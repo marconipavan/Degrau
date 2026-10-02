@@ -1,0 +1,97 @@
+# convertido de G1_080.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 80
+unidade: 'Paralelas: calcular 10'
+a:
+  instrucao: 'Revisão: ache x.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 76
+          marcas:
+          - [r, acima-direita, 2x + 16°]
+          - [s, acima-direita, 76°]
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 76
+          marcas:
+          - [r, abaixo-esquerda, 3x − 14°]
+          - [s, acima-direita, 2x + 16°]
+      - texto: Ache x.
+        resposta: ['28', 28°]
+        incognita: x
+        transversal:
+          direcao: 78
+          marcas:
+          - [r, abaixo-direita, x + 74°]
+          - [s, acima-direita, 2x + 22°]
+      - texto: Ache x.
+        resposta: ['19', 19°]
+        incognita: x
+        transversal:
+          direcao: 76
+          marcas:
+          - [r, acima-direita, 4x]
+          - [s, abaixo-esquerda, 3x + 19°]
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 76
+          marcas:
+          - [r, acima-esquerda, x + 74°]
+          - [s, abaixo-esquerda, x + 46°]
+b:
+  instrucao: 'Revisão: ache a medida pedida.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Quanto mede o ângulo 2x + 24°?
+        resposta: ['104', 104°]
+        transversal:
+          direcao: 104
+          marcas:
+          - [r, acima-direita, 2x + 24°]
+          - [s, acima-direita, 3x − 16°]
+      - texto: Quanto mede o ângulo x + 36°?
+        resposta: ['104', 104°]
+        transversal:
+          direcao: 76
+          marcas:
+          - [r, abaixo-direita, x + 36°]
+          - [s, acima-esquerda, 2x − 32°]
+      - texto: Quanto mede o ângulo em s, abaixo à direita?
+        resposta: ['76', 76°]
+        transversal:
+          direcao: 104
+          marcas:
+          - [r, acima-direita, 3x − 46°]
+          - [s, acima-esquerda, 2x − 24°]
+      - texto: Ache x.
+        resposta: ['24', 24°]
+        incognita: x
+        transversal:
+          direcao: 130
+          marcas:
+          - [r, acima-esquerda, x/2 + 38°]
+          - [s, abaixo-direita, x + 26°]
+      - texto: Ache y.
+        resposta: ['76', 76°]
+        incognita: y
+        transversal:
+          direcao: 104
+          marcas:
+          - [r, abaixo-esquerda, 2x]
+          - [s, acima-direita, 104°]
+          - [s, acima-esquerda, y]

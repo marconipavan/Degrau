@@ -1,0 +1,66 @@
+# convertido de G1_043.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 43
+unidade: Posições 3
+a:
+  instrucao: OM é bissetriz de AÔB. Calcule AÔM.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['OM é bissetriz de AÔB = 70°: divide ao meio, AÔM = 35°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔB = 70°
+        resposta: ['35', 35°]
+        semirretas:
+          direcoes: [0, 35, 70]
+          nomes: [A, M, B]
+          vertice: O
+          marcas:
+          - [A, B, arco, 70°]
+          comprimento: 15
+      - texto: AÔB = 50°
+        resposta: ['25', 25°]
+        semirretas:
+          direcoes: [0, 25, 50]
+          nomes: [A, M, B]
+          vertice: O
+          marcas:
+          - [A, B, arco, 50°]
+          comprimento: 15
+      - texto: AÔB = 90°
+        resposta: ['45', 45°]
+      - texto: AÔB = 120°
+        resposta: ['60', 60°]
+      - texto: AÔB = 36°
+        resposta: ['18', 18°]
+      - texto: AÔB = 75°
+        resposta: [37°30', 37°30'0", 37°30'00"]
+      - texto: AÔB = 45°
+        resposta: [22°30', 22°30'0", 22°30'00"]
+      - texto: AÔB = 101°
+        resposta: [50°30', 50°30'0", 50°30'00"]
+      - texto: AÔB = 13°
+        resposta: [6°30', 6°30'0", 6°30'00"]
+      - texto: AÔB = 179°
+        resposta: [89°30', 89°30'0", 89°30'00"]
+b:
+  instrucao: OM é bissetriz de AÔB. Calcule AÔM.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['AÔB = 31°10'': metade = 15°35''.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔB = 50°20'
+        resposta: [25°10', 25°10'0", 25°10'00"]
+      - texto: AÔB = 31°10'
+        resposta: [15°35', 15°35'0", 15°35'00"]
+      - {texto: AÔB = 45°15', resposta: 22°37'30"}
+      - texto: AÔB = 100°30'
+        resposta: [50°15', 50°15'0", 50°15'00"]
+      - texto: AÔB = 1°
+        resposta: [0°30', 0°30'0", 0°30'00", 30']

@@ -1,0 +1,59 @@
+# convertido de G1_008.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 8
+unidade: Reconhecer ângulos 8
+a:
+  instrucao: Responda com um número inteiro de graus.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Maior ângulo agudo (medida inteira)
+        resposta: ['89', 89°]
+      - texto: Menor ângulo obtuso (medida inteira)
+        resposta: ['91', 91°]
+      - texto: Maior ângulo obtuso (medida inteira)
+        resposta: ['179', 179°]
+      - texto: Medida do ângulo reto
+        resposta: ['90', 90°]
+      - texto: Medida do ângulo raso
+        resposta: ['180', 180°]
+      - texto: 'Um reto dividido ao meio: quanto mede cada parte?'
+        resposta: ['45', 45°]
+      - texto: 'Um raso dividido em 3 partes iguais: cada parte?'
+        resposta: ['60', 60°]
+      - texto: Dois retos juntos medem quanto?
+        resposta: ['180', 180°]
+      - texto: Metade de um ângulo raso
+        resposta: ['90', 90°]
+      - texto: Menor ângulo agudo (medida inteira)
+        resposta: ['1', 1°]
+b:
+  instrucao: Responda S (sim) ou N (não).
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Todo ângulo de 90° é reto?
+        resposta: [S, Sim]
+      - texto: Existe ângulo obtuso de 180°?
+        resposta: [N, Não, Nao]
+      - texto: A soma de dois agudos pode ser obtusa?
+        resposta: [S, Sim]
+      - texto: A soma de dois agudos pode ser rasa?
+        resposta: [N, Não, Nao]
+      - texto: A metade de um obtuso é sempre aguda?
+        resposta: [S, Sim]
+      - texto: O dobro de um reto é raso?
+        resposta: [S, Sim]
+      - texto: O triplo de um agudo é sempre obtuso?
+        resposta: [N, Não, Nao]
+      - texto: Obtuso menos reto dá sempre agudo?
+        resposta: [S, Sim]
+      - texto: Um ângulo de 90,5° é agudo?
+        resposta: [N, Não, Nao]
+      - texto: Dois ângulos retos juntos formam um raso?
+        resposta: [S, Sim]

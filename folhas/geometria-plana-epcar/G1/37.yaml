@@ -1,0 +1,41 @@
+# convertido de G1_037.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 37
+unidade: Equações com ângulos 7
+a:
+  instrucao: Ache o que se pede.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['Complementares, um excede o outro em 30°: x + (x + 30°) = 90° → x = 30°.']
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Complementares; um é o dobro do outro mais 15°. O maior?
+        resposta: ['65', 65°]
+      - texto: Suplementares; um é o triplo do outro menos 20°. O maior?
+        resposta: ['130', 130°]
+      - texto: Complementares; um excede o outro em 30°. O menor?
+        resposta: ['30', 30°]
+      - texto: Suplementares; um excede o outro em 40°. O menor?
+        resposta: ['70', 70°]
+      - texto: Complementares; um é a metade do outro. O menor?
+        resposta: ['30', 30°]
+b:
+  instrucao: Ache o que se pede.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Suplementares que diferem em 50°. O maior?
+        resposta: ['115', 115°]
+      - texto: Complementares que diferem em 10°. O maior?
+        resposta: ['50', 50°]
+      - texto: Suplementares que diferem em 100°. O menor?
+        resposta: ['40', 40°]
+      - texto: Complementares que diferem em 45°. O menor?
+        resposta: [22°30', 22°30'0", 22°30'00"]
+      - texto: Suplementares que diferem em 15°. O menor?
+        resposta: [82°30', 82°30'0", 82°30'00"]

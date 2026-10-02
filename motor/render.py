@@ -8,6 +8,7 @@ from .especificacao import (ErroEspecificacao, carregar_curso, carregar_folha,
 from .folha import Folha, LIMITE, ESPACO
 from .geo import FolhaGeo
 from .bicos import Bico
+from .medidas import POSICOES
 from . import gabarito, audio
 
 MARCA = 'DEGRAU  ·  '
@@ -122,22 +123,33 @@ def _subinstrucao(f, d, ctx):
 
 
 # ---------- geometria ----------
-FIGURAS = {'angulo':     (('direcoes',), ('nomes', 'marca', 'comprimento')),
-           'semirretas': (('direcoes', 'nomes', 'vertice'), ('comprimento',)),
-           'bico':       (('altura', 'segmentos', 'marcas'), ('tamanho',))}
+FIGURAS = {'angulo':      (('direcoes',), ('nomes', 'marca', 'comprimento', 'rotulo')),
+           'semirretas':  (('direcoes', 'nomes', 'vertice'), ('comprimento', 'marcas', 'tracejadas')),
+           'bico':        (('altura', 'segmentos', 'marcas'), ('tamanho',)),
+           'cruzadas':    (('direcoes', 'marcas'), ('ponto', 'tamanho')),
+           'transversal': (('direcao', 'marcas'), ('tamanho',))}
 
 def _validar_figura(fig, onde):
     figs = [k for k in fig if k in FIGURAS]
     if len(figs) != 1:
         raise ErroEspecificacao(f'{onde}: precisa de exatamente uma figura ({", ".join(FIGURAS)})')
-    _chaves(fig[figs[0]], f'{onde} ({figs[0]})', *FIGURAS[figs[0]])
-    return figs[0]
+    tipo, d = figs[0], fig[figs[0]]
+    _chaves(d, f'{onde} ({tipo})', *FIGURAS[tipo])
+    if tipo == 'transversal':
+        for m in d['marcas']:
+            if len(m) != 3 or m[0] not in ('r', 's') or m[1] not in POSICOES:
+                raise ErroEspecificacao(f'{onde} (transversal): marca {m}: use [r|s, {"|".join(POSICOES)}, rótulo]')
+    if tipo == 'semirretas':
+        for m in d.get('marcas', []):
+            if m[0] not in d['nomes'] or m[1] not in d['nomes']:
+                raise ErroEspecificacao(f'{onde} (semirretas): marca {m} usa um nome que não é semirreta')
+    return tipo
 
 def _grade(f, d, ctx):
     its = d['itens']
     for i, it in enumerate(its):
         onde = f'{ctx["onde"]}, item {i + 1}'
-        _chaves(it, onde, (), ('angulo', 'semirretas', 'bico', 'texto', 'resposta'))
+        _chaves(it, onde, (), tuple(FIGURAS) + ('texto', 'resposta', 'alternativas', 'incognita', 'pontos'))
         if any(k in FIGURAS for k in it): _validar_figura(it, onde)
         elif 'texto' not in it: raise ErroEspecificacao(f'{onde}: item sem figura e sem texto')
     f.grade(its, colunas=d.get('colunas', 2), tamanho=d.get('tamanho', 12), altura=ctx.get('altura'))
@@ -172,7 +184,7 @@ TIPOS = {
     'decompor':         (_decompor, ('itens',), ('tamanho',)),
     'subinstrucao':     (_subinstrucao, ('instrucao', 'icone'), ('pontos', 'pontos_cada')),
     'grade':            (_grade, ('itens',), ('colunas', 'tamanho')),
-    'figura':           (_figura, (), ('angulo', 'semirretas', 'bico')),
+    'figura':           (_figura, (), ('angulo', 'semirretas', 'bico', 'cruzadas', 'transversal')),
     'alternativas':     (_alternativas, ('itens', 'resposta'), ('tamanho',)),
 }
 
@@ -189,13 +201,14 @@ def _tipo(bloco, onde):
 
 def _medir(f, bloco, ctx):
     """altura de um bloco fixo: desenha num canvas descartável e vê quanto o cursor desceu"""
-    c, y = f.c, f.y
+    c, y, oc, li = f.c, f.y, list(getattr(f, '_ocupados', [])), list(getattr(f, '_linhas_figuras', []))
     f.c = canvas.Canvas(io.BytesIO(), pagesize=A5)
     try:
         desenhar_bloco(f, bloco, ctx)
         return y - f.y
     finally:
         f.c, f.y = c, y
+        if hasattr(f, '_ocupados'): f._ocupados, f._linhas_figuras = oc, li   # a medição não deixa rótulos nem linhas para trás
 
 
 def desenhar_bloco(f, bloco, ctx):

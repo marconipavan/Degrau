@@ -1,0 +1,94 @@
+# convertido de G1_078.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 78
+unidade: 'Paralelas: calcular 8'
+a:
+  instrucao: Ache x (descubra se são iguais ou somam 180°).
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 72
+          marcas:
+          - [r, acima-direita, 2x + 12°]
+          - [s, abaixo-esquerda, 3x − 18°]
+      - texto: Ache x.
+        resposta: ['58', 58°]
+        incognita: x
+        transversal:
+          direcao: 104
+          marcas:
+          - [r, abaixo-direita, x + 18°]
+          - [s, acima-direita, 2x − 12°]
+      - texto: Ache x.
+        resposta: ['36', 36°]
+        incognita: x
+        transversal:
+          direcao: 72
+          marcas:
+          - [r, acima-esquerda, 3x]
+          - [s, acima-esquerda, 2x + 36°]
+      - texto: Ache x.
+        resposta: ['40', 40°]
+        incognita: x
+        transversal:
+          direcao: 72
+          marcas:
+          - [r, abaixo-esquerda, x + 32°]
+          - [s, acima-esquerda, 3x − 12°]
+      - texto: Ache x.
+        resposta: ['28', 28°]
+        incognita: x
+        transversal:
+          direcao: 104
+          marcas:
+          - [r, acima-direita, 4x − 8°]
+          - [s, abaixo-direita, 2x + 20°]
+b:
+  instrucao: Ache a medida pedida.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Quanto mede o ângulo 3x + 2°?
+        resposta: ['122', 122°]
+        transversal:
+          direcao: 58
+          marcas:
+          - [r, acima-esquerda, 3x + 2°]
+          - [s, abaixo-direita, 2x + 42°]
+      - texto: Quanto mede o ângulo 3x + 2°?
+        resposta: ['122', 122°]
+        transversal:
+          direcao: 58
+          marcas:
+          - [r, abaixo-esquerda, x + 18°]
+          - [s, acima-esquerda, 3x + 2°]
+      - texto: Quanto mede o ângulo em r, abaixo à direita?
+        resposta: ['122', 122°]
+        transversal:
+          direcao: 58
+          marcas:
+          - [r, acima-direita, 2x]
+          - [s, acima-direita, x + 29°]
+      - texto: Quanto mede o ângulo em s, abaixo à esquerda?
+        resposta: ['62', 62°]
+        transversal:
+          direcao: 62
+          marcas:
+          - [r, abaixo-direita, 4x − 2°]
+          - [s, acima-esquerda, 3x + 28°]
+      - texto: Quanto mede o ângulo em r, acima à direita?
+        resposta: ['58', 58°]
+        transversal:
+          direcao: 58
+          marcas:
+          - [r, acima-esquerda, 3x − 28°]
+          - [s, abaixo-esquerda, x + 8°]

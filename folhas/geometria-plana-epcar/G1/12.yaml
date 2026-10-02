@@ -1,0 +1,63 @@
+# convertido de G1_012.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 12
+unidade: Graus, minutos e segundos 2
+a:
+  instrucao: Escreva tudo em minutos.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [2°15' = 2 × 60' + 15' = 135'.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 1°20'
+        resposta: ['80', 80']
+      - texto: 2°30'
+        resposta: ['150', 150']
+      - texto: 3°5'
+        resposta: ['185', 185']
+      - texto: 10°10'
+        resposta: ['610', 610']
+      - texto: 1°1'
+        resposta: ['61', 61']
+      - texto: 2°45'
+        resposta: ['165', 165']
+      - texto: 5°15'
+        resposta: ['315', 315']
+      - texto: 0°50'
+        resposta: ['50', 50']
+      - texto: 12°12'
+        resposta: ['732', 732']
+      - texto: 6°40'
+        resposta: ['400', 400']
+b:
+  instrucao: Escreva em graus e minutos.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [135' = 120' + 15' = 2°15'.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 75'
+        resposta: [1°15', 1°15'0", 1°15'00"]
+      - texto: 130'
+        resposta: [2°10', 2°10'0", 2°10'00"]
+      - texto: 200'
+        resposta: [3°20', 3°20'0", 3°20'00"]
+      - texto: 61'
+        resposta: [1°1', 1°01', 1°1'0", 1°01'00"]
+      - texto: 90'
+        resposta: [1°30', 1°30'0", 1°30'00"]
+      - texto: 150'
+        resposta: [2°30', 2°30'0", 2°30'00"]
+      - texto: 121'
+        resposta: [2°1', 2°01', 2°1'0", 2°01'00"]
+      - texto: 300'
+        resposta: ['5', 5°]
+      - texto: 59'
+        resposta: [0°59', 0°59'0", 0°59'00", 59']
+      - texto: 245'
+        resposta: [4°5', 4°05', 4°5'0", 4°05'00"]

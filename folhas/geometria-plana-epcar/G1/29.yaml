@@ -1,0 +1,49 @@
+# convertido de G1_029.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 29
+unidade: Complemento e suplemento 9
+a:
+  instrucao: Calcule.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O complemento do triplo de 20°
+        resposta: ['30', 30°]
+      - texto: O triplo do complemento de 20°
+        resposta: ['210', 210°]
+      - texto: A metade do suplemento do complemento de 40°
+        resposta: ['65', 65°]
+      - texto: O suplemento da metade do complemento de 30°
+        resposta: ['150', 150°]
+      - texto: O complemento do suplemento do dobro de 50°
+        resposta: ['10', 10°]
+      - texto: O dobro do complemento do suplemento de 140°
+        resposta: ['100', 100°]
+      - texto: O suplemento do dobro do complemento de 70°
+        resposta: ['140', 140°]
+      - texto: A metade do complemento de 31°
+        resposta: [29°30', 29°30'0", 29°30'00"]
+      - texto: O complemento da terça parte de 120°
+        resposta: ['50', 50°]
+      - texto: A terça parte do suplemento do complemento de 15°
+        resposta: ['35', 35°]
+b:
+  instrucao: Calcule.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O dobro do complemento de 40°30'
+        resposta: ['99', 99°]
+      - texto: A metade do suplemento de 100°10'
+        resposta: [39°55', 39°55'0", 39°55'00"]
+      - texto: O complemento da metade de 50°20'
+        resposta: [64°50', 64°50'0", 64°50'00"]
+      - texto: O suplemento do triplo de 20°15'
+        resposta: [119°15', 119°15'0", 119°15'00"]
+      - texto: A metade do complemento de 45°
+        resposta: [22°30', 22°30'0", 22°30'00"]

@@ -1,0 +1,72 @@
+# convertido de G1_042.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 42
+unidade: Posições 2
+a:
+  instrucao: 'Par: adjacentes (A), só consecutivos (C) ou N?'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['AÔB e BÔC: lado OB comum, sem se sobrepor → A. AÔB e AÔC: lado OA comum, mas um está dentro do
+          outro → C.']
+  - figura:
+      semirretas:
+        direcoes: [0, 40, 90, 130]
+        nomes: [A, B, C, D]
+        vertice: O
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔB e BÔC
+        resposta: [A, adjacentes]
+      - texto: AÔB e AÔC
+        resposta: [C, consecutivos]
+      - texto: AÔB e CÔD
+        resposta: [N, nenhum]
+      - texto: BÔC e CÔD
+        resposta: [A, adjacentes]
+      - texto: AÔC e CÔD
+        resposta: [A, adjacentes]
+      - texto: AÔC e BÔD
+        resposta: [N, nenhum]
+      - texto: AÔD e AÔB
+        resposta: [C, consecutivos]
+      - texto: AÔD e BÔD
+        resposta: [C, consecutivos]
+      - texto: AÔB e BÔD
+        resposta: [A, adjacentes]
+      - texto: AÔC e BÔC
+        resposta: [C, consecutivos]
+b:
+  instrucao: 'Par: adjacentes (A), só consecutivos (C) ou N?'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - figura:
+      semirretas:
+        direcoes: [0, 50, 100, 150, 180]
+        nomes: [P, Q, R, S, T]
+        vertice: O
+  - grade:
+      colunas: 2
+      itens:
+      - texto: PÔQ e QÔR
+        resposta: [A, adjacentes]
+      - texto: PÔR e RÔS
+        resposta: [A, adjacentes]
+      - texto: PÔQ e PÔR
+        resposta: [C, consecutivos]
+      - texto: QÔS e SÔT
+        resposta: [A, adjacentes]
+      - texto: PÔQ e RÔS
+        resposta: [N, nenhum]
+      - texto: PÔT e QÔT
+        resposta: [C, consecutivos]
+      - texto: QÔR e RÔT
+        resposta: [A, adjacentes]
+      - texto: PÔS e QÔR
+        resposta: [N, nenhum]
+      - texto: RÔS e SÔT
+        resposta: [A, adjacentes]
+      - texto: PÔR e QÔR
+        resposta: [C, consecutivos]

@@ -1,0 +1,50 @@
+# convertido de G1_022.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 22
+unidade: Complemento e suplemento 2
+a:
+  instrucao: Calcule o complemento de cada ângulo.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['Complemento de 35°20'': 89°60'' − 35°20'' = 54°40''.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Complemento de 35°20'
+        resposta: [54°40', 54°40'0", 54°40'00"]
+      - texto: Complemento de 10°45'
+        resposta: [79°15', 79°15'0", 79°15'00"]
+      - texto: Complemento de 60°30'
+        resposta: [29°30', 29°30'0", 29°30'00"]
+      - texto: Complemento de 45°15'
+        resposta: [44°45', 44°45'0", 44°45'00"]
+      - texto: Complemento de 1°1'
+        resposta: [88°59', 88°59'0", 88°59'00"]
+      - texto: Complemento de 88°40'
+        resposta: [1°20', 1°20'0", 1°20'00"]
+      - texto: Complemento de 20°5'
+        resposta: [69°55', 69°55'0", 69°55'00"]
+      - texto: Complemento de 72°59'
+        resposta: [17°1', 17°01', 17°1'0", 17°01'00"]
+      - texto: Complemento de 33°33'
+        resposta: [56°27', 56°27'0", 56°27'00"]
+      - texto: Complemento de 12°48'
+        resposta: [77°12', 77°12'0", 77°12'00"]
+b:
+  instrucao: Calcule o suplemento de cada ângulo.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['Suplemento de 100°15'': 179°60'' − 100°15'' = 79°45''.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Suplemento de 100°15'
+        resposta: [79°45', 79°45'0", 79°45'00"]
+      - {texto: Suplemento de 45°30'30", resposta: 134°29'30"}
+      - {texto: Suplemento de 120°0'40", resposta: 59°59'20"}
+      - {texto: Suplemento de 10°10'10", resposta: 169°49'50"}
+      - texto: Suplemento de 179°59'59"
+        resposta: [0°0'1", 0°00'01", 0'1"]

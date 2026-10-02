@@ -1,0 +1,65 @@
+# convertido de G1_070.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 70
+unidade: 'Paralelas: identificar 10'
+a:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - figura:
+      transversal:
+        direcao: 75
+        marcas:
+        - [r, acima-direita, '1']
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-esquerda, '3']
+        - [r, abaixo-direita, '4']
+        - [s, acima-direita, '5']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-esquerda, '7']
+        - [s, abaixo-direita, '8']
+  - grade:
+      colunas: 1
+      itens:
+      - {texto: Correspondente do ângulo 3, resposta: '7'}
+      - {texto: Alterno interno do ângulo 6, resposta: '4'}
+      - {texto: Alterno externo do ângulo 2, resposta: '8'}
+      - {texto: Colateral interno do ângulo 5, resposta: '4'}
+      - {texto: Colateral externo do ângulo 7, resposta: '2'}
+      - texto: Tipo do par 1 e 7 (sigla)
+        resposta: [AE, alternos externos]
+      - texto: Tipo do par 3 e 6 (sigla)
+        resposta: [CI, colaterais internos]
+      - texto: '1 e 8: iguais (C) ou somam 180° (S)?'
+        resposta: [S, suplementares]
+      - texto: '4 e 6: iguais (C) ou somam 180° (S)?'
+        resposta: [C, congruentes]
+      - {texto: 'Quantos ângulos são iguais ao ângulo 8 (sem contar o 8)?', resposta: '3'}
+b:
+  instrucao: O ângulo 7 mede 48°. Calcule os pedidos.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - figura:
+      transversal:
+        direcao: 48
+        marcas:
+        - [r, acima-direita, '1']
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-direita, '4']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-esquerda, 48°]
+        - [s, abaixo-direita, '8']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Quanto mede o ângulo 1?
+        resposta: ['48', 48°]
+      - texto: Quanto mede o ângulo 2?
+        resposta: ['132', 132°]
+      - texto: Quanto mede o ângulo 4?
+        resposta: ['132', 132°]
+      - texto: Quanto mede o ângulo 6?
+        resposta: ['132', 132°]
+      - texto: Quanto mede o ângulo 8?
+        resposta: ['132', 132°]

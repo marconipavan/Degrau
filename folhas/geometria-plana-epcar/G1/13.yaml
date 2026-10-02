@@ -1,0 +1,63 @@
+# convertido de G1_013.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 13
+unidade: Graus, minutos e segundos 3
+a:
+  instrucao: Escreva tudo em segundos.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [2'10" = 2 × 60" + 10" = 130".]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 2'10"
+        resposta: ['130', 130"]
+      - texto: 1'1"
+        resposta: ['61', 61"]
+      - texto: 3'30"
+        resposta: ['210', 210"]
+      - texto: 10'5"
+        resposta: ['605', 605"]
+      - texto: 1'59"
+        resposta: ['119', 119"]
+      - texto: 4'20"
+        resposta: ['260', 260"]
+      - texto: 6'6"
+        resposta: ['366', 366"]
+      - texto: 2'2"
+        resposta: ['122', 122"]
+      - texto: 12'30"
+        resposta: ['750', 750"]
+      - texto: 5'45"
+        resposta: ['345', 345"]
+b:
+  instrucao: Escreva em minutos e segundos.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [135" = 120" + 15" = 2'15".]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 75"
+        resposta: [1'15", 0°1'15"]
+      - texto: 135"
+        resposta: [2'15", 0°2'15"]
+      - texto: 200"
+        resposta: [3'20", 0°3'20"]
+      - texto: 61"
+        resposta: [1'1", 0°1'1", 1'01"]
+      - texto: 90"
+        resposta: [1'30", 0°1'30"]
+      - texto: 150"
+        resposta: [2'30", 0°2'30"]
+      - texto: 121"
+        resposta: [2'1", 0°2'1", 2'01"]
+      - texto: 245"
+        resposta: [4'5", 0°4'5", 4'05"]
+      - texto: 119"
+        resposta: [1'59", 0°1'59"]
+      - texto: 600"
+        resposta: [10', 0°10', 10'0"]

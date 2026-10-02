@@ -1,0 +1,94 @@
+# convertido de G1_060.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 60
+unidade: Revisão 1 10
+a:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O suplemento do complemento de x é 5 vezes o complemento de x. Ache x.
+        resposta: ['60', 60°]
+        incognita: x
+      - {texto: Suplemento do complemento de 12°34'56", resposta: 102°34'56"}
+      - texto: A soma do complemento com o suplemento de x é 4x. Ache x.
+        resposta: ['45', 45°]
+        incognita: x
+      - texto: Complementares; o triplo de um é o dobro do outro. O menor?
+        resposta: ['36', 36°]
+      - texto: Suplementares; um é o triplo do outro mais 12°. O maior?
+        resposta: ['138', 138°]
+      - {texto: (180° − 3 × 25°45') ÷ 2, resposta: 51°22'30"}
+      - texto: 'Bissetriz: metades x/2 + 20° e x − 10°. Ache x.'
+        resposta: ['60', 60°]
+        incognita: x
+      - texto: 'Opostos pelo vértice: 2x + 30° e o suplemento de x. Ache x.'
+        resposta: ['50', 50°]
+        incognita: x
+      - texto: 'Sobre uma reta: o complemento de x, x e 2x. Ache x.'
+        resposta: ['45', 45°]
+        incognita: x
+      - texto: Menor ângulo dos ponteiros às 7 h, dividido por 4
+        resposta: [37°30', 37°30'0", 37°30'00"]
+b:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔM = x/2 + 22° e MÔB = 2x − 26°. Ache x.
+        resposta: ['32', 32°]
+        incognita: x
+        semirretas:
+          direcoes: [0, 38, 76]
+          nomes: [A, M, B]
+          vertice: O
+          marcas:
+          - [A, M, null, x/2 + 22°]
+          - [M, B, null, 2x − 26°]
+          comprimento: 15
+      - texto: 8x − 5° e 3x + 40°
+        resposta: ['9', 9°]
+        cruzadas:
+          direcoes: [0, 67]
+          ponto: O
+          marcas:
+          - [0, 67, 8x − 5°]
+          - [180, 247, 3x + 40°]
+      - texto: x + 37° e 4x + 8°
+        resposta: ['27', 27°]
+        cruzadas:
+          direcoes: [0, 64]
+          ponto: O
+          marcas:
+          - [0, 64, x + 37°]
+          - [64, 180, 4x + 8°]
+      - texto: x, 2x, 3x, 4x, 5x, 9x
+        resposta: ['15', 15°]
+        semirretas:
+          direcoes: [0, 15, 45, 90, 150, 225]
+          nomes: [A, B, C, D, E, F]
+          vertice: O
+          marcas:
+          - [A, B, null, x]
+          - [B, C, null, 2x]
+          - [C, D, null, 3x]
+          - [D, E, null, 4x]
+          - [E, F, null, 5x]
+          - [F, A, null, 9x]
+          comprimento: 17
+      - texto: 3x − 4°, x + 12°, 2x + 4°
+        resposta: ['28', 28°]
+        semirretas:
+          direcoes: [0, 80, 120, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, 3x − 4°]
+          - [B, C, null, x + 12°]
+          - [C, D, null, 2x + 4°]
+          comprimento: 15

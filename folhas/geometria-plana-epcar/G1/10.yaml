@@ -1,0 +1,61 @@
+# convertido de G1_010.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 10
+unidade: Reconhecer ângulos 10
+a:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - {texto: Vértice do ângulo MN̂P, resposta: N}
+      - texto: Vértice Q, lados QR e QS
+        resposta: [RQS, SQR, RQ̂S, SQ̂R]
+      - texto: 1/3 de volta
+        resposta: ['120', 120°]
+      - texto: Menor ângulo dos ponteiros às 4 h
+        resposta: ['120', 120°]
+      - texto: Maior ângulo agudo (medida inteira)
+        resposta: ['89', 89°]
+      - texto: Classifique 135°
+        resposta: [O, obtuso]
+      - texto: Classifique 3/8 de volta
+        resposta: [O, obtuso]
+      - texto: Classifique o menor ângulo às 6 h
+        resposta: [Ra, raso, RA]
+      - texto: A metade de um raso é reta?
+        resposta: [S, Sim]
+      - {texto: 'Quantos ângulos formam 4 semirretas de mesma origem?', resposta: '6'}
+b:
+  instrucao: 'Revisão: responda olhando a figura.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - figura:
+      semirretas:
+        direcoes: [0, 45, 90, 180]
+        nomes: [A, B, C, D]
+        vertice: O
+        marcas:
+        - [A, C, reto, null]
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Tipo de AÔB
+        resposta: [A, agudo]
+      - texto: Tipo de AÔC
+        resposta: [R, reto]
+      - texto: Tipo de BÔD
+        resposta: [O, obtuso]
+      - texto: Tipo de AÔD
+        resposta: [Ra, raso, RA]
+      - {texto: 'Quantos ângulos há na figura?', resposta: '6'}
+      - {texto: 'Quantos deles são agudos?', resposta: '2'}
+      - texto: Lados do ângulo BÔC
+        resposta:
+          conjunto: [OB, OC]
+      - texto: Qual ângulo da figura é raso? (nome)
+        resposta: [AOD, DOA, AÔD, DÔA]
+      - {texto: 'Quantos ângulos retos há na figura?', resposta: '2'}
+      - {texto: 'Quantos ângulos obtusos há na figura?', resposta: '1'}

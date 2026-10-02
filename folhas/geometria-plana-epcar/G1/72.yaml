@@ -1,0 +1,103 @@
+# convertido de G1_072.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 72
+unidade: 'Paralelas: calcular 2'
+a:
+  instrucao: Correspondentes. Ache x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [3x − 10° = 2x + 20° → x = 30°.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 80
+          marcas:
+          - [r, acima-direita, 3x − 10°]
+          - [s, acima-direita, 2x + 20°]
+      - texto: Ache x.
+        resposta: ['25', 25°]
+        incognita: x
+        transversal:
+          direcao: 120
+          marcas:
+          - [r, acima-esquerda, x + 35°]
+          - [s, acima-esquerda, 2x + 10°]
+      - texto: Ache x.
+        resposta: ['15', 15°]
+        incognita: x
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, abaixo-esquerda, 4x + 10°]
+          - [s, abaixo-esquerda, 5x − 5°]
+      - texto: Ache x.
+        resposta: ['15', 15°]
+        incognita: x
+        transversal:
+          direcao: 120
+          marcas:
+          - [r, abaixo-direita, 2x + 30°]
+          - [s, abaixo-direita, 3x + 15°]
+      - texto: Ache x.
+        resposta: ['20', 20°]
+        incognita: x
+        transversal:
+          direcao: 45
+          marcas:
+          - [r, acima-direita, 3x − 15°]
+          - [s, acima-direita, x + 25°]
+b:
+  instrucao: Alternos internos. Ache x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [2x + 10° = 3x − 20° → x = 30°.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, abaixo-esquerda, 2x + 10°]
+          - [s, acima-direita, 3x − 20°]
+      - texto: Ache x.
+        resposta: ['25', 25°]
+        incognita: x
+        transversal:
+          direcao: 50
+          marcas:
+          - [r, abaixo-direita, 5x + 5°]
+          - [s, acima-esquerda, 4x + 30°]
+      - texto: Ache x.
+        resposta: ['60', 60°]
+        incognita: x
+        transversal:
+          direcao: 110
+          marcas:
+          - [r, abaixo-esquerda, 2x − 10°]
+          - [s, acima-direita, x + 50°]
+      - texto: Ache x.
+        resposta: ['40', 40°]
+        incognita: x
+        transversal:
+          direcao: 60
+          marcas:
+          - [r, abaixo-direita, x + 80°]
+          - [s, acima-esquerda, 3x]
+      - texto: Ache x.
+        resposta: ['20', 20°]
+        incognita: x
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, abaixo-esquerda, 4x − 10°]
+          - [s, acima-direita, 2x + 30°]

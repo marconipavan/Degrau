@@ -1,0 +1,53 @@
+# convertido de G1_031.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 31
+unidade: Equações com ângulos 1
+a:
+  instrucao: 'Resolva: quanto vale x?'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [2x + 10° = 90° → 2x = 80° → x = 40°.]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: x + 35° = 90°
+        resposta: ['55', 55°]
+      - texto: x + 110° = 180°
+        resposta: ['70', 70°]
+      - texto: 2x = 90°
+        resposta: ['45', 45°]
+      - texto: 3x = 180°
+        resposta: ['60', 60°]
+      - texto: x + x = 90°
+        resposta: ['45', 45°]
+      - texto: 2x + 10° = 90°
+        resposta: ['40', 40°]
+      - texto: 3x − 30° = 180°
+        resposta: ['70', 70°]
+      - texto: 4x + 20° = 180°
+        resposta: ['40', 40°]
+      - texto: 5x = 90°
+        resposta: ['18', 18°]
+      - texto: x/2 = 35°
+        resposta: ['70', 70°]
+b:
+  instrucao: Os dois ângulos são complementares. Ache x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['x e 2x complementares: x + 2x = 90° → x = 30°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: x e 2x
+        resposta: ['30', 30°]
+      - texto: x e 4x
+        resposta: ['18', 18°]
+      - texto: x e x + 20°
+        resposta: ['35', 35°]
+      - texto: 2x e 3x
+        resposta: ['18', 18°]
+      - texto: x + 10° e 2x + 20°
+        resposta: ['20', 20°]

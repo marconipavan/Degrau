@@ -1,0 +1,117 @@
+# convertido de G1_083.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 83
+unidade: O bizu dos bicos 3
+a:
+  instrucao: Calcule x.  (r // s)
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+  - exemplo:
+      texto: ['Bico para a esquerda: a mesma regra. Em r 30°, em s 40° → x = 70°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['75', 75°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-145, 15]
+          - [-40, 0]
+          marcas:
+          - [0, esq, 35°]
+          - [1, null, x]
+          - [2, esq, 40°]
+      - texto: Ache x.
+        resposta: ['78', 78°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-153, 15]
+          - [-51, 0]
+          marcas:
+          - [0, esq, 27°]
+          - [1, null, x]
+          - [2, esq, 51°]
+      - texto: Ache x.
+        resposta: ['84', 84°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-134, 15]
+          - [-38, 0]
+          marcas:
+          - [0, esq, 46°]
+          - [1, null, x]
+          - [2, esq, 38°]
+      - texto: Ache x.
+        resposta: ['85', 85°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-158, 15]
+          - [-63, 0]
+          marcas:
+          - [0, esq, 22°]
+          - [1, null, x]
+          - [2, esq, 63°]
+b:
+  instrucao: Calcule x.  (r // s)
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['33', 33°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-147, 15]
+          - [-49, 0]
+          marcas:
+          - [0, esq, x]
+          - [1, null, 82°]
+          - [2, esq, 49°]
+      - texto: Ache x.
+        resposta: ['24', 24°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-122, 15]
+          - [-24, 0]
+          marcas:
+          - [0, esq, 58°]
+          - [1, null, 82°]
+          - [2, esq, x]
+      - texto: Ache x.
+        resposta: ['19', 19°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-161, 15]
+          - [-61, 0]
+          marcas:
+          - [0, esq, x]
+          - [1, null, 80°]
+          - [2, esq, 61°]
+      - texto: Ache x.
+        resposta: ['36', 36°]
+        incognita: x
+        bico:
+          altura: 45
+          segmentos:
+          - [-136, 15]
+          - [-36, 0]
+          marcas:
+          - [0, esq, 44°]
+          - [1, null, 80°]
+          - [2, esq, x]

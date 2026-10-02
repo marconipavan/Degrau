@@ -1,0 +1,85 @@
+# convertido de G1_067.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 67
+unidade: 'Paralelas: identificar 7'
+a:
+  instrucao: Os ângulos são iguais (C) ou somam 180° (S)?
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [Correspondentes e alternos são iguais (C); colaterais somam 180° (S).]
+  - figura:
+      transversal:
+        direcao: 65
+        marcas:
+        - [r, acima-direita, '1']
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-esquerda, '3']
+        - [r, abaixo-direita, '4']
+        - [s, acima-direita, '5']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-esquerda, '7']
+        - [s, abaixo-direita, '8']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 1 e 5
+        resposta: [C, congruentes]
+      - texto: 3 e 5
+        resposta: [C, congruentes]
+      - texto: 3 e 6
+        resposta: [S, suplementares]
+      - texto: 1 e 7
+        resposta: [C, congruentes]
+      - texto: 4 e 5
+        resposta: [S, suplementares]
+      - texto: 2 e 6
+        resposta: [C, congruentes]
+      - texto: 2 e 7
+        resposta: [S, suplementares]
+      - texto: 4 e 6
+        resposta: [C, congruentes]
+      - texto: 1 e 8
+        resposta: [S, suplementares]
+      - texto: 2 e 8
+        resposta: [C, congruentes]
+b:
+  instrucao: Iguais (C) ou somam 180° (S)?
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - figura:
+      transversal:
+        direcao: 120
+        marcas:
+        - [r, acima-direita, '1']
+        - [r, acima-esquerda, '2']
+        - [r, abaixo-esquerda, '3']
+        - [r, abaixo-direita, '4']
+        - [s, acima-direita, '5']
+        - [s, acima-esquerda, '6']
+        - [s, abaixo-esquerda, '7']
+        - [s, abaixo-direita, '8']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 1 e 3
+        resposta: [C, congruentes]
+      - texto: 1 e 2
+        resposta: [S, suplementares]
+      - texto: 5 e 8
+        resposta: [S, suplementares]
+      - texto: 2 e 8
+        resposta: [C, congruentes]
+      - texto: 6 e 7
+        resposta: [S, suplementares]
+      - texto: 3 e 8
+        resposta: [S, suplementares]
+      - texto: 1 e 6
+        resposta: [S, suplementares]
+      - texto: 4 e 7
+        resposta: [S, suplementares]
+      - texto: 2 e 5
+        resposta: [S, suplementares]
+      - texto: 7 e 3
+        resposta: [C, congruentes]

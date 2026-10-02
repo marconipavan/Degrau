@@ -1,0 +1,63 @@
+# convertido de G1_026.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 26
+unidade: Complemento e suplemento 6
+a:
+  instrucao: Responda S (existe) ou N (não existe).
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['120° tem complemento? Não: já passou de 90°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 30° tem complemento?
+        resposta: [S, Sim]
+      - texto: 120° tem complemento?
+        resposta: [N, Não, Nao]
+      - texto: 120° tem suplemento?
+        resposta: [S, Sim]
+      - texto: 89° tem complemento?
+        resposta: [S, Sim]
+      - texto: 179° tem suplemento?
+        resposta: [S, Sim]
+      - texto: 150° tem complemento?
+        resposta: [N, Não, Nao]
+      - texto: 45° tem suplemento?
+        resposta: [S, Sim]
+      - texto: 95° tem complemento?
+        resposta: [N, Não, Nao]
+      - texto: 60° tem suplemento?
+        resposta: [S, Sim]
+      - texto: 91° tem complemento?
+        resposta: [N, Não, Nao]
+b:
+  instrucao: 'Par: complementares (C), suplementares (S) ou N?'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['35° e 55° somam 90°: complementares (C).']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 35° e 55°
+        resposta: [C, complementares]
+      - texto: 40° e 50°
+        resposta: [C, complementares]
+      - texto: 120° e 60°
+        resposta: [S, suplementares]
+      - texto: 100° e 90°
+        resposta: [N, nenhum]
+      - texto: 45° e 135°
+        resposta: [S, suplementares]
+      - texto: 30° e 70°
+        resposta: [N, nenhum]
+      - texto: 89° e 1°
+        resposta: [C, complementares]
+      - texto: 91° e 89°
+        resposta: [S, suplementares]
+      - texto: 60° e 60°
+        resposta: [N, nenhum]
+      - texto: 170° e 10°
+        resposta: [S, suplementares]

@@ -1,0 +1,58 @@
+# convertido de G1_056.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 56
+unidade: Revisão 1 6
+a:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Suplemento do complemento de 72°
+        resposta: ['162', 162°]
+      - texto: O suplemento do complemento de x é 162°. Ache x.
+        resposta: ['72', 72°]
+        incognita: x
+      - texto: O dobro do complemento de 18°
+        resposta: ['144', 144°]
+      - texto: O dobro do complemento de x é 144°. Ache x.
+        resposta: ['18', 18°]
+        incognita: x
+      - texto: A metade do suplemento de 40°
+        resposta: ['70', 70°]
+      - texto: A metade do suplemento de x é 70°. Ache x.
+        resposta: ['40', 40°]
+        incognita: x
+      - texto: Complemento do triplo de 25°
+        resposta: ['15', 15°]
+      - texto: O complemento do triplo de x é 15°. Ache x.
+        resposta: ['25', 25°]
+        incognita: x
+      - texto: Suplemento menos complemento de 33°
+        resposta: ['90', 90°]
+      - texto: O suplemento de x é 4 vezes x. Ache x.
+        resposta: ['36', 36°]
+        incognita: x
+b:
+  instrucao: 'Revisão: responda no caderno.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O complemento do suplemento de x é x/4. Ache x.
+        resposta: ['120', 120°]
+        incognita: x
+      - texto: O suplemento do complemento de x é 3x + 10°. Ache x.
+        resposta: ['40', 40°]
+        incognita: x
+      - texto: O complemento de x mais o suplemento de x dá 3x. Ache x.
+        resposta: ['54', 54°]
+        incognita: x
+      - texto: O dobro do suplemento de x é 5 vezes o complemento. Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+      - texto: 'Suplementares na razão 2 : 3. O menor?'
+        resposta: ['72', 72°]

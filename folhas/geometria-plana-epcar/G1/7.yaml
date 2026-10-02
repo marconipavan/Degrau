@@ -1,0 +1,61 @@
+# convertido de G1_007.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 7
+unidade: Reconhecer ângulos 7
+a:
+  instrucao: Menor ângulo entre os ponteiros do relógio.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: ['De um número ao seguinte do relógio: 360° ÷ 12 = 30°. Às 2 h: 2 × 30° = 60°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 3 h em ponto
+        resposta: ['90', 90°]
+      - texto: 1 h em ponto
+        resposta: ['30', 30°]
+      - texto: 2 h em ponto
+        resposta: ['60', 60°]
+      - texto: 4 h em ponto
+        resposta: ['120', 120°]
+      - texto: 6 h em ponto
+        resposta: ['180', 180°]
+      - texto: 9 h em ponto
+        resposta: ['90', 90°]
+      - texto: 5 h em ponto
+        resposta: ['150', 150°]
+      - texto: 10 h em ponto
+        resposta: ['60', 60°]
+      - texto: 11 h em ponto
+        resposta: ['30', 30°]
+      - texto: 8 h em ponto
+        resposta: ['120', 120°]
+b:
+  instrucao: 'Classifique o menor ângulo: A, R, O ou Ra.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 3 h em ponto
+        resposta: [R, reto]
+      - texto: 2 h em ponto
+        resposta: [A, agudo]
+      - texto: 5 h em ponto
+        resposta: [O, obtuso]
+      - texto: 6 h em ponto
+        resposta: [Ra, raso, RA]
+      - texto: 8 h em ponto
+        resposta: [O, obtuso]
+      - texto: 1 h em ponto
+        resposta: [A, agudo]
+      - texto: 4 h em ponto
+        resposta: [O, obtuso]
+      - texto: 9 h em ponto
+        resposta: [R, reto]
+      - texto: 7 h em ponto
+        resposta: [O, obtuso]
+      - texto: 11 h em ponto
+        resposta: [A, agudo]

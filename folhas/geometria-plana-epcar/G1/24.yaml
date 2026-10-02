@@ -1,0 +1,63 @@
+# convertido de G1_024.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 24
+unidade: Complemento e suplemento 4
+a:
+  instrucao: Calcule o complemento do suplemento.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [Suplemento de 120° = 60°; complemento de 60° = 30°.]
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Complemento do suplemento de 120°
+        resposta: ['30', 30°]
+      - texto: Complemento do suplemento de 100°
+        resposta: ['10', 10°]
+      - texto: Complemento do suplemento de 150°
+        resposta: ['60', 60°]
+      - texto: Complemento do suplemento de 95°
+        resposta: ['5', 5°]
+      - texto: Complemento do suplemento de 135°
+        resposta: ['45', 45°]
+      - texto: Complemento do suplemento de 170°
+        resposta: ['80', 80°]
+      - texto: Complemento do suplemento de 91°
+        resposta: ['1', 1°]
+      - texto: Complemento do suplemento de 110°
+        resposta: ['20', 20°]
+      - texto: Complemento do suplemento de 160°
+        resposta: ['70', 70°]
+      - texto: Complemento do suplemento de 125°
+        resposta: ['35', 35°]
+b:
+  instrucao: Calcule o suplemento do complemento.
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - exemplo:
+      texto: [Complemento de 30° = 60°; suplemento de 60° = 120°.]
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Suplemento do complemento de 30°
+        resposta: ['120', 120°]
+      - texto: Suplemento do complemento de 10°
+        resposta: ['100', 100°]
+      - texto: Suplemento do complemento de 45°
+        resposta: ['135', 135°]
+      - texto: Suplemento do complemento de 80°
+        resposta: ['170', 170°]
+      - texto: Suplemento do complemento de 1°
+        resposta: ['91', 91°]
+      - texto: Suplemento do complemento de 60°
+        resposta: ['150', 150°]
+      - texto: Suplemento do complemento de 25°
+        resposta: ['115', 115°]
+      - texto: Suplemento do complemento de 72°
+        resposta: ['162', 162°]
+      - texto: Suplemento do complemento de 89°
+        resposta: ['179', 179°]
+      - texto: Suplemento do complemento de 15°
+        resposta: ['105', 105°]

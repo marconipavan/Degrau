@@ -1,0 +1,93 @@
+# convertido de G1_076.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 76
+unidade: 'Paralelas: calcular 6'
+a:
+  instrucao: Ache o valor pedido.
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+  - exemplo:
+      texto: [Ache primeiro o x com um par; depois o y com outro par (lado a lado soma 180°).]
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['35', 35°]
+        incognita: x
+        transversal:
+          direcao: 80
+          marcas:
+          - [r, acima-direita, 2x + 10°]
+          - [s, acima-direita, 80°]
+          - [s, acima-esquerda, y]
+      - texto: Ache y.
+        resposta: ['100', 100°]
+        incognita: y
+        transversal:
+          direcao: 80
+          marcas:
+          - [r, acima-direita, 2x + 10°]
+          - [s, acima-direita, 80°]
+          - [s, acima-esquerda, y]
+      - texto: Ache x.
+        resposta: ['40', 40°]
+        incognita: x
+        transversal:
+          direcao: 55
+          marcas:
+          - [r, abaixo-esquerda, x + 15°]
+          - [s, acima-direita, 55°]
+          - [s, abaixo-direita, y]
+      - texto: Ache y.
+        resposta: ['125', 125°]
+        incognita: y
+        transversal:
+          direcao: 55
+          marcas:
+          - [r, abaixo-esquerda, x + 15°]
+          - [s, acima-direita, 55°]
+          - [s, abaixo-direita, y]
+b:
+  instrucao: Ache o valor pedido.
+  icone: escrever
+  pontos_cada: 25
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['20', 20°]
+        incognita: x
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, acima-direita, 3x + 10°]
+          - [r, acima-esquerda, y]
+          - [s, acima-direita, 2x + 30°]
+      - texto: Ache y.
+        resposta: ['110', 110°]
+        incognita: y
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, acima-direita, 3x + 10°]
+          - [r, acima-esquerda, y]
+          - [s, acima-direita, 2x + 30°]
+      - texto: Ache x.
+        resposta: ['65', 65°]
+        incognita: x
+        transversal:
+          direcao: 65
+          marcas:
+          - [r, abaixo-direita, x + 50°]
+          - [s, acima-esquerda, 2x − 15°]
+          - [s, abaixo-esquerda, y]
+      - texto: Ache y.
+        resposta: ['65', 65°]
+        incognita: y
+        transversal:
+          direcao: 65
+          marcas:
+          - [r, abaixo-direita, x + 50°]
+          - [s, acima-esquerda, 2x − 15°]
+          - [s, abaixo-esquerda, y]

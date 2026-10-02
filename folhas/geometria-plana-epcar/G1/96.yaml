@@ -1,0 +1,31 @@
+# convertido de G1_096.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 96
+unidade: Questões de prova 6
+a:
+  instrucao: Marque a alternativa correta.
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'O suplemento do menor ângulo formado pelos ponteiros às 4 h em ponto mede:'
+        alternativas: [60°, 120°, 30°, 150°]
+        resposta: A
+      - texto: 'O complemento de 1/5 de um ângulo raso mede:'
+        alternativas: [36°, 54°, 144°, 18°]
+        resposta: B
+b:
+  instrucao: Marque a alternativa correta.
+  icone: escrever
+  pontos_cada: 50
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 'O dobro do complemento de um ângulo de 25° é um ângulo:'
+        alternativas: [agudo, reto, obtuso, raso]
+        resposta: C
+      - texto: 'Três quartos de um ângulo raso, menos um reto, mede:'
+        alternativas: [135°, 90°, 225°, 45°]
+        resposta: D

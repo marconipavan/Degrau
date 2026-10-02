@@ -1,0 +1,59 @@
+# convertido de G1_040.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 40
+unidade: Equações com ângulos 10
+a:
+  instrucao: 'Revisão: ache o que se pede.'
+  icone: escrever
+  pontos_cada: 10
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: 3x − 15° = 90°. Ache x.
+        resposta: ['35', 35°]
+        incognita: x
+      - texto: Complementares x e 5x. Ache x.
+        resposta: ['15', 15°]
+        incognita: x
+      - texto: Suplementares 2x e x + 30°. Ache x.
+        resposta: ['50', 50°]
+        incognita: x
+      - texto: O complemento de x é o dobro de x. Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+      - texto: O suplemento de x é o triplo do complemento. Ache x.
+        resposta: ['45', 45°]
+        incognita: x
+      - texto: Complementares que diferem em 20°. O maior?
+        resposta: ['55', 55°]
+      - texto: 'Suplementares na razão 2 : 7. O menor?'
+        resposta: ['40', 40°]
+      - texto: O complemento de x é a metade do suplemento menos 15°. Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+      - texto: O suplemento do complemento de x é 4 vezes x. Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+      - texto: O suplemento de x é igual a 3x. Quanto mede o complemento?
+        resposta: ['45', 45°]
+b:
+  instrucao: 'Revisão: ache o que se pede.'
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 1
+      itens:
+      - texto: O complemento de x é o triplo de x. Ache x.
+        resposta: [22°30', 22°30'0", 22°30'00"]
+        incognita: x
+      - texto: O suplemento de x é 7 vezes x. Ache x.
+        resposta: [22°30', 22°30'0", 22°30'00"]
+        incognita: x
+      - texto: 'Complementares na razão 3 : 5. O maior?'
+        resposta: [56°15', 56°15'0", 56°15'00"]
+      - texto: O suplemento de x é o quíntuplo do complemento. Ache x.
+        resposta: [67°30', 67°30'0", 67°30'00"]
+        incognita: x
+      - texto: Complementares que diferem em 25°. O menor?
+        resposta: [32°30', 32°30'0", 32°30'00"]

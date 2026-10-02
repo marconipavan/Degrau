@@ -1,0 +1,40 @@
+# convertido de G1_027.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 27
+unidade: Complemento e suplemento 7
+a:
+  instrucao: Calcule o complemento do suplemento.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [Suplemento de 110°40' = 69°20'; complemento = 20°40'.]
+  - grade:
+      colunas: 1
+      itens:
+      - texto: Complemento do suplemento de 110°40'
+        resposta: [20°40', 20°40'0", 20°40'00"]
+      - texto: Complemento do suplemento de 150°15'
+        resposta: [60°15', 60°15'0", 60°15'00"]
+      - texto: Complemento do suplemento de 95°30'
+        resposta: [5°30', 5°30'0", 5°30'00"]
+      - texto: Complemento do suplemento de 135°45'
+        resposta: [45°45', 45°45'0", 45°45'00"]
+      - texto: Complemento do suplemento de 100°1'
+        resposta: [10°1', 10°01', 10°1'0", 10°01'00"]
+b:
+  instrucao: Calcule o suplemento do complemento.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: [Complemento de 25°10'30" = 64°49'30"; suplemento = 115°10'30".]
+  - grade:
+      colunas: 1
+      itens:
+      - {texto: Suplemento do complemento de 25°10'30", resposta: 115°10'30"}
+      - texto: Suplemento do complemento de 45°0'15"
+        resposta: [135°0'15", 135°00'15"]
+      - {texto: Suplemento do complemento de 10°20'30", resposta: 100°20'30"}
+      - {texto: Suplemento do complemento de 60°59'59", resposta: 150°59'59"}
+      - texto: Suplemento do complemento de 1°1'1"
+        resposta: [91°1'1", 91°01'01"]

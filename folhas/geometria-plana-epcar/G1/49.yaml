@@ -1,0 +1,116 @@
+# convertido de G1_049.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 49
+unidade: Posições 9
+a:
+  instrucao: Ache x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔM = 3x + 5° e MÔB = 4x − 10°. Ache x.
+        resposta: ['15', 15°]
+        incognita: x
+        semirretas:
+          direcoes: [0, 50, 100]
+          nomes: [A, M, B]
+          vertice: O
+          marcas:
+          - [A, M, null, 3x + 5°]
+          - [M, B, null, 4x − 10°]
+          comprimento: 15
+      - texto: 5x − 10° e 2x + 50°
+        resposta: ['20', 20°]
+        cruzadas:
+          direcoes: [0, 90]
+          ponto: O
+          marcas:
+          - [0, 90, 5x − 10°]
+          - [180, 270, 2x + 50°]
+      - texto: 3x + 20° e x
+        resposta: ['40', 40°]
+        cruzadas:
+          direcoes: [0, 140]
+          ponto: O
+          marcas:
+          - [0, 140, 3x + 20°]
+          - [140, 180, x]
+      - texto: x, 3x, 2x
+        resposta: ['30', 30°]
+        semirretas:
+          direcoes: [0, 30, 120, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, x]
+          - [B, C, null, 3x]
+          - [C, D, null, 2x]
+          comprimento: 15
+      - texto: x + 30°, 2x + 30°, 3x
+        resposta: ['50', 50°]
+        semirretas:
+          direcoes: [0, 80, 210]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, x + 30°]
+          - [B, C, null, 2x + 30°]
+          - [C, A, null, 3x]
+          comprimento: 15
+b:
+  instrucao: Calcule o que se pede.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: AÔM = 2x + 20° e MÔB = 5x − 10°. Quanto mede AÔB?
+        resposta: ['80', 80°]
+        semirretas:
+          direcoes: [0, 40, 80]
+          nomes: [A, M, B]
+          vertice: O
+          marcas:
+          - [A, M, null, 2x + 20°]
+          - [M, B, null, 5x − 10°]
+          comprimento: 15
+      - texto: Retas se cruzam; um ângulo mede 2x e o oposto, x + 35°. Quanto mede 2x?
+        resposta: ['70', 70°]
+        cruzadas:
+          direcoes: [0, 70]
+          ponto: O
+          marcas:
+          - [0, 70, 2x]
+          - [180, 250, x + 35°]
+      - texto: AÔB = 64° e BÔC = 116°. MÔN?
+        resposta: ['90', 90°]
+        semirretas:
+          direcoes: [0, 32, 64, 122, 180]
+          nomes: [A, M, B, N, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 64°]
+          - [B, C, null, 116°]
+          tracejadas: [M, N]
+          comprimento: 15
+      - texto: 'Retas se cruzam; dois ângulos lado a lado: 3x e 2x. Quanto mede o maior?'
+        resposta: ['108', 108°]
+        cruzadas:
+          direcoes: [0, 108]
+          ponto: O
+          marcas:
+          - [0, 108, 3x]
+          - [108, 180, 2x]
+      - texto: 'Sobre uma reta: x, x e x + 30°. Quanto mede o maior?'
+        resposta: ['80', 80°]
+        semirretas:
+          direcoes: [0, 50, 100, 180]
+          nomes: [A, B, C, D]
+          vertice: O
+          marcas:
+          - [A, B, null, x]
+          - [B, C, null, x]
+          - [C, D, null, x + 30°]
+          comprimento: 15

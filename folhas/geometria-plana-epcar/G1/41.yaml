@@ -1,0 +1,123 @@
+# convertido de G1_041.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 41
+unidade: Posições 1
+a:
+  instrucao: Calcule a medida de AÔC.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['AÔB = 30° e BÔC = 45° lado a lado: AÔC = 30° + 45° = 75°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 'Figura 1: quanto mede AÔC?'
+        resposta: ['75', 75°]
+        semirretas:
+          direcoes: [0, 30, 75]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 30°]
+          - [B, C, null, 45°]
+          comprimento: 15
+      - texto: 'Figura 2: quanto mede AÔC?'
+        resposta: ['70', 70°]
+        semirretas:
+          direcoes: [0, 20, 70]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 20°]
+          - [B, C, null, 50°]
+          comprimento: 15
+      - texto: 'Figura 3: quanto mede AÔC?'
+        resposta: ['70', 70°]
+        semirretas:
+          direcoes: [0, 35, 70]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 35°]
+          - [B, C, null, 35°]
+          comprimento: 15
+      - texto: 'Figura 4: quanto mede AÔC?'
+        resposta: ['85', 85°]
+        semirretas:
+          direcoes: [0, 60, 85]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 60°]
+          - [B, C, null, 25°]
+          comprimento: 15
+      - texto: 'Figura 5: quanto mede AÔC?'
+        resposta: ['90', 90°]
+        semirretas:
+          direcoes: [0, 15, 90]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 15°]
+          - [B, C, null, 75°]
+          comprimento: 17
+b:
+  instrucao: Calcule a medida de BÔC.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['AÔC = 100° e AÔB = 35°: BÔC = 100° − 35° = 65°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: 'Figura 1: quanto mede BÔC?'
+        resposta: ['65', 65°]
+        semirretas:
+          direcoes: [0, 35, 100]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 35°]
+          - [A, C, arco, 100°]
+          comprimento: 15
+      - texto: 'Figura 2: quanto mede BÔC?'
+        resposta: ['50', 50°]
+        semirretas:
+          direcoes: [0, 40, 90]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 40°]
+          - [A, C, arco, 90°]
+          comprimento: 15
+      - texto: 'Figura 3: quanto mede BÔC?'
+        resposta: ['90', 90°]
+        semirretas:
+          direcoes: [0, 60, 150]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 60°]
+          - [A, C, arco, 150°]
+          comprimento: 15
+      - texto: 'Figura 4: quanto mede BÔC?'
+        resposta: ['55', 55°]
+        semirretas:
+          direcoes: [0, 25, 80]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 25°]
+          - [A, C, arco, 80°]
+          comprimento: 15
+      - texto: 'Figura 5: quanto mede BÔC?'
+        resposta: ['35', 35°]
+        semirretas:
+          direcoes: [0, 85, 120]
+          nomes: [A, B, C]
+          vertice: O
+          marcas:
+          - [A, B, null, 85°]
+          - [A, C, arco, 120°]
+          comprimento: 15

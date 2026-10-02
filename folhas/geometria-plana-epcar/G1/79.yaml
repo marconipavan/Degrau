@@ -1,0 +1,96 @@
+# convertido de G1_079.md (esqueletos gerados numa conversa do Claude; revisar)
+folha: G1 79
+unidade: 'Paralelas: calcular 9'
+a:
+  instrucao: Ache x.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - exemplo:
+      texto: ['1 e 6 não têm nome, mas 1 = 5 (correspondentes) e 5 + 6 = 180°. Então 1 + 6 = 180°.']
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 80
+          marcas:
+          - [r, acima-direita, 2x + 20°]
+          - [s, acima-esquerda, 3x + 10°]
+      - texto: Ache x.
+        resposta: ['35', 35°]
+        incognita: x
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, acima-esquerda, x + 75°]
+          - [s, abaixo-esquerda, 2x]
+      - texto: Ache x.
+        resposta: ['30', 30°]
+        incognita: x
+        transversal:
+          direcao: 110
+          marcas:
+          - [r, abaixo-direita, 3x − 20°]
+          - [s, acima-direita, x + 80°]
+      - texto: Ache x.
+        resposta: ['42', 42°]
+        incognita: x
+        transversal:
+          direcao: 60
+          marcas:
+          - [r, abaixo-esquerda, x + 18°]
+          - [s, abaixo-direita, 4x − 48°]
+      - texto: Ache x.
+        resposta: ['55', 55°]
+        incognita: x
+        transversal:
+          direcao: 125
+          marcas:
+          - [r, acima-esquerda, x]
+          - [s, acima-direita, 3x − 40°]
+b:
+  instrucao: Ache a medida pedida.
+  icone: escrever
+  pontos_cada: 20
+  blocos:
+  - grade:
+      colunas: 2
+      itens:
+      - texto: Quanto mede o ângulo em s, abaixo à direita?
+        resposta: ['100', 100°]
+        transversal:
+          direcao: 80
+          marcas:
+          - [r, acima-direita, 2x + 20°]
+          - [s, acima-esquerda, 3x + 10°]
+      - texto: Quanto mede o ângulo em r, abaixo à direita?
+        resposta: ['110', 110°]
+        transversal:
+          direcao: 70
+          marcas:
+          - [r, acima-esquerda, x + 75°]
+          - [s, abaixo-esquerda, 2x]
+      - texto: Quanto mede o ângulo em s, abaixo à esquerda?
+        resposta: ['110', 110°]
+        transversal:
+          direcao: 110
+          marcas:
+          - [r, abaixo-direita, 3x − 20°]
+          - [s, acima-direita, x + 80°]
+      - texto: Quanto mede o ângulo em r, acima à esquerda?
+        resposta: ['120', 120°]
+        transversal:
+          direcao: 60
+          marcas:
+          - [r, abaixo-esquerda, x + 18°]
+          - [s, abaixo-direita, 4x − 48°]
+      - texto: Quanto mede o ângulo em s, acima à esquerda?
+        resposta: ['55', 55°]
+        transversal:
+          direcao: 125
+          marcas:
+          - [r, acima-esquerda, x]
+          - [s, acima-direita, 3x − 40°]
