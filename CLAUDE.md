@@ -279,6 +279,17 @@ Feuille cinq b. Je suis dans un avion. …
 
 **Formulário:** uma seção por página do bloco, 12 campos cada, numerados como os itens da folha. O gabarito da planilha sai do YAML (`.planilha.csv`). Ver `correcao/README.md`.
 
+**Decisões de 02/10/2026 para o piloto:**
+
+- **Uma versão de cada folha.** Na repetição, o gerador lista a versão 2 que falta e o Ângelo escreve na hora;
+  a geração automática de versões novas (variação das folhas de cálculo) fica para uma etapa posterior.
+- **Gabarito indexado por folha e versão**, carregado uma vez só na aba Gabarito para a biblioteca inteira
+  (resolve entradas em qualquer folha e repetições com versões diferentes). Código do bloco com a versão quando
+  for repetição (`G1 10-12 v2`).
+- **Código do bloco impresso na folha**, para o aluno copiar no formulário.
+- **Entrega por e-mail automático.** O sistema é entregue ao CASD; os e-mails dos alunos ficam com a
+  administração do curso (na planilha da conta institucional), nunca no repositório.
+
 **Piloto:** 6–8 voluntários (fortes e com dificuldade), 4 semanas, só G1. Critérios definidos antes: ≥70% ainda entregando na semana 4; nota média nas folhas subindo; desempenho no simulado melhor que o de não participantes com nível parecido. Semana 0: revisar tabela, montar planilha/formulário/script, testar com envios falsos, falar com a coordenação, convidar voluntários.
 
 **Privacidade:** alunos são menores de idade. Formulário e planilha na conta institucional do CASD; coleta de fotos de cadernos autorizada pela coordenação (01/10/2026); envio de arquivo no Forms exige conta Google (alternativa: fotos por WhatsApp). **Nunca** versionar dados de alunos (`.gitignore` já bloqueia).
@@ -406,7 +417,7 @@ Perguntas a responder antes de construir:
 | **3. Correção do CASD testada** (lógica testada; falta o teste no Google) | Conjuntos em qualquer ordem (G1 2b); testar o Apps Script com envios falsos; documentar a montagem passo a passo | Envio falso → linha correta no Painel |
 | **4. Gerador de pacotes** (feita) | Linha de comando `degrau`; estado do aluno via adaptador; regra de domínio e repetição com exercícios novos | Gerar 5 dias seguidos de francês e 2 pacotes de geometria sem editar código |
 | **5. Automação** (feita; falta ligar com as chaves) | Agendador + geração do conteúdo pela API + envio por e-mail | Pacote chega sozinho às 06:30 |
-| **6. Multi-aluno CASD** | Pacote individual por aluno a partir do painel | Piloto de 6–8 alunos rodando |
+| **6. Multi-aluno CASD** | Gabarito por folha e versão; código do bloco na folha; `degrau validar` e `degrau ver`; um estado por aluno; importar o Painel; gerar e enviar por e-mail o pacote de cada aluno; nivelamento | Piloto de 6–8 alunos rodando |
 | **7. Expansão para outras áreas** (a planejar) | Alemão, mandarim, química (nomenclatura, balanceamento, estequiometria), física (circuitos simples) etc. (seção 7.7) | Por área: currículo validado, um pacote de exemplo com gabarito calculado e testes |
 | **8. Métricas de desempenho** (a planejar) | Acertos, constância, posição em relação ao objetivo, marcos por idade, tendência mensal, progresso de nível, projeção, teste de fim de nível (seção 7.8) | Definir com o Ângelo depois do piloto |
 
