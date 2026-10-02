@@ -85,4 +85,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    finally:   # aberto com dois cliques no Windows: a janela espera antes de fechar
+        if WINDOWS and sys.stdin and sys.stdin.isatty(): input('\nPressione Enter para fechar.')

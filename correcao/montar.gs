@@ -40,3 +40,27 @@ function montar() {
   ScriptApp.newTrigger('aoEnviar').forSpreadsheet(ss).onFormSubmit().create();
   return form.getPublishedUrl();
 }
+
+/** Menu "Degrau" na planilha (aparece ao abrir a planilha). */
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu('Degrau')
+    .addItem('Atualizar lista de alunos no formulário', 'atualizarAlunos')
+    .addSeparator()
+    .addItem('Montar (só na primeira vez)', 'montar')
+    .addToUi();
+}
+
+/** Copia os nomes da aba Alunos para a lista "Aluno" do formulário (rodar quando entrar ou sair aluno). */
+function atualizarAlunos() {
+  const ss = SpreadsheetApp.getActive();
+  const url = ss.getFormUrl();
+  if (!url) throw new Error('Esta planilha ainda não tem formulário: rode "Montar" primeiro.');
+  const alunos = ss.getSheetByName('Alunos').getDataRange().getValues().slice(1)
+    .map(l => String(l[0]).trim()).filter(a => a);
+  if (alunos.length === 0) throw new Error('A aba Alunos está vazia.');
+  const item = FormApp.openByUrl(url).getItems(FormApp.ItemType.LIST).find(i => i.getTitle() === 'Aluno');
+  if (!item) throw new Error('O formulário não tem a pergunta "Aluno".');
+  item.asListItem().setChoiceValues(alunos);
+  ss.toast(`${alunos.length} aluno(s) no formulário.`, 'Degrau');
+  return alunos.length;
+}

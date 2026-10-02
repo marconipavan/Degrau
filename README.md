@@ -2,50 +2,52 @@
 
 Folhas de estudo diárias, curtas e em degraus mínimos, com domínio exigido antes de avançar.
 
-- Cada folha tem frente e verso, formato A5, **uma única tarefa por página** e quase nenhum texto.
-- A regra aparece num exemplo resolvido; não há explicação teórica na folha.
-- Avança-se só com **domínio**: pelo menos 90% de acerto e tempo dentro do padrão do nível.
-- O compromisso é diário: pacote de manhã, entrega até o fim do dia.
+Cada aluno recebe, depois de cada aula, as folhas do seu próprio nível: um bloco de 3 folhas por dia, resolvido no
+caderno. As respostas vão por um formulário do Google, corrigido automaticamente. Quem domina avança; quem não
+domina refaz o trecho com exercícios novos. A aula continua coletiva; o treino passa a ser individual.
 
-O método é inspirado em sistemas tradicionais de folhas diárias individualizadas. Este projeto é
-independente e não tem relação com nenhuma marca.
+- **Uma tarefa por página**, frente e verso, formato A5 (lido no celular ou impresso).
+- **Exemplo, não explicação:** a regra aparece num exemplo resolvido.
+- **Domínio:** pelo menos 90% de acerto e tempo dentro do padrão do nível.
+- **Figuras geradas por código**, com o gabarito saindo do mesmo cálculo que desenha a figura.
 
-## Exemplos
+O método é inspirado em sistemas tradicionais de folhas diárias individualizadas. Este projeto é independente e não
+tem relação com nenhuma marca.
 
-| Francês, nível inicial (6A) | Francês, nível B1 (DI) | Geometria (paralelas e "bicos") |
-|---|---|---|
-| `exemplos/pdf/Pacote_001_6A_1-5.pdf` | `exemplos/pdf/Amostra_niveis_AII_e_DI.pdf` | `exemplos/pdf/G1_amostra_folhas81-89.pdf` |
+## O que vem pronto
 
-## Como gerar os exemplos
+- **Geometria plana, nível G1 (ângulos):** 100 folhas, da noção de ângulo às questões de prova (preparação EPCAR e
+  Colégio Naval).
+- **Correção automática:** formulário e planilha do Google com um script que corrige cada envio e anota nota, tempo
+  e domínio.
+- **Rotina da turma:** a partir da planilha, prepara as folhas seguintes de cada aluno e envia por e-mail.
 
-```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-./degrau exemplos exemplos/pacotes.yaml
-pytest
-```
+## Como usar
 
-Os PDFs saem em `exemplos/pdf/`, cada um com o gabarito (`.gabarito.csv`), o gabarito da planilha do
-formulário (`.planilha.csv`, folhas de caderno) e o bloco de áudio (`.audio.txt`, quando há som). Cada folha é descrita em YAML em `folhas/`; o motor só lê e desenha.
+| Quem | Guia |
+|---|---|
+| Quem instala e opera no dia a dia | [docs/ADMINISTRACAO.md](docs/ADMINISTRACAO.md) |
+| Professor (escrever e revisar folhas) | [docs/PROFESSOR.md](docs/PROFESSOR.md) |
+| Aluno | [docs/ALUNO.md](docs/ALUNO.md) |
+| Quem vai mexer no código | [docs/DESENVOLVIMENTO.md](docs/DESENVOLVIMENTO.md) |
+
+Resumo da instalação: Python 3.10 ou mais novo, Node.js e `npm install -g @google/clasp`; depois `python instalar.py`
+e, para configurar, abrir o Degrau (`degrau.cmd` no Windows, `Degrau.command` no macOS, `./degrau` no Linux) e
+escolher "Configurar".
 
 ## Estrutura
 
 ```
-folhas/       folhas descritas em YAML, uma por arquivo (frente e verso)
-motor/        leitura do YAML e desenho das folhas (Python + reportlab) e fonte Andika
-exemplos/     pacotes de exemplo (pacotes.yaml) e os PDFs gerados
-testes/       testes (pytest): geração, nada fora da página, nada sobreposto, gabarito
-ferramentas/  comparação dos PDFs com a referência
-estado/       estado dos alunos (JSON; os reais ficam fora do git)
-degrau        linha de comando: exemplos, proximo, registrar, estado, automatico (API), enviar (e-mail),
-              validar, ver, gabarito, semana (turma do CASD)
-curriculos/   tabelas de níveis (YAML)
-leitor/       leitor de áudio em HTML (texto para fala com vozes por personagem)
-correcao/     correção automática com Google Forms + Planilha + Apps Script
-docs/         plano completo do sistema
+folhas/       folhas descritas em YAML, uma por arquivo
+curriculos/   níveis e unidades de cada curso
+motor/        leitura das folhas, desenho dos PDFs, gabarito, gerador de pacotes, rotina da turma
+correcao/     Apps Script da correção automática (Google Forms + Planilha)
+ferramentas/  conversor de esqueletos de folha, comparação de PDFs
+testes/       testes (pytest) e simulador do Apps Script (correcao/teste)
+docs/         guias por papel
 ```
 
 ## Licenças
 
-Código: MIT. Conteúdo pedagógico: CC BY-SA 4.0. Fonte Andika: SIL Open Font License.
+Código: MIT. Conteúdo pedagógico (folhas e currículos): CC BY-SA 4.0. Fonte Andika: SIL Open Font License.
 Detalhes em `LICENSE` e `LICENSE-CONTEUDO.md`.

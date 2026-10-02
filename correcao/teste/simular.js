@@ -185,6 +185,19 @@ caso('montar.gs cria um campo para cada linha do gabarito, com o mesmo título',
   for (const c of [' g1  10-12 ', 'G1 100', 'G1 10-12 v2']) assert.ok(re.test(c), c);
 });
 
+caso('atualizarAlunos copia a aba Alunos para a lista do formulário', () => {
+  let escolhas = null;
+  const lista = { getTitle: () => 'Aluno', asListItem: () => ({ setChoiceValues: v => { escolhas = v; } }) };
+  const ss = { getFormUrl: () => 'url', toast() {},
+               getSheetByName: () => ({ getDataRange: () => ({ getValues: () => [['Aluno', 'E-mail'], ['Ana', 'a@x'], ['', ''], [' Bruno ', 'b@x']] }) }) };
+  const ctx = { SpreadsheetApp: { getActive: () => ss }, Error, Object, String,
+                FormApp: { openByUrl: () => ({ getItems: () => [lista] }), ItemType: { LIST: 'LIST' } } };
+  vm.createContext(ctx);
+  vm.runInContext(fs.readFileSync(path.join(DIR, 'montar.gs'), 'utf8') + '\nthis.atualizarAlunos = atualizarAlunos;', ctx);
+  assert.strictEqual(ctx.atualizarAlunos(), 2);
+  assert.deepStrictEqual(escolhas, ['Ana', 'Bruno']);
+});
+
 let falhas = 0;
 for (const [nome, f] of casos) {
   try { f(); console.log('ok     ' + nome); }
