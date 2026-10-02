@@ -1,5 +1,5 @@
 # Degrau — adaptador de estado do aluno: arquivo JSON local (fora do git: estado/*.local.json).
-# Outro adaptador (planilha, Notion) só precisa oferecer carregar e salvar com o mesmo formato.
+# Outro adaptador (planilha, banco de dados) só precisa oferecer carregar e salvar com o mesmo formato.
 #
 # Formato:
 #   curso, aluno, inicio (primeira folha do aluno, definida pelo nivelamento)

@@ -86,12 +86,16 @@ def test_registrar_codigo_errado(biblioteca):
         registrar(est, '6A 6-10', 95)
 
 
-@requer_frances
-def test_estado_real_do_frances_bloqueia_ate_corrigir():
-    caminho = os.path.join(RAIZ, 'estado', 'frances.local.json')
-    if not os.path.exists(caminho): pytest.skip('estado pessoal não está nesta máquina')
-    with pytest.raises(ErroEspecificacao, match='pendente'):
-        proximo(E.carregar(caminho), saida='/nao/usado')
+def test_estados_locais_com_pendente_bloqueiam():
+    """estados reais deste computador (estado/*.local.json): se há pacote pendente, o próximo não sai"""
+    import glob
+    reais = [E.carregar(c) for c in glob.glob(os.path.join(RAIZ, 'estado', '*.local.json'))]
+    reais = [e for e in reais if any(u['status'] == 'pendente' for u in e['unidades'])]
+    if not reais: pytest.skip('nenhum estado local com pacote pendente')
+    for est in reais:
+        with pytest.raises(ErroEspecificacao, match='pendente'):
+            proximo(est, saida='/nao/usado')
+
 
 
 def test_validar_aponta_erros_e_faltas(biblioteca, capsys):
