@@ -1,6 +1,5 @@
 #!/bin/sh
-# Degrau: linha de comando (ver motor/__main__.py).
-# A chave da API (comando automatico) pode ficar em .env.local, fora do git:  ANTHROPIC_API_KEY=...
-cd "$(dirname "$0")" || exit 1
-[ -f .env.local ] && set -a && . ./.env.local && set +a
-exec .venv/bin/python -m motor "$@"
+# Degrau: linha de comando (Linux e macOS). No Windows: degrau.cmd. Comandos: ./degrau --help
+# Os segredos (senha do e-mail, chave da API) ficam em .env.local, lido pelo próprio programa.
+RAIZ=$(cd "$(dirname "$0")" && pwd)
+PYTHONPATH="$RAIZ" exec "$RAIZ/.venv/bin/python" -m motor "$@"

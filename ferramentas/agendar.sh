@@ -10,7 +10,8 @@ if [ "$1" = "--remover" ]; then
   echo "agendamento removido"; exit 0
 fi
 ESTADO=${1:-estado/frances.local.json}
-[ -f "$RAIZ/$ESTADO" ] || { echo "estado não encontrado: $RAIZ/$ESTADO"; exit 1; }
+case "$ESTADO" in /*) ;; *) ESTADO="$RAIZ/$ESTADO" ;; esac
+[ -f "$ESTADO" ] || { echo "estado não encontrado: $ESTADO"; exit 1; }
 [ -f "$RAIZ/.env.local" ] || echo "aviso: $RAIZ/.env.local não existe; a chamada à API vai falhar sem a chave"
 mkdir -p "$RAIZ/saida"
 LINHA="30 6 * * * \"$RAIZ/degrau\" automatico \"$ESTADO\" >> \"$RAIZ/saida/automatico.log\" 2>&1 $MARCA"

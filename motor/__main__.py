@@ -14,6 +14,19 @@
 #             rotina da turma: resultados do Painel, próximos pacotes e e-mails (pergunta antes de enviar)
 import argparse, os, sys
 from .especificacao import ErroEspecificacao, RAIZ, carregar_curso, carregar_folha, biblioteca
+
+
+def carregar_env(caminho=os.path.join(RAIZ, '.env.local')):
+    """segredos locais (senha do e-mail, chave da API): linhas NOME=valor; não sobrescreve o ambiente"""
+    if not os.path.exists(caminho): return
+    for linha in open(caminho, encoding='utf-8'):
+        linha = linha.strip()
+        if not linha or linha.startswith('#') or '=' not in linha: continue
+        nome, valor = linha.split('=', 1)
+        os.environ.setdefault(nome.strip(), valor.strip().strip('"').strip("'"))
+
+
+carregar_env()
 from . import estado as E, gerador, render, autor, envio, ferramentas
 
 
